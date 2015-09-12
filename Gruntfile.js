@@ -76,13 +76,12 @@ module.exports = function(grunt) {
     'cssmin:compile'
   ]);
 
-  /* Tâche lancée lors du déploiement en prod
+  // Tâche lancée lors du déploiement en prod
   grunt.registerTask('heroku:production', [
     'jshint:lint',
     'bower:install',
     'uglify:compile',
     'cssmin:compile'
   ]);
-  */
 
 };
