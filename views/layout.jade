@@ -1,0 +1,28 @@
+mixin ie(condition)
+  | <!--[!{condition}]>
+  block
+  | <![endif]-->
+
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    meta(name="description" content="mondedie-chat")
+    title=title
+
+    +ie('if IE')
+      link(rel='shortcut icon' href='/img/favicon.ico')
+
+    link(rel="icon" href="/img/favicon.png")
+    link(href='/stylesheets/dest/styles.min.css', rel='stylesheet')
+
+    +ie('if lt IE 9')
+    script(src='/bower/html5shiv/dist/html5shiv.js')
+    script(src='/bower/respond/dest/respond.min.js')
+
+  body
+    block content
+
+    include includes/javascript

@@ -1,0 +1,54 @@
+body {
+  font: 13px Helvetica, Arial;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+
+.form-chat { width: 100%; margin-top:10px; }
+.form-chat button { width: 9%;  }
+.form-chat input { width: 90%; min-height: 30px; box-sizing: border-box; margin-left:3px; padding-left:5px;}
+
+#messages { list-style-type: none; margin: 0; padding: 0; overflow: scroll; min-height: 600px; max-height: 600px }
+#messages li { padding: 5px 10px; }
+#messages li:nth-child(odd) { background: #eee; }
+#messages-box { margin:0; padding:0 }
+
+#clients { list-style-type: none; margin: 0; padding: 0; }
+#clients-box h4 { border-bottom: 1px solid gray; }
