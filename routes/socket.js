@@ -1,4 +1,5 @@
 var socket = {};
+var moment = require('moment');
 
 socket.init = function( io ) {
 
@@ -8,16 +9,21 @@ socket.init = function( io ) {
 
     if(session.user) {
 
-      io.emit('user_connected', session.user.id, session.user.name);
-      io.emit('message', "CHATBOT", session.user.name + " s'est connecté");
+      var dateFormat = 'DD/MM à HH:mm:ss'
+      var time = moment().format(dateFormat);
 
-      socket.on('message', function( message ){
-        io.emit('message', session.user.name, message);
+      io.emit('user_connected', session.user.id, session.user.name);
+      io.emit('message', time, "CHATBOT", session.user.name + " s'est connecté");
+
+      socket.on('message', function( message ) {
+        time = moment().format(dateFormat);
+        io.emit('message', time, session.user.name, message);
       });
 
-      socket.on('disconnect', function(){
+      socket.on('disconnect', function() {
+        time = moment().format(dateFormat);
         io.emit('user_disconnected', session.user.id);
-        io.emit('message', "CHATBOT", session.user.name + " s'est déconnecté");
+        io.emit('message', time, "CHATBOT", session.user.name + " s'est déconnecté");
       });
 
     }

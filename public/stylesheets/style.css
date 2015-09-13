@@ -48,6 +48,7 @@ body {
 #messages { list-style-type: none; margin: 0; padding: 0; overflow: scroll; min-height: 600px; max-height: 600px }
 #messages li { padding: 5px 10px; }
 #messages li:nth-child(odd) { background: #eee; }
+#messages li.message-bot { background-color: rgba(0, 153, 153, 0.2); }
 #messages-box { margin:0; padding:0 }
 
 #clients { list-style-type: none; margin: 0; padding: 0; }
