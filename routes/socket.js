@@ -4,10 +4,12 @@ var moment   = require('moment');
 var async    = require('async');
 var entities = require("entities");
 
+// Tableau contenant la liste des utilisateurs connectés
+// Solution provisoire, à remplacer par redis pour un stockage
+// plus souple et performant
+var users = [];
+
 socket.init = function( io ) {
-
-  var users = [];
-
   io.on('connection', function( socket ) {
 
     var session = socket.handshake.session;
@@ -15,49 +17,51 @@ socket.init = function( io ) {
     var time = moment().format( dateFormat );
 
     if( session.user ) {
+      // Ajout de l'utilisateur à la liste des participants
+      users.push( session.user );
+      sortUsersByName( users );
 
-      console.log( session.user );
+      // On previent les autres utilisateurs qu'un membre vient de se connecter
+      io.emit('user_new');
+      io.emit('botMessage', time, session.user.name + " s'est connecté");
 
-      if( ! session.user.connected ) {
-
-        socket.handshake.session.user.connected = true;
-        users.push( session.user );
-
-        io.emit('user_new');
-        io.emit('user_connected', session.user);
-        io.emit('botMessage', time, session.user.name + " s'est connecté");
-
-      }
-
-      async.eachSeries(users, function( user, nextUser ) {
-
-        if( user.name != session.user.name ) {
-          io.emit('user_connected', user);
-        }
-
-        nextUser();
-
-      }, function( err ) {
-
+      async.eachSeries(users, function( user, next ) {
+        io.emit('user_connected', user);
+        next();
+      }, function() {
+        // Réception d'un message
         socket.on('message', function( message ) {
           time = moment().format( dateFormat );
-          io.emit('message', time, session.user, entities.encodeHTML(message));
+          io.emit('message', time, session.user, entities.encodeHTML( message ));
         });
-
+        // Déconnexion de l'utilisateur
         socket.on('disconnect', function() {
-          socket.handshake.session.user.connected = false;
-          users.slice(users.indexOf(session.user), 1);
+          removeUser( session.user.id );
           time = moment().format( dateFormat );
           io.emit('user_disconnected', session.user.id);
           io.emit('botMessage', time, session.user.name + " s'est déconnecté");
         });
-
       });
-
     }
 
   });
+};
 
+// Trie la liste des utilisateurs par ordre alphabétique
+var sortUsersByName = function( users ) {
+  users.sort(function( x, y ) {
+    var a = x.name;
+    var b = y.name;
+    return ( a < b ) ? -1 : ( a > b ) ? 1 : 0;
+  });
+};
+
+// Supprime un utilisateur via son identifiant
+var removeUser = function( userid ) {
+  for( var i = 0; i < users.length; i++ ) {
+    if( users[i].id == userid )
+      users.splice(i, 1);
+  }
 };
 
 module.exports = socket;

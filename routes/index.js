@@ -44,10 +44,9 @@ router.post('/login', function(req, res, next) {
             req.session.user = {
               id:userInfos.data.id,
               name:userInfos.data.attributes.username,
-              groupName:userInfos.included[0].attributes.namePlural,
-              groupColor:userInfos.included[0].attributes.color,
-              avatar:process.env.FLARUM_URL + userInfos.data.attributes.avatarUrl,
-              connected:false
+              groupName:( userInfos.included ) ? userInfos.included[0].attributes.namePlural : null,
+              groupColor:( userInfos.included ) ? userInfos.included[0].attributes.color : null,
+              avatar:process.env.FLARUM_URL + userInfos.data.attributes.avatarUrl
             };
             callback();
           } else {
