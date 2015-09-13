@@ -46,7 +46,8 @@ router.post('/login', function(req, res, next) {
               name:userInfos.data.attributes.username,
               groupName:userInfos.included[0].attributes.namePlural,
               groupColor:userInfos.included[0].attributes.color,
-              avatar:process.env.FLARUM_URL + userInfos.data.attributes.avatarUrl
+              avatar:process.env.FLARUM_URL + userInfos.data.attributes.avatarUrl,
+              connected:false
             };
             callback();
           } else {

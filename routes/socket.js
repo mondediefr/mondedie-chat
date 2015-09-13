@@ -16,11 +16,18 @@ socket.init = function( io ) {
 
     if( session.user ) {
 
-      users.push(session.user);
+      console.log( session.user );
 
-      io.emit('user_new');
-      io.emit('user_connected', session.user);
-      io.emit('botMessage', time, session.user.name + " s'est connecté");
+      if( ! session.user.connected ) {
+
+        socket.handshake.session.user.connected = true;
+        users.push( session.user );
+
+        io.emit('user_new');
+        io.emit('user_connected', session.user);
+        io.emit('botMessage', time, session.user.name + " s'est connecté");
+
+      }
 
       async.eachSeries(users, function( user, nextUser ) {
 
@@ -38,6 +45,8 @@ socket.init = function( io ) {
         });
 
         socket.on('disconnect', function() {
+          socket.handshake.session.user.connected = false;
+          users.slice(users.indexOf(session.user), 1);
           time = moment().format( dateFormat );
           io.emit('user_disconnected', session.user.id);
           io.emit('botMessage', time, session.user.name + " s'est déconnecté");
