@@ -1,5 +1,6 @@
 var socket = {};
 var moment = require('moment');
+var xss    = require('node-xss').clean;
 
 socket.init = function( io ) {
 
@@ -17,7 +18,7 @@ socket.init = function( io ) {
 
       socket.on('message', function( message ) {
         time = moment().format( dateFormat );
-        io.emit('message', time, session.user, message);
+        io.emit('message', time, session.user, xss(message));
       });
 
       socket.on('disconnect', function() {
