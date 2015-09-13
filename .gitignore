@@ -4,7 +4,7 @@ bower
 build
 Procfile_dev
 public/stylesheets/dest/*
-public/javascript/dest/*
+public/javascripts/dest/*
 typings
 
 *~
