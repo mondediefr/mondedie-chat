@@ -1,8 +1,8 @@
 var socket = {};
 
-var moment = require('moment');
-var xss    = require('node-xss').clean;
-var async  = require('async');
+var moment   = require('moment');
+var async    = require('async');
+var entities = require("entities");
 
 socket.init = function( io ) {
 
@@ -34,7 +34,7 @@ socket.init = function( io ) {
 
         socket.on('message', function( message ) {
           time = moment().format( dateFormat );
-          io.emit('message', time, session.user, xss(message));
+          io.emit('message', time, session.user, entities.encodeHTML(message));
         });
 
         socket.on('disconnect', function() {
