@@ -7,7 +7,7 @@ $('.form-chat').submit(function(){
 });
 
 socket.on('user_connected', function( user ) {
-  $("ul#clients").append('<li style="color:' + user.groupColor + ';" class="' + user.id + '">' + user.name + '</li>');
+  $("ul#clients").append('<li style="color:' + user.groupColor + ';" class="' + user.id + '"> <img class="img-circle" src="'+user.avatar+'">' + user.name + '</li>');
 });
 
 socket.on('user_disconnected', function( userid ) {
