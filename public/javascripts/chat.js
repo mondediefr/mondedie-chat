@@ -6,30 +6,35 @@ $('.form-chat').submit(function(){
   return false;
 });
 
-socket.on('user_connected', function( userid, username ) {
-  $("ul#clients").append("<li class=\"" + userid + "\">" + username + "</li>");
+socket.on('user_connected', function( user ) {
+  $("ul#clients").append('<li style="color:' + user.groupColor + ';" class="' + user.id + '">' + user.name + '</li>');
 });
 
 socket.on('user_disconnected', function( userid ) {
   $("ul#clients li." + userid).remove();
 });
 
-socket.on('message', function( time, username, message ) {
-  add( time, username, message );
+socket.on('message', function( time, user, message ) {
+  addMessage( time, user, message );
+});
+socket.on('botMessage', function( time, message ) {
+  addBotMessage( time, message );
 });
 
 var send = function( message ) {
   socket.emit('message', message);
 };
 
-var add = function( time, username, message ) {
+var addMessage = function( time, user, message ) {
 
-  var liClass = "";
-
-  if(username == "CHATBOT") {
-    liClass = 'class="message-bot"';
-  }
-
-  $('#messages').append('<li ' + liClass + '>(' + time + ') <b>' + username + ':</b> ' + message + '</li>');
+  $('#messages').append('<li>(' + time + ') <b><span style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '</li>');
   $("#messages").scrollTop($("#messages")[0].scrollHeight);
+
+};
+
+var addBotMessage = function( time, message ) {
+
+  $('#messages').append('<li class="message-bot">(' + time + ') <b>CHATBOT:</b> ' + message + '</li>');
+  $("#messages").scrollTop($("#messages")[0].scrollHeight);
+
 };

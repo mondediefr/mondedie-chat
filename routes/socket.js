@@ -7,23 +7,23 @@ socket.init = function( io ) {
 
     var session = socket.handshake.session;
 
-    if(session.user) {
+    if( session.user ) {
 
       var dateFormat = 'DD/MM à HH:mm:ss'
-      var time = moment().format(dateFormat);
+      var time = moment().format( dateFormat );
 
-      io.emit('user_connected', session.user.id, session.user.name);
-      io.emit('message', time, "CHATBOT", session.user.name + " s'est connecté");
+      io.emit('user_connected', session.user);
+      io.emit('botMessage', time, session.user.name + " s'est connecté");
 
       socket.on('message', function( message ) {
-        time = moment().format(dateFormat);
-        io.emit('message', time, session.user.name, message);
+        time = moment().format( dateFormat );
+        io.emit('message', time, session.user, message);
       });
 
       socket.on('disconnect', function() {
-        time = moment().format(dateFormat);
+        time = moment().format( dateFormat );
         io.emit('user_disconnected', session.user.id);
-        io.emit('message', time, "CHATBOT", session.user.name + " s'est déconnecté");
+        io.emit('botMessage', time, session.user.name + " s'est déconnecté");
       });
 
     }

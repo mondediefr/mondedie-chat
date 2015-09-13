@@ -43,7 +43,9 @@ router.post('/login', function(req, res, next) {
           if( userInfos ) {
             req.session.user = {
               id:userInfos.data.id,
-              name:userInfos.data.attributes.username
+              name:userInfos.data.attributes.username,
+              groupName:userInfos.included[0].attributes.namePlural,
+              groupColor:userInfos.included[0].attributes.color
             };
             callback();
           } else {
