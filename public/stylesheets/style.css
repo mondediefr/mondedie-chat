@@ -53,4 +53,5 @@ body {
 #messages > li > img { max-height: 200px; max-width: 200px}
 
 #clients { list-style-type: none; margin: 0; padding: 0; }
+#clients > li > img {max-height: 50px; max-width: 50px; margin-right: 10px; margin-top: 5px;}
 #clients-box h4 { border-bottom: 1px solid gray; }
