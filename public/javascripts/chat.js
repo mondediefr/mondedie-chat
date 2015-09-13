@@ -6,8 +6,12 @@ $('.form-chat').submit(function(){
   return false;
 });
 
+socket.on('user_new', function() {
+  $("ul#clients").text("");
+});
+
 socket.on('user_connected', function( user ) {
-  $("ul#clients").append('<li style="color:' + user.groupColor + ';" class="' + user.id + '"> <img class="img-circle" src="'+user.avatar+'">' + user.name + '</li>');
+  $("ul#clients").append('<li style="color:' + user.groupColor + ';" class="' + user.id + '"> <img class="img-circle" src="' + user.avatar + '">' + user.name + '</li>');
 });
 
 socket.on('user_disconnected', function( userid ) {

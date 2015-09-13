@@ -1,33 +1,52 @@
 var socket = {};
+
 var moment = require('moment');
 var xss    = require('node-xss').clean;
+var async  = require('async');
 
 socket.init = function( io ) {
+
+  var users = [];
 
   io.on('connection', function( socket ) {
 
     var session = socket.handshake.session;
+    var dateFormat = 'DD/MM à HH:mm:ss'
+    var time = moment().format( dateFormat );
 
     if( session.user ) {
 
-      var dateFormat = 'DD/MM à HH:mm:ss'
-      var time = moment().format( dateFormat );
+      users.push(session.user);
 
+      io.emit('user_new');
       io.emit('user_connected', session.user);
       io.emit('botMessage', time, session.user.name + " s'est connecté");
 
-      socket.on('message', function( message ) {
-        time = moment().format( dateFormat );
-        io.emit('message', time, session.user, xss(message));
-      });
+      async.eachSeries(users, function( user, nextUser ) {
 
-      socket.on('disconnect', function() {
-        time = moment().format( dateFormat );
-        io.emit('user_disconnected', session.user.id);
-        io.emit('botMessage', time, session.user.name + " s'est déconnecté");
+        if( user.name != session.user.name ) {
+          io.emit('user_connected', user);
+        }
+
+        nextUser();
+
+      }, function( err ) {
+
+        socket.on('message', function( message ) {
+          time = moment().format( dateFormat );
+          io.emit('message', time, session.user, xss(message));
+        });
+
+        socket.on('disconnect', function() {
+          time = moment().format( dateFormat );
+          io.emit('user_disconnected', session.user.id);
+          io.emit('botMessage', time, session.user.name + " s'est déconnecté");
+        });
+
       });
 
     }
+
   });
 
 };
