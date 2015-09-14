@@ -17,6 +17,7 @@ socket.init = function( io ) {
     var time = moment().format( dateFormat );
 
     if( session.user ) {
+      removeUser( session.user.id );
       // Ajout de l'utilisateur à la liste des participants
       users.push( session.user );
       sortUsersByName( users );
