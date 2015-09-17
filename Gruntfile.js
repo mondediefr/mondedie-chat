@@ -10,7 +10,7 @@ module.exports = function(grunt) {
       options: {
         jshintrc: '.jshintrc'
       },
-      lint: ['web.js', 'Gruntfile.js', 'routes/*.js']
+      lint: ['web.js', 'Gruntfile.js', 'routes/*.js', 'libs/*.js', 'models/*.js']
     },
 
     bower: {
@@ -51,7 +51,7 @@ module.exports = function(grunt) {
 
     watch: {
       lint: {
-        files:['web.js', 'Gruntfile.js', 'routes/*.js'],
+        files:['web.js', 'Gruntfile.js', 'routes/*.js', 'libs/*.js', 'models/*.js'],
         tasks:['jshint:lint']
       },
       scripts: {

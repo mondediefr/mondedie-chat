@@ -1,4 +1,6 @@
-exports.settings = function( req, res, options, callback ) {
+var session = {};
+
+session.settings = function( req, res, options, callback ) {
 
   var isLogged = ( req.session.user ) ? true : false;
 
@@ -39,3 +41,5 @@ exports.settings = function( req, res, options, callback ) {
   callback( settings );
 
 };
+
+module.exports = session;

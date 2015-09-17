@@ -20,6 +20,7 @@
     "moment": "^2.10.6",
     "morgan": "~1.6.1",
     "ms": "^0.7.1",
+    "redis": "^1.0.0",
     "request": "^2.61.0",
     "serve-favicon": "~2.3.0",
     "serve-static": "^1.10.0",

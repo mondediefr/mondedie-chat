@@ -9,7 +9,8 @@ var Session      = require('express-session');
 var validator    = require('express-validator');
 var ms           = require('ms');
 
-var socket = require('./routes/socket');
+var redis  = require('./libs/redis');
+var socket = require('./libs/socket');
 var routes = require('./routes/index');
 
 var app    = express();
@@ -26,6 +27,7 @@ var session = Session({
 
 io.use(ios(session));
 socket.init(io);
+redis.init();
 
 app.set('env', process.env.ENV || 'development');
 app.set('port', process.env.PORT || 3000);
@@ -54,7 +56,6 @@ app.use(serveStatic(path.join(__dirname, 'public'), { maxAge:ms('1y'), setHeader
 /*
  *  ROUTES
  */
-
 app.use('/', routes);
 
 /*

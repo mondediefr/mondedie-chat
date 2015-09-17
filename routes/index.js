@@ -1,7 +1,7 @@
 var express = require('express');
 var async   = require('async');
-var session = require('./session');
-var flarum  = require('./flarum');
+var session = require('../libs/session');
+var flarum  = require('../libs/flarum');
 
 var router = express.Router();
 

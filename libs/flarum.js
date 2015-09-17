@@ -1,9 +1,10 @@
 var request = require('request');
+var flarum = {};
 
 /*
  *  Récupère les informations d'identification au près de l'API
  */
-exports.login = function( data, next, callback ) {
+flarum.login = function( data, next, callback ) {
 
   request({
 
@@ -30,7 +31,7 @@ exports.login = function( data, next, callback ) {
 /*
  *  Récupère les informations de l'utilisateur
  */
-exports.user = function( user, next, callback ) {
+flarum.user = function( user, next, callback ) {
 
   request({
 
@@ -48,7 +49,9 @@ exports.user = function( user, next, callback ) {
 
     var userInfos = JSON.parse( body );
     callback( userInfos );
-    
+
   });
 
 };
+
+module.exports = flarum;
