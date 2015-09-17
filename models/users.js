@@ -7,6 +7,7 @@ exports.add = function( user ) {
     var userkey = 'user:' + user.name;
     db.hmset( userkey, user );
     db.sadd('users', userkey);
+    db.quit();
   });
 };
 
@@ -21,6 +22,7 @@ exports.list = function( callback ) {
           nextUser();
         })
       }, function() {
+        db.quit();
         callback( list );
       });
     });
@@ -31,6 +33,7 @@ exports.list = function( callback ) {
 exports.remove = function( username ) {
   redis.connect(function( db ) {
     db.srem('users', 'user:' + username);
+    db.quit();
   });
 };
 
@@ -38,6 +41,7 @@ exports.remove = function( username ) {
 var getUsersKeys = function( callback ) {
   redis.connect(function( db ) {
     db.smembers('users', function( err, users ) {
+      db.quit();
       callback( users );
     });
   });

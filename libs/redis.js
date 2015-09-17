@@ -5,6 +5,7 @@ var redis  = {};
 redis.init = function() {
   createClient(function( client ) {
     client.del('users');
+    client.quit();
   });
 };
 
