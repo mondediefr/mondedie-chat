@@ -5,7 +5,10 @@ var redis = require("../libs/redis");
 exports.add = function( time, user, message ) {
   redis.connect(function( db ) {
     getIncrementalCount(function( counter ) {
-      db.set( 'message:' + counter, JSON.stringify({ time:time, user:user, message:message }));
+      if( ! user )
+        db.set( 'message:' + counter, JSON.stringify({ time:time, message:message }));
+      else
+        db.set( 'message:' + counter, JSON.stringify({ time:time, user:user, message:message }));
       db.sadd('messages', counter);
       db.quit();
     });
@@ -55,31 +58,3 @@ var getMessagesKeys = function( callback ) {
 var sortKeys = function( a, b ) {
   return a - b;
 }
-
-/*
-
-Incrémentation :
---------------------------------------------------
-INCR messages:count
-
-Ajout :
---------------------------------------------------
-HMSET message:1 {
-  Time "17/09 à 21:31:11"
-  User {
-    id	       2
-    name	     Hardware
-    groupName	 Admins
-    groupColor #DF013A
-    avatar	   http://flarum.mondedie.fr/...
-  }
-  Text "Mon super message !"
-}
-
-Listing :
---------------------------------------------------
-SMEMBERS messages forEach {
-  HGETALL message
-}
-
-*/

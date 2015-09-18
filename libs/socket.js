@@ -19,7 +19,7 @@ socket.init = function( io ) {
       users.list(function( usersList ) {
         // On previent les autres utilisateurs qu'un membre vient de se connecter
         io.emit('user_new');
-        io.emit('botMessage', time, session.user.name + " s'est connecté");
+        addBotMessage(io, time, session.user.name + " s'est connecté");
         async.eachSeries(usersList, function( user, next ) {
           io.emit('user_connected', user);
           next();
@@ -27,20 +27,29 @@ socket.init = function( io ) {
           // Réception d'un message
           socket.on('message', function( message ) {
             time = moment().format( dateFormat );
-            messages.add( time, session.user, message );
-            io.emit('message', time, session.user, entities.encodeHTML( message ));
+            addMessage(io, time, session.user, message);
           });
           // Déconnexion de l'utilisateur
           socket.on('disconnect', function() {
             users.remove( session.user.name );
             time = moment().format( dateFormat );
             io.emit('user_disconnected', session.user.id);
-            io.emit('botMessage', time, session.user.name + " s'est déconnecté");
+            addBotMessage(io, time, session.user.name + " s'est déconnecté");
           });
         });
       });
     }
   });
+};
+
+var addMessage = function( io, time, user, message ) {
+  messages.add( time, user, message );
+  io.emit('message', time, user, entities.encodeHTML( message ));
+};
+
+var addBotMessage = function( io, time, message ) {
+  messages.add( time, null, message );
+  io.emit('botMessage', time, message);
 };
 
 module.exports = socket;

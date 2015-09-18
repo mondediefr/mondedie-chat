@@ -4,8 +4,10 @@ $(function(){
 
   $.get('/get/messages', function( data ) {
     $.each(data.messages, function( index, message ) {
-      console.log(message);
-      addMessage(message.time, message.user, message.message);
+      if( ! message.user )
+        addBotMessage( message.time, message.message );
+      else
+        addMessage( message.time, message.user, message.message );
     });
   }, 'json');
 
