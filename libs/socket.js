@@ -1,6 +1,6 @@
 var socket = {};
 
-var moment   = require('moment');
+var moment   = require('moment-timezone');
 var async    = require('async');
 var entities = require("entities");
 
@@ -12,7 +12,7 @@ socket.init = function( io ) {
 
     var session = socket.handshake.session;
     var dateFormat = 'DD/MM à HH:mm:ss'
-    var time = moment().format( dateFormat );
+    var time = moment().tz('Europe/Paris').format( dateFormat );
 
     if( session.user ) {
       users.add( session.user );
@@ -26,13 +26,13 @@ socket.init = function( io ) {
         }, function() {
           // Réception d'un message
           socket.on('message', function( message ) {
-            time = moment().format( dateFormat );
+            time = moment().tz('Europe/Paris').format( dateFormat );
             addMessage(io, time, session.user, message);
           });
           // Déconnexion de l'utilisateur
           socket.on('disconnect', function() {
             users.remove( session.user.name );
-            time = moment().format( dateFormat );
+            time = moment().tz('Europe/Paris').format( dateFormat );
             io.emit('user_disconnected', session.user.id);
             addBotMessage(io, time, session.user.name + " s'est déconnecté");
           });
