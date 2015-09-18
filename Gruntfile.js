@@ -30,8 +30,10 @@ module.exports = function(grunt) {
           'public/javascripts/dest/scripts.min.js':[
             'public/bower/jquery/dist/jquery.min.js',
             'public/bower/pace/pace.min.js',
-            'public/bower/bootstrap/dist/js/bootstrap.min.js',
-            'public/javascripts/*.js'
+            'public/bower/bootstrap/dist/js/bootstrap.min.js'
+          ],
+          'public/javascripts/dest/io.scripts.min.js':[
+            'public/javascripts/chat.js'
           ]
         }
       }

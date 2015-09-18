@@ -4,7 +4,8 @@ var moment   = require('moment');
 var async    = require('async');
 var entities = require("entities");
 
-var users = require('../models/users.js');
+var users    = require('../models/users.js');
+var messages = require('../models/messages.js');
 
 socket.init = function( io ) {
   io.on('connection', function( socket ) {
@@ -26,6 +27,7 @@ socket.init = function( io ) {
           // Réception d'un message
           socket.on('message', function( message ) {
             time = moment().format( dateFormat );
+            messages.add( time, session.user, message );
             io.emit('message', time, session.user, entities.encodeHTML( message ));
           });
           // Déconnexion de l'utilisateur

@@ -1,9 +1,14 @@
 var db = require('redis');
 var redis  = {};
 
-// Initialisation de la db redis ( Flush des utilisateurs connectés )
+// Initialisation de la db redis
+// Flush des utilisateurs connectés + initialisation du compteur de message
 redis.init = function() {
   createClient(function( client ) {
+    client.exists('messages:count', function( err, reply ) {
+      if( reply !== 1 )
+        client.set('messages:count', 0);
+    });
     client.del('users');
     client.quit();
   });

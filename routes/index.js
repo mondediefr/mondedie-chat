@@ -1,7 +1,10 @@
 var express = require('express');
 var async   = require('async');
+
 var session = require('../libs/session');
 var flarum  = require('../libs/flarum');
+
+var messages = require('../models/messages');
 
 var router = express.Router();
 
@@ -69,6 +72,14 @@ router.get('/chatroom', function(req, res, next) {
   session.settings(req, res, { shouldBeLogged:true }, function( settings ) {
     settings.title += "Chatroom";
     res.render('chatroom', settings);
+  });
+});
+
+router.get('/get/messages', function( req, res, next ) {
+  session.settings(req, res, { shouldBeLogged:true }, function( settings ) {
+    messages.list(function( list ) {
+      res.json({ messages:list });
+    });
   });
 });
 
