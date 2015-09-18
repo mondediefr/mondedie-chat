@@ -49,7 +49,7 @@ router.post('/login', function(req, res, next) {
               name:userInfos.data.attributes.username,
               groupName:( userInfos.included ) ? userInfos.included[0].attributes.namePlural : null,
               groupColor:( userInfos.included ) ? userInfos.included[0].attributes.color : null,
-              avatar:userInfos.data.attributes.avatarUrl
+              avatar:( userInfos.data.attributes.avatarUrl ) ? userInfos.data.attributes.avatarUrl : process.env.APP_URL + 'images/avatar.png'
             };
             callback();
           } else {
