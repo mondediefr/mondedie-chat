@@ -37,10 +37,6 @@ $(function(){
     return false;
   });
 
-  $( window ).focus(function() {
-    titleNotification.off();
-  });
-
   var initMessageList = function( callback ) {
     $.get('/get/messages', function( data ) {
       $.each(data.messages, function( index, message ) {
@@ -84,10 +80,10 @@ $(function(){
         ? notification
         : _this.properties.originalTitle;
       }, 1000);
-    },
-    off:function() {
-      clearInterval( this.properties.interval );
-      document.title = this.properties.originalTitle;
+      setTimeout(function() {
+        clearInterval( _this.properties.interval );
+        document.title = _this.properties.originalTitle;
+      }, 6000);
     }
   };
 
