@@ -34,7 +34,6 @@ $(function(){
   });
 
   socket.on('already_connected', function() {
-    $("body").empty();
     alert('Vous êtes déjà connecté, connexion au chat impossible !');
   });
 
