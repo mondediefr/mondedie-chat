@@ -2,14 +2,34 @@ $(function(){
 
   var socket = io();
 
-  $.get('/get/messages', function( data ) {
-    $.each(data.messages, function( index, message ) {
-      if( ! message.user )
-        addBotMessage( message.time, message.message );
-      else
-        addMessage( message.time, message.user, message.message );
+  socket.on('connect', function() {
+
+    socket.on('user_new', function() {
+      $("ul#clients").text("");
     });
-  }, 'json');
+
+    socket.on('user_connected', function( user ) {
+      $("ul#clients").append('<li style="color:' + user.groupColor + ';" class="' + user.id + '"> <img class="img-circle" src="' + user.avatar + '">' + user.name + '</li>');
+    });
+
+    socket.on('user_disconnected', function( userid ) {
+      $("ul#clients li." + userid).remove();
+    });
+
+    socket.on('already_connected', function() {
+      alert('Vous êtes déjà connecté, connexion au chat impossible !');
+    });
+
+    initMessageList(function() {
+      socket.on('message', function( time, user, message ) {
+        addMessage( time, user, message );
+      });
+
+      socket.on('botMessage', function( time, message ) {
+        addBotMessage( time, message );
+      });
+    });
+  });
 
   $('.form-chat').submit(function(){
     send($('#message').val());
@@ -21,29 +41,17 @@ $(function(){
     titleNotification.off();
   });
 
-  socket.on('user_new', function() {
-    $("ul#clients").text("");
-  });
-
-  socket.on('user_connected', function( user ) {
-    $("ul#clients").append('<li style="color:' + user.groupColor + ';" class="' + user.id + '"> <img class="img-circle" src="' + user.avatar + '">' + user.name + '</li>');
-  });
-
-  socket.on('user_disconnected', function( userid ) {
-    $("ul#clients li." + userid).remove();
-  });
-
-  socket.on('already_connected', function() {
-    alert('Vous êtes déjà connecté, connexion au chat impossible !');
-  });
-
-  socket.on('message', function( time, user, message ) {
-    addMessage( time, user, message );
-  });
-
-  socket.on('botMessage', function( time, message ) {
-    addBotMessage( time, message );
-  });
+  var initMessageList = function( callback ) {
+    $.get('/get/messages', function( data ) {
+      $.each(data.messages, function( index, message ) {
+        if( ! message.user )
+          addBotMessage( message.time, message.message );
+        else
+          addMessage( message.time, message.user, message.message );
+      });
+      callback();
+    }, 'json');
+  };
 
   var send = function( message ) {
     socket.emit('message', message);
@@ -51,7 +59,7 @@ $(function(){
 
   var addMessage = function( time, user, message ) {
     if( ! document.hasFocus() ) {
-      titleNotification.on("Nouveau message !");
+      titleNotification.on("Nouveau(x) message(s) !");
     }
     $('#messages').append('<li>(' + time + ') <b><span style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '</li>');
     $("#messages").scrollTop($("#messages")[0].scrollHeight);
