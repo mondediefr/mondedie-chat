@@ -29,7 +29,8 @@ socket.init = function( io ) {
               // Réception d'un message
               socket.on('message', function( message ) {
                 time = moment().tz('Europe/Paris').format( dateFormat );
-                addMessage(io, time, session.user, message);
+                if( message )
+                  addMessage(io, time, session.user, message);
               });
               // Déconnexion de l'utilisateur
               socket.on('disconnect', function() {
