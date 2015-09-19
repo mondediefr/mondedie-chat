@@ -9,6 +9,7 @@ Installer :
 * heroku toolbelt : https://toolbelt.heroku.com/
 * Node.js
 * NPM
+* Redis
 
 Cloner le projet et installer les dépendances :
 ```
