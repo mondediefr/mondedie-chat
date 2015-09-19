@@ -37,6 +37,25 @@ exports.remove = function( username ) {
   });
 };
 
+// Vérifie si l'utilisateur est déjà connecté
+exports.exist = function( username, callback ) {
+  var exist = false;
+  redis.connect(function( db ) {
+    getUsersKeys(function( users ) {
+      async.each(users, function( user, nextUser ) {
+        db.hgetall(user, function( err, userObj ) {
+          if(userObj.name == username)
+            exist = true;
+          nextUser();
+        })
+      }, function() {
+        db.quit();
+        callback( exist );
+      });
+    });
+  });
+};
+
 // Retourne la liste des clés associées aux utilisateurs
 var getUsersKeys = function( callback ) {
   redis.connect(function( db ) {

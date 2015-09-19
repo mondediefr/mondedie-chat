@@ -4,6 +4,7 @@ var async   = require('async');
 var session = require('../libs/session');
 var flarum  = require('../libs/flarum');
 
+var users    = require('../models/users');
 var messages = require('../models/messages');
 
 var router = express.Router();
@@ -56,11 +57,22 @@ router.post('/login', function(req, res, next) {
             callback("Impossible d'initialiser la session utilisateur.");
           }
         });
+      },
+      // On vérifie que l'utilisateur ne soit pas déjà connecté
+      function( callback ) {
+        users.exist(req.session.user.name, function( exist ) {
+          if( exist )
+            callback("Vous êtes déjà connecté au chat.");
+          else
+            callback();
+        });
       }
     ], function( err ) {
       if( err ) {
-        settings.formMessage = err;
-        return res.render('login', settings);
+        req.session.destroy(function() {
+          settings.formMessage = err;
+          return res.render('login', settings);
+        });
       } else {
         return res.redirect('/chatroom');
       }

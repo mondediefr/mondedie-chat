@@ -17,6 +17,10 @@ $(function(){
     return false;
   });
 
+  $( window ).focus(function() {
+    titleNotification.off();
+  });
+
   socket.on('user_new', function() {
     $("ul#clients").text("");
   });
@@ -29,9 +33,15 @@ $(function(){
     $("ul#clients li." + userid).remove();
   });
 
+  socket.on('already_connected', function() {
+    $("body").empty();
+    alert('Vous êtes déjà connecté, connexion au chat impossible !');
+  });
+
   socket.on('message', function( time, user, message ) {
     addMessage( time, user, message );
   });
+
   socket.on('botMessage', function( time, message ) {
     addBotMessage( time, message );
   });
@@ -41,10 +51,11 @@ $(function(){
   };
 
   var addMessage = function( time, user, message ) {
-
+    if( ! document.hasFocus() ) {
+      titleNotification.on("Nouveau message !");
+    }
     $('#messages').append('<li>(' + time + ') <b><span style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '</li>');
     $("#messages").scrollTop($("#messages")[0].scrollHeight);
-
   };
 
   var addBotMessage = function( time, message ) {
@@ -52,6 +63,25 @@ $(function(){
     $('#messages').append('<li class="message-bot">(' + time + ') <b>CHATBOT:</b> ' + message + '</li>');
     $("#messages").scrollTop($("#messages")[0].scrollHeight);
 
+  };
+
+  var titleNotification = {
+    properties:{
+      originalTitle:document.title,
+      interval:null
+    },
+    on:function( notification ) {
+      var _this = this;
+      _this.properties.interval = setInterval(function() {
+        document.title = ( _this.properties.originalTitle == document.title )
+        ? notification
+        : _this.properties.originalTitle;
+      }, 1000);
+    },
+    off: function() {
+      clearInterval( this.properties.interval );
+      document.title = this.properties.originalTitle;
+    }
   };
 
 });
