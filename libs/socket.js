@@ -41,7 +41,7 @@ socket.init = function( io ) {
             });
           });
         } else {
-          io.emit('already_connected');
+          io.to( socket.id ).emit('already_connected');
         }
       });
     }
