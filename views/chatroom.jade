@@ -22,5 +22,30 @@ block content
             | - Sous <strong>Firefox</strong>, ouvrir le menu <strong>about:permissions</strong>, chercher l'url du chat et cliquer
             | sur <strong>'Forget About This Site'</strong>.
       div(class='col-md-2' id='clients-box')
+        .dropdown
+          button(class='btn btn-info dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='true') #{ user.name } > Menu
+            &nbsp;
+            span.caret
+          ul.dropdown-menu
+            if isAdmin
+              li.dropdown-header Modération
+              li.divider
+              li
+                a(href='#') Kick/Ban
+              li
+                a(href='#') Lister les membres exclus
+              li
+                a(href='#') Montrer IP
+              li &nbsp;
+              li.dropdown-header Général
+              li.divider
+            li
+              a(href='#') /roll BXT
+            li
+              a(href='#') Lancer un dé
+            li.divider
+            li
+              a(href='/logout') Se déconnecter
+        hr
         h4 Utilisateurs
         ul#clients

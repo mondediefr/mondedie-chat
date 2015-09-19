@@ -83,6 +83,7 @@ router.post('/login', function(req, res, next) {
 router.get('/chatroom', function(req, res, next) {
   session.settings(req, res, { shouldBeLogged:true }, function( settings ) {
     settings.title += "Chatroom";
+    settings.user = req.session.user;
     res.render('chatroom', settings);
   });
 });
@@ -91,6 +92,14 @@ router.get('/get/messages', function( req, res, next ) {
   session.settings(req, res, { shouldBeLogged:true }, function( settings ) {
     messages.list(function( list ) {
       res.json({ messages:list });
+    });
+  });
+});
+
+router.get('/logout', function( req, res, next ) {
+  session.settings(req, res, { shouldBeLogged:true }, function( settings ) {
+    req.session.destroy(function() {
+      return res.redirect('/');
     });
   });
 });

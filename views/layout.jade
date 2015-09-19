@@ -15,14 +15,13 @@ html
     +ie('if IE')
       link(rel='shortcut icon' href='/img/favicon.ico')
 
-    link(rel="icon" href="/img/favicon.png")
+    // link(rel="icon" href="/img/favicon.png")
     link(href='/stylesheets/dest/styles.min.css', rel='stylesheet')
 
     +ie('if lt IE 9')
-    script(src='/bower/html5shiv/dist/html5shiv.js')
-    script(src='/bower/respond/dest/respond.min.js')
+      script(src='/bower/html5shiv/dist/html5shiv.js')
+      script(src='/bower/respond/dest/respond.min.js')
 
   body
     block content
-
     include includes/javascript
