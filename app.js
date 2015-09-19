@@ -8,6 +8,7 @@ var serveStatic  = require('serve-static');
 var Session      = require('express-session');
 var validator    = require('express-validator');
 var ms           = require('ms');
+var RedisStore   = require('connect-redis')( Session );
 
 var redis  = require('./libs/redis');
 var socket = require('./libs/socket');
@@ -18,74 +19,79 @@ var server = require("http").createServer(app);
 var io     = require("socket.io")(server);
 var ios    = require('socket.io-express-session');
 
-var session = Session({
-  secret: process.env.SESSION_SECRET,
-  key: 'SID',
-  resave:true,
-  saveUninitialized:true
-});
-
-io.use(ios(session));
-socket.init(io);
-redis.init();
-
 app.set('env', process.env.ENV || 'development');
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// if(app.get('env') == 'development') {
+// Initialisation de Redis
+redis.init(function( client ) {
+
+  // Initialisation de la session
+  var session = Session({
+    store: new RedisStore({ client:client }),
+    secret: process.env.SESSION_SECRET,
+    key: 'SID',
+    resave:true,
+    saveUninitialized:true
+  });
+
+  // Initialisation du socket
+  io.use(ios( session ));
+  socket.init( io );
+
   app.use(logger('dev'));
   var edt = require('express-debug');
   edt(app);
-// }
 
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(validator());
-app.use(cookieParser(process.env.COOKIES_SECRET));
-app.use(session);
+  // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(validator());
+  app.use(cookieParser(process.env.COOKIES_SECRET));
+  app.use(session);
 
-function setHeaders( res, path, stat ) {
-  res.setHeader('Expires', new Date(Date.now() + ms('1y')).toUTCString());
-}
+  function setHeaders( res, path, stat ) {
+    res.setHeader('Expires', new Date(Date.now() + ms('1y')).toUTCString());
+  }
 
-app.use(serveStatic(path.join(__dirname, 'public'), { maxAge:ms('1y'), setHeaders:setHeaders }));
+  app.use(serveStatic(path.join(__dirname, 'public'), { maxAge:ms('1y'), setHeaders:setHeaders }));
 
-/*
- *  ROUTES
- */
-app.use('/', routes);
+  /*
+  *  ROUTES
+  */
+  app.use('/', routes);
 
-/*
- *  ERREUR 404
- */
-app.use(function( req, res, next ) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next( err );
-});
+  /*
+  *  ERREUR 404
+  */
+  app.use(function( req, res, next ) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next( err );
+  });
 
-/*
- *  TOUTES LES AUTRES ERREURS
- */
-if (app.get('env') === 'development') {
+  /*
+  *  TOUTES LES AUTRES ERREURS
+  */
+  if (app.get('env') === 'development') {
+    app.use(function( err, req, res, next ) {
+      res.status(err.status || 500);
+      res.render('error', {
+        message: err.message,
+        error: err
+      });
+    });
+  }
+
   app.use(function( err, req, res, next ) {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
-      error: err
+      error: {}
     });
   });
-}
 
-app.use(function( err, req, res, next ) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+  server.listen(app.get('port'));
+
 });
-
-server.listen(app.get('port'));
