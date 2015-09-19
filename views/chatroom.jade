@@ -10,6 +10,17 @@ block content
         form.form-chat
           input(type='text' id='message' autocomplete='off' placeholder='Votre message...')
           button(type='submit' class='btn btn-default') Envoyer
+        hr
+        .bs-callout.bs-callout-warning
+          p
+            | Vider le cache en cas de problème avec le chat. <strong>F5</strong> suffit généralement, sinon : <br>
+          p
+            | - Sous <strong>Chrome</strong> ouvrir le menu de développement puis maintenir le bouton
+            | <strong>actualiser</strong> (à côté de la barre d'adresse) et cliquer sur
+            | <strong>'Empty Cache & Hard Reload'</strong>.
+          p
+            | - Sous <strong>Firefox</strong>, ouvrir le menu <strong>about:permissions</strong>, chercher l'url du chat et cliquer
+            | sur <strong>'Forget About This Site'</strong>.
       div(class='col-md-2' id='clients-box')
         h4 Utilisateurs
         ul#clients

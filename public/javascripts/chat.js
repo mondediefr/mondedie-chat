@@ -85,7 +85,7 @@ $(function(){
         : _this.properties.originalTitle;
       }, 1000);
     },
-    off: function() {
+    off:function() {
       clearInterval( this.properties.interval );
       document.title = this.properties.originalTitle;
     }
