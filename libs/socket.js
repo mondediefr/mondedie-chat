@@ -49,7 +49,7 @@ socket.init = function( io ) {
 };
 
 var addMessage = function( io, time, user, message ) {
-  messages.add( time, user, message );
+  messages.add( time, user, entities.encodeHTML( message ));
   io.emit('message', time, user, entities.encodeHTML( message ));
 };
 
