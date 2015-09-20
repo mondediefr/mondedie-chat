@@ -6,8 +6,10 @@ Procfile_dev
 public/stylesheets/dest/*
 public/javascripts/dest/*
 typings
+.vagrant/
 
 *~
 *.log
 *.env
 *.migrate
+Berksfile.lock
