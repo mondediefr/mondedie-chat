@@ -20,8 +20,5 @@ npm install
 # Compilation des assets
 grunt run
 
-while read variable; do export "$variable";
-done < .env
-
 # Exécution de l'app
 node app.js
