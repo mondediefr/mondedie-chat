@@ -57,7 +57,7 @@ $(function(){
     if( ! document.hasFocus() ) {
       titleNotification.on("Nouveau(x) message(s) !");
     }
-    $('#messages').append('<li>(' + time + ') <b><span style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '</li>');
+    $('#messages').append('<li class="message">(' + time + ') <b><span style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '</li>');
     $("#messages").scrollTop($("#messages")[0].scrollHeight);
   };
 

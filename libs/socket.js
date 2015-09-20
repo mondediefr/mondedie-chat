@@ -2,10 +2,15 @@ var socket = {};
 
 var moment   = require('moment-timezone');
 var async    = require('async');
-var entities = require("entities");
+var marked   = require('marked');
 
 var users    = require('../models/users.js');
 var messages = require('../models/messages.js');
+
+marked.setOptions({
+  tables: false,
+  sanitize: true
+});
 
 socket.init = function( io ) {
   io.on('connection', function( socket ) {
@@ -30,7 +35,7 @@ socket.init = function( io ) {
               socket.on('message', function( message ) {
                 time = moment().tz('Europe/Paris').format( dateFormat );
                 if( message )
-                  addMessage(io, time, session.user, message);
+                  addMessage(io, time, session.user, marked( message ));
               });
               // Déconnexion de l'utilisateur
               socket.on('disconnect', function() {
@@ -50,8 +55,8 @@ socket.init = function( io ) {
 };
 
 var addMessage = function( io, time, user, message ) {
-  messages.add( time, user, entities.encodeHTML( message ));
-  io.emit('message', time, user, entities.encodeHTML( message ));
+  messages.add( time, user, message );
+  io.emit('message', time, user, message);
 };
 
 var addBotMessage = function( io, time, message ) {

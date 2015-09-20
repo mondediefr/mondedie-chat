@@ -81,6 +81,10 @@ body {
   background: #eee;
 }
 
+#messages li.message > p {
+  display:inline;
+}
+
 #messages li.message-bot {
   background-color: rgba(0, 153, 153, 0.2);
 }
