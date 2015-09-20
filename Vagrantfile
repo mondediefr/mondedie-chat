@@ -9,7 +9,6 @@ Vagrant.configure(2) do |config|
   config.vm.box_url = 'ubuntu/trusty64'
   config.vm.network "forwarded_port", guest: 5000, host: 5000
   config.vm.synced_folder './share', '/home/vagrant/share', :mount_options => ['dmode=777', 'fmode=666']
-  config.ssh.private_key_path = "~/.ssh/id_rsa"
   config.ssh.forward_agent = true
 
   config.vm.provider 'virtualbox' do |vb|
