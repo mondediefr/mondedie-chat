@@ -1,5 +1,5 @@
 git '/home/vagrant/mondedie-chat' do
-  repository 'https://bitbucket.org/Hardware/mondedie-chat'
+  repository 'git@bitbucket.org:mondediefr/nodechat-flarum.git'
   revision 'master'
   enable_submodules false
   action :sync
