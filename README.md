@@ -2,6 +2,28 @@
 
 https://mondedie-chat.herokuapp.com/
 
+# Installation avec Vagrant #
+
+## Prérequis:
+
+- [chef-dk](https://downloads.chef.io/chef-dk/)
+- [virtualbox](https://www.virtualbox.org/wiki/Downloads)
+- [vagrant](https://www.vagrantup.com/downloads.html)
+
+### Vagrant plugins :
+
+```
+vagrant plugin install vagrant-berkshelf
+```
+
+## Up !
+
+```
+vagrant up
+```
+
+Ouvrir l'app `http://127.0.0.1:5000`
+
 # Installation de la version de développement en local : #
 
 Installer :
