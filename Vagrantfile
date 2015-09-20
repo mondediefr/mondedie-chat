@@ -1,7 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# ip_address = '192.168.33.13'
 project_name = 'mondedie-chat'
 
 Vagrant.configure(2) do |config|
@@ -18,9 +17,6 @@ Vagrant.configure(2) do |config|
 
   config.berkshelf.enabled = true
 
-  config.vm.hostname = project_name + '.local'
-  # config.vm.network :private_network, ip: ip_address
-
   config.vm.provision :chef_solo do |chef|
 
     chef.add_recipe 'apt'
@@ -34,7 +30,7 @@ Vagrant.configure(2) do |config|
     chef.json = {
       :chat => {
         :packages => %W{ vim git curl },
-        :npm_packages => %W{ bower grunt-cli nodemon }
+        :npm_packages => %W{ pm2 bower grunt-cli }
       }
     }
   end

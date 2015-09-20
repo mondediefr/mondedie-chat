@@ -21,4 +21,4 @@ npm install
 grunt run
 
 # Exécution de l'app
-node app.js
+pm2 start app.js
