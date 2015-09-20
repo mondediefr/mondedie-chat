@@ -11,11 +11,6 @@ template '/home/vagrant/mondedie-chat/.env' do
   not_if { ::File.exists?('/home/vagrant/mondedie-chat/.env') }
 end
 
-template '/home/vagrant/mondedie-chat/Procfile_dev' do
-  source 'Procfile_dev'
-  not_if { ::File.exists?('/home/vagrant/mondedie-chat/Procfile_dev') }
-end
-
 script 'chat' do
   interpreter 'bash'
   cwd '/home/vagrant'
