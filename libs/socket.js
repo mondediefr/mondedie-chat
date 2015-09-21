@@ -1,5 +1,6 @@
 var socket = {};
 
+var debug    = require('debug')('socket')
 var moment   = require('moment-timezone');
 var async    = require('async');
 var marked   = require('marked');
@@ -12,7 +13,18 @@ marked.setOptions({
   sanitize: true
 });
 
+// Ping du client toutes les 50 secondes pour éviter
+// un drop de la connexion par Heroku au bout de 55
+// secondes ( erreur H15 )
+var heartbeatInterval = 50000;
+
 socket.init = function( io ) {
+
+  function sendHeartbeat() {
+    setTimeout( sendHeartbeat, heartbeatInterval );
+    io.emit('ping', { beat : 1 });
+  }
+
   io.on('connection', function( socket ) {
 
     var session = socket.handshake.session;
@@ -31,6 +43,10 @@ socket.init = function( io ) {
               io.emit('user_connected', user);
               next();
             }, function() {
+              // Réception la réponse (pong) du client
+              socket.on('pong', function( data ) {
+                debug('Pong received from client');
+              });
               // Réception d'un message
               socket.on('message', function( message ) {
                 time = moment().tz('Europe/Paris').format( dateFormat );
@@ -52,6 +68,8 @@ socket.init = function( io ) {
       });
     }
   });
+  // Envoi du premier Heartbeat
+  setTimeout( sendHeartbeat, heartbeatInterval );
 };
 
 var addMessage = function( io, time, user, message ) {

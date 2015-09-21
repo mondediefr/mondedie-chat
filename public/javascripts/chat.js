@@ -4,6 +4,10 @@ $(function(){
 
   socket.on('connect', function() {
 
+    socket.on('ping', function( data ) {
+      socket.emit('pong', { beat: 1 });
+    });
+
     socket.on('user_new', function() {
       $("ul#clients").text("");
     });
