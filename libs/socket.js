@@ -50,7 +50,7 @@ socket.init = function( io ) {
               // Réception d'un message
               socket.on('message', function( message ) {
                 time = moment().tz('Europe/Paris').format( dateFormat );
-                if( message )
+                if( message && message.length <= 1000 )
                   addMessage(io, time, session.user, marked( message ));
               });
               // Déconnexion de l'utilisateur
@@ -73,6 +73,7 @@ socket.init = function( io ) {
 };
 
 var addMessage = function( io, time, user, message ) {
+
   messages.add( time, user.name, message );
   io.emit('message', time, user, message);
 };
