@@ -4,18 +4,12 @@ session.settings = function( req, res, options, callback ) {
 
   var isLogged = ( req.session.user ) ? true : false;
 
-  if( !! options.shouldBeLogged && ! isLogged ) {
-    res.redirect('/');
-    return;
-  }
+  if( !! options.shouldBeLogged && ! isLogged )
+    return res.redirect('/');
 
   if( ! options.shouldBeLogged && isLogged ) {
-
-  if( ! options.mayBeLogged ) {
-    res.redirect('/chatroom');
-    return;
-  }
-
+    if( ! options.mayBeLogged )
+      return res.redirect('/chatroom');
   }
 
   var settings = {
@@ -25,17 +19,11 @@ session.settings = function( req, res, options, callback ) {
   };
 
   if( isLogged ) {
-
     var isAdmin = ( req.session.user.groupName === 'Admins' ) ? true : false;
-
-    settings.user    = req.session.user;
+    settings.user = req.session.user;
     settings.isAdmin = isAdmin;
-
-    if( !! options.shouldBeAdmin && ! isAdmin ) {
-      res.redirect('/');
-      return;
-    }
-
+    if( !! options.shouldBeAdmin && ! isAdmin )
+      return res.redirect('/');
   }
 
   callback( settings );
