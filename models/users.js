@@ -4,35 +4,24 @@ var redis = require("../libs/redis");
 // Ajoute un utilisateurs à la liste des membres connectés
 exports.add = function( user ) {
   redis.connect(function( db ) {
-    var userkey = 'user:' + user.name;
+    var userkey = 'users:profiles:' + user.name;
     db.hmset( userkey, user );
-    db.sadd('users', userkey);
+    db.sadd('users:connected', userkey);
     db.quit();
   });
 };
 
 // Retourne la liste des membres connectés
 exports.list = function( callback ) {
-  var list = [];
-  redis.connect(function( db ) {
-    getUsersKeys(function( users ) {
-      async.each(users, function( user, nextUser ) {
-        db.hgetall(user, function( err, userObj ) {
-          list.push( userObj );
-          nextUser();
-        })
-      }, function() {
-        db.quit();
-        callback( list );
-      });
-    });
+  usersList(function( users ) {
+    callback( users );
   });
 };
 
 // Supprime un utilisateur de la liste des membres connectés
 exports.remove = function( username ) {
   redis.connect(function( db ) {
-    db.srem('users', 'user:' + username);
+    db.srem('users:connected', 'users:profiles:' + username);
     db.quit();
   });
 };
@@ -40,65 +29,31 @@ exports.remove = function( username ) {
 // Vérifie si l'utilisateur est déjà connecté
 exports.exist = function( username, callback ) {
   var exist = false;
+  usersList(function( users ) {
+    async.each(users, function( user, nextUser ) {
+      if(user.name == username)
+        exist = true;
+      nextUser();
+    }, function() {
+      callback( exist );
+    });
+  });
+};
+
+// Retourne la liste des utilisateur sous forme d'objet
+var usersList = function( callback ) {
+  var list = [];
   redis.connect(function( db ) {
-    getUsersKeys(function( users ) {
-      async.each(users, function( user, nextUser ) {
-        db.hgetall(user, function( err, userObj ) {
-          if(userObj.name == username)
-            exist = true;
+    db.smembers('users:connected', function( err, users ) {
+      async.eachSeries(users, function( user, nextUser ) {
+        db.hgetall(user, function( err, obj ) {
+          list.push( obj );
           nextUser();
-        })
+        });
       }, function() {
         db.quit();
-        callback( exist );
+        callback( list );
       });
     });
   });
 };
-
-// Retourne la liste des clés associées aux utilisateurs
-var getUsersKeys = function( callback ) {
-  redis.connect(function( db ) {
-    db.smembers('users', function( err, users ) {
-      db.quit();
-      callback( users );
-    });
-  });
-};
-
-/*
-
-Ajout :
---------------------------------------------------
-HMSET user:hardware {
-  id	       2
-  name	     Hardware
-  groupName	 Admins
-  groupColor #DF013A
-  avatar	   http://flarum.mondedie.fr/...
-}
-
-SADD users user:hardware
-
-HMSET user:hydrog3n {
-  id	       3
-  name	     Hydrog3n
-  groupName	 Admins
-  groupColor #DF013A
-  avatar	   http://flarum.mondedie.fr/...
-}
-
-SADD users user:hydrog3n
-
-Listing :
---------------------------------------------------
-SMEMBERS users forEach {
-  HGETALL user
-}
-
-Suppression :
---------------------------------------------------
-SREM users user:hardware
-SREM users user:hydrog3n
-
-*/

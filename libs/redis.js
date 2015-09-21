@@ -9,7 +9,7 @@ redis.init = function( callback ) {
       if( reply !== 1 )
         client.set('messages:count', 0);
     });
-    client.del('users');
+    client.del('users:connected');
     callback( client );
   });
 };

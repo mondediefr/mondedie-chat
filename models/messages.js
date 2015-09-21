@@ -1,15 +1,17 @@
 var async = require('async');
 var redis = require("../libs/redis");
 
+// Nombre maximum de messages récupérés dans la base de données
+var MAX = 200;
+
 // Ajoute un message dans le base de données
-exports.add = function( time, user, message ) {
+exports.add = function( time, username, message ) {
   redis.connect(function( db ) {
-    getIncrementalCount(function( counter ) {
-      if( ! user )
-        db.set( 'message:' + counter, JSON.stringify({ time:time, message:message }));
+    getIncrementalCount(function( nb ) {
+      if( ! username )
+        db.hmset('messages:list:' + nb, { time:time, message:message });
       else
-        db.set( 'message:' + counter, JSON.stringify({ time:time, user:user, message:message }));
-      db.sadd('messages', counter);
+        db.hmset('messages:list:' + nb, { time:time, user:username, message:message });
       db.quit();
     });
   });
@@ -18,17 +20,20 @@ exports.add = function( time, user, message ) {
 // Retourne la liste des messages
 exports.list = function( callback ) {
   var list = [];
+  var listed = 0;
   redis.connect(function( db ) {
-    getMessagesKeys(function( messages ) {
-      async.eachSeries(messages, function( counter, next ) {
-        db.get('message:' + counter, function( err, message ) {
-          list.push(JSON.parse( message ));
-          next();
-        })
-      }, function() {
-        db.quit();
-        callback( list );
-      });
+    db.get('messages:count', function( err, nb ) {
+      var min = ((nb - MAX) > 0) ? (nb - MAX) : 1 ;
+      for( var i = min; i <= nb; i++ ) {
+        /* jshint loopfunc: true */
+        getFormatedMessage(db, i, function( message ) {
+          list.push( message );
+          if(++listed == ( nb - min )) {
+            db.quit();
+            callback( list );
+          }
+        });
+      }
     });
   });
 };
@@ -43,18 +48,12 @@ var getIncrementalCount = function( callback ) {
   });
 };
 
-// Retourne la liste des clés associées aux messages
-var getMessagesKeys = function( callback ) {
-  redis.connect(function( db ) {
-    db.smembers('messages', function( err, messages ) {
-      db.quit();
-      // Retourne les 200 derniers messages
-      callback(messages.sort( sortKeys ).slice( -200 ));
+// Format un message à partir du profil utilisateur
+var getFormatedMessage = function( db, i, callback ) {
+  db.hgetall('messages:list:' + i, function( err, message ) {
+    db.hgetall('users:profiles:' + message.user, function( err, user ) {
+      message.user = user;
+      callback( message );
     });
   });
 };
-
-// Permet de trier les clés
-var sortKeys = function( a, b ) {
-  return a - b;
-}
