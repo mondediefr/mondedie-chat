@@ -1,4 +1,3 @@
-var async = require('async');
 var redis = require("../libs/redis");
 
 // Nombre maximum de messages récupérés dans la base de données
@@ -8,10 +7,7 @@ var MAX = 200;
 exports.add = function( time, username, message ) {
   redis.connect(function( db ) {
     getIncrementalCount(function( nb ) {
-      if( ! username )
-        db.hmset('messages:list:' + nb, { time:time, message:message });
-      else
-        db.hmset('messages:list:' + nb, { time:time, user:username, message:message });
+      db.hmset('messages:list:' + nb, { time:time, user:( username ) ? username : null, message:message });
       db.quit();
     });
   });
@@ -23,12 +19,12 @@ exports.list = function( callback ) {
   var listed = 0;
   redis.connect(function( db ) {
     db.get('messages:count', function( err, nb ) {
-      var min = ((nb - MAX) > 0) ? (nb - MAX) : 1 ;
+      var min = ((nb - MAX) > 0) ? (nb - MAX) + 1 : 1 ;
       for( var i = min; i <= nb; i++ ) {
         /* jshint loopfunc: true */
         getFormatedMessage(db, i, function( message ) {
           list.push( message );
-          if(++listed == ( nb - min )) {
+          if(listed++ == ( nb - min )) {
             db.quit();
             callback( list );
           }
@@ -51,9 +47,11 @@ var getIncrementalCount = function( callback ) {
 // Format un message à partir du profil utilisateur
 var getFormatedMessage = function( db, i, callback ) {
   db.hgetall('messages:list:' + i, function( err, message ) {
-    db.hgetall('users:profiles:' + message.user, function( err, user ) {
-      message.user = user;
-      callback( message );
-    });
+    if( message.user ) {
+      db.hgetall('users:profiles:' + message.user, function( err, user ) {
+        message.user = user;
+        callback( message );
+      });
+    } else callback( message );
   });
 };
