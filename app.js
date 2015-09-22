@@ -54,10 +54,16 @@ redis.init(function( client ) {
   app.use(session);
 
   function setHeaders( res, path, stat ) {
-    res.setHeader('Expires', new Date(Date.now() + ms('1y')).toUTCString());
+    // Activation du cache pendant 30 jours pour les fichiers statiques
+    // res.setHeader('Cache-Control', 'private');
+    // res.setHeader('Expires', new Date(Date.now() + ms('30d')).toUTCString());
+    // Désactivation du cache pendant le développement
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate'); // HTTP 1.1
+    res.setHeader('Expires', 0); // Proxies
+    res.setHeader('Pragma', 'no-cache');  // HTTP 1.0
   }
 
-  app.use(serveStatic(path.join(__dirname, 'public'), { maxAge:ms('1y'), setHeaders:setHeaders }));
+  app.use(serveStatic(path.join(__dirname, 'public'), { maxAge:0, setHeaders:setHeaders }));
 
   /*
   *  ROUTES
