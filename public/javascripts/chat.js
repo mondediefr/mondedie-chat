@@ -2,7 +2,7 @@ $(function(){
 
   var socket = io();
 
-  socket.on('connect', function() {
+  socket.once('connect', function() {
 
     socket.on('ping', function( data ) {
       socket.emit('pong', { beat: 1 });
@@ -33,6 +33,26 @@ $(function(){
         addBotMessage( time, message );
       });
     });
+
+  });
+
+  socket.on('disconnect', function() {
+    addWarningMessage('Vous êtes déconnecté du chat !');
+  });
+
+  socket.on('reconnecting', function( attempt ) {
+    if( attempt == 1 )
+      addWarningMessage('Tentative de connexion au serveur en cours...');
+    else if( attempt == 10 )
+      addErrorMessage('Impossible de rétablir la connexion avec le serveur, recharger la page ou réessayer ultérieurement.');
+  });
+
+  socket.on('reconnect', function() {
+    addSuccessMessage('Connexion au chat réussie !');
+  });
+
+  socket.on('error', function() {
+    addErrorMessage('Une erreur est survenue lors de la connexion au serveur, recharger la page ou réessayer ultérieurement.');
   });
 
   $('.form-chat').submit(function(){
@@ -68,6 +88,27 @@ $(function(){
   var addBotMessage = function( time, message ) {
 
     $('#messages').append('<li class="message-bot">(' + time + ') <b>CHATBOT:</b> ' + message + '</li>');
+    $("#messages").scrollTop($("#messages")[0].scrollHeight);
+
+  };
+
+  var addErrorMessage = function( message ) {
+
+    $('#messages').append('<li class="message-error"><b>ERREUR:</b> ' + message + '</li>');
+    $("#messages").scrollTop($("#messages")[0].scrollHeight);
+
+  };
+
+  var addWarningMessage = function( message ) {
+
+    $('#messages').append('<li class="message-warning"><b>ATTENTION:</b> ' + message + '</li>');
+    $("#messages").scrollTop($("#messages")[0].scrollHeight);
+
+  };
+
+  var addSuccessMessage = function( message ) {
+
+    $('#messages').append('<li class="message-success"><b>INFO:</b> ' + message + '</li>');
     $("#messages").scrollTop($("#messages")[0].scrollHeight);
 
   };

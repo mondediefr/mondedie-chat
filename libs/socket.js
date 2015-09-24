@@ -73,7 +73,6 @@ socket.init = function( io ) {
 };
 
 var addMessage = function( io, time, user, message ) {
-
   messages.add( time, user.name, message );
   io.emit('message', time, user, message);
 };
