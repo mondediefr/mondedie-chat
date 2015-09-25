@@ -5,20 +5,15 @@
   "moduleType": [
     "node"
   ],
+  "private": true,
   "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "public/bower",
-    "test",
-    "tests"
-  ],
   "dependencies": {
-    "bootstrap": "~3.3.5",
     "html5shiv": "~3.7.3",
-    "jquery": "~2.1.4",
-    "PACE": "pace#~1.0.2",
     "respond": "~1.4.2"
+  },
+  "devDependencies": {
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4",
+    "PACE": "pace#~1.0.2"
   }
 }
