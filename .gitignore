@@ -4,6 +4,7 @@ Procfile_dev
 public/stylesheets/dest/*
 public/javascripts/dest/*
 .vagrant/
+public/bower
 
 *~
 *.log

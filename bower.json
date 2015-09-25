@@ -6,14 +6,10 @@
     "node"
   ],
   "private": true,
-  "license": "MIT",
   "dependencies": {
     "html5shiv": "~3.7.3",
-    "respond": "~1.4.2"
-  },
-  "devDependencies": {
     "bootstrap": "~3.3.5",
     "jquery": "~2.1.4",
-    "PACE": "pace#~1.0.2"
+    "respond": "~1.4.2"
   }
 }
