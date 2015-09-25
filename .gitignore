@@ -5,6 +5,7 @@ public/stylesheets/dest/*
 public/javascripts/dest/*
 .vagrant/
 public/bower
+typings
 
 *~
 *.log
