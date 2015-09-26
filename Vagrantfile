@@ -8,8 +8,7 @@ Vagrant.configure(2) do |config|
   config.vm.box = 'ubuntu/trusty64'
   config.vm.box_url = 'ubuntu/trusty64'
   config.vm.network "forwarded_port", guest: 5000, host: 5000
-  config.vm.synced_folder './share', '/home/vagrant/share', :mount_options => ['dmode=777', 'fmode=666']
-  config.ssh.forward_agent = true
+  config.vm.synced_folder '.', '/home/vagrant/mondedie-chat', :mount_options => ['dmode=777', 'fmode=666']
 
   config.vm.provider 'virtualbox' do |vb|
     vb.gui = false
@@ -17,11 +16,6 @@ Vagrant.configure(2) do |config|
   end
 
   config.berkshelf.enabled = true
-
-  config.vm.provision "shell" do |shell|
-    shell.inline = "touch $1 && ssh-keyscan -H $2 >> $1 && chmod 600 $1 && chown vagrant: $1"
-    shell.args   = ["/home/vagrant/.ssh/known_hosts", "bitbucket.org"]
-  end
 
   config.vm.provision :chef_solo do |chef|
 
@@ -40,4 +34,14 @@ Vagrant.configure(2) do |config|
       }
     }
   end
+
+  # Configuration du host manager
+  config.hostmanager.enabled = true
+  config.hostmanager.manage_host = true
+
+  # Setup de l'ip par rapport aux paramètres globaux
+  config.vm.hostname = project_name + '.dev'
+  config.vm.network :private_network, ip: '127.0.0.1'
+  config.vm.provision :hostmanager
+
 end

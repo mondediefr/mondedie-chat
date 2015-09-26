@@ -14,6 +14,7 @@ https://mondedie-chat.herokuapp.com/
 
 ```
 vagrant plugin install vagrant-berkshelf
+vagrant plugin install vagrant-hostmanager
 ```
 
 ## Up !
@@ -22,7 +23,7 @@ vagrant plugin install vagrant-berkshelf
 vagrant up
 ```
 
-Ouvrir l'app `http://127.0.0.1:5000`
+Ouvrir l'app `http://mondedie-chat.dev:5000`
 
 # Installation de la version de développement en local : #
 
