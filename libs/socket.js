@@ -81,8 +81,11 @@ socket.init = function( io ) {
                   });
                   // Deban d'un utilisateur
                   socket.on('unban', function( username ) {
-                    if( session.user.isAdmin )
+                    if( session.user.isAdmin ) {
                       users.unban( username );
+                      time = moment().tz('Europe/Paris').format( dateFormat );
+                      addBotMessage(io, time, " Une seconde chance a été offerte à " + username);
+                    }
                   });
                 });
               });
