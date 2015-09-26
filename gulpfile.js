@@ -57,7 +57,7 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['default'], function() {
   gulp.watch(filesJs, ['lint'])
     .on('change', function(event){
       console.log('Le fichier ' + event.path + ' vient d\'être modifié');
