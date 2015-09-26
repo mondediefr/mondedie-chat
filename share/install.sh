@@ -15,7 +15,7 @@ fi
 cd ~/mondedie-chat
 
 # Installation des dépendances
-npm install
+npm --no-bin-links install
 
 # Compilation des assets
 grunt run
