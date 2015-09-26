@@ -122,6 +122,11 @@ $(function(){
     e.preventDefault();
   });
 
+  $(document).on('click', '.username', function() {
+    var username = $(this).text();
+    editor.value('**@' + username + ':** ');
+  });
+
   // ========================= FUNCTIONS =========================
 
   var initMessageList = function( callback ) {
@@ -145,7 +150,7 @@ $(function(){
     // if( ! document.hasFocus() ) {
     //   titleNotification.on("Nouveau(x) message(s) !");
     // }
-    $('#messages').append('<li class="message">(' + time + ') <b><span style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '</li>');
+    $('#messages').append('<li class="message">(' + time + ') <b><span class="username" style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '</li>');
     $("#messages").scrollTop($("#messages")[0].scrollHeight);
   };
 
