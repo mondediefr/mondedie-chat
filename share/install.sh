@@ -18,7 +18,7 @@ cd ~/mondedie-chat
 npm --no-bin-links install
 
 # Compilation des assets
-grunt run
+gulp
 
 # Exécution de l'app
 pm2 start app.js

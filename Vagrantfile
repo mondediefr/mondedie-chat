@@ -34,7 +34,7 @@ Vagrant.configure(2) do |config|
     chef.json = {
       :chat => {
         :packages => %W{ vim git curl },
-        :npm_packages => %W{ pm2 bower grunt-cli }
+        :npm_packages => %W{ pm2 bower gulp }
       }
     }
   end
