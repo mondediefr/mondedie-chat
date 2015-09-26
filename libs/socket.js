@@ -13,6 +13,12 @@ marked.setOptions({
   sanitize: true
 });
 
+var renderer = new marked.Renderer();
+
+renderer.link = function( href, title, text ) {
+  return '<a target="_blank" href="'+ href +'">' + text + '</a>'
+}
+
 // Ping du client toutes les 50 secondes pour éviter
 // un drop de la connexion par Heroku au bout de 55
 // secondes ( erreur H15 )
@@ -55,7 +61,7 @@ socket.init = function( io ) {
                   socket.on('message', function( message ) {
                     time = moment().tz('Europe/Paris').format( dateFormat );
                     if( message && message.length <= 1000 )
-                      addMessage(io, time, session.user, marked( message ));
+                      addMessage(io, time, session.user, marked( message, { renderer:renderer }));
                   });
                   // Déconnexion de l'utilisateur
                   socket.on('disconnect', function() {
