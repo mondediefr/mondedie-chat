@@ -33,6 +33,10 @@ $(function(){
       alert('Impossible de se connecter au chat, vous avez été banni.');
     });
 
+    socket.on('user_notfound', function() {
+      alert('Utilisateur introuvable...');
+    });
+
     socket.on('ban', function() {
       location.reload();
     });

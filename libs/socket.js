@@ -67,11 +67,15 @@ socket.init = function( io ) {
                   // Ban d'un utilisateur par un admin
                   socket.on('ban', function( username ) {
                     if( session.user.isAdmin ) {
-                      users.ban( username );
-                      users.getUserSocket( username, function( socket ) {
-                        io.to( socket ).emit('ban');
-                        time = moment().tz('Europe/Paris').format( dateFormat );
-                        addBotMessage(io, time, username + " a été kick du chat");
+                      users.getUserSocket( username, function( userSocket ) {
+                        if( userSocket ) {
+                          users.ban( username );
+                          io.to( userSocket ).emit('ban');
+                          time = moment().tz('Europe/Paris').format( dateFormat );
+                          addBotMessage(io, time, username + " a été kick du chat");
+                        } else {
+                          io.to( socket.id ).emit('user_notfound');
+                        }
                       });
                     }
                   });

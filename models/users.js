@@ -60,7 +60,10 @@ exports.exist = function( username, callback ) {
 exports.getUserSocket = function( username, callback ) {
   redis.connect(function( db ) {
     db.hgetall('users:profiles:' + username, function( err, user ) {
-      callback( user.socket );
+      if( user )
+        callback( user.socket );
+      else
+        callback( null );
     });
   });
 };
