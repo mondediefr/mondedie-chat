@@ -10,7 +10,10 @@ var messages = require('../models/messages.js');
 
 marked.setOptions({
   tables: false,
-  sanitize: true
+  sanitize: true,
+  highlight: function( code ) {
+    return require('highlight.js').highlightAuto( code ).value;
+  }
 });
 
 var renderer = new marked.Renderer();
