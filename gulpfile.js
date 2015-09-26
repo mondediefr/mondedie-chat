@@ -13,6 +13,7 @@ var filesJshint = [
 ];
 
 gulp.task('default', ['js-script', 'js-io.scripts', 'css', 'lint']);
+gulp.task('heroku:production', ['default']);
 
 // All tasks
 gulp.task('bower', function() {
