@@ -6,6 +6,12 @@ concat = require('gulp-concat'),
 bower = require('gulp-bower'),
 jshint = require('gulp-jshint');
 
+// variable
+var filesJshint = [
+  'app.js', 'gulpfile.js', 'routes/*.js', 'libs/*.js',
+  'models/*.js', 'public/javascripts/*.js'
+];
+
 gulp.task('default', ['js-script', 'js-io.scripts', 'css', 'lint']);
 
 // All tasks
@@ -48,17 +54,13 @@ gulp.task('css', ['bower'], function() {
 });
 
 gulp.task('lint', function() {
-  var filesJs = [
-    'app.js', 'gulpfile.js', 'routes/*.js', 'libs/*.js',
-    'models/*.js', 'public/javascripts/*.js'
-  ];
-  return gulp.src(filesJs)
+  return gulp.src(filesJshint)
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('watch', ['default'], function() {
-  gulp.watch(filesJs, ['lint'])
+  gulp.watch(filesJshint, ['lint'])
     .on('change', function(event){
       console.log('Le fichier ' + event.path + ' vient d\'être modifié');
   });
