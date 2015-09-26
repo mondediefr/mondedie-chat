@@ -3,9 +3,10 @@ minifyCss = require('gulp-minify-css'),
 uglify = require('gulp-uglify'),
 size = require('gulp-size'),
 concat = require('gulp-concat'),
-bower = require('gulp-bower');
+bower = require('gulp-bower'),
+jshint = require('gulp-jshint');
 
-gulp.task('default', ['js-script', 'js-io.scripts', 'css'], function() {});
+gulp.task('default', ['bower', 'js-script', 'js-io.scripts', 'css', 'lint']);
 
 // All tasks
 gulp.task('bower', function() {
@@ -29,6 +30,7 @@ gulp.task('js-io.scripts', function() {
   ];
   return gulp.src(fileJs)
     .pipe(uglify())
+    .pipe(concat('io.scripts.min.js'))
     .pipe(size({title: "fichier io.scripts.min.js"}))
     .pipe(gulp.dest('public/javascripts/dest'));
 });
@@ -45,7 +47,22 @@ gulp.task('css', ['bower'], function() {
     .pipe(gulp.dest('public/stylesheets/dest'));
 });
 
+var filesJs = [
+  'app.js', 'gulpfile.js', 'routes/*.js', 'libs/*.js',
+  'models/*.js', 'public/javascripts/*.js'
+];
+
+gulp.task('lint', function() {
+  return gulp.src(filesJs)
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'));
+});
+
 gulp.task('watch', function() {
+  gulp.watch(filesJs, ['lint'])
+    .on('change', function(event){
+      console.log('Le fichier ' + event.path + ' vient d\'être modifié');
+  });
   gulp.watch('public/javascripts/*.js', ['js-io.scripts'])
     .on('change', function(event){
       console.log('Le fichier ' + event.path + ' vient d\'être modifié');
@@ -55,22 +72,3 @@ gulp.task('watch', function() {
       console.log('Le fichier ' + event.path + ' vient d\'être modifié');
   });
 });
-
-
-/*
-
-jshint: {
-  options: {
-    jshintrc: '.jshintrc'
-  },
-  lint: ['web.js', 'Gruntfile.js', 'routes/*.js', 'libs/*.js', 'models/*.js']
-},
-
-
-watch: {
-  lint: {
-    files:['web.js', 'Gruntfile.js', 'routes/*.js', 'libs/*.js', 'models/*.js'],
-    tasks:['jshint:lint']
-  },
-
-*/

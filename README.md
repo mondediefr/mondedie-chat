@@ -39,11 +39,12 @@ Cloner le projet et installer les dépendances :
 heroku git:clone -a mondedie-chat
 cd mondedie-chat
 
-npm install -g grunt-cli
+npm install -g bower
+npm install -g gulp
 npm install -g nodemon
 npm install
 
-grunt run
+gulp
 ```
 
 Créer un .env à la racine du projet avec ce contenu :
@@ -60,7 +61,7 @@ Créer un fichier Procfile_dev à la racine du projet avec ceci :
 
 ```
 web: nodemon app.js
-worker: grunt
+worker: gulp watch
 ```
 
 Lancer l’application avec :
