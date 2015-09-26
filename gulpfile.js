@@ -6,7 +6,7 @@ concat = require('gulp-concat'),
 bower = require('gulp-bower'),
 jshint = require('gulp-jshint');
 
-gulp.task('default', ['bower', 'js-script', 'js-io.scripts', 'css', 'lint']);
+gulp.task('default', ['js-script', 'js-io.scripts', 'css', 'lint']);
 
 // All tasks
 gulp.task('bower', function() {
@@ -47,12 +47,11 @@ gulp.task('css', ['bower'], function() {
     .pipe(gulp.dest('public/stylesheets/dest'));
 });
 
-var filesJs = [
-  'app.js', 'gulpfile.js', 'routes/*.js', 'libs/*.js',
-  'models/*.js', 'public/javascripts/*.js'
-];
-
 gulp.task('lint', function() {
+  var filesJs = [
+    'app.js', 'gulpfile.js', 'routes/*.js', 'libs/*.js',
+    'models/*.js', 'public/javascripts/*.js'
+  ];
   return gulp.src(filesJs)
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
