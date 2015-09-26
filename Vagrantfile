@@ -34,4 +34,14 @@ Vagrant.configure(2) do |config|
       }
     }
   end
+
+  # Configuration du host manager
+  config.hostmanager.enabled = true
+  config.hostmanager.manage_host = true
+
+  # Setup de l'ip par rapport aux paramètres globaux
+  config.vm.hostname = project_name + '.dev'
+  config.vm.network :private_network, ip: '127.0.0.1'
+  config.vm.provision :hostmanager
+
 end
