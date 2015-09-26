@@ -23,7 +23,7 @@ vagrant plugin install vagrant-hostmanager
 vagrant up
 ```
 
-Ouvrir l'app `http://mondedie-chat.dev:5000`
+Ouvrir l'app `http://mondedie-chat.dev`
 
 # Installation de la version de développement en local : #
 
