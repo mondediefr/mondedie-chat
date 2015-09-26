@@ -5,6 +5,10 @@ body {
   box-sizing: border-box;
 }
 
+pre {
+  margin-top:10px;
+}
+
 .form-signin {
   max-width: 330px;
   padding: 15px;
@@ -46,8 +50,8 @@ body {
 }
 
 .form-chat {
-  width: 100%;
-  margin-top: 10px;
+  width: 99%;
+  margin: 10px;
 }
 
 .form-chat button {
@@ -165,4 +169,12 @@ body {
 
 .bs-callout-info h4 {
   color: #5bc0de;
+}
+
+.CodeMirror {
+  height: 75px;
+}
+
+.CodeMirror, .CodeMirror-scroll {
+  min-height: 75px;
 }

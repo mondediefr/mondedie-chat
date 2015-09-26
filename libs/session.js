@@ -20,8 +20,8 @@ session.settings = function( req, res, options, callback ) {
 
   if( isLogged ) {
     var isAdmin = ( req.session.user.groupName === 'Admins' ) ? true : false;
+    req.session.user.isAdmin = isAdmin;
     settings.user = req.session.user;
-    settings.isAdmin = isAdmin;
     if( !! options.shouldBeAdmin && ! isAdmin )
       return res.redirect('/');
   }

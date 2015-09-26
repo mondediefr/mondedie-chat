@@ -66,6 +66,15 @@ router.post('/login', function(req, res, next) {
           else
             callback();
         });
+      },
+      // On vérifie que l'utilisateur ne soit pas banni
+      function( callback ) {
+        users.banned(req.session.user.name, function( isBanned ) {
+          if( isBanned )
+            callback("Impossible de se connecter au chat, vous avez été banni.");
+          else
+            callback();
+        });
       }
     ], function( err ) {
       if( err ) {

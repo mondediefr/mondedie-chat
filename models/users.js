@@ -1,7 +1,7 @@
 var async = require('async');
 var redis = require("../libs/redis");
 
-// Ajoute un utilisateurs à la liste des membres connectés
+// Ajoute un utilisateur à la liste des membres connectés
 exports.add = function( user ) {
   redis.connect(function( db ) {
     var userkey = 'users:profiles:' + user.name;
@@ -11,9 +11,25 @@ exports.add = function( user ) {
   });
 };
 
+// Ajoute un utilisateur à la liste des membres bannis
+exports.ban = function( username ) {
+  redis.connect(function( db ) {
+    db.sadd('users:banned', 'users:profiles:' + username);
+    db.quit();
+  });
+};
+
+// Supprime un utilisateur de la liste des membres bannis
+exports.unban = function( username ) {
+  redis.connect(function( db ) {
+    db.srem('users:banned', 'users:profiles:' + username);
+    db.quit();
+  });
+};
+
 // Retourne la liste des membres connectés
 exports.list = function( callback ) {
-  usersList(function( users ) {
+  list('users:connected', function( users ) {
     callback( users );
   });
 };
@@ -29,9 +45,9 @@ exports.remove = function( username ) {
 // Vérifie si l'utilisateur est déjà connecté
 exports.exist = function( username, callback ) {
   var exist = false;
-  usersList(function( users ) {
+  list('users:connected', function( users ) {
     async.each(users, function( user, nextUser ) {
-      if(user.name == username)
+      if( user.name == username )
         exist = true;
       nextUser();
     }, function() {
@@ -40,11 +56,34 @@ exports.exist = function( username, callback ) {
   });
 };
 
-// Retourne la liste des utilisateur sous forme d'objet
-var usersList = function( callback ) {
+// Récupère l'identificateur du socket de l'utilisateur
+exports.getUserSocket = function( username, callback ) {
+  redis.connect(function( db ) {
+    db.hgetall('users:profiles:' + username, function( err, user ) {
+      callback( user.socket );
+    });
+  });
+};
+
+// Vérifie si l'utilisateur est banni
+exports.banned = function( username, callback ) {
+  var exist = false;
+  list('users:banned', function( users ) {
+    async.each(users, function( user, nextUser ) {
+      if( user.name == username )
+        exist = true;
+      nextUser();
+    }, function() {
+      callback( exist );
+    });
+  });
+};
+
+// Retourne une liste d'utilisateurs sous forme d'objet
+var list = function( key, callback ) {
   var list = [];
   redis.connect(function( db ) {
-    db.smembers('users:connected', function( err, users ) {
+    db.smembers(key, function( err, users ) {
       async.eachSeries(users, function( user, nextUser ) {
         db.hgetall(user, function( err, obj ) {
           list.push( obj );

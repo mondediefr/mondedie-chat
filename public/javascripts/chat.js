@@ -1,6 +1,11 @@
+/* global hljs */
+/* global SimpleMDE */
+
 $(function(){
 
   var socket = io();
+
+  // ========================= SOCKET EVENTS =========================
 
   socket.once('connect', function() {
 
@@ -22,6 +27,14 @@ $(function(){
 
     socket.on('already_connected', function() {
       alert('Vous êtes déjà connecté, connexion au chat impossible !');
+    });
+
+    socket.on('user_banned', function() {
+      alert('Impossible de se connecter au chat, vous avez été banni.');
+    });
+
+    socket.on('ban', function() {
+      location.reload();
     });
 
     initMessageList(function() {
@@ -55,11 +68,57 @@ $(function(){
     addErrorMessage('Une erreur est survenue lors de la connexion au serveur, recharger la page ou réessayer ultérieurement.');
   });
 
-  $('.form-chat').submit(function(){
-    send($('#message').val());
-    $('#message').val('');
-    return false;
+  // ========================= EDITOR =========================
+
+  var editor = new SimpleMDE({
+    autofocus: true,
+    autosave: {
+        enabled: true,
+        unique_id: 'chatForm',
+        delay: 1000
+    },
+    toolbar: [
+      'bold', 'italic', 'strikethrough', '|', 'code', 'quote', 'unordered-list',
+      'horizontal-rule', '|', 'link', 'image', '|', 'preview', 'side-by-side', 'fullscreen'
+    ],
+    indentWithTabs: false,
+    renderingConfig: {
+      codeSyntaxHighlighting: true,
+    },
+    spellChecker: false,
+    status: false,
+    tabSize: 4,
+    toolbarTips: false
   });
+
+  // ========================= PAGE EVENT =========================
+
+  $('.form-chat').submit(function( e ) {
+    send(editor.value());
+    editor.value('');
+    e.preventDefault();
+  });
+
+  $('#banLink').click(function( e ) {
+    $('#banPopup').modal();
+    e.preventDefault();
+  });
+
+  $('#banPopup').find('button[role="ban"]').click(function( e ) {
+    var username = $('input[name="userBanned"]').val();
+    socket.emit('ban', username);
+    $('#banPopup').modal('hide');
+    e.preventDefault();
+  });
+
+  $('#banPopup').find('button[role="unban"]').click(function( e ) {
+    var username = $('input[name="userBanned"]').val();
+    socket.emit('unban', username);
+    $('#banPopup').modal('hide');
+    e.preventDefault();
+  });
+
+  // ========================= FUNCTIONS =========================
 
   var initMessageList = function( callback ) {
     $.get('/get/messages', function( data ) {
@@ -78,9 +137,10 @@ $(function(){
   };
 
   var addMessage = function( time, user, message ) {
-    if( ! document.hasFocus() ) {
-      titleNotification.on("Nouveau(x) message(s) !");
-    }
+    // Bug !
+    // if( ! document.hasFocus() ) {
+    //   titleNotification.on("Nouveau(x) message(s) !");
+    // }
     $('#messages').append('<li class="message">(' + time + ') <b><span style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '</li>');
     $("#messages").scrollTop($("#messages")[0].scrollHeight);
   };
@@ -113,6 +173,7 @@ $(function(){
 
   };
 
+  /*
   var titleNotification = {
     properties:{
       originalTitle:document.title,
@@ -131,5 +192,6 @@ $(function(){
       }, 6000);
     }
   };
+  */
 
 });
