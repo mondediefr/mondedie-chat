@@ -1,31 +1,33 @@
-var db = require('redis');
-var redis  = {};
+var Promise = require('bluebird');
+var db      = require('redis');
+var redis   = {};
+
+Promise.promisifyAll( db.RedisClient.prototype );
 
 // Initialisation de la db redis
 // Flush des utilisateurs connectés + initialisation du compteur de message
-redis.init = function( callback ) {
-  createClient(function( client ) {
-    client.exists('messages:count', function( err, reply ) {
+redis.init = function() {
+  return createClient().then(function( client ) {
+    client.existsAsync('messages:count').then(function( reply ) {
       if( reply !== 1 )
         client.set('messages:count', 0);
+      client.del('users:connected');
+      return client;
     });
-    client.del('users:connected');
-    callback( client );
   });
 };
 
 // Connexion à la base de données Redis
-redis.connect = function( callback ) {
-  createClient(function( client ) {
-    callback( client );
-  });
+redis.connect = function() {
+  return createClient();
 };
 
 // Création du client
-var createClient = function( callback ) {
+var createClient = function() {
   var client = db.createClient( process.env.REDIS_URL );
-  client.on('ready', function() {
-    callback( client );
+  return client.onAsync('ready')
+  .then(function() {
+    return Promise.resolve( client );
   });
 };
 

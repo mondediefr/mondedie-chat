@@ -1,5 +1,5 @@
 var express = require('express');
-var async   = require('async');
+var Promise = require('bluebird');
 
 var session = require('../libs/session');
 var flarum  = require('../libs/flarum');
@@ -9,87 +9,65 @@ var messages = require('../models/messages');
 
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
+router.get('/', function( req, res, next ) {
   session.settings(req, res, { shouldBeLogged:false }, function( settings ) {
     settings.title += "Connexion";
     res.render('login', settings);
   });
 });
 
-router.post('/login', function(req, res, next) {
+router.post('/login', function( req, res, next ) {
   session.settings(req, res, { shouldBeLogged:false }, function( settings ) {
 
     req.checkBody('username', "Valeur invalide").notEmpty();
     req.checkBody('password', "Valeur invalide").notEmpty();
 
-    var errors = req.validationErrors( true );
+    if(req.validationErrors( true )) {
+      settings.formMessage = 'Veuillez saisir vos identifiants mondedie.fr - flarum';
+      return res.render('login', settings);
+    }
 
-    async.waterfall([
-      // Vérification du formulaire
-      function( callback ) {
-        if( errors )
-          callback("Veuillez saisir vos identifiants mondedie.fr - flarum");
-        else
-          callback();
-      },
-      // Authentification via l'API
-      function( callback ) {
-        flarum.login(req.body, next, function( user ) {
-          if( user )
-            callback( null, user );
-          else
-            callback("Identifiant ou mot de passe incorrect.");
-        });
-      },
-      // Préparation de la session
-      function( user, callback ) {
-        flarum.user(user, next, function( userInfos ) {
-          if( userInfos ) {
-            req.session.user = {
-              id:userInfos.data.id,
-              name:userInfos.data.attributes.username,
-              groupName:( userInfos.included ) ? userInfos.included[0].attributes.namePlural : null,
-              groupColor:( userInfos.included ) ? userInfos.included[0].attributes.color : null,
-              avatar:( userInfos.data.attributes.avatarUrl ) ? userInfos.data.attributes.avatarUrl : process.env.APP_URL + 'images/avatar.png'
-            };
-            callback();
-          } else {
-            callback("Impossible d'initialiser la session utilisateur.");
-          }
-        });
-      },
-      // On vérifie que l'utilisateur ne soit pas déjà connecté
-      function( callback ) {
-        users.exist(req.session.user.name, function( exist ) {
-          if( exist )
-            callback("Vous êtes déjà connecté au chat.");
-          else
-            callback();
-        });
-      },
-      // On vérifie que l'utilisateur ne soit pas banni
-      function( callback ) {
-        users.banned(req.session.user.name, function( isBanned ) {
-          if( isBanned )
-            callback("Impossible de se connecter au chat, vous avez été banni.");
-          else
-            callback();
-        });
+    return flarum.login( req.body )
+    .then(function( user ) {
+      return flarum.user( user )
+    })
+    .then(function( userInfos ) {
+      req.session.user = {
+        id:userInfos.data.id,
+        name:userInfos.data.attributes.username,
+        groupName:( userInfos.included ) ? userInfos.included[0].attributes.namePlural : null,
+        groupColor:( userInfos.included ) ? userInfos.included[0].attributes.color : null,
+        avatar:( userInfos.data.attributes.avatarUrl ) ? userInfos.data.attributes.avatarUrl : process.env.APP_URL + 'images/avatar.png'
       }
-    ], function( err ) {
-      if( err ) {
-        req.session.destroy(function() {
-          settings.formMessage = err;
-          return res.render('login', settings);
-        });
-      } else {
-        return res.redirect('/chatroom');
-      }
+    })
+    .then(function() {
+      return users.exist( req.session.user.name )
+      .then(function( exist ) {
+        if( exist )
+          return Promise.reject('Vous êtes déjà connecté au chat.');
+      });
+    })
+    .then(function() {
+      return users.banned( req.session.user.name )
+      .then(function( isBanned ) {
+        if( isBanned )
+          return Promise.reject('Impossible de se connecter au chat, vous avez été banni.');
+      });
+    })
+    .then(function() {
+      return res.redirect('/chatroom');
+    })
+    .catch(function( err ) {
+      req.session.destroy(function() {
+        settings.formMessage = err;
+        return res.render('login', settings);
+      });
     });
+
   });
 });
 
-router.get('/chatroom', function(req, res, next) {
+router.get('/chatroom', function( req, res, next ) {
   session.settings(req, res, { shouldBeLogged:true }, function( settings ) {
     settings.title += "Chatroom";
     settings.user = req.session.user;
@@ -99,7 +77,7 @@ router.get('/chatroom', function(req, res, next) {
 
 router.get('/get/messages', function( req, res, next ) {
   session.settings(req, res, { shouldBeLogged:true }, function( settings ) {
-    messages.list(function( list ) {
+    messages.list().then(function( list ) {
       res.json({ messages:list });
     });
   });

@@ -27,7 +27,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // Initialisation de Redis
-redis.init(function( client ) {
+redis.init().then(function( client ) {
 
   // Initialisation de la session
   var session = Session({

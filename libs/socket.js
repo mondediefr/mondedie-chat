@@ -40,73 +40,74 @@ socket.init = function( io ) {
     var dateFormat = 'DD/MM à HH:mm:ss'
     var time = moment().tz('Europe/Paris').format( dateFormat );
 
-    // TODO: Utiliser les promises pour éviter une piramide de doom (callback hell)
-    if( session.user ) {
-      session.user.socket = socket.id;
-      users.exist(session.user.name, function( exist ) {
-        if( ! exist ) {
-          users.banned(session.user.name, function( isBanned ) {
-            if( ! isBanned ) {
-              users.add( session.user );
-              users.list(function( usersList ) {
-                // On previent les autres utilisateurs qu'un membre vient de se connecter
-                io.emit('user_new');
-                addBotMessage(io, time, session.user.name + " s'est connecté");
-                async.eachSeries(usersList, function( user, next ) {
-                  io.emit('user_connected', user);
-                  next();
-                }, function() {
-                  // Réception la réponse (pong) du client
-                  socket.on('pong', function( data ) {
-                    debug('Pong received from client');
-                  });
-                  // Réception d'un message
-                  socket.on('message', function( message ) {
-                    time = moment().tz('Europe/Paris').format( dateFormat );
-                    if( message && message.length <= 1000 )
-                      addMessage(io, time, session.user, marked( message, { renderer:renderer }));
-                  });
-                  // Déconnexion de l'utilisateur
-                  socket.on('disconnect', function() {
-                    users.remove( session.user.name );
-                    time = moment().tz('Europe/Paris').format( dateFormat );
-                    io.emit('user_disconnected', session.user.id);
-                    addBotMessage(io, time, session.user.name + " s'est déconnecté");
-                  });
-                  // Ban d'un utilisateur par un admin
-                  socket.on('ban', function( username ) {
-                    if( session.user.isAdmin ) {
-                      users.getUserSocket( username, function( userSocket ) {
-                        if( userSocket ) {
-                          users.ban( username );
-                          io.to( userSocket ).emit('ban');
-                          time = moment().tz('Europe/Paris').format( dateFormat );
-                          addBotMessage(io, time, username + " a été kick du chat");
-                        } else {
-                          io.to( socket.id ).emit('user_notfound');
-                        }
-                      });
-                    }
-                  });
-                  // Deban d'un utilisateur
-                  socket.on('unban', function( username ) {
-                    if( session.user.isAdmin ) {
-                      users.unban( username );
-                      time = moment().tz('Europe/Paris').format( dateFormat );
-                      addBotMessage(io, time, " Une seconde chance a été offerte à " + username);
-                    }
-                  });
-                });
-              });
-            } else {
-              io.to( socket.id ).emit('user_banned');
-            }
+    if( ! session.user ) {
+      return;
+    }
+
+    session.user.socket = socket.id;
+
+    return users.exist( session.user.name )
+    .then(function( exist ) {
+      if( exist ) throw new AlreadyConnectedError();
+    })
+    .then(function() {
+      return users.banned( session.user.name ).then(function( isBanned ) {
+        if( isBanned ) throw new UserBannedError();
+      });
+    })
+    .then(function() {
+      users.add( session.user );
+      io.emit('user_new');
+      addBotMessage(io, time, session.user.name + " s'est connecté");
+      users.list().map(function( user ) {
+        io.emit('user_connected', user);
+      });
+    })
+    .then(function() {
+      // Réception la réponse (pong) du client
+      socket.on('pong', function( data ) {
+        debug('Pong received from client');
+      });
+      // Réception d'un message
+      socket.on('message', function( message ) {
+        time = moment().tz('Europe/Paris').format( dateFormat );
+        if( message && message.length <= 1000 )
+          addMessage(io, time, session.user, marked( message, { renderer:renderer }));
+      });
+      // Déconnexion de l'utilisateur
+      socket.on('disconnect', function() {
+        users.remove( session.user.name );
+        time = moment().tz('Europe/Paris').format( dateFormat );
+        io.emit('user_disconnected', session.user.id);
+        addBotMessage(io, time, session.user.name + " s'est déconnecté");
+      });
+      // Ban d'un utilisateur par un admin
+      socket.on('ban', function( username ) {
+        if( session.user.isAdmin ) {
+          users.getUserSocket( username )
+          .then(function( userSocket ) {
+            users.ban( username );
+            io.to( userSocket ).emit('ban');
+            time = moment().tz('Europe/Paris').format( dateFormat );
+            addBotMessage(io, time, username + " a été kick du chat");
+          }).catch(function() {
+            io.to( socket.id ).emit('user_notfound');
           });
-        } else {
-          io.to( socket.id ).emit('already_connected');
         }
       });
-    }
+      // Deban d'un utilisateur
+      socket.on('unban', function( username ) {
+        if( session.user.isAdmin ) {
+          users.unban( username );
+          time = moment().tz('Europe/Paris').format( dateFormat );
+          addBotMessage(io, time, " Une seconde chance a été offerte à " + username);
+        }
+      });
+    }).catch(AlreadyConnectedError, function() {
+      io.to( socket.id ).emit('already_connected');
+    }).catch(UserBannedError, function() {
+      io.to( socket.id ).emit('user_banned');
+    });
   });
   // Envoi du premier Heartbeat
   setTimeout( sendHeartbeat, heartbeatInterval );
@@ -121,5 +122,13 @@ var addBotMessage = function( io, time, message ) {
   messages.add( time, null, message );
   io.emit('botMessage', time, message);
 };
+
+// Déclaration des erreurs
+function AlreadyConnectedError() {}
+function UserBannedError() {}
+
+// Déclaration des prototypes
+AlreadyConnectedError.prototype = Object.create( Error.prototype );
+UserBannedError.prototype = Object.create( Error.prototype );
 
 module.exports = socket;
