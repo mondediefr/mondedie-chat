@@ -2,8 +2,8 @@
 
 # Vérification de la présence de l'app
 if [ ! -d ~/mondedie-chat ]; then
- echo "No git repository"
- exit 1
+  echo "No git repository"
+  exit 1
 fi
 
 cd ~/mondedie-chat
