@@ -1,0 +1,23 @@
+# EditorConfig: http://EditorConfig.org
+
+# dossier racine
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true # supprime les espaces inutiles
+charset = utf-8
+indent_style = space
+indent_size = 4
+
+[gulpfile.js]
+indent_style = space
+indent_size = 2
+
+[*.{json,css}]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
