@@ -35,6 +35,11 @@ Vagrant.configure(2) do |config|
       :chat => {
         :packages => %W{ vim git curl },
         :npm_packages => %W{ pm2 bower gulp }
+      },
+      :nginx => {
+        :user => 'vagrant',
+        :default_site_enabled => false,
+        :sendfile => 'off' # à cause d'un bug de VirtualBox
       }
     }
   end
