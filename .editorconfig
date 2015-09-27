@@ -9,14 +9,6 @@ insert_final_newline = true
 trim_trailing_whitespace = true # supprime les espaces inutiles
 charset = utf-8
 indent_style = space
-indent_size = 4
-
-[gulpfile.js]
-indent_style = space
-indent_size = 2
-
-[*.{json,css,jade}]
-indent_style = space
 indent_size = 2
 
 [*.md]
