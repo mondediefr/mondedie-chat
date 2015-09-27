@@ -2,7 +2,6 @@ var socket = {};
 
 var debug    = require('debug')('socket')
 var moment   = require('moment-timezone');
-var async    = require('async');
 var marked   = require('marked');
 
 var users    = require('../models/users.js');
@@ -39,10 +38,6 @@ socket.init = function( io ) {
     var session = socket.handshake.session;
     var dateFormat = 'DD/MM à HH:mm:ss'
     var time = moment().tz('Europe/Paris').format( dateFormat );
-
-    if( ! session.user ) {
-      return;
-    }
 
     session.user.socket = socket.id;
 
