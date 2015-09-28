@@ -11,7 +11,7 @@ exports.add = function(time, username, message) {
     getIncrementalCount()
     .then(function(nb) {
       var messagekey = 'messages:list:' + nb;
-      db.hmset(messagekey, { time:time, user:(username) ? username : null, message:message });
+      db.hmset(messagekey, {time:time, user:(username) ? username : null, message:message, id:nb});
       db.sadd('messages:listed', messagekey);
       db.quit();
     });
@@ -59,3 +59,23 @@ var getIncrementalCount = function() {
     });
   });
 };
+
+// Format un message à partir du profil utilisateur
+var getFormatedMessage = function( db, i, callback ) {
+  db.hgetall('messages:list:' + i, function( err, message ) {
+    if( message.user ) {
+      db.hgetall('users:profiles:' + message.user, function( err, user ) {
+        message.user = user;
+        callback( message );
+      });
+    } else callback( message );
+  });
+};
+
+ // Supprime un message préci
+ var delMessage = function(messageId) {
+   redis.connect(function (db) {
+     db.del('message:list:'+messageId);
+     db.quit();
+   });
+ };
