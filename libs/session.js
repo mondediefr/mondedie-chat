@@ -1,14 +1,14 @@
 var session = {};
 
-session.settings = function( req, res, options, callback ) {
+session.settings = function(req, res, options, callback) {
 
-  var isLogged = ( req.session.user ) ? true : false;
+  var isLogged = (req.session.user) ? true : false;
 
-  if( !! options.shouldBeLogged && ! isLogged )
+  if(!! options.shouldBeLogged && ! isLogged)
     return res.redirect('/');
 
-  if( ! options.shouldBeLogged && isLogged ) {
-    if( ! options.mayBeLogged )
+  if(! options.shouldBeLogged && isLogged) {
+    if(! options.mayBeLogged)
       return res.redirect('/chatroom');
   }
 
@@ -18,15 +18,15 @@ session.settings = function( req, res, options, callback ) {
     isLogged:isLogged
   };
 
-  if( isLogged ) {
-    var isAdmin = ( req.session.user.groupName === 'Admins' ) ? true : false;
+  if(isLogged) {
+    var isAdmin = (req.session.user.groupName === 'Admins') ? true : false;
     req.session.user.isAdmin = isAdmin;
     settings.user = req.session.user;
-    if( !! options.shouldBeAdmin && ! isAdmin )
+    if(!! options.shouldBeAdmin && ! isAdmin)
       return res.redirect('/');
   }
 
-  callback( settings );
+  callback(settings);
 
 };
 

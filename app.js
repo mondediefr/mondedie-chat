@@ -10,7 +10,7 @@ var serveStatic  = require('serve-static');
 var Session      = require('express-session');
 var validator    = require('express-validator');
 var ms           = require('ms');
-var RedisStore   = require('connect-redis')( Session );
+var RedisStore   = require('connect-redis')(Session);
 
 var redis  = require('./libs/redis');
 var socket = require('./libs/socket');
@@ -27,7 +27,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // Initialisation de Redis
-redis.init().then(function( client ) {
+redis.init().then(function(client) {
 
   // Initialisation de la session
   var session = Session({
@@ -39,8 +39,8 @@ redis.init().then(function( client ) {
   });
 
   // Initialisation du socket
-  io.use(ios( session ));
-  socket.init( io );
+  io.use(ios(session));
+  socket.init(io);
 
   app.use(logger('dev'));
   var edt = require('express-debug');
@@ -53,7 +53,7 @@ redis.init().then(function( client ) {
   app.use(cookieParser(process.env.COOKIES_SECRET));
   app.use(session);
 
-  function setHeaders( res, path, stat ) {
+  function setHeaders(res, path, stat) {
     // Activation du cache pendant 30 jours pour les fichiers statiques
     // res.setHeader('Cache-Control', 'private');
     // res.setHeader('Expires', new Date(Date.now() + ms('30d')).toUTCString());
@@ -73,17 +73,17 @@ redis.init().then(function( client ) {
   /*
   *  ERREUR 404
   */
-  app.use(function( req, res, next ) {
+  app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
-    next( err );
+    next(err);
   });
 
   /*
   *  TOUTES LES AUTRES ERREURS
   */
   if (app.get('env') === 'development') {
-    app.use(function( err, req, res, next ) {
+    app.use(function(err, req, res, next) {
       res.status(err.status || 500);
       res.render('error', {
         message: err.message,
@@ -92,7 +92,7 @@ redis.init().then(function( client ) {
     });
   }
 
-  app.use(function( err, req, res, next ) {
+  app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
