@@ -126,6 +126,11 @@ $(function(){
     var username = $(this).text();
     editor.value('**@' + username + ':** ');
   });
+  
+  $(document).on('click', '.delete', function() {
+    var id = $(this).data().id;
+    $.get('/del/message/'+id);
+  });
 
   // ========================= FUNCTIONS =========================
 
@@ -135,7 +140,7 @@ $(function(){
         if(! message.user)
           addBotMessage(message.time, message.message);
         else
-          addMessage(message.time, message.user, message.message);
+          addMessage(message.time, message.user, message.message, message.id);
       });
       callback();
     }, 'json');
@@ -145,12 +150,16 @@ $(function(){
     socket.emit('message', message);
   };
 
-  var addMessage = function(time, user, message) {
+  var addMessage = function(time, user, message, id) {
     // Bug !
     // if(! document.hasFocus()) {
     //   titleNotification.on("Nouveau(x) message(s) !");
     // }
-    $('#messages').append('<li class="message">(' + time + ') <b><span class="username" style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '</li>');
+    if (user.isAdmin) {
+      $('#messages').append('<li class="message">(' + time + ') <b><span class="username" style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '<button class="btn btn-danger delete" data-id="'+id+'"><i class="fa fa-times"></i></button></li>'); 
+    } else {
+      $('#messages').append('<li class="message">(' + time + ') <b><span class="username" style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '</li>');
+    }
     $("#messages").scrollTop($("#messages")[0].scrollHeight);
   };
 
