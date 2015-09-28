@@ -68,14 +68,10 @@ var getIncrementalCount = function() {
   });
 };
 
-// Format un message à partir du profil utilisateur
-var getFormatedMessage = function( db, i, callback ) {
-  db.hgetall('messages:list:' + i, function( err, message ) {
-    if( message.user ) {
-      db.hgetall('users:profiles:' + message.user, function( err, user ) {
-        message.user = user;
-        callback( message );
-      });
-    } else callback( message );
-  });
-};
+ // Supprime un message préci
+ var delMessage = function(messageId) {
+   redis.connect(function (db) {
+     db.del('message:list:'+messageId);
+     db.quit();
+   });
+ };
