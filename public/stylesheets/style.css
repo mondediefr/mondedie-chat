@@ -140,6 +140,12 @@ pre {
   cursor:pointer;
 }
 
+button.delete {
+  margin-top:-1px;
+  padding: 0px 5px;
+  line-height: 1.2;
+}
+
 .bs-callout {
   padding: 20px;
   margin: 20px;

@@ -156,7 +156,7 @@ $(function(){
     //   titleNotification.on("Nouveau(x) message(s) !");
     // }
     if(user.isAdmin)
-      $('#messages').append('<li class="message">(' + time + ') <b><span class="username" style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '<button class="btn btn-danger delete" data-id="' + id + '"><i class="fa fa-times"></i></button></li>');
+      $('#messages').append('<li class="message">(' + time + ') <b><span class="username" style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '<button class="btn btn-warning btn-xs pull-right delete" data-id="' + id + '"><i class="fa fa-times"></i></button></li>');
     else
       $('#messages').append('<li class="message">(' + time + ') <b><span class="username" style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '</li>');
 
