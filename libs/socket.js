@@ -1,5 +1,6 @@
 var socket = {};
 
+var Promise  = require('bluebird');
 var debug    = require('debug')('socket')
 var moment   = require('moment-timezone');
 var marked   = require('marked');
@@ -47,16 +48,18 @@ socket.init = function(io) {
     return users.exist(session.user.name)
     .then(function(exist) {
       if(exist) throw new AlreadyConnectedError();
+      else return Promise.resolve()
     })
     .then(function() {
       return users.banned(session.user.name).then(function(isBanned) {
         if(isBanned) throw new UserBannedError();
+        else return Promise.resolve();
       });
     })
     .then(function() {
       users.add(session.user);
-      io.emit('user_new');
-      addBotMessage(io, time, session.user.name + " s'est connecté");
+      io.emit('user_new', time, session.user.name);
+      messages.add(time, null, session.user.name + " s'est connecté");
       users.list().map(function(user) {
         io.emit('user_connected', user);
       });
@@ -76,8 +79,8 @@ socket.init = function(io) {
       socket.on('disconnect', function() {
         users.remove(session.user.name);
         time = moment().tz('Europe/Paris').format(dateFormat);
-        io.emit('user_disconnected', session.user.id);
-        addBotMessage(io, time, session.user.name + " s'est déconnecté");
+        io.emit('user_disconnected', time, session.user);
+        messages.add(time, null, session.user.name + " s'est déconnecté");
       });
       // Ban d'un utilisateur par un admin
       socket.on('ban', function(username) {
@@ -85,9 +88,9 @@ socket.init = function(io) {
           users.getUserSocket(username)
           .then(function(userSocket) {
             users.ban(username);
-            io.to(userSocket).emit('ban');
             time = moment().tz('Europe/Paris').format(dateFormat);
-            addBotMessage(io, time, username + " a été kick du chat");
+            io.to(userSocket).emit('ban', time, username);
+            messages.add(time, null, username + " a été kick du chat");
           }).catch(function() {
             io.to(socket.id).emit('user_notfound');
           });

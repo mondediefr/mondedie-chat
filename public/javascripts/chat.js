@@ -13,16 +13,18 @@ $(function(){
       socket.emit('pong', { beat: 1 });
     });
 
-    socket.on('user_new', function() {
+    socket.on('user_new', function(time, username) {
       $("ul#clients").text("");
+      addBotMessage(time, username + " s'est connecté");
     });
 
     socket.on('user_connected', function(user) {
       $("ul#clients").append('<li style="color:' + user.groupColor + ';" class="' + user.id + '"> <img class="img-circle" src="' + user.avatar + '">' + user.name + '</li>');
     });
 
-    socket.on('user_disconnected', function(userid) {
-      $("ul#clients li." + userid).remove();
+    socket.on('user_disconnected', function(time, user) {
+      $("ul#clients li." + user.id).remove();
+      addBotMessage(time, user.name + " s'est connecté");
     });
 
     socket.on('already_connected', function() {
@@ -155,9 +157,9 @@ $(function(){
     // if(! document.hasFocus()) {
     //   titleNotification.on("Nouveau(x) message(s) !");
     // }
-    if(user.isAdmin)
-      $('#messages').append('<li class="message">(' + time + ') <b><span class="username" style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '<button class="btn btn-warning btn-xs pull-right delete" data-id="' + id + '"><i class="fa fa-times"></i></button></li>');
-    else
+    // if(user.isAdmin)
+    //  $('#messages').append('<li class="message">(' + time + ') <b><span class="username" style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '<button class="btn btn-warning btn-xs pull-right delete" data-id="' + id + '"><i class="fa fa-times"></i></button></li>');
+    // else
       $('#messages').append('<li class="message">(' + time + ') <b><span class="username" style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '</li>');
 
     $("#messages").scrollTop($("#messages")[0].scrollHeight);
