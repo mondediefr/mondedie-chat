@@ -93,6 +93,8 @@ redis.init().then(function(client) {
   }
 
   app.use(function(err, req, res, next) {
+    if( res.headersSent )
+      return next( err );
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
