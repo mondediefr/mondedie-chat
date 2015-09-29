@@ -39,6 +39,9 @@ socket.init = function(io) {
     var dateFormat = 'DD/MM à HH:mm:ss'
     var time = moment().tz('Europe/Paris').format(dateFormat);
 
+    if( ! session.user )
+      return;
+
     session.user.socket = socket.id;
 
     return users.exist(session.user.name)
