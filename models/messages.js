@@ -48,13 +48,17 @@ exports.list = function() {
   });
 };
 
- // Supprime un message
- exports.delete = function(id) {
-   redis.connect(function (db) {
-     db.del('messages:list:'+id);
-     db.hdel('messages:listed', 'messages:list:'+id);
-   });
- };
+// Supprime un message
+exports.delete = function(id) {
+  return redis.connect()
+  .then(function(db) {
+    db.delAsync('messages:list:' + id)
+    .then(function() {
+      db.sremAsync('messages:listed', 'messages:list:' + id) })
+  }).then(function() {
+    return Promise.resolve();
+  });
+};
 
 // Permet d'obtenir le nombre total de message avec incrémentation
 var getIncrementalCount = function() {
@@ -67,11 +71,3 @@ var getIncrementalCount = function() {
     });
   });
 };
-
- // Supprime un message préci
- var delMessage = function(messageId) {
-   redis.connect(function (db) {
-     db.del('message:list:'+messageId);
-     db.quit();
-   });
- };

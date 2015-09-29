@@ -92,8 +92,10 @@ router.get('/logout', function(req, res, next) {
 });
 
 router.get('/del/message/:id', function(req, res, next) {
-  session.settings(req, res, { shouldBeLogged:true }, function(settings) {
-    messages.delete(req.param.id);
+  session.settings(req, res, { shouldBeAdmin:true }, function(settings) {
+    messages.delete(req.param.id).then(function() {
+      res.json({ deleted:true });
+    });
   });
 });
 

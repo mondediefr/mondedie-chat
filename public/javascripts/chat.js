@@ -126,7 +126,7 @@ $(function(){
     var username = $(this).text();
     editor.value('**@' + username + ':** ');
   });
-  
+
   $(document).on('click', '.delete', function() {
     var id = $(this).data().id;
     $.get('/del/message/'+id);
@@ -155,11 +155,11 @@ $(function(){
     // if(! document.hasFocus()) {
     //   titleNotification.on("Nouveau(x) message(s) !");
     // }
-    if (user.isAdmin) {
-      $('#messages').append('<li class="message">(' + time + ') <b><span class="username" style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '<button class="btn btn-danger delete" data-id="'+id+'"><i class="fa fa-times"></i></button></li>'); 
-    } else {
+    if(user.isAdmin)
+      $('#messages').append('<li class="message">(' + time + ') <b><span class="username" style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '<button class="btn btn-danger delete" data-id="' + id + '"><i class="fa fa-times"></i></button></li>');
+    else
       $('#messages').append('<li class="message">(' + time + ') <b><span class="username" style="color:' + user.groupColor + ';">' + user.name + '</span>:</b> ' + message + '</li>');
-    }
+
     $("#messages").scrollTop($("#messages")[0].scrollHeight);
   };
 
