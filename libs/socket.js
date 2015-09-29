@@ -88,9 +88,9 @@ socket.init = function(io) {
           users.getUserSocket(username)
           .then(function(userSocket) {
             users.ban(username);
+            io.to(userSocket).emit('ban');
             time = moment().tz('Europe/Paris').format(dateFormat);
-            io.to(userSocket).emit('ban', time, username);
-            messages.add(time, null, username + " a été kick du chat");
+            addBotMessage(io, time, username + " a été kick du chat");
           }).catch(function() {
             io.to(socket.id).emit('user_notfound');
           });
