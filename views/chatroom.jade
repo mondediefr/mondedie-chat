@@ -4,12 +4,7 @@ block content
 
   .container-fluid
     .row
-      div(class='col-md-10' id='messages-box')
-        ul#messages
-        form.form-chat
-          textarea(id='message' rows='1' autocomplete='off' placeholder='Votre message...' maxlength='1000')
-          hr
-          button(type='submit' class='btn btn-info') Envoyer
+      #content-messages
       div(class='col-md-2' id='clients-box')
         .dropdown
           button(class='btn btn-info dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='true') #{ user.name } > Menu
