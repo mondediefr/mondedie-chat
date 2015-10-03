@@ -34,15 +34,15 @@ var viewDomElement = document.getElementById("content-messages");
 // Model
 chat.Message = function(data) {
   this.time = m.prop(data.time);
-	this.user = m.prop(data.user);
-	this.mess = m.prop(data.mess);
+  this.user = m.prop(data.user);
+  this.mess = m.prop(data.mess);
 };
 
 chat.MessagesList = Array;
 
 // View-Model
 chat.vm = (function() {
-	var vm = {};
+  var vm = {};
   vm.init = function() {
     // Properties
     vm.list = new chat.MessagesList();
@@ -73,9 +73,7 @@ chat.vm = (function() {
 
 // Controller
 chat.controller = function() {
-  socket.once('connect', function() {
-    chat.vm.init();
-  });
+  chat.vm.init();
 };
 
 // View
