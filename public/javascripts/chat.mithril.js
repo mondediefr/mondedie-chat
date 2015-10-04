@@ -221,7 +221,7 @@ chat.view = function() {
         ])
       })
     ]),
-    m("form", { config:onSubmitForm, class:'form-chat' }, [
+    m("form", { class:'form-chat' }, [
       m("textarea", {
         id:'message',
         rows:'5',
@@ -229,7 +229,8 @@ chat.view = function() {
         autocomplete:'off',
         placeholder:'Votre message...',
         maxlength:'1000',
-        onchange: m.withAttr("value", chat.vm.mess)
+        onchange: m.withAttr("value", chat.vm.mess),
+        value:chat.vm.mess()
       }),
       m("hr"),
       m("button", { type:'button', class:'btn btn-info', onclick:chat.vm.send }, "Envoyer")
@@ -238,10 +239,6 @@ chat.view = function() {
 };
 
 // ==================== DOM METHODS ===================
-
-function onSubmitForm(element) {
-  element.reset();
-}
 
 function autoScroll(element) {
   element.scrollTop = element.scrollHeight;
