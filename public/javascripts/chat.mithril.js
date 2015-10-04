@@ -1,9 +1,11 @@
 var socket = io();
-
-// ========================= JQUERY =========================
+var editor = null;
 
 $(function(){
 
+  // ========================= JQUERY =========================
+  // TODO : Convertir le code suivant avec Mihtril
+  
   $('#banLink').click(function(e) {
     $('#banPopup').modal();
     e.preventDefault();
@@ -23,44 +25,42 @@ $(function(){
     e.preventDefault();
   });
 
-  /*
   $(document).on('click', '.username', function() {
     var username = $(this).text();
     editor.value('**@' + username + ':** ');
   });
 
+  /*
   $(document).on('click', '.delete', function() {
     var id = $(this).data().id;
     $.get('/del/message/'+id);
   });
   */
 
-});
+  // ========================= EDITOR =========================
 
-// ========================= EDITOR =========================
-
-/*
-var editor = new SimpleMDE({
-  autofocus: true,
-  autosave: {
+  editor = new SimpleMDE({
+    autofocus: true,
+    autosave: {
       enabled: true,
       unique_id: 'chatForm',
       delay: 1000
-  },
-  toolbar: [
-    'bold', 'italic', 'strikethrough', '|', 'code', 'quote', 'unordered-list',
-    'horizontal-rule', '|', 'link', 'image', '|', 'preview', 'side-by-side', 'fullscreen'
-  ],
-  indentWithTabs: false,
-  renderingConfig: {
-    codeSyntaxHighlighting: true,
-  },
-  spellChecker: false,
-  status: false,
-  tabSize: 4,
-  toolbarTips: false
+    },
+    toolbar: [
+      'bold', 'italic', 'strikethrough', '|', 'code', 'quote', 'unordered-list',
+      'horizontal-rule', '|', 'link', 'image', '|', 'preview', 'side-by-side', 'fullscreen'
+    ],
+    indentWithTabs: false,
+    renderingConfig: {
+      codeSyntaxHighlighting: true,
+    },
+    spellChecker: false,
+    status: false,
+    tabSize: 4,
+    toolbarTips: false
+  });
+
 });
-*/
 
 // ==================== MITHRIL COMPONENT ===================
 
@@ -93,9 +93,7 @@ chat.vm = (function() {
   var vm = {};
   vm.load = function() {
     var deferred = m.deferred();
-    // Properties
     vm.list = new chat.MessagesList();
-    vm.mess = m.prop('');
     // Load initial messages list
     vm.loadmessages = function(res) {
       res.messages.filter(function(m, i) {
@@ -107,13 +105,13 @@ chat.vm = (function() {
     };
     // Send a message
     vm.send = function() {
-      if(vm.mess()) {
-        socket.emit('message', vm.mess());
-        vm.mess('');
+      if(editor.value()) {
+        socket.emit('message', editor.value());
+        editor.value('');
       }
     };
     // Get and load messages list
-    m.request({ method: "GET", url: "/get/messages"} )
+    m.request({ method: "GET", url: "/get/messages"})
     .then(vm.loadmessages)
     .then(m.redraw)
     .then(deferred.resolve);
@@ -222,16 +220,7 @@ chat.view = function() {
       })
     ]),
     m("form", { class:'form-chat' }, [
-      m("textarea", {
-        id:'message',
-        rows:'5',
-        cols:'140',
-        autocomplete:'off',
-        placeholder:'Votre message...',
-        maxlength:'1000',
-        onchange: m.withAttr("value", chat.vm.mess),
-        value:chat.vm.mess()
-      }),
+      m("textarea"),
       m("hr"),
       m("button", { type:'button', class:'btn btn-info', onclick:chat.vm.send }, "Envoyer")
     ])
