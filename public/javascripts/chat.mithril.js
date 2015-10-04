@@ -40,7 +40,16 @@ chat.Message = function(data) {
 };
 
 // Messages list storage
-chat.MessagesList = Array;
+// chat.MessagesList = Array;
+chat.MessagesList = function() {
+  this.list = [];
+  this.push = function(message) {
+    this.list.push(message);
+  };
+  this.messages = function() {
+    return this.list;
+  };
+};
 
 // View-Model
 chat.vm = (function() {
@@ -71,12 +80,15 @@ chat.vm = (function() {
     .then(vm.loadmessages)
     .then(m.redraw)
     .then(deferred.resolve);
-    
+
     return deferred.promise;
   };
   vm.initsockets = function() {
     vm.listen = (function () {
       // ==================== CHAT EVENTS ===================
+      socket.on('ping', function(data) {
+        socket.emit('pong', { beat: 1 });
+      });
       socket.on('message', function(time, user, mess) {
         vm.list.push(new chat.Message({ time:time, user:user, mess:mess }));
         m.redraw();
@@ -164,11 +176,11 @@ chat.controller = function() {
 // View
 chat.view = function() {
   return m("#messages-box", { class:'col-md-10' }, [
-    m("ul#messages", [
-      chat.vm.list.map(function(message, i) {
+    m("ul#messages", { config:autoScroll }, [
+      chat.vm.list.messages().map(function(message, i) {
         var user = message.user();
         return m("li", { class:message.type() }, [
-          '(' + message.time() + ') ',
+          ( message.time() ? message.time() : "" ) + ' ',
           m("b", m("span", { class:'username', style: { color:user.groupColor }}, user.name), ': '),
           m.trust(message.mess())
         ])
@@ -194,6 +206,10 @@ chat.view = function() {
 
 function onSubmitForm(element) {
   element.reset();
+}
+
+function autoScroll(element) {
+  element.scrollTop = element.scrollHeight;
 }
 
 m.mount(viewDomElement, { controller:chat.controller, view:chat.view });
