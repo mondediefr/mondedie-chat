@@ -33,11 +33,13 @@ var viewDomElement = document.getElementById("content-messages");
 
 // Model
 chat.Message = function(data) {
+  this.type = m.prop(data.type || 'message');
   this.time = m.prop(data.time);
-  this.user = m.prop(data.user);
+  this.user = m.prop(data.user || { name:'CHATBOT' });
   this.mess = m.prop(data.mess);
 };
 
+// Stockage de la liste des messages
 chat.MessagesList = Array;
 
 // View-Model
@@ -54,17 +56,80 @@ chat.vm = (function() {
         vm.mess('');
       }
     };
-    // Listen for new messages
     vm.listen = (function () {
-      m.startComputation();
+      // ==================== CHAT EVENTS ===================
       socket.on('message', function(time, user, mess) {
-        try {
-          vm.list.push(new chat.Message({ time:time, user:user, mess:mess }));
-        } catch(e) {
-          console.log(e);
-        } finally {
-          m.endComputation();
-        }
+        vm.list.push(new chat.Message({ time:time, user:user, mess:mess }));
+        m.redraw();
+      });
+      socket.on('botMessage', function(time, mess) {
+        vm.list.push(new chat.Message({ type:'message-bot', time:time, mess:mess }));
+        m.redraw();
+      });
+      socket.on('user_new', function(time, username) {
+        // $("ul#clients").text("");
+        vm.list.push(new chat.Message({
+          type:'message-bot',
+          time:time,
+          mess:username + " s'est connecté"
+        }));
+        m.redraw();
+      });
+      socket.on('user_disconnected', function(time, user) {
+        // $("ul#clients li." + user.id).remove();
+        vm.list.push(new chat.Message({
+          type:'message-bot',
+          time:time,
+          mess:user.name + " s'est déconnecté"
+        }));
+        m.redraw();
+      });
+      socket.on('already_connected', function() {
+        alert('Vous êtes déjà connecté, connexion au chat impossible !');
+      });
+      socket.on('user_banned', function() {
+        alert('Impossible de se connecter au chat, vous avez été banni.');
+      });
+      socket.on('user_notfound', function() {
+        alert('Utilisateur introuvable...');
+      });
+      socket.on('ban', function() {
+        location.reload();
+      });
+      // ==================== GENERALS EVENTS ===================
+      socket.on('disconnect', function() {
+        vm.list.push(new chat.Message({
+          type:'message-warning',
+          mess:'Vous êtes déconnecté du chat !'
+        }));
+        m.redraw();
+      });
+      socket.on('reconnecting', function(attempt) {
+        if(attempt == 1)
+          vm.list.push(new chat.Message({
+            type:'message-warning',
+            mess:'Tentative de connexion au serveur en cours...'
+          }));
+        else if(attempt == 10)
+          vm.list.push(new chat.Message({
+            type:'message-error',
+            mess:'Impossible de rétablir la connexion avec le serveur, recharger la page ou réessayer ultérieurement..'
+          }));
+        m.redraw();
+      });
+      socket.on('reconnect', function() {
+        vm.list.push(new chat.Message({
+          type:'message-success',
+          mess:'Connexion au chat réussie !'
+        }));
+        m.redraw();
+      });
+      socket.on('error', function() {
+        vm.list.push(new chat.Message({
+          type:'message-error',
+          mess:'Une erreur est survenue lors de la connexion au serveur, recharger la page ou réessayer ultérieurement.'
+        }));
+        m.redraw();
       });
     })();
   };
@@ -76,30 +141,35 @@ chat.controller = function() {
   chat.vm.init();
 };
 
+function onSubmitForm(element) {
+  element.reset();
+}
+
 // View
 chat.view = function() {
   return m("#messages-box", { class:'col-md-10' }, [
     m("ul#messages", [
       chat.vm.list.map(function(message, i) {
         var user = message.user();
-        return m("li", { class:'message' }, [
-          '(' + message.time() + ')',
-          m("b", m("span", { class:'username', style: { color: user.groupColor }}, user.name ? user.name : 'CHATBOT'), ': '),
-          message.mess()
+        return m("li", { class:message.type() }, [
+          '(' + message.time() + ') ',
+          m("b", m("span", { class:'username', style: { color: user.groupColor }}, user.name), ': '),
+          m.trust(message.mess())
         ])
       })
     ]),
-    m("form", { class:'form-chat' }, [
+    m("form", { config: onSubmitForm, class:'form-chat' }, [
       m("textarea", {
         id:'message',
-        rows:'10',
+        rows:'5',
+        cols:'140',
         autocomplete:'off',
         placeholder:'Votre message...',
         maxlength:'1000',
         onchange: m.withAttr("value", chat.vm.mess)
       }),
       m("hr"),
-      m("button", { type:'button', class:'btn btn-info', onclick: chat.vm.add }, "Envoyer")
+      m("button", { type:'button', class:'btn btn-info', onclick: chat.vm.send }, "Envoyer")
     ])
   ])
 };
