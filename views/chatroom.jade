@@ -5,7 +5,7 @@ block content
   .container-fluid
     .row
       #content-messages
-      div(class='col-md-2' id='clients-box')
+      .col-md-2.panel
         .dropdown
           button(class='btn btn-info dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='true') #{ user.name } > Menu
             | &nbsp;
@@ -32,7 +32,8 @@ block content
               a(href='/logout') Se déconnecter
         hr
         h4 Utilisateurs
-        ul#clients
+        #content-users
+          //- ul#clients
 
   div(class='modal fade' id='banPopup')
     .modal-dialog

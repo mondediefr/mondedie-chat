@@ -128,11 +128,11 @@ pre {
   margin-top: 5px;
 }
 
-#clients-box {
+.panel {
   padding-top: 10px;
 }
 
-#clients-box h4 {
+.panel h4 {
   border-bottom: 1px solid gray;
 }
 

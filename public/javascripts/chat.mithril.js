@@ -44,6 +44,7 @@ chat.Message = function(data) {
 chat.MessagesList = function() {
   this.list = [];
   this.push = function(message) {
+    // AJOUTER LES PROMISES !!!!!!!!!!!!!!
     this.list.push(message);
   };
   this.messages = function() {
@@ -98,7 +99,7 @@ chat.vm = (function() {
         m.redraw();
       });
       socket.on('user_new', function(time, username) {
-        // $("ul#clients").text("");
+        users.vm.list.length = 0;
         vm.list.push(new chat.Message({
           type:'message-bot',
           time:time,
@@ -107,7 +108,7 @@ chat.vm = (function() {
         m.redraw();
       });
       socket.on('user_disconnected', function(time, user) {
-        // $("ul#clients li." + user.id).remove();
+        users.vm.list.del(user.id);
         vm.list.push(new chat.Message({
           type:'message-bot',
           time:time,
@@ -181,7 +182,7 @@ chat.view = function() {
         var user = message.user();
         return m("li", { class:message.type() }, [
           ( message.time() ? message.time() : "" ) + ' ',
-          m("b", m("span", { class:'username', style: { color:user.groupColor }}, user.name), ': '),
+          m("b", m("span", { class:'username', style:{ color:user.groupColor }}, user.name), ': '),
           m.trust(message.mess())
         ])
       })
@@ -213,3 +214,89 @@ function autoScroll(element) {
 }
 
 m.mount(viewDomElement, { controller:chat.controller, view:chat.view });
+
+// ==================== MITHRIL USERS COMPONENT ===================
+
+// Users Namespace
+var users = {};
+var usersViewElement = document.getElementById("content-users");
+
+// Model
+users.User = function(data) {
+  this.id     = m.prop(data.id);
+  this.name   = m.prop(data.name);
+  this.color  = m.prop(data.color);
+  this.avatar = m.prop(data.avatar);
+};
+
+// Users list storage
+// users.UsersList = Array;
+users.UsersList = function() {
+  this.list = [];
+  this.reinit = function() {
+    this.list.length = 0;
+  };
+  this.push = function(user) {
+    this.list.push(user);
+  };
+  this.del = function(id) {
+    var deferred = m.deferred();
+    for(var i = 0; i < this.list.length; i++) {
+      var user = this.list[i];
+      if(id == user.id()) {
+        this.list.splice(i, 1);
+        deferred.resolve();
+      }
+    }
+    return deferred.promise;
+  };
+  this.users = function() {
+    return this.list;
+  };
+};
+
+// View-Model
+users.vm = (function() {
+  var vm = {};
+  vm.init = function() {
+    vm.list = new users.UsersList();
+    vm.listen = (function () {
+      socket.on('user_connected', function(user) {
+        vm.list.push(new users.User({
+          id:user.id,
+          name:user.name,
+          color:user.groupColor,
+          avatar:user.avatar
+        }));
+        m.redraw();
+      });
+      socket.on('user_new', function(time, username) {
+        vm.list.reinit();
+        m.redraw();
+      });
+      socket.on('user_disconnected', function(time, user) {
+        vm.list.del(user.id).then(m.redraw);
+      });
+    }());
+  };
+  return vm;
+}());
+
+// Controller
+users.controller = function() {
+  users.vm.init();
+};
+
+// View
+users.view = function() {
+  return m("ul#clients", [
+    users.vm.list.users().map(function(user, i) {
+      return m("li", { class:user.id(), style:{ color:user.color() }}, [
+        m("img", { class:'img-circle', src:user.avatar(), alt:user.name() }),
+        user.name()
+      ])
+    })
+  ])
+};
+
+m.mount(usersViewElement, { controller:users.controller, view:users.view });
