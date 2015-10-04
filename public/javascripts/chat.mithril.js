@@ -39,16 +39,26 @@ chat.Message = function(data) {
   this.mess = m.prop(data.mess);
 };
 
-// Stockage de la liste des messages
+// Messages list storage
 chat.MessagesList = Array;
 
 // View-Model
 chat.vm = (function() {
   var vm = {};
-  vm.init = function() {
+  vm.load = function() {
+    var deferred = m.deferred();
     // Properties
     vm.list = new chat.MessagesList();
     vm.mess = m.prop('');
+    // Load initial messages list
+    vm.loadmessages = function(res) {
+      res.messages.filter(function(m, i) {
+        if( ! m.user )
+          vm.list.push(new chat.Message({ type:'message-bot', time:m.time, mess:m.message }));
+        else
+          vm.list.push(new chat.Message({ time:m.time, user:m.user, mess:m.message  }));
+      });
+    };
     // Send a message
     vm.send = function() {
       if(vm.mess()) {
@@ -56,6 +66,15 @@ chat.vm = (function() {
         vm.mess('');
       }
     };
+    // Get and load messages list
+    m.request({ method: "GET", url: "/get/messages"} )
+    .then(vm.loadmessages)
+    .then(m.redraw)
+    .then(deferred.resolve);
+    
+    return deferred.promise;
+  };
+  vm.initsockets = function() {
     vm.listen = (function () {
       // ==================== CHAT EVENTS ===================
       socket.on('message', function(time, user, mess) {
@@ -131,6 +150,7 @@ chat.vm = (function() {
         }));
         m.redraw();
       });
+      // ========================================================
     })();
   };
   return vm;
@@ -138,12 +158,8 @@ chat.vm = (function() {
 
 // Controller
 chat.controller = function() {
-  chat.vm.init();
+  chat.vm.load().then(chat.vm.initsockets);
 };
-
-function onSubmitForm(element) {
-  element.reset();
-}
 
 // View
 chat.view = function() {
@@ -153,12 +169,12 @@ chat.view = function() {
         var user = message.user();
         return m("li", { class:message.type() }, [
           '(' + message.time() + ') ',
-          m("b", m("span", { class:'username', style: { color: user.groupColor }}, user.name), ': '),
+          m("b", m("span", { class:'username', style: { color:user.groupColor }}, user.name), ': '),
           m.trust(message.mess())
         ])
       })
     ]),
-    m("form", { config: onSubmitForm, class:'form-chat' }, [
+    m("form", { config:onSubmitForm, class:'form-chat' }, [
       m("textarea", {
         id:'message',
         rows:'5',
@@ -169,9 +185,15 @@ chat.view = function() {
         onchange: m.withAttr("value", chat.vm.mess)
       }),
       m("hr"),
-      m("button", { type:'button', class:'btn btn-info', onclick: chat.vm.send }, "Envoyer")
+      m("button", { type:'button', class:'btn btn-info', onclick:chat.vm.send }, "Envoyer")
     ])
   ])
 };
 
-m.mount(viewDomElement, { controller: chat.controller, view: chat.view });
+// ==================== DOM METHODS ===================
+
+function onSubmitForm(element) {
+  element.reset();
+}
+
+m.mount(viewDomElement, { controller:chat.controller, view:chat.view });
