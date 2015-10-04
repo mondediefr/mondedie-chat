@@ -1,5 +1,42 @@
 var socket = io();
 
+// ========================= JQUERY =========================
+
+$(function(){
+
+  $('#banLink').click(function(e) {
+    $('#banPopup').modal();
+    e.preventDefault();
+  });
+
+  $('#banPopup').find('button[role="ban"]').click(function(e) {
+    var username = $('input[name="userBanned"]').val();
+    socket.emit('ban', username);
+    $('#banPopup').modal('hide');
+    e.preventDefault();
+  });
+
+  $('#banPopup').find('button[role="unban"]').click(function(e) {
+    var username = $('input[name="userBanned"]').val();
+    socket.emit('unban', username);
+    $('#banPopup').modal('hide');
+    e.preventDefault();
+  });
+
+  /*
+  $(document).on('click', '.username', function() {
+    var username = $(this).text();
+    editor.value('**@' + username + ':** ');
+  });
+
+  $(document).on('click', '.delete', function() {
+    var id = $(this).data().id;
+    $.get('/del/message/'+id);
+  });
+  */
+
+});
+
 // ========================= EDITOR =========================
 
 /*
@@ -44,7 +81,6 @@ chat.Message = function(data) {
 chat.MessagesList = function() {
   this.list = [];
   this.push = function(message) {
-    // AJOUTER LES PROMISES !!!!!!!!!!!!!!
     this.list.push(message);
   };
   this.messages = function() {
@@ -99,7 +135,6 @@ chat.vm = (function() {
         m.redraw();
       });
       socket.on('user_new', function(time, username) {
-        users.vm.list.length = 0;
         vm.list.push(new chat.Message({
           type:'message-bot',
           time:time,
@@ -108,7 +143,6 @@ chat.vm = (function() {
         m.redraw();
       });
       socket.on('user_disconnected', function(time, user) {
-        users.vm.list.del(user.id);
         vm.list.push(new chat.Message({
           type:'message-bot',
           time:time,
@@ -242,8 +276,7 @@ users.UsersList = function() {
   this.del = function(id) {
     var deferred = m.deferred();
     for(var i = 0; i < this.list.length; i++) {
-      var user = this.list[i];
-      if(id == user.id()) {
+      if(id == this.list[i].id()) {
         this.list.splice(i, 1);
         deferred.resolve();
       }
@@ -291,7 +324,7 @@ users.controller = function() {
 users.view = function() {
   return m("ul#clients", [
     users.vm.list.users().map(function(user, i) {
-      return m("li", { class:user.id(), style:{ color:user.color() }}, [
+      return m("li", { style:{ color:user.color() }}, [
         m("img", { class:'img-circle', src:user.avatar(), alt:user.name() }),
         user.name()
       ])

@@ -36,7 +36,7 @@ router.post('/login', function(req, res, next) {
         id:userInfos.data.id,
         name:userInfos.data.attributes.username,
         groupName:(userInfos.included) ? userInfos.included[0].attributes.namePlural : null,
-        groupColor:(userInfos.included) ? userInfos.included[0].attributes.color : null,
+        groupColor:(userInfos.included) ? userInfos.included[0].attributes.color : "#000000",
         avatar:(userInfos.data.attributes.avatarUrl) ? userInfos.data.attributes.avatarUrl : process.env.APP_URL + 'images/avatar.png'
       }
     })
