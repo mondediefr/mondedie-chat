@@ -27,10 +27,10 @@ $(function(){
   });
 
   editor.codemirror.on('keyHandled', function(instance, key) {
-    if(key == 'Enter' && ! document.getElementById('disable-enter-action').checked && instance.getValue().length > 1) {
-      messages.vm.send();
-    } else {
-      if(!document.getElementById('disable-enter-action').checked)
+    if(key == 'Enter' && ! document.getElementById('disable-enter-action').checked) {
+      if(instance.getValue().length > 1)
+        messages.vm.send();
+      else
         editor.value('');
     }
   });
