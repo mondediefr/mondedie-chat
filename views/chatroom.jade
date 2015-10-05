@@ -4,7 +4,7 @@ block content
 
   .container-fluid
     .row
-      #content-messages
+      div(id='content-messages' class='col-md-10')
       .col-md-2.panel
         .dropdown
           button(class='btn btn-info dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='true') #{ user.name } > Menu
@@ -33,20 +33,26 @@ block content
         hr
         h4 Utilisateurs
         #content-users
-
-  div(class='modal fade' id='banPopup')
-    .modal-dialog
-      .modal-content
-        .modal-header
-          button(type='button' class='close' data-dismiss='modal')
-            span &times;
-          h4.modal-title Kick/Ban
-        .modal-body
-          form
-            .form-group
-              label.control-label Pseudo :
-              input(type='text' name='userBanned' class='form-control' autofocus)
-        .modal-footer
-          button(type='button' class='btn btn-default' data-dismiss='modal') Annuler
-          button(type='button' role="ban" class='btn btn-danger') Bannir
-          button(type='button' role="unban" class='btn btn-warning') Débannir
+    .row
+      .col-md-10
+        form.form-chat
+          textarea
+          hr
+          button(type='button' class='btn btn-info', onclick='messages.vm.send()') Envoyer
+  if user.isAdmin
+    div(class='modal fade' id='banPopup')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button(type='button' class='close' data-dismiss='modal')
+              span &times;
+            h4.modal-title Kick/Ban
+          .modal-body
+            form
+              .form-group
+                label.control-label Pseudo :
+                input(type='text' name='userBanned' class='form-control' autofocus)
+          .modal-footer
+            button(type='button' class='btn btn-default' data-dismiss='modal') Annuler
+            button(type='button' role="ban" class='btn btn-danger') Bannir
+            button(type='button' role="unban" class='btn btn-warning') Débannir

@@ -2,7 +2,7 @@
  * Messages component - view
  */
 messages.view = function() {
-  return m("#messages-box", { class:'col-md-10' }, [
+  return m("#messages-box", [
     m("ul#messages", { config:autoScroll }, [
       messages.vm.list.messages().map(function(message, i) {
         var user = message.user();
@@ -12,11 +12,6 @@ messages.view = function() {
           m.trust(message.mess())
         ])
       })
-    ]),
-    m("form", { class:'form-chat' }, [
-      m("textarea"),
-      m("hr"),
-      m("button", { type:'button', class:'btn btn-info', onclick:messages.vm.send }, "Envoyer")
     ])
   ])
 };

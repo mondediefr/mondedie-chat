@@ -49,6 +49,10 @@ pre {
   border-top-right-radius: 0;
 }
 
+.col-md-10 {
+  padding-left: 0px;
+}
+
 .form-chat {
   width: 99%;
   margin: 10px;
@@ -129,6 +133,7 @@ pre {
 }
 
 .panel {
+  padding-left: 0px;
   padding-top: 10px;
 }
 
