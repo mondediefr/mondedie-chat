@@ -42,11 +42,13 @@ redis.init().then(function(client) {
   io.use(ios(session));
   socket.init(io);
 
-  app.use(logger('dev'));
-  var edt = require('express-debug');
-  edt(app);
+  if(app.get('env') == 'development') {
+    app.use(logger('dev'));
+    var edt = require('express-debug');
+    edt(app);
+  }
 
-  // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+  app.use(favicon(path.join(__dirname, 'public/images/favicon.png')));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(validator());

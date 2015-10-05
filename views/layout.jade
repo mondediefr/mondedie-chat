@@ -9,16 +9,17 @@ html
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible' content='IE=edge')
     meta(name='viewport' content='width=device-width, initial-scale=1')
-    meta(name="description" content="mondedie-chat")
-    title=title
+    meta(name='description' content='mondedie-chat')
+    title #{title}
 
-    +ie('if IE')
-      link(rel='shortcut icon' href='/img/favicon.ico')
+    link(rel='icon' href='/images/favicon.png' type='image/png')
+    link(rel='stylesheet' href='//fonts.googleapis.com/css?family=Oswald' type='text/css')
 
-    // link(rel="icon" href="/img/favicon.png")
-    link(href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" rel="stylesheet")
-    link(href="//cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css" rel="stylesheet")
-    link(href='/stylesheets/dest/styles.min.css', rel='stylesheet')
+    if path == '/chatroom'
+      link(rel='stylesheet' href='//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css')
+      link(rel='stylesheet' href='//cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css')
+
+    link(rel='stylesheet' href='/stylesheets/dest/styles.min.css')
 
     +ie('if lt IE 9')
       script(src='/bower/html5shiv/dist/html5shiv.js')

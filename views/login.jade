@@ -2,9 +2,13 @@ extends layout
 
 block content
 
-  .container
+  .container.text-center
+    h1.title-site
+      a(href="/" title="Mondedie.fr" class="site-name")
+        span M
+        | ONDEDIE
+      p.site-motto Forum pour débutant en administration système.
     form(action='/login' method='post' class='form-signin')
-      h2.form-signin-heading Mondedie-chat
       if formMessage
         .alert.alert-danger #{formMessage}
       input(type='text' name='username' class='form-control' placeholder='Pseudo')
@@ -13,4 +17,4 @@ block content
         label
           input(type='checkbox' value='remember-me')
           | Se souvenir de moi
-      button(type='submit' class='btn btn-lg btn-primary btn-block') Connexion
+      button(type='submit' class='btn btn-lg btn-info btn-block') Connexion
