@@ -51,8 +51,10 @@ gulp.task('js-io.scripts', function() {
 });
 
 gulp.task('mithril-map', ['bower'], function() {
-  return gulp.src('public/bower/mithril/mithril.min.js.map')
-    .pipe(gulp.dest(pathJs + 'dest'));
+  return gulp.src([
+    'public/bower/mithril/mithril.js',
+    'public/bower/mithril/mithril.min.js.map'
+  ]).pipe(gulp.dest(pathJs + 'dest'));
 });
 
 gulp.task('css', ['bower'], function() {
