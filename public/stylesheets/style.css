@@ -96,17 +96,12 @@ h1.title-site .site-motto {
 }
 
 .form-chat button {
-  width: 9%;
+  margin-top: 15px;
   margin-left: 10px;
-  margin-bottom: 2px;
 }
 
-.form-chat input {
-  width: 89%;
-  min-height: 32px;
-  box-sizing: border-box;
-  margin-left: 3px;
-  padding-left: 5px;
+.form-chat input[type="checkbox"] {
+  margin: 0px 5px;
 }
 
 #messages {

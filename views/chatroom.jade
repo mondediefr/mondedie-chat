@@ -37,8 +37,14 @@ block content
       .col-md-10
         form.form-chat
           textarea
-          hr
           button(type='button' class='btn btn-info', onclick='messages.vm.send()') Envoyer
+          button(type='button' class='btn btn-default' data-toggle='collapse' data-target='#chat-options' aria-expanded='false' aria-controls='chat-options') Options
+          div(class="collapse" id="chat-options")
+            hr
+            .well
+              input(type='checkbox' id='disable-enter-action')
+              span Désactiver l'envoi des messages avec la touche entrée
+
   if user.isAdmin
     div(class='modal fade' id='banPopup')
       .modal-dialog
@@ -54,5 +60,5 @@ block content
                 input(type='text' name='userBanned' class='form-control' autofocus)
           .modal-footer
             button(type='button' class='btn btn-default' data-dismiss='modal') Annuler
-            button(type='button' role="ban" class='btn btn-danger') Bannir
-            button(type='button' role="unban" class='btn btn-warning') Débannir
+            button(type='button' role='ban' class='btn btn-danger') Bannir
+            button(type='button' role='unban' class='btn btn-warning') Débannir
