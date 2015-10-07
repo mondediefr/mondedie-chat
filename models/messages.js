@@ -18,18 +18,31 @@ exports.add = function(time, username, message) {
   });
 };
 
-// Retourne la liste des messages
+/*
+ * Retourne les 200 derniers messages
+ *
+ * - La méthode call appel la fonction de trie des messages
+ *
+ * - La méthode filter permet de retirer les messages trop anciens
+ *
+ * - La méthode map traite chaque message en allant chercher
+ *   ses propriétés (time, user, message) dans redis via hgetall
+ *   L'objet message.user est lui aussi complété avec les propriétés
+ *   du profil de l'utilisateur (users:profiles:username)
+ *   Si la propriété user est nulle, alors il s'agit d'un message
+ *   du bot, donc on renvoie un objet message sans utilisateur.
+ */
 exports.list = function() {
   return redis.connect()
   .then(function(db) {
-    return db.smembersAsync('messages:listed').call('sort', function(a, b) {
-      a = a.replace('messages:list:', '');
-      b = b.replace('messages:list:', '');
-      return a - b;
-    })
-    .map(function(message, index) {
-      if(index <= (MAX-1)) {
-        return db.hgetallAsync(message)
+    return db.getAsync('messages:count')
+    .then(function(count) {
+      return db.smembersAsync('messages:listed').call('sort', sort)
+      .filter(function(item, index) {
+        return index >= (count - MAX);
+      })
+      .map(function(item) {
+        return db.hgetallAsync(item)
         .then(function(message) {
           if(message.user) {
             return db.hgetallAsync('users:profiles:' + message.user)
@@ -39,11 +52,11 @@ exports.list = function() {
             })
           } else return message;
         });
-      }
-    }, { concurrency:200 })
-    .then(function(messages) {
-      db.quit();
-      return messages;
+      }, { concurrency:200 })
+      .then(function(messages) {
+        db.quit();
+        return messages;
+      });
     });
   });
 };
@@ -70,4 +83,19 @@ var getIncrementalCount = function() {
       return reply;
     });
   });
+};
+
+/*
+ * Trie des messages par id
+ *
+ * Les clés se composent comme ceci :
+ * messages:list:id
+ * Donc pour effectuer un trie par différence
+ * numérique il faut supprimer tout ce qui
+ * se trouve avant l'identifiant
+ */
+var sort = function(a, b) {
+  a = a.substring(14);
+  b = b.substring(14);
+  return a - b;
 };
