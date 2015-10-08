@@ -1,13 +1,16 @@
-var express = require('express');
-var Promise = require('bluebird');
+var express  = require('express');
+var Promise  = require('bluebird');
 
-var session = require('../libs/session');
-var flarum  = require('../libs/flarum');
+var session  = require('../libs/session');
+var flarum   = require('../libs/flarum');
+var redis    = require('../libs/redis')();
 
-var users    = require('../models/users');
-var messages = require('../models/messages');
+var Messages = require('../models/messages');
+var Users    = require('../models/users');
 
-var router = express.Router();
+var router   = express.Router();
+var users    = new Users(redis.client);
+var messages = new Messages(redis.client);
 
 router.get('/', function(req, res, next) {
   session.settings(req, res, { shouldBeLogged:false }, function(settings) {
@@ -45,6 +48,8 @@ router.post('/login', function(req, res, next) {
       .then(function(exist) {
         if(exist)
           return Promise.reject('Vous êtes déjà connecté au chat.');
+        else
+          return Promise.resolve();
       });
     })
     .then(function() {
@@ -52,6 +57,8 @@ router.post('/login', function(req, res, next) {
       .then(function(isBanned) {
         if(isBanned)
           return Promise.reject('Impossible de se connecter au chat, vous avez été banni.');
+        else
+          return Promise.resolve();
       });
     })
     .then(function() {

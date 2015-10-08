@@ -5,8 +5,12 @@ var debug    = require('debug')('socket')
 var moment   = require('moment-timezone');
 var marked   = require('marked');
 
-var users    = require('../models/users.js');
-var messages = require('../models/messages.js');
+var redis    = require('../libs/redis')();
+var Users    = require('../models/users.js');
+var Messages = require('../models/messages.js');
+
+var users    = new Users(redis.client);
+var messages = new Messages(redis.client);
 
 marked.setOptions({
   tables: false,
