@@ -177,6 +177,11 @@ h1.title-site .site-motto {
   cursor:pointer;
 }
 
+.emojione {
+  width: 20px;
+  height: auto;
+}
+
 button.delete {
   margin-top:-1px;
   padding: 0px 5px;

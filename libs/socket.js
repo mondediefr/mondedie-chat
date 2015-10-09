@@ -4,6 +4,7 @@ var Promise  = require('bluebird');
 var debug    = require('debug')('socket')
 var moment   = require('moment-timezone');
 var marked   = require('marked');
+var emojione = require('emojione');
 
 var redis    = require('../libs/redis')();
 var Users    = require('../models/users.js');
@@ -11,6 +12,8 @@ var Messages = require('../models/messages.js');
 
 var users    = new Users(redis.client);
 var messages = new Messages(redis.client);
+
+emojione.ascii = true;
 
 marked.setOptions({
   tables: false,
@@ -24,6 +27,10 @@ var renderer = new marked.Renderer();
 
 renderer.link = function(href, title, text) {
   return '<a target="_blank" href="'+ href +'">' + text + '</a>'
+}
+
+renderer.paragraph = function(text) {
+  return emojione.shortnameToImage(text);
 }
 
 // Ping du client toutes les 50 secondes pour éviter
