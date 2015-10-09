@@ -7,11 +7,13 @@ var marked   = require('marked');
 var emojione = require('emojione');
 
 var redis    = require('../libs/redis')();
+var Smileys  = require('../libs/smileys');
 var Users    = require('../models/users.js');
 var Messages = require('../models/messages.js');
 
 var users    = new Users(redis.client);
 var messages = new Messages(redis.client);
+var smileys  = new Smileys();
 
 emojione.ascii = true;
 
@@ -30,7 +32,7 @@ renderer.link = function(href, title, text) {
 }
 
 renderer.paragraph = function(text) {
-  return emojione.shortnameToImage(text);
+  return smileys.replace(emojione.shortnameToImage(text));
 }
 
 // Ping du client toutes les 50 secondes pour éviter
