@@ -117,6 +117,20 @@ socket.init = function(io) {
           addBotMessage(io, time, " Une seconde chance a été offerte à " + username);
         }
       });
+      // Utilisateur est AFK
+      socket.on('afk', function() {
+        session.user.status = 'afk';
+        users.add(session.user);
+        time = moment().tz('Europe/Paris').format(dateFormat);
+        io.emit('user_afk', time, session.user.name);
+      });
+      // Utilisateur n'est plus AFK
+      socket.on('unafk', function() {
+        session.user.status = 'online';
+        users.add(session.user);
+        time = moment().tz('Europe/Paris').format(dateFormat);
+        io.emit('user_unafk', time, session.user.name);
+      });
     }).catch(AlreadyConnectedError, function() {
       io.to(socket.id).emit('already_connected');
     }).catch(UserBannedError, function() {

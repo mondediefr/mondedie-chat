@@ -9,6 +9,11 @@ $(function(){
     e.preventDefault();
   });
 
+  $('#afk').click(function(e) {
+    editor.value('/afk on|off');
+    e.preventDefault();
+  });
+
   $('#banPopup').find('button[role="ban"]').click(function(e) {
     var username = $('input[name="userBanned"]').val();
     socket.emit('ban', username);

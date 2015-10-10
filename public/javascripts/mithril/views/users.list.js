@@ -4,7 +4,7 @@
 users.view = function() {
   return m("ul#clients", [
     users.vm.list.users().map(function(user, i) {
-      return m("li", { style:{ color:user.color() }}, [
+      return m("li", { class:user.status(), style:{ color:user.color() }}, [
         m("img", { class:'img-circle', src:user.avatar(), alt:user.name() }),
         user.name()
       ])

@@ -164,6 +164,10 @@ h1.title-site .site-motto {
   margin-top: 5px;
 }
 
+#clients > li.afk {
+  opacity: 0.3;
+}
+
 .panel {
   padding-left: 0px;
   padding-top: 10px;

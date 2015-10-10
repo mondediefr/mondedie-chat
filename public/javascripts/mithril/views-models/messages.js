@@ -17,9 +17,31 @@ messages.vm = (function() {
     };
     // Send a message
     vm.send = function() {
-      if(editor.value()) {
-        socket.emit('message', editor.value());
-        editor.value('');
+      var message = editor.value();
+      if(!message)
+        return;
+      if(message.indexOf('/') === 0)
+        vm.cmd(message.trim());
+      else
+        socket.emit('message', message);
+      editor.value('');
+    };
+    // Parse a command
+    vm.cmd = function(message) {
+      switch(message) {
+        case '/afk on':
+          socket.emit('afk');
+          break;
+        case '/afk off':
+          socket.emit('unafk');
+          break;
+        default:
+          vm.list.push(new messages.Message({
+            type:'message-warning',
+            mess:'"' + message + '" -> commande inconnue...'
+          }));
+          m.redraw();
+          break;
       }
     };
     // Get and load messages list
@@ -57,6 +79,22 @@ messages.vm = (function() {
           type:'message-bot',
           time:time,
           mess:user.name + " s'est déconnecté"
+        }));
+        m.redraw();
+      });
+      socket.on('user_afk', function(time, username) {
+        vm.list.push(new messages.Message({
+          type:'message-bot',
+          time:time,
+          mess:username + " est AFK"
+        }));
+        m.redraw();
+      });
+      socket.on('user_unafk', function(time, username) {
+        vm.list.push(new messages.Message({
+          type:'message-bot',
+          time:time,
+          mess:username + " n'est plus AFK"
         }));
         m.redraw();
       });

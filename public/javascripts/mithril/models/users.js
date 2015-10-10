@@ -4,8 +4,9 @@
 users.User = function(data) {
   this.id     = m.prop(data.id);
   this.name   = m.prop(data.name);
-  this.color  = m.prop(data.color);
+  this.color  = m.prop(data.groupColor);
   this.avatar = m.prop(data.avatar);
+  this.status = m.prop(data.status);
 };
 
 /**
@@ -24,6 +25,16 @@ users.UsersList = function() {
     for(var i = 0; i < this.list.length; i++) {
       if(id == this.list[i].id()) {
         this.list.splice(i, 1);
+        deferred.resolve();
+      }
+    }
+    return deferred.promise;
+  };
+  this.status = function(status, username) {
+    var deferred = m.deferred();
+    for(var i = 0; i < this.list.length; i++) {
+      if(username == this.list[i].name()) {
+        this.list[i].status(status);
         deferred.resolve();
       }
     }

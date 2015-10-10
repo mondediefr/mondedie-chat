@@ -40,7 +40,8 @@ router.post('/login', function(req, res, next) {
         name:userInfos.data.attributes.username,
         groupName:(userInfos.included) ? userInfos.included[0].attributes.namePlural : null,
         groupColor:(userInfos.included) ? userInfos.included[0].attributes.color : "#333",
-        avatar:(userInfos.data.attributes.avatarUrl) ? userInfos.data.attributes.avatarUrl : process.env.APP_URL + 'images/avatar.png'
+        avatar:(userInfos.data.attributes.avatarUrl) ? userInfos.data.attributes.avatarUrl : process.env.APP_URL + 'images/avatar.png',
+        status:'online'
       }
     })
     .then(function() {
