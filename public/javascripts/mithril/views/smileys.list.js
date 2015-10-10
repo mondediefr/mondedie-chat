@@ -17,8 +17,7 @@ smileys.view = function(controller) {
  * DOM methods
  */
 function insertEmoji(pattern) {
-  editor.value(editor.value() + ' ' + pattern)
-  editor.codemirror.focus();
+  editor.value(editor.value() + ' ' + pattern);
 }
 
 /**

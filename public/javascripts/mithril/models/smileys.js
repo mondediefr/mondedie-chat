@@ -25,6 +25,7 @@
         { url:'http://cdn.jsdelivr.net/emojione/assets/png/1F621.png?v=1.2.4', pattern:':rage:' },
         { url:'http://cdn.jsdelivr.net/emojione/assets/png/1F61D.png?v=1.2.4', pattern:':stuck_out_tongue_closed_eyes:' },
         { url:'/images/smileys/noel.gif', pattern:':noel:' },
+        { url:'/images/smileys/hap.gif', pattern:':hap:' },
         { url:'/images/smileys/aviator.png', pattern:':aviator:' },
         { url:'/images/smileys/kappa.png', pattern:':kappa:' },
       ]
