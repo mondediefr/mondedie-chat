@@ -1,3 +1,5 @@
+/* global Visibility */
+
 /**
  * Messages component - model
  */
@@ -14,6 +16,8 @@ messages.Message = function(data) {
 messages.MessagesList = function() {
   this.list = [];
   this.push = function(message) {
+    if(Visibility.state() === 'hidden')
+      document.title = 'Nouveau(x) message(s) !';
     this.list.push(message);
   };
   this.messages = function() {

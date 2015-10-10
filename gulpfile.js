@@ -20,6 +20,7 @@ var jshintFiles = [
 var dependJsFiles = [
   'public/bower/jquery/dist/jquery.min.js',
   'public/bower/bootstrap/dist/js/bootstrap.min.js',
+  'public/bower/visibilityjs/lib/visibility.core.js',
   'public/bower/mithril/mithril.min.js'
 ];
 
