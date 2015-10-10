@@ -1,4 +1,6 @@
-/* global Visibility */
+/* global m, document, Visibility */
+'use strict';
+var messages = messages || {};
 
 /**
  * Messages component - model

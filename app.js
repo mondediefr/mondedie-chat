@@ -1,3 +1,4 @@
+"use strict";
 require('dotenv').load();
 
 var express      = require('express');
@@ -30,7 +31,7 @@ app.set('view engine', 'jade');
 redis.init(redis.client);
 
 // Initialisation de la session
-var session = Session({
+var session = new Session({
   store: new RedisStore({ client:redis.client }),
   secret: process.env.SESSION_SECRET,
   key: 'SID',

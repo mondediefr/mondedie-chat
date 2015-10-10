@@ -1,3 +1,7 @@
+/* global m */
+'use strict';
+var users = users || {};
+
 /**
  * Users component - model
  */

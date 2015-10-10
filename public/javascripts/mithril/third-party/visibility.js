@@ -1,3 +1,6 @@
+/* global $, document, Visibility */
+'use strict';
+
 $(function(){
 
   /**

@@ -1,3 +1,6 @@
+"use strict";
+var Promise = require('bluebird');
+
 /*
  * Users - model
  */

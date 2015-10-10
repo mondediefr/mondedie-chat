@@ -1,3 +1,7 @@
+/* global m, socket */
+'use strict';
+var users = users || {};
+
 /**
  * Users component - view-model
  */

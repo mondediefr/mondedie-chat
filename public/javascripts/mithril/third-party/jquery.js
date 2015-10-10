@@ -1,3 +1,6 @@
+/* global $, document, editor, socket */
+'use strict';
+
 $(function(){
 
   /**

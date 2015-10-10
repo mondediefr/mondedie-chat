@@ -1,3 +1,5 @@
+/* global document, io */
+'use strict';
 var socket = io();
 var editor = null;
 

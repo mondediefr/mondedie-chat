@@ -1,4 +1,6 @@
-/* global SimpleMDE */
+/* global $, document, messages, SimpleMDE */
+'use strict';
+var editor = editor || {};
 
 $(function(){
 

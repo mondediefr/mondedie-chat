@@ -1,3 +1,7 @@
+/* global m, smileysViewElement, editor */
+'use strict';
+var smileys = smileys || {};
+
 /**
  * Smileys component - view
  */

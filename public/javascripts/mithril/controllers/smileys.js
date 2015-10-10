@@ -1,3 +1,6 @@
+'use strict';
+var smileys = smileys || {};
+
 /**
  * Smileys component - controller
  */

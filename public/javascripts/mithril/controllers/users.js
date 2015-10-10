@@ -1,3 +1,6 @@
+'use strict';
+var users = users || {};
+
 /**
  * Users component - controller
  */

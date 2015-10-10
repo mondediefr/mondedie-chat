@@ -1,3 +1,4 @@
+"use strict";
 var session = {};
 
 session.settings = function(req, res, options, callback) {

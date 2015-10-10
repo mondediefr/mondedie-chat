@@ -1,3 +1,4 @@
+"use strict";
 var socket = {};
 
 var Promise  = require('bluebird');

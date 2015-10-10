@@ -1,3 +1,7 @@
+/* global m, messagesViewElement */
+'use strict';
+var messages = messages || {};
+
 /**
  * Messages component - view
  */

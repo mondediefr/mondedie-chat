@@ -1,3 +1,4 @@
+"use strict";
 // Nombre maximum de messages récupérés dans la base de données
 var MAX = 200;
 

@@ -1,3 +1,4 @@
+"use strict";
 var smileys = require('./smileys.json');
 
 var Smileys = function() {

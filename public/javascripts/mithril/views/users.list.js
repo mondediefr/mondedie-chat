@@ -1,3 +1,7 @@
+/* global m, usersViewElement */
+'use strict';
+var users = users || {};
+
 /**
  * Users component - view
  */

@@ -1,3 +1,4 @@
+"use strict";
 var Promise = require('bluebird');
 var request = Promise.promisifyAll(require("request"));
 var flarum = {};

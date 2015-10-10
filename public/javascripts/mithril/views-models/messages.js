@@ -1,3 +1,7 @@
+/* global m, socket, editor, location, alert */
+'use strict';
+var messages = messages || {};
+
 /**
  * Messages component - view-model
  */
