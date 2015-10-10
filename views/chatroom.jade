@@ -37,6 +37,9 @@ block content
       .col-md-10
         form.form-chat
           textarea
+          #content-smileys
+          .smileys-link-container
+            a(href="http://emoji.codes/") emoji.codes
           button(type='button' class='btn btn-info', onclick='messages.vm.send()') Envoyer
           button(type='button' class='btn btn-default' data-toggle='collapse' data-target='#chat-options' aria-expanded='false' aria-controls='chat-options') Options
           div(class="collapse" id="chat-options")
