@@ -32,20 +32,20 @@ messages.vm = (function() {
     };
     // Parse a command
     vm.cmd = function(message) {
-      switch(message) {
-        case '/afk on':
-          socket.emit('afk');
-          break;
-        case '/afk off':
-          socket.emit('unafk');
-          break;
-        default:
-          vm.list.push(new messages.Message({
-            type:'message-warning',
-            mess:'"' + message + '" -> commande inconnue...'
-          }));
-          m.redraw();
-          break;
+      if(message == '/afk on')
+        socket.emit('afk');
+      else if(message == '/afk off')
+        socket.emit('unafk');
+      else if(message.substring(0, 5) == '/kick')
+        socket.emit('ban', message.substring(6));
+      else if(message.substring(0, 6) == '/unban')
+        socket.emit('unban', message.substring(7));
+      else {
+        vm.list.push(new messages.Message({
+          type:'message-warning',
+          mess:'"' + message + '" -> commande inconnue...'
+        }));
+        m.redraw();
       }
     };
     // Get and load messages list

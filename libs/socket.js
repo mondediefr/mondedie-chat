@@ -98,25 +98,25 @@ socket.init = function(io) {
       });
       // Ban d'un utilisateur par un admin
       socket.on('ban', function(username) {
-        if(session.user.isAdmin) {
-          users.getUserSocket(username)
-          .then(function(userSocket) {
-            users.ban(username);
-            io.to(userSocket).emit('ban');
-            time = moment().tz('Europe/Paris').format(dateFormat);
-            addBotMessage(io, time, username + " a été kick du chat");
-          }).catch(function() {
-            io.to(socket.id).emit('user_notfound');
-          });
-        }
+        if(!session.user.isAdmin)
+          return;
+        users.getUserSocket(username)
+        .then(function(userSocket) {
+          users.ban(username);
+          io.to(userSocket).emit('ban');
+          time = moment().tz('Europe/Paris').format(dateFormat);
+          addBotMessage(io, time, username + " a été kick du chat");
+        }).catch(function() {
+          io.to(socket.id).emit('user_notfound');
+        });
       });
       // Deban d'un utilisateur
       socket.on('unban', function(username) {
-        if(session.user.isAdmin) {
-          users.unban(username);
-          time = moment().tz('Europe/Paris').format(dateFormat);
-          addBotMessage(io, time, " Une seconde chance a été offerte à " + username);
-        }
+        if(!session.user.isAdmin)
+          return;
+        users.unban(username);
+        time = moment().tz('Europe/Paris').format(dateFormat);
+        addBotMessage(io, time, " Une seconde chance a été offerte à " + username);
       });
       // Utilisateur est AFK
       socket.on('afk', function() {
