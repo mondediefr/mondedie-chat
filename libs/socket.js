@@ -118,6 +118,19 @@ socket.init = function(io) {
         time = moment().tz('Europe/Paris').format(dateFormat);
         addBotMessage(io, time, " Une seconde chance a été offerte à " + username);
       });
+      // Liste des utilisateurs bannis
+      socket.on('banlist', function() {
+        if(!session.user.isAdmin)
+          return;
+        users.banlist().map(function(user) {
+          return user.name;
+        })
+        .then(function(userslist) {
+          time = moment().tz('Europe/Paris').format(dateFormat);
+          var message = 'Liste (' + userslist.length + ') : ' + userslist.toString();
+          io.to(socket.id).emit('botMessage', time, userslist.length > 0 ? message : "Personne n'a été banni :)");
+        });
+      });
       // Utilisateur est AFK
       socket.on('afk', function() {
         session.user.status = 'afk';

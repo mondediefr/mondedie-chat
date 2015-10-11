@@ -7,11 +7,6 @@ $(function(){
   * jQuery bindings
   * @todo Convertir le code suivant avec Mihtril
   */
-  $('#banLink').click(function(e) {
-    $('#banPopup').modal();
-    e.preventDefault();
-  });
-
   $('#afk').click(function(e) {
     editor.value('/afk on|off');
     e.preventDefault();
@@ -19,6 +14,16 @@ $(function(){
 
   $('#pm').click(function(e) {
     editor.value('/msg user message');
+    e.preventDefault();
+  });
+
+  $('#banLink').click(function(e) {
+    $('#banPopup').modal();
+    e.preventDefault();
+  });
+
+  $('#banList').click(function(e) {
+    socket.emit('banlist');
     e.preventDefault();
   });
 

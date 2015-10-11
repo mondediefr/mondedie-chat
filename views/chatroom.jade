@@ -14,24 +14,16 @@ block content
             if user.isAdmin
               li.dropdown-header Modération
               li.divider
-              li
-                a(href='#' id='banLink') Kick/Ban
-              li
-                a(href='#') Lister les membres exclus
-              li
-                a(href='#') Montrer IP
+              li: a(href='#' id='banLink') Kick/Ban
+              li: a(href='#' id='banList') Lister les membres exclus
               li &nbsp;
               li.dropdown-header Commandes
               li.divider
-            li
-              a(href='#') /roll
-            li
-              a(href='#' id='afk') /afk
-            li
-              a(href='#' id='pm') /msg user message
+            li: a(href='#') /roll
+            li: a(href='#' id='afk') /afk
+            li: a(href='#' id='pm') /msg user message
             li.divider
-            li
-              a(href='/logout') Se déconnecter
+            li: a(href='/logout') Se déconnecter
         hr
         h4 Utilisateurs
         #content-users
@@ -59,7 +51,9 @@ block content
               span &times;
             h4.modal-title Kick/Ban
           .modal-body
-            .alert.alert-info Commandes équivalentes : <code>/kick user</code> et <code>/unban user</code>
+            .alert.alert-info
+              | Commandes équivalentes : <code>/kick user</code> et <code>/unban user</code>
+              | Liste : <code>/ban list</code>
             form
               .form-group
                 label.control-label Pseudo :

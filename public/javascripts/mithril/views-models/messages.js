@@ -36,6 +36,8 @@ messages.vm = (function() {
         socket.emit('afk');
       else if(message == '/afk off')
         socket.emit('unafk');
+      else if(message == '/ban list')
+        socket.emit('banlist');
       else if(message.substring(0, 5) == '/kick')
         socket.emit('ban', message.substring(6));
       else if(message.substring(0, 6) == '/unban')

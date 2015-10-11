@@ -39,6 +39,13 @@ Users.prototype.list = function() {
 }
 
 /*
+ * Retourne la liste des membres bannis
+ */
+Users.prototype.banlist = function() {
+  return list(this.db, 'users:banned');
+}
+
+/*
  * Supprime un utilisateur de la liste des membres connectés
  */
 Users.prototype.remove = function(username) {
