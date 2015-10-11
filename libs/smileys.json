@@ -1,6 +1,23 @@
 {
+  ":aviator:":"aviator.png",
+  ":smilee:":"smile.png",
+  ":winkk:":"wink.png",
+  ":plain:":"plain.png",
+  ":sad:":"sad.png",
+  ":surprise:":"surprise.png",
+  ":confusedd:":"confused.png",
+  ":eek:":"eek.png",
+  ":grinn:":"grin.png",
+  ":kisss:":"kiss.png",
+  ":angell:":"angel.png",
+  ":coool:":"cool.png",
+  ":crying:":"crying.png",
+  ":razz:":"razz.png",
+  ":monkeyglass:":"monkey-glass.png",
+  ":monkeysmile:":"monkey-smile.png",
   ":noel:":"noel.gif",
   ":kappa:":"kappa.png",
-  ":aviator:":"aviator.png",
-  ":hap:":"hap.gif"
+  ":hap:":"hap.gif",
+  "Kappa":"kappa.png",
+  "kappa":"kappa.png"
 }

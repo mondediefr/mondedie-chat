@@ -58,15 +58,15 @@ app.use(session);
 
 function setHeaders(res, path, stat) {
   // Activation du cache pendant 30 jours pour les fichiers statiques
-  // res.setHeader('Cache-Control', 'private');
-  // res.setHeader('Expires', new Date(Date.now() + ms('30d')).toUTCString());
+  res.setHeader('Cache-Control', 'private');
+  res.setHeader('Expires', new Date(Date.now() + ms('30d')).toUTCString());
   // Désactivation du cache pendant le développement
-  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate'); // HTTP 1.1
-  res.setHeader('Expires', 0); // Proxies
-  res.setHeader('Pragma', 'no-cache');  // HTTP 1.0
+  // res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate'); // HTTP 1.1
+  // res.setHeader('Expires', 0); // Proxies
+  // res.setHeader('Pragma', 'no-cache');  // HTTP 1.0
 }
 
-app.use(serveStatic(path.join(__dirname, 'public'), { maxAge:0, setHeaders:setHeaders }));
+app.use(serveStatic(path.join(__dirname, 'public'), { maxAge:ms('30d'), setHeaders:setHeaders }));
 
 /*
 *  ROUTES
@@ -101,7 +101,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
-    error: err
+    error: {}
   });
 });
 
