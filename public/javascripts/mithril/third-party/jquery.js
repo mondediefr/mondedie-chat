@@ -5,6 +5,9 @@ $(function() {
 
   notify.config({ pageVisibility:true });
 
+  if(notify.permissionLevel() === notify.PERMISSION_DEFAULT)
+    notify.requestPermission();
+
   if(notify.permissionLevel() === notify.PERMISSION_GRANTED)
     $('#notification').remove();
 
@@ -24,10 +27,8 @@ $(function() {
   });
 
   $('#notification').click(function(e) {
-    if(notify.permissionLevel() === notify.PERMISSION_DEFAULT) {
-      notify.requestPermission();
-      $('#notification').remove();
-    }
+    notify.requestPermission();
+    $('#notification').remove();
     e.preventDefault();
   });
 
