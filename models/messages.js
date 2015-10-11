@@ -39,7 +39,7 @@ Messages.prototype.list = function() {
   })
   .map(function(message) {
     if(!message.user) return message;
-    return self.db.hgetallAsync('users:profiles:' + message.user)
+    return self.db.hgetallAsync('users:profiles:' + message.user.toLowerCase())
     .then(function(user) {
       message.user = user;
       return message;
