@@ -73,7 +73,6 @@ socket.init = function(io) {
     .then(function() {
       users.add(session.user);
       io.emit('user_new', time, session.user.name);
-      messages.add(time, null, session.user.name + " s'est connecté");
       users.list().map(function(user) {
         io.emit('user_connected', user);
       });
@@ -94,7 +93,6 @@ socket.init = function(io) {
         users.remove(session.user.name);
         time = moment().tz('Europe/Paris').format(dateFormat);
         io.emit('user_disconnected', time, session.user);
-        messages.add(time, null, session.user.name + " s'est déconnecté");
       });
       // Ban d'un utilisateur par un admin
       socket.on('ban', function(username) {
