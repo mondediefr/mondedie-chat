@@ -96,7 +96,7 @@ socket.init = function(io) {
       });
       // Ban d'un utilisateur par un admin
       socket.on('ban', function(username) {
-        if(!session.user.isAdmin)
+        if(!session.user.isAdmin || username.toLowerCase() == session.user.name.toLowerCase())
           return;
         users.getUserSocket(username)
         .then(function(userSocket) {
@@ -104,8 +104,10 @@ socket.init = function(io) {
           io.to(userSocket).emit('ban');
           time = moment().tz('Europe/Paris').format(dateFormat);
           addBotMessage(io, time, username + " a été kick du chat");
-        }).catch(function() {
-          io.to(socket.id).emit('user_notfound');
+        })
+        .catch(function() {
+          time = moment().tz('Europe/Paris').format(dateFormat);
+          io.to(socket.id).emit('botMessage', time, 'Utilisateur introuvable...');
         });
       });
       // Deban d'un utilisateur
@@ -130,9 +132,32 @@ socket.init = function(io) {
         time = moment().tz('Europe/Paris').format(dateFormat);
         io.emit('user_unafk', time, session.user.name);
       });
-    }).catch(AlreadyConnectedError, function() {
+      // Messages privés
+      socket.on('private_message', function(username, message) {
+        if(username.toLowerCase() == session.user.name.toLowerCase()) {
+          io.to(socket.id).emit('botMessage', time, 'WTF, il se parle à lui même oO ...');
+          return;
+        }
+        users.getUserSocket(username)
+        .then(function(userSocket) {
+          time = moment().tz('Europe/Paris').format(dateFormat);
+          if(message && message.length <= 1000) {
+            var marksrc  = marked('*(chuchotte à **' + username + '**)* ' + message, { renderer:renderer });
+            var markdest = marked('*(murmure)* ' + message, { renderer:renderer });
+            io.to(socket.id).emit('message', time, session.user, marksrc);
+            io.to(userSocket).emit('message', time, session.user, markdest);
+          }
+        })
+        .catch(function() {
+          time = moment().tz('Europe/Paris').format(dateFormat);
+          io.to(socket.id).emit('botMessage', time, 'Utilisateur introuvable, transmission du message impossible...');
+        });
+      });
+    })
+    .catch(AlreadyConnectedError, function() {
       io.to(socket.id).emit('already_connected');
-    }).catch(UserBannedError, function() {
+    })
+    .catch(UserBannedError, function() {
       io.to(socket.id).emit('user_banned');
     });
   });

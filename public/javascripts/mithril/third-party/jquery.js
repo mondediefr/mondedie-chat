@@ -17,6 +17,11 @@ $(function(){
     e.preventDefault();
   });
 
+  $('#pm').click(function(e) {
+    editor.value('/msg user message');
+    e.preventDefault();
+  });
+
   $('#banPopup').find('button[role="ban"]').click(function(e) {
     var username = $('input[name="userBanned"]').val();
     socket.emit('ban', username);

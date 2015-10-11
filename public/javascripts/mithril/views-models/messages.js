@@ -40,7 +40,12 @@ messages.vm = (function() {
         socket.emit('ban', message.substring(6));
       else if(message.substring(0, 6) == '/unban')
         socket.emit('unban', message.substring(7));
-      else {
+      else if(message.substring(0, 4) == '/msg') {
+        var arr = message.split(' ');
+        var res = arr.splice(0, 2);
+        res.push(arr.join(' ')); // res = ['/msg', 'user', 'message']
+        socket.emit('private_message', res[1], res[2]);
+      } else {
         vm.list.push(new messages.Message({
           type:'message-warning',
           mess:'"' + message + '" -> commande inconnue...'
@@ -103,13 +108,18 @@ messages.vm = (function() {
         m.redraw();
       });
       socket.on('already_connected', function() {
-        alert('Vous êtes déjà connecté, connexion au chat impossible !');
+        vm.list.push(new messages.Message({
+          type:'message-error',
+          mess:'Vous êtes déjà connecté, connexion au chat impossible !'
+        }));
+        m.redraw();
       });
       socket.on('user_banned', function() {
-        alert('Impossible de se connecter au chat, vous avez été banni.');
-      });
-      socket.on('user_notfound', function() {
-        alert('Utilisateur introuvable...');
+        vm.list.push(new messages.Message({
+          type:'message-error',
+          mess:'Impossible de se connecter au chat, vous avez été banni.'
+        }));
+        m.redraw();
       });
       socket.on('ban', function() {
         location.reload();

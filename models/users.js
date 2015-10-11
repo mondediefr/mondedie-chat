@@ -12,7 +12,7 @@ var Users = function(redis) {
  * Ajoute un utilisateur à la liste des membres connectés
  */
 Users.prototype.add = function(user) {
-  var userkey = 'users:profiles:' + user.name;
+  var userkey = 'users:profiles:' + user.name.toLowerCase();
   this.db.hmset(userkey, user);
   this.db.sadd('users:connected', userkey);
 }
@@ -21,14 +21,14 @@ Users.prototype.add = function(user) {
  * Ajoute un utilisateur à la liste des membres bannis
  */
 Users.prototype.ban = function(username) {
-  this.db.sadd('users:banned', 'users:profiles:' + username);
+  this.db.sadd('users:banned', 'users:profiles:' + username.toLowerCase());
 }
 
 /*
  * Supprime un utilisateur de la liste des membres bannis
  */
 Users.prototype.unban = function(username) {
-  this.db.srem('users:banned', 'users:profiles:' + username);
+  this.db.srem('users:banned', 'users:profiles:' + username.toLowerCase());
 }
 
 /*
@@ -42,7 +42,7 @@ Users.prototype.list = function() {
  * Supprime un utilisateur de la liste des membres connectés
  */
 Users.prototype.remove = function(username) {
-  this.db.srem('users:connected', 'users:profiles:' + username);
+  this.db.srem('users:connected', 'users:profiles:' + username.toLowerCase());
 }
 
 /*
@@ -52,7 +52,7 @@ Users.prototype.exist = function(username) {
   var exist = false;
   return list(this.db, 'users:connected')
   .map(function(user) {
-    if(user.name == username)
+    if(user.name.toLowerCase() == username.toLowerCase())
       exist = true;
   })
   .then(function() {
@@ -64,7 +64,7 @@ Users.prototype.exist = function(username) {
  * Récupère l'identificateur du socket de l'utilisateur
  */
 Users.prototype.getUserSocket = function(username) {
-  return this.db.hgetallAsync('users:profiles:' + username)
+  return this.db.hgetallAsync('users:profiles:' + username.toLowerCase())
   .then(function(user) {
     return user ? user.socket : Promise.reject();
   });
@@ -77,7 +77,7 @@ Users.prototype.banned = function(username) {
   var exist = false;
   return list(this.db, 'users:banned')
   .map(function(user) {
-    if(user.name == username)
+    if(user.name.toLowerCase() == username.toLowerCase())
       exist = true;
   })
   .then(function() {
