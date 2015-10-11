@@ -159,11 +159,29 @@ socket.init = function(io) {
             var markdest = marked('*(murmure)* ' + message, { renderer:renderer });
             io.to(socket.id).emit('message', time, session.user, marksrc);
             io.to(userSocket).emit('message', time, session.user, markdest);
+            io.to(userSocket).emit('private_notification', session.user.name);
           }
         })
         .catch(function() {
           time = moment().tz('Europe/Paris').format(dateFormat);
           io.to(socket.id).emit('botMessage', time, 'Utilisateur introuvable, transmission du message impossible...');
+        });
+      });
+      // Highlight d'un utilisateur
+      socket.on('highlight', function(username) {
+        if(username.toLowerCase() == session.user.name.toLowerCase()) {
+          io.to(socket.id).emit('botMessage', time, 'WTF, il se poke lui même oO ...');
+          return;
+        }
+        users.getUserSocket(username)
+        .then(function(userSocket) {
+          time = moment().tz('Europe/Paris').format(dateFormat);
+          io.to(socket.id).emit('botMessage', time, 'Vous avez poke @' + username);
+          io.to(userSocket).emit('user_highlight', time, session.user.name);
+        })
+        .catch(function() {
+          time = moment().tz('Europe/Paris').format(dateFormat);
+          io.to(socket.id).emit('botMessage', time, 'Utilisateur introuvable...');
         });
       });
     })

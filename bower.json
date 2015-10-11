@@ -12,6 +12,7 @@
     "jquery": "~2.1.4",
     "respond": "~1.4.2",
     "mithril": "~0.2.0",
-    "visibilityjs": "~1.2.1"
+    "visibilityjs": "~1.2.1",
+    "HTML5-Desktop-Notifications": "html5-desktop-notifications#*"
   }
 }

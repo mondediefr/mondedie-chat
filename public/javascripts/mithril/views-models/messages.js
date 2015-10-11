@@ -1,4 +1,4 @@
-/* global m, socket, editor, location, alert */
+/* global m, socket, editor, location, alert, notify */
 'use strict';
 var messages = messages || {};
 
@@ -42,6 +42,8 @@ messages.vm = (function() {
         socket.emit('ban', message.substring(6));
       else if(message.substring(0, 6) == '/unban')
         socket.emit('unban', message.substring(7));
+      else if(message.substring(0, 5) == '/poke')
+        socket.emit('highlight', message.substring(6));
       else if(message.substring(0, 4) == '/msg') {
         var arr = message.split(' ');
         var res = arr.splice(0, 2);
@@ -62,6 +64,15 @@ messages.vm = (function() {
     .then(deferred.resolve);
 
     return deferred.promise;
+  };
+  // Envoyer une notification
+  vm.notification = function(message) {
+    if(notify.permissionLevel() === notify.PERMISSION_GRANTED) {
+      notify.createNotification('Mondedie::chat', {
+        body:message,
+        icon:'http://mondedie.fr/img/favicon.png'
+      });
+    }
   };
   vm.initsockets = function() {
     vm.listen = (function () {
@@ -109,6 +120,15 @@ messages.vm = (function() {
         }));
         m.redraw();
       });
+      socket.on('user_highlight', function(time, username) {
+        vm.notification('Vous avez reçu un poke de @' + username);
+        vm.list.push(new messages.Message({
+          type:'message-bot',
+          time:time,
+          mess:"Poke de @" + username
+        }));
+        m.redraw();
+      });
       socket.on('already_connected', function() {
         vm.list.push(new messages.Message({
           type:'message-error',
@@ -124,7 +144,11 @@ messages.vm = (function() {
         m.redraw();
       });
       socket.on('ban', function() {
+        vm.notification('Vous avez été banni du chat !');
         location.reload();
+      });
+      socket.on('private_notification', function(username) {
+        vm.notification('Vous avez reçu un message privé de la part de @' + username);
       });
       // ==================== GENERALS EVENTS ===================
       socket.on('disconnect', function() {
@@ -135,16 +159,18 @@ messages.vm = (function() {
         m.redraw();
       });
       socket.on('reconnecting', function(attempt) {
-        if(attempt == 1)
+        if(attempt == 1) {
           vm.list.push(new messages.Message({
             type:'message-warning',
             mess:'Tentative de connexion au serveur en cours...'
           }));
-        else if(attempt == 10)
+        } else if(attempt == 10) {
+          vm.notification('Impossible de rétablir la connexion avec le serveur.');
           vm.list.push(new messages.Message({
             type:'message-error',
             mess:'Impossible de rétablir la connexion avec le serveur, recharger la page ou réessayer ultérieurement..'
           }));
+        }
         m.redraw();
       });
       socket.on('reconnect', function() {

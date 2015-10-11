@@ -1,12 +1,13 @@
-/* global $, document, editor, socket */
+/* global $, document, editor, socket, notify */
 'use strict';
 
-$(function(){
+$(function() {
 
-  /**
-  * jQuery bindings
-  * @todo Convertir le code suivant avec Mihtril
-  */
+  notify.config({ pageVisibility:true });
+
+  if(notify.permissionLevel() === notify.PERMISSION_GRANTED)
+    $('#notification').remove();
+
   $('#afk').click(function(e) {
     editor.value('/afk on|off');
     e.preventDefault();
@@ -14,6 +15,19 @@ $(function(){
 
   $('#pm').click(function(e) {
     editor.value('/msg user message');
+    e.preventDefault();
+  });
+
+  $('#poke').click(function(e) {
+    editor.value('/poke user');
+    e.preventDefault();
+  });
+
+  $('#notification').click(function(e) {
+    if(notify.permissionLevel() === notify.PERMISSION_DEFAULT) {
+      notify.requestPermission();
+      $('#notification').remove();
+    }
     e.preventDefault();
   });
 
