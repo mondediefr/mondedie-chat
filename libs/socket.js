@@ -19,6 +19,7 @@ var smileys  = new Smileys();
 emojione.ascii = true;
 
 marked.setOptions({
+  breaks: true,
   tables: false,
   sanitize: true,
   highlight: function(code) {
