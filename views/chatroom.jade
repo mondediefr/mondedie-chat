@@ -43,8 +43,12 @@ block content
           div(class="collapse" id="chat-options")
             hr
             .well
-              input(type='checkbox' id='disable-enter-action')
-              span Désactiver l'envoi des messages avec la touche entrée
+              p
+                input(type='checkbox' id='disable-enter-action')
+                span Désactiver l'envoi des messages avec la touche entrée
+              p
+                input(type='checkbox' id='disable-auto-scroll')
+                span Désactiver l'auto-scroll
 
   if user.isAdmin
     div(class='modal fade' id='banPopup')

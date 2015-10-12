@@ -1,4 +1,4 @@
-/* global m, messagesViewElement */
+/* global m, document, messagesViewElement */
 'use strict';
 var messages = messages || {};
 
@@ -24,7 +24,8 @@ messages.view = function() {
  * DOM methods
  */
 function autoScroll(element) {
-  element.scrollTop = element.scrollHeight;
+  if(!document.getElementById('disable-auto-scroll').checked)
+    element.scrollTop = element.scrollHeight;
 }
 
 /**
