@@ -5,9 +5,9 @@ var smileys = smileys || {};
  * Smileys component - model
  */
 (function () {
-	smileys.list = {
-		get:function() {
-			return [
+  smileys.list = {
+    get:function() {
+      return [
         { url:'http://cdn.jsdelivr.net/emojione/assets/png/1F600.png?v=1.2.4', pattern:':grinning:' },
         { url:'http://cdn.jsdelivr.net/emojione/assets/png/1F602.png?v=1.2.4', pattern:':joy:' },
         { url:'http://cdn.jsdelivr.net/emojione/assets/png/1F604.png?v=1.2.4', pattern:':smile:' },
@@ -47,6 +47,6 @@ var smileys = smileys || {};
         { url:'/images/smileys/kappa.png', pattern:':kappa:' },
         { url:'/images/smileys/hap.gif', pattern:':hap:' }
       ]
-		}
-	};
+    }
+  };
 })();
