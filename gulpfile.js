@@ -6,11 +6,12 @@ var size   = require('gulp-size');
 var concat = require('gulp-concat');
 var bower  = require('gulp-bower');
 var jshint = require('gulp-jshint');
+var sass = require('gulp-sass');
+var filter = require('gulp-filter');
 
 // ########################### PATHS ###########################
 
 var jsPath  = 'public/javascripts/';
-var cssPath = 'public/stylesheets/';
 
 var jshintFiles = [
   'app.js', 'gulpfile.js', 'routes/*.js', 'libs/*.js',
@@ -33,11 +34,6 @@ var appJsFiles = [
   jsPath + 'mithril/views-models/*.js',
   jsPath + 'mithril/controllers/*.js',
   jsPath + 'mithril/views/*.js',
-];
-
-var cssFiles = [
-  'public/bower/bootstrap/dist/css/bootstrap.min.css',
-  cssPath + '*.css'
 ];
 
 // ########################### TASKS ###########################
@@ -71,12 +67,23 @@ gulp.task('mithril-map', ['bower'], function() {
   ]).pipe(gulp.dest(jsPath + 'dest'));
 });
 
-gulp.task('css', ['bower'], function() {
-  return gulp.src(cssFiles)
-    .pipe(minify())
-    .pipe(concat('styles.min.css'))
-    .pipe(size({title: "fichier styles.min.css"}))
-    .pipe(gulp.dest(cssPath + 'dest'));
+gulp.task('sass', ['bower'], function() {
+  var file = [
+    'public/bower/bootstrap/dist/css/bootstrap.min.css',
+    'public/scss/app.scss'
+  ];
+  var sassFile = filter(
+    '*.scss',
+    {restore: true}
+  );
+  return gulp.src(file)
+    .pipe(sassFile)
+    .pipe(sass())
+    .pipe(sassFile.restore)
+    .pipe(minify({keepSpecialComments: 0}))
+    .pipe(concat('app.min.css'))
+    .pipe(size({title: "fichier app.min.css"}))
+    .pipe(gulp.dest('public/css'));
 });
 
 gulp.task('lint', function() {
@@ -86,16 +93,7 @@ gulp.task('lint', function() {
 });
 
 gulp.task('watch', ['default'], function() {
-  gulp.watch(jshintFiles, ['lint'])
-    .on('change', function(event) {
-      console.log("Le fichier " + event.path + " vient d'être modifié");
-  });
-  gulp.watch(appJsFiles, ['js-io.scripts'])
-    .on('change', function(event) {
-      console.log("Le fichier " + event.path + " vient d'être modifié");
-  });
-  gulp.watch(cssPath + '*.css', ['css'])
-    .on('change', function(event) {
-      console.log("Le fichier " + event.path + " vient d'être modifié");
-  });
+  gulp.watch(jshintFiles, ['lint']);
+  gulp.watch(appJsFiles, ['js-io.scripts']);
+  gulp.watch('public/scss/**/*.scss', ['sass']);
 });

@@ -7,9 +7,9 @@
   ],
   "private": true,
   "dependencies": {
-    "bootstrap": "~3.3.5",
     "mithril": "~0.2.0",
     "visibilityjs": "~1.2.1",
-    "HTML5-Desktop-Notifications": "html5-desktop-notifications#*"
+    "HTML5-Desktop-Notifications": "html5-desktop-notifications#*",
+    "bootstrap": "v4.0.0-alpha"
   }
 }

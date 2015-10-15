@@ -3,6 +3,7 @@ node_modules
 Procfile_dev
 public/stylesheets/dest/*
 public/javascripts/dest/*
+public/css/app.min.css
 .vagrant/
 public/bower
 typings
