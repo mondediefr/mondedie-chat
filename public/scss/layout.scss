@@ -1,0 +1,24 @@
+/*
+ * scss nodechat-flarum
+ *
+ * author : hardware, magicalex, hydrog3n
+*/
+
+.container-fluid {
+  font-size: convert-px(13px);
+  border: 4px solid green;
+  position: fixed;
+  top: 0; bottom: 0;
+  right: 0; left: 0;
+}
+
+#form-chat {
+  border: 2px solid red;
+  position: absolute;
+  bottom: 0;
+  background-color: white;
+}
+
+#content-messages {
+  border: 2px solid blue;
+}

@@ -1,0 +1,82 @@
+/*
+ * scss nodechat-flarum
+ *
+ * author : hardware, magicalex, hydrog3n
+*/
+
+h1.title-site {
+  margin: 15px 0;
+}
+
+h1.title-site .site-name {
+  color: #90a4ae;
+  font-family: 'Oswald', sans-serif;
+  font-size: 80px;
+  font-weight: normal;
+  line-height: 1;
+  text-decoration: none;
+}
+
+h1.title-site .site-name:before {
+  color: #90a4ae;
+  content: "{ ";
+}
+
+h1.title-site .site-name:after {
+  color: #03a9f4;
+  content: " }";
+}
+
+h1.title-site .site-name span {
+  color: #03a9f4;
+}
+
+h1.title-site .site-motto {
+  color: #999;
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.form-signin .form-signin-heading, .form-signin .checkbox {
+  margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+  font-weight: normal;
+}
+
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

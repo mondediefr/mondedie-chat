@@ -1,0 +1,10 @@
+/*
+ * scss nodechat-flarum
+ *
+ * author : hardware, magicalex, hydrog3n
+*/
+
+// fonction convertie px en rem
+@function convert-px($px) {
+  @return $px / $global-font-size + rem;
+}

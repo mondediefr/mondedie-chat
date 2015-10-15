@@ -1,0 +1,52 @@
+/*
+ * scss nodechat-flarum
+ *
+ * author : hardware, magicalex, hydrog3n
+*/
+
+#messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: scroll;
+  min-height: 600px;
+  max-height: 600px;
+}
+
+#messages li {
+  padding: 5px 10px;
+}
+
+#messages li:nth-child(odd) {
+  background: #eee;
+}
+
+#messages li.message > p {
+  display:inline;
+}
+
+#messages li.message-bot {
+  background-color: rgba(0, 153, 153, 0.2);
+}
+
+#messages li.message-error {
+  background-color: rgba(255, 0, 0, 0.3);
+}
+
+#messages li.message-warning {
+  background-color: rgba(255, 165, 0, 0.5);
+}
+
+#messages li.message-success {
+  background-color: rgba(0, 255, 0, 0.3);
+}
+
+#messages-box {
+  margin: 0;
+  padding: 0;
+}
+
+#messages > li > img {
+  max-height: 200px;
+  max-width: 200px
+}

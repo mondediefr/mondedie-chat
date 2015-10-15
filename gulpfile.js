@@ -1,4 +1,3 @@
-"use strict";
 var gulp   = require('gulp');
 var minify = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
@@ -36,9 +35,16 @@ var appJsFiles = [
   jsPath + 'mithril/views/*.js',
 ];
 
+// ########################### ERROR ###########################
+
+function handleError(err) {
+  console.log(err.toString());
+  this.emit('end');
+}
+
 // ########################### TASKS ###########################
 
-gulp.task('default', ['js-scripts', 'js-io.scripts', 'mithril-map', 'css', 'lint']);
+gulp.task('default', ['sass', 'js-scripts', 'js-io.scripts', 'mithril-map', 'lint']);
 gulp.task('heroku:production', ['default']);
 
 gulp.task('bower', function() {
@@ -78,7 +84,7 @@ gulp.task('sass', ['bower'], function() {
   );
   return gulp.src(file)
     .pipe(sassFile)
-    .pipe(sass())
+    .pipe(sass()).on('error', handleError)
     .pipe(sassFile.restore)
     .pipe(minify({keepSpecialComments: 0}))
     .pipe(concat('app.min.css'))
