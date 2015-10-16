@@ -4,15 +4,6 @@
  * author : hardware, magicalex, hydrog3n
 */
 
-#messages {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: scroll;
-  min-height: 600px;
-  max-height: 600px;
-}
-
 #messages li {
   padding: 5px 10px;
 }
@@ -39,11 +30,6 @@
 
 #messages li.message-success {
   background-color: rgba(0, 255, 0, 0.3);
-}
-
-#messages-box {
-  margin: 0;
-  padding: 0;
 }
 
 #messages > li > img {

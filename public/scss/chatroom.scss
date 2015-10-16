@@ -1,0 +1,87 @@
+/*
+ * scss nodechat-flarum
+ *
+ * author : hardware, magicalex, hydrog3n
+*/
+
+body {
+  font-size: convert-px(13px);
+}
+
+.conteneur-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+header {
+  height: $height-header; width: 100%;
+  position: fixed; top: 0;
+
+  .head-menu-left{
+    width: 20%;
+    border-bottom: $border;
+  }
+
+  .head-message{
+    width: 80%;
+    border-bottom: $border;
+    border-right: $border;
+    border-left: $border;
+  }
+
+  .head-menu-right{
+    width: 20%;
+    border-bottom: $border;
+  }
+}
+
+section {
+  position: absolute;
+  top: $height-header; bottom: $height-footer;
+  width: 100%;
+
+  .core-menu-left {
+    width: 20%;
+    overflow: scroll;
+  }
+
+  .core-message {
+    width: 80%;
+    overflow: scroll;
+
+    border-right: $border;
+    border-left: $border;
+
+    #messages {
+      padding: 0; margin: 0;
+      list-style-type: none;
+    }
+  }
+
+  .core-menu-right {
+    width: 20%;
+    overflow: scroll;
+  }
+}
+
+footer {
+  height: $height-footer; width: 100%;
+  position: fixed; bottom: 0;
+
+  .foot-menu-left{
+    width: 20%;
+    border-top: $border;
+  }
+
+  .foot-message{
+    width: 80%;
+    border-top: $border;
+    border-right: $border;
+    border-left: $border;
+  }
+
+  .foot-menu-right{
+    width: 20%;
+    border-top: $border;
+  }
+}

@@ -2,53 +2,21 @@ extends layout
 
 block content
 
-  .container-fluid
-    .row
-      div(id='content-messages' class='col-md-10')
-      .col-md-2.panel
-        .dropdown
-          button(class='btn btn-info dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='true') #{ user.name } > Menu
-            | &nbsp;
-            span.caret
-          ul.dropdown-menu
-            if user.isAdmin
-              li.dropdown-header Modération
-              li.divider
-              li: a(href='#' id='banLink') Kick/Ban
-              li: a(href='#' id='banList') Lister les membres exclus
-              li &nbsp;
-            li.dropdown-header Commandes
-            li.divider
-            li: a(href='#') /roll
-            li: a(href='#' id='afk') /afk
-            li: a(href='#' id='pm') /msg user message
-            li: a(href='#' id='poke') /poke user
-            li &nbsp;
-            li.dropdown-header Général
-            li.divider
-            li: a(href='#' id="notification") Activer les notifications
-            li: a(href='/logout') Se déconnecter
-        hr
-        h4 Utilisateurs
-        #content-users
-    .row
-      #form-chat.col-md-12
-        form.form-chat
-          textarea
-          #content-smileys
-          .smileys-link-container
-            a(target="_blank" href="http://emoji.codes/") emoji.codes
-          button(type='button' class='btn btn-info', onclick='messages.vm.send()') Envoyer
-          button(type='button' class='btn btn-default' data-toggle='collapse' data-target='#chat-options' aria-expanded='false' aria-controls='chat-options') Options
-          div(class="collapse" id="chat-options")
-            hr
-            .well
-              p
-                input(type='checkbox' id='disable-enter-action')
-                span Désactiver l'envoi des messages avec la touche entrée
-              p
-                input(type='checkbox' id='disable-auto-scroll')
-                span Désactiver l'auto-scroll
+  header.conteneur-flex
+    .head-menu-left
+    .head-message
+      h3 Chat de mondedie.fr
+    .head-menu-right
+
+  section.conteneur-flex
+    include includes/menu-left
+    div(id="content-messages" class="core-message")
+    include includes/menu-right
+    
+  footer.conteneur-flex
+    .foot-menu-left
+    include includes/form
+    .foot-menu-right
 
   if user.isAdmin
     div(class='modal fade' id='banPopup')
