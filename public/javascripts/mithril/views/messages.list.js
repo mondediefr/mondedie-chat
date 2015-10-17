@@ -12,7 +12,7 @@ messages.view = function() {
       return m("li", { class:message.type() }, [
         m("span", {class:'date'}, '[' + message.time() + '] '),
         m("span", {class:'username', style:{ color:user.groupColor }}, user.name),
-        m("span", {class:'text'}, ': ' + message.mess())
+        m("span", {class:'text'}, ': ', m.trust(message.mess()))
       ])
     })
   ])
