@@ -1,0 +1,24 @@
+/*
+ * scss nodechat-flarum
+ *
+ * author : hardware, magicalex, hydrog3n
+*/
+
+#clients {
+  list-style-type: none;
+  margin: 0; padding: 0;
+
+  li {
+
+    & > img {
+      max-height: rem(30px);
+      max-width: rem(30px);
+      margin-right: rem(10px);
+      margin-left: rem(10px);
+    }
+
+    &.afk {
+      opacity: 0.3;
+    }
+  }
+}

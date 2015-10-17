@@ -4,17 +4,20 @@
  * author : hardware, magicalex, hydrog3n
 */
 
-// ############# variable ################
-$global-font-size: 16px; // note le pixel de base est de 16px avec bootstrap 4
-$height-footer: 230px;
-$height-header: 70px;
-$border: 1px solid grey;
-
 // ############# import ##################
+// fonction
 @import "public/scss/function";
+@import "public/scss/variables";
+
+//core
 @import "public/scss/chatroom";
 @import "public/scss/login";
 @import "public/scss/menu-right";
 @import "public/scss/menu-left";
 @import "public/scss/block-message";
 @import "public/scss/style";
+
+body {
+  font-size: rem(13px);
+  overflow: hidden;
+}

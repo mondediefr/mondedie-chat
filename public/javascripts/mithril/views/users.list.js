@@ -9,7 +9,7 @@ users.view = function() {
   return m("ul#clients", [
     users.vm.list.users().map(function(user, i) {
       return m("li", { class:user.status(), style:{ color:user.color() }}, [
-        m("img", { class:'img-circle', src:user.avatar(), alt:user.name() }),
+        m("img", { class:'img-rounded', src:user.avatar(), alt:user.name() }),
         user.name()
       ])
     })

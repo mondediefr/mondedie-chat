@@ -4,10 +4,6 @@
  * author : hardware, magicalex, hydrog3n
 */
 
-body {
-  font-size: convert-px(13px);
-}
-
 .conteneur-flex {
   display: flex;
   flex-direction: row;
@@ -19,13 +15,12 @@ header {
 
   .head-menu-left{
     width: 20%;
-    border-bottom: $border;
+    background-color: $color-left;
   }
 
   .head-message{
     width: 80%;
     border-bottom: $border;
-    border-right: $border;
     border-left: $border;
   }
 
@@ -43,6 +38,7 @@ section {
   .core-menu-left {
     width: 20%;
     overflow: scroll;
+    background-color: $color-left;
   }
 
   .core-message {
@@ -51,11 +47,6 @@ section {
 
     border-right: $border;
     border-left: $border;
-
-    #messages {
-      padding: 0; margin: 0;
-      list-style-type: none;
-    }
   }
 
   .core-menu-right {
@@ -70,7 +61,7 @@ footer {
 
   .foot-menu-left{
     width: 20%;
-    border-top: $border;
+    background-color: $color-left;
   }
 
   .foot-message{
@@ -82,6 +73,5 @@ footer {
 
   .foot-menu-right{
     width: 20%;
-    border-top: $border;
   }
 }

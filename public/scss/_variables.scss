@@ -1,0 +1,14 @@
+/*
+ * scss nodechat-flarum
+ *
+ * author : hardware, magicalex, hydrog3n
+*/
+
+// ############# global ################
+$global-font-size: 16px; // note le pixel de base est de 16px avec bootstrap 4
+
+// ############# chatroom ##############
+$height-footer: rem(230px);
+$height-header: rem(50px);
+$border: rem(1px) solid grey;
+$color-left: rgba(#00a4df, .3);
