@@ -4,9 +4,10 @@
  * author : hardware, magicalex, hydrog3n
 */
 
-#messages {
+ul#messages {
   padding: 0; margin: 0;
   list-style-type: none;
+  height: 1 !important;
 
   li {
     padding: rem(4px);

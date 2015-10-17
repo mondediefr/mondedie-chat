@@ -16,7 +16,8 @@ $(function(){
     },
     toolbar: [
       'bold', 'italic', 'strikethrough', '|', 'code', 'quote', 'unordered-list',
-      'horizontal-rule', '|', 'link', 'image', '|', 'preview', 'side-by-side', 'fullscreen'
+      'horizontal-rule', '|', 'link', 'image', '|', 'preview', 'side-by-side', 'fullscreen',
+      '|', {name: 'smiley', action: toggleSmiley, className: "fa fa-smile-o", title: "smiley (Ctrl+d)"}
     ],
     indentWithTabs: false,
     renderingConfig: {
@@ -36,5 +37,9 @@ $(function(){
         editor.value('');
     }
   });
+
+  function toggleSmiley() {
+    return console.log('do something...');
+  }
 
 });
