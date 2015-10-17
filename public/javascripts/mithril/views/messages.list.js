@@ -23,7 +23,7 @@ messages.view = function() {
  */
 function autoScroll(element) {
   if(!document.getElementById('disable-auto-scroll').checked)
-    element.scrollTop = element.scrollHeight;
+    messagesViewElement.scrollTop = element.scrollHeight;
 }
 
 /**
