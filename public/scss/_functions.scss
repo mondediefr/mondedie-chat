@@ -6,5 +6,6 @@
 
 // fonction convertie px en rem
 @function rem($px) {
+  //$global-font-size: 16px;
   @return $px / $global-font-size + rem;
 }

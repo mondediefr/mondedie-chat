@@ -18,7 +18,7 @@ var mapping = function(smileys) {
   for(var smiley in smileys) {
     if(smileys.hasOwnProperty(smiley)) {
       var filename = smileys[smiley];
-      smileys[smiley] = '<img src="/images/smileys/' + filename + '" alt="' + smiley + '" title="' + smiley + '"></img>';
+      smileys[smiley] = '<img src="/images/smileys/' + filename + '" class="emojione" alt="' + smiley + '" title="' + smiley + '"></img>';
     }
   }
 }

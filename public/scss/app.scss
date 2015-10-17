@@ -5,19 +5,14 @@
 */
 
 // ############# import ##################
-// fonction
-@import "public/scss/function";
+// core variables, functions and mixins
+@import "public/scss/functions";
 @import "public/scss/variables";
 
-//core
+// core css
 @import "public/scss/chatroom";
 @import "public/scss/login";
 @import "public/scss/menu-right";
 @import "public/scss/menu-left";
 @import "public/scss/block-message";
 @import "public/scss/style";
-
-body {
-  font-size: rem(13px);
-  overflow: hidden;
-}

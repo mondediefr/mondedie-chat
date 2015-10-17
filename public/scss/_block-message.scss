@@ -7,13 +7,11 @@
 ul#messages {
   padding: 0; margin: 0;
   list-style-type: none;
-  height: 1 !important;
 
   li {
     padding: rem(4px);
 
     .username {
-      font-weight: bold;
       cursor:pointer;
     }
 
@@ -41,9 +39,15 @@ ul#messages {
       background-color: rgba(0, 255, 0, 0.3);
     }
 
-    & > img {
-      max-height: rem(200px);
-      max-width: rem(200px);
+    .text img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+
+      &.emojione {
+        width: 18px;
+        display: inline;
+      }
     }
   }
 }

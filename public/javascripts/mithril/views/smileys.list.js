@@ -10,6 +10,7 @@ smileys.view = function(controller) {
     controller.smileys.map(function(smiley) {
       return m("img", {
         src:smiley.url,
+        class:'emojione',
         title:smiley.pattern,
         onclick:m.withAttr("title", insertEmoji)
       });
