@@ -6,11 +6,11 @@
 
 // - CODE A REFACTORER
 
-h1.title-site {
+.title-site {
   margin: 15px 0;
 }
 
-h1.title-site .site-name {
+.title-site .site-name {
   color: #90a4ae;
   font-family: 'Oswald', sans-serif;
   font-size: 80px;
@@ -19,21 +19,29 @@ h1.title-site .site-name {
   text-decoration: none;
 }
 
-h1.title-site .site-name:before {
+h5.title-site .site-name {
+  font-size: 30px;
+}
+
+h5.title-site {
+  text-align:center;
+}
+
+.title-site .site-name:before {
   color: #90a4ae;
   content: "{ ";
 }
 
-h1.title-site .site-name:after {
+.title-site .site-name:after {
   color: #03a9f4;
   content: " }";
 }
 
-h1.title-site .site-name span {
+.title-site .site-name span {
   color: #03a9f4;
 }
 
-h1.title-site .site-motto {
+.title-site .site-motto {
   color: #999;
   font-size: 11px;
   font-style: italic;
@@ -78,4 +86,8 @@ h1.title-site .site-motto {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+input[type="checkbox"] {
+  margin-right:5px;
 }

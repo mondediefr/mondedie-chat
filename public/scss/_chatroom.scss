@@ -16,12 +16,13 @@ header {
   .head-menu-left{
     width: 20%;
     background-color: $color-left;
+    border-right: $border;
   }
 
   .head-message{
     width: 80%;
+    padding: rem(10px);
     border-bottom: $border;
-    border-left: $border;
   }
 
   .head-menu-right{
@@ -37,21 +38,20 @@ section {
 
   .core-menu-left {
     width: 20%;
-    overflow: scroll;
+    padding:rem(10px);
     background-color: $color-left;
+    border-right: $border;
   }
 
   .core-message {
-    width: 80%;
-    overflow: scroll;
-
-    border-right: $border;
-    border-left: $border;
+    width: 81%;
+    overflow: auto;
   }
 
   .core-menu-right {
     width: 20%;
-    overflow: scroll;
+    padding: rem(10px);
+    overflow: auto;
   }
 }
 
@@ -62,13 +62,11 @@ footer {
   .foot-menu-left{
     width: 20%;
     background-color: $color-left;
+    border-right: $border;
   }
 
   .foot-message{
     width: 80%;
-    border-top: $border;
-    border-right: $border;
-    border-left: $border;
     overflow: scroll;
   }
 

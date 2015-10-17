@@ -4,16 +4,19 @@ block content
 
   header.conteneur-flex
     .head-menu-left
-      h5 Chat de mondedie.fr
+      h5.title-site
+        a(href="/" title="Mondedie.fr" class="site-name")
+          span M
+          | ONDEDIE
     .head-message
-      h5 #Generale
+      h5 #General
     .head-menu-right
 
   section.conteneur-flex
     include includes/menu-left
     div(id='content-messages' class='core-message')
     include includes/menu-right
-    
+
   footer.conteneur-flex
     .foot-menu-left
     include includes/form

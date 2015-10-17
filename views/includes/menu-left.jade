@@ -1,6 +1,4 @@
 .core-menu-left
-  h5 #{ user.name } - Menu
-
   if user.isAdmin
     h6 Modération
     p
@@ -9,25 +7,19 @@
       a(href='#' id='banList') Lister les membres exclus
 
   h6 Commandes
-  p
-    a(href='#') /roll
-  p
-    a(href='#' id='afk') /afk
-  p
-    a(href='#' id='pm') /msg user message
-  p
-    a(href='#' id='poke') /poke user
+  p: a(href='#') /roll
+  p: a(href='#' id='afk') /afk
+  p: a(href='#' id='pm') /msg user message
+  p: a(href='#' id='poke') /poke user
 
   h6 Général
-  p
-    a(href='#' id="notification") Activer les notifications
-  p
-    a(href='/logout') Se déconnecter
-    
+  p: a(href='#' id="notification") Activer les notifications
+  p: a(href='/logout') Se déconnecter
+
   h6 Options
   label
     input(type='checkbox' id='disable-enter-action')
-    | Désactiver l'envoi des messages avec la touche entrée
+    | Désactiver la touche entrée
   label
     input(type='checkbox' id='disable-auto-scroll')
     | Désactiver l'auto-scroll
