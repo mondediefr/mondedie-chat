@@ -11,77 +11,8 @@ body {
   overflow: hidden;
 }
 
-.smileys-container {
-  display: inline-block;
-  margin-top:10px;
-  padding:5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.smileys-container img {
-  margin-right:5px;
-  width:18px;
-  height:auto;
-}
-
-.smileys-link-container {
-  margin-top:-1px;
-  width:81px;
-  padding:5px;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-
 button.delete {
   margin-top:-1px;
   padding: 0px 5px;
   line-height: 1.2;
-}
-
-.bs-callout {
-  padding: 20px;
-  margin: 20px;
-  border-width: 1px 1px 1px 5px;
-  border-style: solid;
-  border-color: #EEE;
-  -moz-border-top-colors: none;
-  -moz-border-right-colors: none;
-  -moz-border-bottom-colors: none;
-  -moz-border-left-colors: none;
-  border-image: none;
-  border-radius: 3px;
-}
-
-.bs-callout-info {
-  border-left-color: #5BC0DE;
-}
-
-.bs-callout-danger {
-  border-left-color: #D9534F;
-}
-
-.bs-callout-warning {
-  border-left-color: #F0AD4E;
-}
-
-.bs-callout h4 {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-.bs-callout-info h4 {
-  color: #5bc0de;
-}
-
-.CodeMirror {
-  height: 75px;
-}
-
-.CodeMirror, .CodeMirror-scroll {
-  min-height: 75px;
 }
