@@ -36,7 +36,12 @@
     padding: 0;
 
     .form-control {
+      position: relative; //permet le focus sur 1 ligne, un peu wtf la solution
       padding: rem(10px);
+
+      &:focus {
+        z-index: 1;
+      }
     }
 
     .form-group, .checkbox {
