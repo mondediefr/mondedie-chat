@@ -9,10 +9,7 @@
   margin: 0; padding: 0;
 
   li {
-
-    & {
-      margin-bottom: rem(5px);
-    }
+    margin-bottom: rem(5px);
 
     & > img {
       max-height: rem(30px);
