@@ -10,6 +10,10 @@
 
   li {
 
+    & {
+      margin-bottom: rem(5px);
+    }
+
     & > img {
       max-height: rem(30px);
       max-width: rem(30px);

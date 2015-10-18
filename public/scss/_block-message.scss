@@ -12,7 +12,8 @@ ul#messages {
     padding: rem(4px);
 
     .username {
-      cursor:pointer;
+      cursor: pointer;
+      font-weight: bolder;
     }
 
     .date {

@@ -10,9 +10,9 @@ messages.view = function() {
     messages.vm.list.messages().map(function(message, i) {
       var user = message.user();
       return m("li", { class:message.type() }, [
-        m("span", {class:'date'}, ( message.time() ? '[' + message.time() + '] ' : '' )),
-        m("span", {class:'username', style:{ color:user.groupColor }}, user.name),
-        m("span", {class:'text'}, ': ', m.trust(message.mess()))
+        m("span", { class:'date' }, ( message.time() ? '[' + message.time() + '] ' : '' )),
+        m("span", { class:'username', style:{ color:user.groupColor }}, user.name + ': '),
+        m("span", { class:'text' }, m.trust(message.mess()))
       ])
     })
   ])
