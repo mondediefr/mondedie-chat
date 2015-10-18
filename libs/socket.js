@@ -16,6 +16,8 @@ var users    = new Users(redis.client);
 var messages = new Messages(redis.client);
 var smileys  = new Smileys();
 
+var dateFormat = 'DD/MM à HH:mm:ss'
+
 emojione.ascii = true;
 
 marked.setOptions({
@@ -52,7 +54,6 @@ socket.init = function(io) {
   io.on('connection', function(socket) {
 
     var session = socket.handshake.session;
-    var dateFormat = 'DD/MM à HH:mm:ss'
     var time = moment().tz('Europe/Paris').format(dateFormat);
 
     if( ! session.user )
@@ -85,9 +86,8 @@ socket.init = function(io) {
       });
       // Réception d'un message
       socket.on('message', function(message) {
-        time = moment().tz('Europe/Paris').format(dateFormat);
         if(message && message.length <= 1000)
-          addMessage(io, time, session.user, marked(message, { renderer:renderer }));
+          addMessage(io, session.user, marked(message, { renderer:renderer }));
       });
       // Déconnexion de l'utilisateur
       socket.on('disconnect', function() {
@@ -103,12 +103,10 @@ socket.init = function(io) {
         .then(function(userSocket) {
           users.ban(username);
           io.to(userSocket).emit('ban');
-          time = moment().tz('Europe/Paris').format(dateFormat);
-          addBotMessage(io, time, username + " a été kick du chat");
+          addBotMessage(io, username + " a été kick du chat");
         })
         .catch(function() {
-          time = moment().tz('Europe/Paris').format(dateFormat);
-          io.to(socket.id).emit('botMessage', time, 'Utilisateur introuvable...');
+          addBotMessage(io, '(' + username + ') utilisateur introuvable...', { storage:false, socket:socket.id });
         });
       });
       // Deban d'un utilisateur
@@ -116,8 +114,7 @@ socket.init = function(io) {
         if(!session.user.isAdmin)
           return;
         users.unban(username);
-        time = moment().tz('Europe/Paris').format(dateFormat);
-        addBotMessage(io, time, " Une seconde chance a été offerte à " + username);
+        addBotMessage(io, " Une seconde chance a été offerte à " + username);
       });
       // Liste des utilisateurs bannis
       socket.on('banlist', function() {
@@ -127,9 +124,8 @@ socket.init = function(io) {
           return user.name;
         })
         .then(function(userslist) {
-          time = moment().tz('Europe/Paris').format(dateFormat);
           var message = 'Liste (' + userslist.length + ') : ' + userslist.toString();
-          io.to(socket.id).emit('botMessage', time, userslist.length > 0 ? message : "Personne n'a été banni :)");
+          addBotMessage(io, userslist.length > 0 ? message : "Personne n'a été banni :)", { storage:false, socket:socket.id });
         });
       });
       // Débloquer un utilisateur
@@ -137,8 +133,7 @@ socket.init = function(io) {
         if(!session.user.isAdmin)
           return;
         users.remove(username);
-        time = moment().tz('Europe/Paris').format(dateFormat);
-        io.to(socket.id).emit('botMessage', time, username + " a été débloqué");
+        addBotMessage(io, username + ' a été débloqué', { storage:false, socket:socket.id });
       });
       // Utilisateur est AFK
       socket.on('afk', function() {
@@ -157,7 +152,7 @@ socket.init = function(io) {
       // Messages privés
       socket.on('private_message', function(username, message) {
         if(username.toLowerCase() == session.user.name.toLowerCase()) {
-          io.to(socket.id).emit('botMessage', time, 'WTF, il se parle à lui même oO ...');
+          addBotMessage(io, 'WTF, il se parle à lui même oO ...', { storage:false, socket:socket.id });
           return;
         }
         users.getUserSocket(username)
@@ -172,33 +167,28 @@ socket.init = function(io) {
           }
         })
         .catch(function() {
-          time = moment().tz('Europe/Paris').format(dateFormat);
-          io.to(socket.id).emit('botMessage', time, 'Utilisateur introuvable, transmission du message impossible...');
+          addBotMessage(io, '(' + username + ') utilisateur introuvable, transmission du message impossible...', { storage:false, socket:socket.id });
         });
       });
       // Highlight d'un utilisateur
       socket.on('highlight', function(username) {
         if(username.toLowerCase() == session.user.name.toLowerCase()) {
-          io.to(socket.id).emit('botMessage', time, 'WTF, il se poke lui même oO ...');
+          addBotMessage(io, 'WTF, il se poke lui même oO ...', { storage:false, socket:socket.id });
           return;
         }
         users.getUserSocket(username)
         .then(function(userSocket) {
-          time = moment().tz('Europe/Paris').format(dateFormat);
-          io.to(socket.id).emit('botMessage', time, 'Vous avez poke @' + username);
+          addBotMessage(io, 'Vous avez poke @' + username, { storage:false, socket:socket.id });
           io.to(userSocket).emit('user_highlight', time, session.user.name);
         })
         .catch(function() {
-          time = moment().tz('Europe/Paris').format(dateFormat);
-          io.to(socket.id).emit('botMessage', time, 'Utilisateur introuvable...');
+          addBotMessage(io, '(' + username + ') utilisateur introuvable...', { storage:false, socket:socket.id });
         });
       });
       // Lancer un dé
       socket.on('roll', function(pattern) {
-        time = moment().tz('Europe/Paris').format(dateFormat);
-
         if(!pattern)
-          addBotMessage(io, time, session.user.name + " lance 1d6 et obtient " + rollDice(6));
+          addBotMessage(io, session.user.name + " lance 1d6 et obtient " + rollDice(6));
 
         var dice   = pattern.split('d');
         var number = parseInt(dice[0], 10);
@@ -213,7 +203,7 @@ socket.init = function(io) {
         }
 
         var message = session.user.name + " lance " + number + "d" + sides + " et obtient " + result.toString();
-        addBotMessage(io, time, message);
+        addBotMessage(io, message);
       });
     })
     .catch(AlreadyConnectedError, function() {
@@ -227,14 +217,24 @@ socket.init = function(io) {
   setTimeout(sendHeartbeat, heartbeatInterval);
 };
 
-var addMessage = function(io, time, user, message) {
+var addMessage = function(io, user, message) {
+  var time = moment().tz('Europe/Paris').format(dateFormat);
   messages.add(time, user.name, message);
   io.emit('message', time, user, message);
 };
 
-var addBotMessage = function(io, time, message) {
-  messages.add(time, null, message);
-  io.emit('botMessage', time, message);
+var addBotMessage = function(io, message, options) {
+  var time = moment().tz('Europe/Paris').format(dateFormat);
+  if(!options) {
+    io.emit('botMessage', time, message);
+    return;
+  }
+  if(options.storage)
+    messages.add(time, null, message);
+  if(options.socket)
+    io.to(options.socket).emit('botMessage', time, message);
+  else
+    io.emit('botMessage', time, message);
 };
 
 /*
