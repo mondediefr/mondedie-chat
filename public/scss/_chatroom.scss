@@ -1,9 +1,7 @@
-/*
- * scss nodechat-flarum
- *
- * author : hardware, magicalex, hydrog3n
-*/
-// note : les numéros de block correspondent à une lecture de gauche à droite (du haut vers le bas)
+//
+// _chatroom.scss
+// note : les numéros de block se lisent de gauche à droite
+//
 
 .conteneur-flex {
   display: flex;
@@ -85,6 +83,7 @@ footer {
   // BLOCK 8
   .foot-message{
     width: 80%;
+    overflow: hidden;
     padding: 0; margin: 0;
     border: $border;
   }

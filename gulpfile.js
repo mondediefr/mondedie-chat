@@ -7,6 +7,7 @@ var bower  = require('gulp-bower');
 var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 var filter = require('gulp-filter');
+var autoprefixer = require('gulp-autoprefixer');
 
 // ########################### PATHS ###########################
 
@@ -84,8 +85,12 @@ gulp.task('sass', ['bower'], function() {
   );
   return gulp.src(file)
     .pipe(sassFile)
-    .pipe(sass()).on('error', handleError)
+    .pipe(sass({outputStyle: 'expanded'})).on('error', handleError)
     .pipe(sassFile.restore)
+    .pipe(autoprefixer({
+      browsers: ['> 1%'],
+      cascade: true
+    }))
     .pipe(minify({keepSpecialComments: 0}))
     .pipe(concat('app.min.css'))
     .pipe(size({title: "fichier app.min.css"}))
