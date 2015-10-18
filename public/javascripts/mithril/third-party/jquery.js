@@ -26,6 +26,11 @@ $(function() {
     e.preventDefault();
   });
 
+  $('#roll').click(function(e) {
+    editor.value('/roll 1d6');
+    e.preventDefault();
+  });
+
   $('#notification').click(function(e) {
     notify.requestPermission();
     $('#notification').remove();

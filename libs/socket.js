@@ -185,6 +185,28 @@ socket.init = function(io) {
           io.to(socket.id).emit('botMessage', time, 'Utilisateur introuvable...');
         });
       });
+      // Lancer un dé
+      socket.on('roll', function(pattern) {
+        time = moment().tz('Europe/Paris').format(dateFormat);
+
+        if(!pattern)
+          addBotMessage(io, time, session.user.name + " lance 1d6 et obtient " + rollDice(6));
+
+        var dice   = pattern.split('d');
+        var number = parseInt(dice[0], 10);
+        var sides  = parseInt(dice[1], 10);
+        var result = [];
+
+        number = (number > 0 && number <= 10)  ? number : 1 ;
+        sides  = (sides  > 0 && sides  <= 100) ? sides  : 6 ;
+
+        for(var i = 0; i < number; i++) {
+          result.push(rollDice(sides));
+        }
+
+        var message = session.user.name + " lance " + number + "d" + sides + " et obtient " + result.toString();
+        addBotMessage(io, time, message);
+      });
     })
     .catch(AlreadyConnectedError, function() {
       io.to(socket.id).emit('already_connected');
@@ -206,6 +228,14 @@ var addBotMessage = function(io, time, message) {
   messages.add(time, null, message);
   io.emit('botMessage', time, message);
 };
+
+/*
+ * Génére un nombre aléatoire selon le nombre de faces
+ * Les valeurs min et max sont incluses [1-sides]
+ */
+function rollDice(sides) {
+  return Math.floor(Math.random() * (sides - 1 + 1)) + 1;
+}
 
 // Déclaration des erreurs
 function AlreadyConnectedError() {}

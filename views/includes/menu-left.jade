@@ -1,16 +1,14 @@
 .core-menu-left
   if user.isAdmin
     h6 Modération
-    p
-      a(href='#' id='banLink') Kick/Ban
-    p
-      a(href='#' id='banList') Lister les membres exclus
+    p: a(href='#' id='banLink') Kick/Ban
+    p: a(href='#' id='banList') Lister les membres exclus
 
   h6 Commandes
-  p: a(href='#') /roll
   p: a(href='#' id='afk') /afk
   p: a(href='#' id='pm') /msg user message
   p: a(href='#' id='poke') /poke user
+  p: a(href='#' id='roll') /roll [nombre]d[faces]
 
   h6 Général
   p: a(href='#' id="notification") Activer les notifications

@@ -44,10 +44,12 @@ messages.vm = (function() {
         socket.emit('unban', message.substring(7));
       else if(message.substring(0, 5) == '/poke')
         socket.emit('highlight', message.substring(6));
+      else if(message.substring(0, 5) == '/roll')
+        socket.emit('roll', message.substring(6));
       else if(message.substring(0, 4) == '/msg') {
         var arr = message.split(' ');
         var res = arr.splice(0, 2);
-        res.push(arr.join(' ')); // res = ['/msg', 'user', 'message']
+        res.push(arr.join(' '));
         socket.emit('private_message', res[1], res[2]);
       } else {
         vm.list.push(new messages.Message({
