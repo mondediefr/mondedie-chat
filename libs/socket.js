@@ -103,10 +103,10 @@ socket.init = function(io) {
         .then(function(userSocket) {
           users.ban(username);
           io.to(userSocket).emit('ban');
-          addBotMessage(io, username + " a été kick du chat");
+          addBotMessage(io, username + " a été kick du chat", { storage:true });
         })
         .catch(function() {
-          addBotMessage(io, '(' + username + ') utilisateur introuvable...', { storage:false, socket:socket.id });
+          addBotMessage(io, '(' + username + ') utilisateur introuvable...', { socket:socket.id });
         });
       });
       // Deban d'un utilisateur
@@ -114,7 +114,7 @@ socket.init = function(io) {
         if(!session.user.isAdmin)
           return;
         users.unban(username);
-        addBotMessage(io, " Une seconde chance a été offerte à " + username);
+        addBotMessage(io, " Une seconde chance a été offerte à " + username, { storage:true });
       });
       // Liste des utilisateurs bannis
       socket.on('banlist', function() {
@@ -125,7 +125,7 @@ socket.init = function(io) {
         })
         .then(function(userslist) {
           var message = 'Liste (' + userslist.length + ') : ' + userslist.toString();
-          addBotMessage(io, userslist.length > 0 ? message : "Personne n'a été banni :)", { storage:false, socket:socket.id });
+          addBotMessage(io, userslist.length > 0 ? message : "Personne n'a été banni :)", { socket:socket.id });
         });
       });
       // Débloquer un utilisateur
@@ -133,7 +133,7 @@ socket.init = function(io) {
         if(!session.user.isAdmin)
           return;
         users.remove(username);
-        addBotMessage(io, username + ' a été débloqué', { storage:false, socket:socket.id });
+        addBotMessage(io, username + ' a été débloqué', { socket:socket.id });
       });
       // Utilisateur est AFK
       socket.on('afk', function() {
@@ -152,7 +152,7 @@ socket.init = function(io) {
       // Messages privés
       socket.on('private_message', function(username, message) {
         if(username.toLowerCase() == session.user.name.toLowerCase()) {
-          addBotMessage(io, 'WTF, il se parle à lui même oO ...', { storage:false, socket:socket.id });
+          addBotMessage(io, 'WTF, il se parle à lui même oO ...', { socket:socket.id });
           return;
         }
         users.getUserSocket(username)
@@ -167,28 +167,28 @@ socket.init = function(io) {
           }
         })
         .catch(function() {
-          addBotMessage(io, '(' + username + ') utilisateur introuvable, transmission du message impossible...', { storage:false, socket:socket.id });
+          addBotMessage(io, '(' + username + ') utilisateur introuvable, transmission du message impossible...', { socket:socket.id });
         });
       });
       // Highlight d'un utilisateur
       socket.on('highlight', function(username) {
         if(username.toLowerCase() == session.user.name.toLowerCase()) {
-          addBotMessage(io, 'WTF, il se poke lui même oO ...', { storage:false, socket:socket.id });
+          addBotMessage(io, 'WTF, il se poke lui même oO ...', { socket:socket.id });
           return;
         }
         users.getUserSocket(username)
         .then(function(userSocket) {
-          addBotMessage(io, 'Vous avez poke @' + username, { storage:false, socket:socket.id });
+          addBotMessage(io, 'Vous avez poke @' + username, { socket:socket.id });
           io.to(userSocket).emit('user_highlight', time, session.user.name);
         })
         .catch(function() {
-          addBotMessage(io, '(' + username + ') utilisateur introuvable...', { storage:false, socket:socket.id });
+          addBotMessage(io, '(' + username + ') utilisateur introuvable...', { socket:socket.id });
         });
       });
       // Lancer un dé
       socket.on('roll', function(pattern) {
         if(!pattern)
-          addBotMessage(io, session.user.name + " lance 1d6 et obtient " + rollDice(6));
+          addBotMessage(io, session.user.name + " lance 1d6 et obtient " + rollDice(6), { storage:true });
 
         var dice   = pattern.split('d');
         var number = parseInt(dice[0], 10);
@@ -203,7 +203,7 @@ socket.init = function(io) {
         }
 
         var message = session.user.name + " lance " + number + "d" + sides + " et obtient " + result.toString();
-        addBotMessage(io, message);
+        addBotMessage(io, message, { storage:true });
       });
     })
     .catch(AlreadyConnectedError, function() {
