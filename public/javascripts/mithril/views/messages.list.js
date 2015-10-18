@@ -13,7 +13,7 @@ messages.view = function() {
         m("span", { class:'date' }, ( message.time() ? '[' + message.time() + '] ' : '' )),
         m("span", { class:'username', style:{ color:user.groupColor }}, user.name + ': '),
         m("span", { class:'text' }, m.trust(message.mess())),
-        m("a.option[href='#']", m("i", { class:'fa fa-times' }))
+        m("a.option[href='#']", m("i", { class:message.type() == 'message' ? 'fa fa-times' : '' }))
       ])
     })
   ])
