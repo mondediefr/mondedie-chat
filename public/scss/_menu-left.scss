@@ -5,5 +5,22 @@
 */
 
 .core-menu-left {
-  // todo ...
+  .block {
+    // todo ...
+  }
+}
+
+.head-menu-left {
+
+  h5 {
+    margin: 0;
+
+    &.title-site {
+      text-align: center;
+
+      .site-name {
+        font-size: rem(30px);
+      }
+    }
+  }
 }
