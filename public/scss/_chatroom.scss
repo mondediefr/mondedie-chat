@@ -14,14 +14,18 @@ header {
   position: fixed; top: 0;
 
   .head-menu-left{
+    padding: rem(10px);
     width: 20%;
     background-color: $color-left;
     border-right: $border;
+
+    h5 {
+      margin: 0;
+    }
   }
 
   .head-message{
     width: 80%;
-    padding: rem(10px);
     border-bottom: $border;
   }
 
@@ -37,20 +41,22 @@ section {
   width: 100%;
 
   .core-menu-left {
+    padding: rem(10px);
     width: 20%;
-    padding:rem(10px);
+    overflow: auto;
     background-color: $color-left;
     border-right: $border;
   }
 
   .core-message {
-    width: 81%;
+    width: 80%;
     overflow: auto;
+    border-bottom: $border;
+    border-right: $border;
   }
 
   .core-menu-right {
     width: 20%;
-    padding: rem(10px);
     overflow: auto;
   }
 }
@@ -60,6 +66,7 @@ footer {
   position: fixed; bottom: 0;
 
   .foot-menu-left{
+    padding: rem(10px);
     width: 20%;
     background-color: $color-left;
     border-right: $border;
@@ -68,6 +75,7 @@ footer {
   .foot-message{
     width: 80%;
     overflow: scroll;
+    border-right: $border;
   }
 
   .foot-menu-right{

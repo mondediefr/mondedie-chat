@@ -24,11 +24,12 @@ block content
 
   if user.isAdmin
     div(class='modal fade' id='banPopup')
-      .modal-dialog
+      div(class='modal-dialog' role='document')
         .modal-content
           .modal-header
-            button(type='button' class='close' data-dismiss='modal')
-              span &times;
+            button(type='button' class='close' data-dismiss='modal' aria-label='Close')
+              span(aria-hidden='true') &times;
+              span(class='sr-only') Close
             h4.modal-title Kick/Ban
           .modal-body
             .alert.alert-info
@@ -39,6 +40,6 @@ block content
                 label.control-label Pseudo :
                 input(type='text' name='userBanned' class='form-control' autofocus)
           .modal-footer
-            button(type='button' class='btn btn-default' data-dismiss='modal') Annuler
+            button(type='button' class='btn btn-secondary' data-dismiss='modal') Annuler
             button(type='button' role='ban' class='btn btn-danger') Bannir
             button(type='button' role='unban' class='btn btn-warning') Débannir
