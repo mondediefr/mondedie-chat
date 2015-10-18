@@ -152,7 +152,7 @@ socket.init = function(io) {
       // Messages privés
       socket.on('private_message', function(username, message) {
         if(username.toLowerCase() == session.user.name.toLowerCase()) {
-          addBotMessage(io, 'WTF, il se parle à lui même oO ...', { socket:socket.id });
+          addBotMessage(io, 'WTF, ' + session.user.name + ' se parle à lui même oO ...', { storage:true });
           return;
         }
         users.getUserSocket(username)
@@ -173,7 +173,7 @@ socket.init = function(io) {
       // Highlight d'un utilisateur
       socket.on('highlight', function(username) {
         if(username.toLowerCase() == session.user.name.toLowerCase()) {
-          addBotMessage(io, 'WTF, il se poke lui même oO ...', { socket:socket.id });
+          addBotMessage(io, 'WTF, ' + session.user.name + ' se poke lui même oO ...', { storage:true });
           return;
         }
         users.getUserSocket(username)
