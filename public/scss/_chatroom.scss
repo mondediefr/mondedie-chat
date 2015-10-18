@@ -3,7 +3,7 @@
  *
  * author : hardware, magicalex, hydrog3n
 */
-// note : les numéros de block correspond à une lecture de gauche à droite (du haut vers le bas)
+// note : les numéros de block correspondent à une lecture de gauche à droite (du haut vers le bas)
 
 .conteneur-flex {
   display: flex;
@@ -20,10 +20,6 @@ header {
     padding: 0; margin: 0;
     background-color: $color-left;
     border-right: $border;
-
-    h5 {
-      margin: 0;
-    }
   }
 
   // BLOCK 2
