@@ -4,25 +4,33 @@
  * author : hardware, magicalex, hydrog3n
 */
 
-.CodeMirror {
-  height: 75px;
-}
+#editor {
 
-.CodeMirror, .CodeMirror-scroll {
-  min-height: 75px;
-}
+  .editor-toolbar {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
 
-.smileys-container {
-  display: inline-block;
-  margin-top:10px;
-  padding:5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
+  .CodeMirror {
+    height: 75px;
+  }
 
-  img {
-    margin-right:5px;
-    width:18px;
-    height:auto;
+  .CodeMirror, .CodeMirror-scroll {
+    min-height: 75px;
+  }
+
+  .smileys-container {
+    display: inline-block;
+    margin-top:10px;
+    padding:5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+
+    img {
+      margin-right:5px;
+      width:18px;
+      height:auto;
+    }
   }
 }
