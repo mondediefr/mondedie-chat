@@ -132,6 +132,14 @@ socket.init = function(io) {
           io.to(socket.id).emit('botMessage', time, userslist.length > 0 ? message : "Personne n'a été banni :)");
         });
       });
+      // Débloquer un utilisateur
+      socket.on('unlock', function(username) {
+        if(!session.user.isAdmin)
+          return;
+        users.remove(username);
+        time = moment().tz('Europe/Paris').format(dateFormat);
+        io.to(socket.id).emit('botMessage', time, username + " a été débloqué");
+      });
       // Utilisateur est AFK
       socket.on('afk', function() {
         session.user.status = 'afk';

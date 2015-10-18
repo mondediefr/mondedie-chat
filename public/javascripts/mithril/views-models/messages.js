@@ -42,6 +42,8 @@ messages.vm = (function() {
         socket.emit('ban', message.substring(6));
       else if(message.substring(0, 6) == '/unban')
         socket.emit('unban', message.substring(7));
+      else if(message.substring(0, 7) == '/unlock')
+        socket.emit('unlock', message.substring(8));
       else if(message.substring(0, 5) == '/poke')
         socket.emit('highlight', message.substring(6));
       else if(message.substring(0, 5) == '/roll')

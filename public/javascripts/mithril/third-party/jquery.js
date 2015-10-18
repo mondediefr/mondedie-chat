@@ -37,6 +37,11 @@ $(function() {
     e.preventDefault();
   });
 
+  $('#unlock').click(function(e) {
+    editor.value('/unlock user');
+    e.preventDefault();
+  });
+
   $('#banLink').click(function(e) {
     $('#banPopup').modal();
     e.preventDefault();
