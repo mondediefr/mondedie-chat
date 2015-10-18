@@ -4,13 +4,16 @@ block content
 
   header.conteneur-flex
     .head-menu-left
-      h5.title-site
-        a(href="/" title="Mondedie.fr" class="site-name")
-          span M
-          | ONDEDIE
+      .block
+        h5.title-site
+          a(href="/" title="Mondedie.fr" class="site-name")
+            span M
+            | ONDEDIE
     .head-message
-      h5 #General
+      .block
+        h5 #General
     .head-menu-right
+      .block
 
   section.conteneur-flex
     include includes/menu-left
@@ -19,8 +22,10 @@ block content
 
   footer.conteneur-flex
     .foot-menu-left
+      .block
     include includes/form
     .foot-menu-right
+      .block
 
   if user.isAdmin
     div(class='modal fade' id='banPopup')

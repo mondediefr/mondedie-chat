@@ -3,6 +3,7 @@
  *
  * author : hardware, magicalex, hydrog3n
 */
+// note : les numéros de block correspond à une lecture de gauche à droite (du haut vers le bas)
 
 .conteneur-flex {
   display: flex;
@@ -13,9 +14,10 @@ header {
   height: $height-header; width: 100%;
   position: fixed; top: 0;
 
+  // BLOCK 1
   .head-menu-left{
-    padding: rem(10px);
     width: 20%;
+    padding: 0; margin: 0;
     background-color: $color-left;
     border-right: $border;
 
@@ -24,13 +26,18 @@ header {
     }
   }
 
+  // BLOCK 2
   .head-message{
     width: 80%;
+    padding: 0; margin: 0;
+    border-left: $border;
     border-bottom: $border;
   }
 
+  // BLOCK 3
   .head-menu-right{
     width: 20%;
+    padding: 0; margin: 0;
     border-bottom: $border;
   }
 }
@@ -40,24 +47,30 @@ section {
   top: $height-header; bottom: $height-footer;
   width: 100%;
 
+  // BLOCK 4
   .core-menu-left {
-    padding: rem(10px);
     width: 20%;
+    padding: 0; margin: 0;
     overflow: auto;
     background-color: $color-left;
     border-right: $border;
   }
 
+  // BLOCK 5
   .core-message {
     width: 80%;
+    padding: 0; margin: 0;
     overflow: auto;
-    border-bottom: $border;
-    border-right: $border;
+    border: $border;
   }
 
+  // BLOCK 6
   .core-menu-right {
     width: 20%;
+    padding: 0; margin: 0;
     overflow: auto;
+    border-left: $border;
+    border-top: $border;
   }
 }
 
@@ -65,20 +78,26 @@ footer {
   height: $height-footer; width: 100%;
   position: fixed; bottom: 0;
 
+  // BLOCK 7
   .foot-menu-left{
-    padding: rem(10px);
     width: 20%;
+    padding: 0; margin: 0;
     background-color: $color-left;
     border-right: $border;
   }
 
+  // BLOCK 8
   .foot-message{
     width: 80%;
+    padding: 0; margin: 0;
     overflow: scroll;
-    border-right: $border;
+    border: $border;
   }
 
+  // BLOCK 9
   .foot-menu-right{
     width: 20%;
+    padding: 0; margin: 0;
+    border-left: $border;
   }
 }

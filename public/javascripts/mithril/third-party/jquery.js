@@ -70,5 +70,4 @@ $(function() {
     var username = $(this).text();
     editor.value('**@' + username + ':** ');
   });
-
 });

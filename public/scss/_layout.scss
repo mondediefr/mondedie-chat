@@ -8,3 +8,7 @@ body {
   font-size: rem(13px);
   overflow: hidden;
 }
+
+.block {
+  padding: $padding-block;
+}
