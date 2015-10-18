@@ -187,8 +187,10 @@ socket.init = function(io) {
       });
       // Lancer un dé
       socket.on('roll', function(pattern) {
-        if(!pattern)
+        if(!pattern) {
           addBotMessage(io, session.user.name + " lance 1d6 et obtient " + rollDice(6), { storage:true });
+          return;
+        }
 
         var dice   = pattern.split('d');
         var number = parseInt(dice[0], 10);

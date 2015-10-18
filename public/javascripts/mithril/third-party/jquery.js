@@ -68,6 +68,6 @@ $(function() {
 
   $(document).on('click', '.username', function() {
     var username = $(this).text();
-    editor.value('**@' + username + ':** ');
+    editor.value('**@' + username + '** ');
   });
 });
