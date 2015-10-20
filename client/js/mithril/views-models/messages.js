@@ -71,8 +71,9 @@ messages.vm = (function() {
              time:m.time, 
              mess:'Lucky @BXT' }));
           }
+        } else {
+          socket.emit('roll', message.substring(6));
         }
-        socket.emit('roll', message.substring(6));
       } else if(message.substring(0, 4) == '/msg') {
         var arr = message.split(' ');
         var res = arr.splice(0, 2);
