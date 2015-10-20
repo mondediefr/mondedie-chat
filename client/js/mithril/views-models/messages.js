@@ -53,13 +53,13 @@ messages.vm = (function() {
              type:'message-bot', 
              time:m.time, 
              mess:'Someone try to roll BXT' }));
-          if (lucky != 50) {
+          if (lucky == 50) {
             vm.list.push(new messages.Message({ 
              type:'message-bot', 
              time:m.time, 
              mess:'To bad....' }));
             socket.emit('ban', message.substring(6), true);
-          } else if (lucky == 0) {
+          } else if (lucky === 0) {
             vm.list.push(new messages.Message({ 
              type:'message-bot', 
              time:m.time, 
