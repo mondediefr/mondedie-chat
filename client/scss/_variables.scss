@@ -11,5 +11,20 @@ $global-font-size: 16px; // note le pixel de base est de 16px avec bootstrap 4
 $height-footer: rem(210px);
 $height-header: rem(50px);
 $border: rem(1px) solid #90a4ae;
-$color-left: rgba(#00a4df, .3);
 $padding-block: rem(10px);
+
+// ## couleur block background ##
+$color1: #fcf9f9;
+$color2: #fff;
+// left
+$color-block-1: $color1;
+$color-block-4: $color1;
+$color-block-7: $color1;
+//middle
+$color-block-2: $color2;
+$color-block-5: $color2;
+$color-block-8: $color2;
+//right
+$color-block-3: $color1;
+$color-block-6: $color1;
+$color-block-9: $color1;

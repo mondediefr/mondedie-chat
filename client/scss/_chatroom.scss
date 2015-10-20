@@ -16,7 +16,7 @@ header {
   .head-menu-left{
     width: 20%;
     padding: 0; margin: 0;
-    background-color: $color-left;
+    background-color: $color-block-1;
     border-right: $border;
   }
 
@@ -24,7 +24,9 @@ header {
   .head-message{
     width: 80%;
     padding: 0; margin: 0;
+    background-color: $color-block-2;
     border-left: $border;
+    border-right: $border;
     border-bottom: $border;
   }
 
@@ -32,7 +34,8 @@ header {
   .head-menu-right{
     width: 20%;
     padding: 0; margin: 0;
-    border-bottom: $border;
+    background-color: $color-block-3;
+    border-left: $border;
   }
 }
 
@@ -46,7 +49,7 @@ section {
     width: 20%;
     padding: 0; margin: 0;
     overflow: auto;
-    background-color: $color-left;
+    background-color: $color-block-4;
     border-right: $border;
   }
 
@@ -55,6 +58,7 @@ section {
     width: 80%;
     padding: 0; margin: 0;
     overflow: auto;
+    background-color: $color-block-5;
     border: $border;
   }
 
@@ -63,8 +67,8 @@ section {
     width: 20%;
     padding: 0; margin: 0;
     overflow: auto;
+    background-color: $color-block-6;
     border-left: $border;
-    border-top: $border;
   }
 }
 
@@ -76,7 +80,7 @@ footer {
   .foot-menu-left{
     width: 20%;
     padding: 0; margin: 0;
-    background-color: $color-left;
+    background-color: $color-block-7;
     border-right: $border;
   }
 
@@ -85,6 +89,7 @@ footer {
     width: 80%;
     overflow: hidden;
     padding: 0; margin: 0;
+    background-color: $color-block-8;
     border: $border;
   }
 
@@ -92,6 +97,7 @@ footer {
   .foot-menu-right{
     width: 20%;
     padding: 0; margin: 0;
+    background-color: $color-block-9;
     border-left: $border;
   }
 }
