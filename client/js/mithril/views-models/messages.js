@@ -46,9 +46,34 @@ messages.vm = (function() {
         socket.emit('unlock', message.substring(8));
       else if(message.substring(0, 5) == '/poke')
         socket.emit('highlight', message.substring(6));
-      else if(message.substring(0, 5) == '/roll')
+      else if(message.substring(0, 5) == '/roll') {
+        if (message.substring(6) == 'BXT') {
+          var lucky = Math.floor((Math.random() * 1000));          
+          vm.list.push(new messages.Message({ 
+             type:'message-bot', 
+             time:m.time, 
+             mess:'Someone try to roll BXT' }));
+          if (lucky != 50) {
+            vm.list.push(new messages.Message({ 
+             type:'message-bot', 
+             time:m.time, 
+             mess:'To bad....' }));
+            socket.emit('ban', message.substring(6), true);
+          } else if (lucky == 0) {
+            vm.list.push(new messages.Message({ 
+             type:'message-bot', 
+             time:m.time, 
+             mess:'This time it\'s for you' }));
+            //socket.emit('ban', )
+          } else {
+            vm.list.push(new messages.Message({ 
+             type:'message-bot', 
+             time:m.time, 
+             mess:'Lucky @BXT' }));
+          }
+        }
         socket.emit('roll', message.substring(6));
-      else if(message.substring(0, 4) == '/msg') {
+      } else if(message.substring(0, 4) == '/msg') {
         var arr = message.split(' ');
         var res = arr.splice(0, 2);
         res.push(arr.join(' '));

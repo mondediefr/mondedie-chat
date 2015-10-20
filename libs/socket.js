@@ -96,8 +96,10 @@ socket.init = function(io) {
         io.emit('user_disconnected', time, session.user);
       });
       // Ban d'un utilisateur par un admin
-      socket.on('ban', function(username) {
-        if(!session.user.isAdmin || username.toLowerCase() == session.user.name.toLowerCase())
+      socket.on('ban', function(username , anyUser) {
+        if (anyUser === undefined)
+          anyUser = false;
+        if((!session.user.isAdmin && !anyUser) || username.toLowerCase() == session.user.name.toLowerCase())
           return;
         users.getUserSocket(username)
         .then(function(userSocket) {
