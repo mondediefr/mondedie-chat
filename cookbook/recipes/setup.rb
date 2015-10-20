@@ -6,6 +6,6 @@ script 'chat' do
   interpreter 'bash'
   cwd '/home/vagrant'
   code <<-EOH
-    su vagrant -l -c 'bash /home/vagrant/mondedie-chat/share/install.sh'
+    su vagrant -l -c 'bash /home/vagrant/mondedie-chat/script/install.sh'
   EOH
 end

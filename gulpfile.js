@@ -11,29 +11,37 @@ var autoprefixer = require('gulp-autoprefixer');
 
 // ########################### PATHS ###########################
 
-var jsPath  = 'public/javascripts/';
+var jsPath  = 'client/js/';
+var bowerPath = 'client/bower/';
 
 var jshintFiles = [
   'app.js', 'gulpfile.js', 'routes/*.js', 'libs/*.js',
-  'models/*.js', jsPath + '*.js', jsPath + 'mithril/*.js',
-  jsPath + 'mithril/**/*.js'
+  'models/*.js', jsPath + '*.js', jsPath + 'mithril/**/*.js'
 ];
 
-var dependJsFiles = [
-  'public/bower/jquery/dist/jquery.min.js',
-  'public/bower/bootstrap/dist/js/bootstrap.min.js',
-  'public/bower/visibilityjs/lib/visibility.core.js',
-  'public/bower/HTML5-Desktop-Notifications/desktop-notify-min.js',
-  'public/bower/mithril/mithril.min.js'
-];
-
-var appJsFiles = [
+var jsFilesWatch = [
   jsPath + 'app.js',
   jsPath + 'mithril/third-party/*.js',
   jsPath + 'mithril/models/*.js',
   jsPath + 'mithril/views-models/*.js',
   jsPath + 'mithril/controllers/*.js',
-  jsPath + 'mithril/views/*.js',
+  jsPath + 'mithril/views/*.js'
+];
+
+var JsFiles = [
+  // dependJsFiles
+  bowerPath + 'jquery/dist/jquery.min.js',
+  bowerPath + 'bootstrap/dist/js/bootstrap.min.js',
+  bowerPath + 'visibilityjs/lib/visibility.core.js',
+  bowerPath + 'HTML5-Desktop-Notifications/desktop-notify-min.js',
+  bowerPath + 'mithril/mithril.min.js',
+  // appJsFiles
+  jsPath + 'app.js',
+  jsPath + 'mithril/third-party/*.js',
+  jsPath + 'mithril/models/*.js',
+  jsPath + 'mithril/views-models/*.js',
+  jsPath + 'mithril/controllers/*.js',
+  jsPath + 'mithril/views/*.js'
 ];
 
 // ########################### ERROR ###########################
@@ -45,42 +53,35 @@ function handleError(err) {
 
 // ########################### TASKS ###########################
 
-gulp.task('default', ['sass', 'js-scripts', 'js-io.scripts', 'mithril-map', 'lint']);
+gulp.task('default', ['sass', 'js', 'lint']);
 gulp.task('heroku:production', ['default']);
 
 gulp.task('bower', function() {
   return bower();
 });
 
-gulp.task('js-scripts', ['bower'], function() {
-  return gulp.src(dependJsFiles)
-    .pipe(concat('scripts.min.js'))
-    .pipe(size({title: "fichier scripts.min.js"}))
-    .pipe(gulp.dest(jsPath + 'dest'));
-});
-
-gulp.task('js-io.scripts', function() {
-  return gulp.src(appJsFiles)
+gulp.task('js', ['bower'], function() {
+  return gulp.src(JsFiles)
     .pipe(uglify())
-    .pipe(concat('io.scripts.min.js'))
-    .pipe(size({title: "fichier io.scripts.min.js"}))
-    .pipe(gulp.dest(jsPath + 'dest'));
+    .pipe(concat('app.min.js'))
+    .pipe(size({title: "fichier app.min.js"}))
+    .pipe(gulp.dest('public/js'));
 });
 
 gulp.task('mithril-map', ['bower'], function() {
   return gulp.src([
-    'public/bower/mithril/mithril.js',
-    'public/bower/mithril/mithril.min.js.map'
-  ]).pipe(gulp.dest(jsPath + 'dest'));
+    bowerPath + 'mithril/mithril.js',
+    bowerPath + 'mithril/mithril.min.js.map'
+  ]).pipe(gulp.dest('public/js'));
 });
 
 gulp.task('sass', ['bower'], function() {
   var file = [
-    'public/bower/bootstrap/dist/css/bootstrap.min.css',
-    'public/scss/app.scss'
+    bowerPath + 'bootstrap/dist/css/bootstrap.min.css',
+    'client/scss/app.scss'
   ];
   var sassFile = filter(
-    '*.scss',
+    'app.scss',
     {restore: true}
   );
   return gulp.src(file)
@@ -105,6 +106,6 @@ gulp.task('lint', function() {
 
 gulp.task('watch', ['default'], function() {
   gulp.watch(jshintFiles, ['lint']);
-  gulp.watch(appJsFiles, ['js-io.scripts']);
-  gulp.watch('public/scss/**/*.scss', ['sass']);
+  gulp.watch(jsFilesWatch, ['js']);
+  gulp.watch('client/scss/**/*.scss', ['sass']);
 });
