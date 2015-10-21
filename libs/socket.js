@@ -96,20 +96,10 @@ socket.init = function(io) {
         io.emit('user_disconnected', time, session.user);
       });
       // Ban d'un utilisateur par un admin
-      socket.on('ban', function(username , anyUser) {
-        if (anyUser === undefined)
-          anyUser = false;
-        if((!session.user.isAdmin && !anyUser) || username.toLowerCase() == session.user.name.toLowerCase())
+      socket.on('ban', function(username) {
+        if(!session.user.isAdmin || username.toLowerCase() == session.user.name.toLowerCase())
           return;
-        users.getUserSocket(username)
-        .then(function(userSocket) {
-          users.ban(username);
-          io.to(userSocket).emit('ban');
-          addBotMessage(io, username + " a été kick du chat", { storage:true });
-        })
-        .catch(function() {
-          addBotMessage(io, '(' + username + ') utilisateur introuvable...', { socket:socket.id });
-        });
+        banUser(io, socket.id, username);
       });
       // Deban d'un utilisateur
       socket.on('unban', function(username) {
@@ -209,6 +199,29 @@ socket.init = function(io) {
         var message = session.user.name + " lance " + number + "d" + sides + " et obtient " + result.toString();
         addBotMessage(io, message, { storage:true });
       });
+      socket.on('rollBXT', function() {
+        return Promise.try(function() {
+          addBotMessage(io, "Quelqu'un a tenté un roll BXT...", { storage:true });
+          var message = null;
+          var lucky = Math.floor(Math.random() * 1000);
+          switch(lucky) {
+            case 0:
+              message = 'Mouhahaha :evil:';
+              banUser(io, socket.id, "BXT");
+              break;
+            case 999:
+              message = 'Dommage, le trolleur trollé :D';
+              banUser(io, socket.id, session.user.name);
+              break;
+            default:
+              message = '... la tentative a échoué, peut-être une autre fois :3';
+              break;
+          }
+          return Promise.delay(message, 50);
+        }).then(function(message) {
+          addBotMessage(io, message, { storage:true });
+        });
+      });
     })
     .catch(AlreadyConnectedError, function() {
       io.to(socket.id).emit('already_connected');
@@ -240,6 +253,18 @@ var addBotMessage = function(io, message, options) {
   else
     io.emit('botMessage', time, message);
 };
+
+var banUser = function(io, socketid, username) {
+  users.getUserSocket(username)
+  .then(function(userSocket) {
+    users.ban(username);
+    io.to(userSocket).emit('ban');
+    addBotMessage(io, username + " a été kick du chat", { storage:true });
+  })
+  .catch(function() {
+    addBotMessage(io, '(' + username + ') utilisateur introuvable...', { socket:socketid });
+  });
+}
 
 /*
  * Génére un nombre aléatoire selon le nombre de faces
