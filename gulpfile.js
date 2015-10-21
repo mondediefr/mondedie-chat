@@ -8,6 +8,7 @@ var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 var filter = require('gulp-filter');
 var autoprefixer = require('gulp-autoprefixer');
+var runSequence = require('run-sequence');
 
 // ########################### PATHS ###########################
 
@@ -17,15 +18,6 @@ var bowerPath = 'client/bower/';
 var jshintFiles = [
   'app.js', 'gulpfile.js', 'routes/*.js', 'libs/*.js',
   'models/*.js', jsPath + '*.js', jsPath + 'mithril/**/*.js'
-];
-
-var jsFilesWatch = [
-  jsPath + 'app.js',
-  jsPath + 'mithril/third-party/*.js',
-  jsPath + 'mithril/models/*.js',
-  jsPath + 'mithril/views-models/*.js',
-  jsPath + 'mithril/controllers/*.js',
-  jsPath + 'mithril/views/*.js'
 ];
 
 var JsFiles = [
@@ -80,10 +72,7 @@ gulp.task('sass', ['bower'], function() {
     bowerPath + 'bootstrap/dist/css/bootstrap.min.css',
     'client/scss/app.scss'
   ];
-  var sassFile = filter(
-    'app.scss',
-    {restore: true}
-  );
+  var sassFile = filter('app.scss', {restore: true});
   return gulp.src(file)
     .pipe(sassFile)
     .pipe(sass({outputStyle: 'expanded'})).on('error', handleError)
@@ -106,6 +95,6 @@ gulp.task('lint', function() {
 
 gulp.task('watch', ['default'], function() {
   gulp.watch(jshintFiles, ['lint']);
-  gulp.watch(jsFilesWatch, ['js']);
-  gulp.watch('client/scss/**/*.scss', ['sass']);
+  gulp.watch('client/js/**/*.js', function() { runSequence('js') });
+  gulp.watch('client/scss/**/*.scss', function() { runSequence('sass') });
 });
