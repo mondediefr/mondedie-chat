@@ -10,7 +10,6 @@ var messages = messages || {};
 var users    = users    || {};
 var smileys  = smileys  || {};
 
-
 /**
  * Views DOM anchors
  */

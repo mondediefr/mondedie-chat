@@ -12,28 +12,28 @@ var runSequence = require('run-sequence');
 
 // ########################### PATHS ###########################
 
-var jsPath  = 'client/js/';
-var bowerPath = 'client/bower/';
+var bowerPath = 'client/bower';
+var jsPath = 'client/js';
 
 var jshintFiles = [
   'app.js', 'gulpfile.js', 'routes/*.js', 'libs/*.js',
-  'models/*.js', jsPath + '*.js', jsPath + 'mithril/**/*.js'
+  'models/*.js', 'client/js/**/*.js'
 ];
 
 var JsFiles = [
   // dependJsFiles
-  bowerPath + 'jquery/dist/jquery.min.js',
-  bowerPath + 'bootstrap/dist/js/bootstrap.min.js',
-  bowerPath + 'visibilityjs/lib/visibility.core.js',
-  bowerPath + 'HTML5-Desktop-Notifications/desktop-notify-min.js',
-  bowerPath + 'mithril/mithril.min.js',
+  bowerPath + '/jquery/dist/jquery.min.js',
+  bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
+  bowerPath + '/visibilityjs/lib/visibility.core.js',
+  bowerPath + '/HTML5-Desktop-Notifications/desktop-notify-min.js',
+  bowerPath + '/mithril/mithril.min.js',
   // appJsFiles
-  jsPath + 'app.js',
-  jsPath + 'mithril/third-party/*.js',
-  jsPath + 'mithril/models/*.js',
-  jsPath + 'mithril/views-models/*.js',
-  jsPath + 'mithril/controllers/*.js',
-  jsPath + 'mithril/views/*.js'
+  jsPath + '/app.js',
+  jsPath + '/mithril/third-party/*.js',
+  jsPath + '/mithril/models/*.js',
+  jsPath + '/mithril/views-models/*.js',
+  jsPath + '/mithril/controllers/*.js',
+  jsPath + '/mithril/views/*.js'
 ];
 
 // ########################### ERROR ###########################
@@ -69,7 +69,7 @@ gulp.task('mithril-map', ['bower'], function() {
 
 gulp.task('sass', ['bower'], function() {
   var file = [
-    bowerPath + 'bootstrap/dist/css/bootstrap.min.css',
+    bowerPath + '/bootstrap/dist/css/bootstrap.min.css',
     'client/scss/app.scss'
   ];
   var sassFile = filter('app.scss', {restore: true});
