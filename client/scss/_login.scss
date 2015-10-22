@@ -51,12 +51,14 @@
     }
 
     input[type="text"] {
-      margin-bottom: rem(-1px);
+      margin-bottom: rem(-2px);
+      border-width: rem(2px);
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
     }
 
     input[type="password"] {
+      border-width: rem(2px);
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }

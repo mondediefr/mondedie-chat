@@ -26,6 +26,7 @@ var JsFiles = [
   bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
   bowerPath + '/visibilityjs/lib/visibility.core.js',
   bowerPath + '/HTML5-Desktop-Notifications/desktop-notify-min.js',
+  bowerPath + '/simplemde/dist/simplemde.min.js',
   bowerPath + '/mithril/mithril.min.js',
   // appJsFiles
   jsPath + '/app.js',
@@ -70,6 +71,7 @@ gulp.task('mithril-map', ['bower'], function() {
 gulp.task('sass', ['bower'], function() {
   var file = [
     bowerPath + '/bootstrap/dist/css/bootstrap.min.css',
+    bowerPath + '/simplemde/dist/simplemde.min.css',
     'client/scss/app.scss'
   ];
   var sassFile = filter('app.scss', {restore: true});

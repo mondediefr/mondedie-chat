@@ -8,15 +8,13 @@ $(function(){
   * Markdown editor
   */
   editor = new SimpleMDE({
+    element: document.getElementById('text-editor'),
     autofocus: true,
-    autosave: {
-      enabled: true,
-      unique_id: 'chatForm',
-      delay: 1000
-    },
+    autosave: {enabled: false},
     toolbar: [
-      'bold', 'italic', 'strikethrough', '|', 'code', 'quote', 'unordered-list',
-      'horizontal-rule', '|', 'link', 'image', '|', 'preview', 'side-by-side', 'fullscreen',
+      'bold', 'italic', 'strikethrough',
+      '|', 'code', 'quote', 'unordered-list',
+      '|', 'link', 'image', '|', 'preview', 'side-by-side', 'fullscreen',
       '|', {name: 'smiley', action: toggleSmiley, className: "fa fa-smile-o", title: "smiley (Ctrl+d)"}
     ],
     indentWithTabs: false,
@@ -26,7 +24,7 @@ $(function(){
     spellChecker: false,
     status: false,
     tabSize: 4,
-    toolbarTips: false
+    toolbarTips: true
   });
 
   editor.codemirror.on('keyHandled', function(instance, key) {

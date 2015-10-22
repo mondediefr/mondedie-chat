@@ -2,33 +2,35 @@
 // _editor.scss
 //
 
+$heigh-editor: 60px;
+
 #editor {
 
   .editor-toolbar {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-radius: 0;
   }
 
   .CodeMirror {
-    height: 75px;
-  }
-
-  .CodeMirror, .CodeMirror-scroll {
-    min-height: 75px;
+    min-height: rem($heigh-editor);
+    height: rem($heigh-editor);
+    border-radius: 0;
+    &, .CodeMirror-scroll {
+      min-height: rem($heigh-editor);
+    }
   }
 
   .smileys-container {
     display: inline-block;
-    margin-top:10px;
-    padding:5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    margin-top: rem(10px);
+    padding: rem(5px);
+    border: rem(1px) solid #ccc;
+    border-radius: rem(4px);
     cursor: pointer;
 
     img {
-      margin-right:5px;
-      width:18px;
-      height:auto;
+      margin-right: 5px;
+      width: 18px;
+      height: auto;
     }
   }
 }
