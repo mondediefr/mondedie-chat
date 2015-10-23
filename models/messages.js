@@ -1,4 +1,5 @@
 "use strict";
+var Promise = require('bluebird');
 // Nombre maximum de messages récupérés dans la base de données
 var MAX = 200;
 
@@ -16,13 +17,35 @@ Messages.prototype.add = function(time, username, message) {
     var id = count + 1;
     var messagekey = 'messages:list:' + id;
     self.db.hmset(messagekey, {
+      id:id,
       time:time,
       user:(username) ? username : null,
       message:message,
-      id:id
+      deleted:false
     });
-    self.db.zadd('messages:listed', id, messagekey)
+    self.db.zadd('messages:listed', id, messagekey);
+    return id;
+  }).finally(function(id) {
+    return Promise.resolve(id);
   });
+}
+
+/*
+ * Supprime un message (changement du flag 'deleted')
+ */
+Messages.prototype.del = function(message) {
+  message.deleted = true;
+  this.db.hmset('messages:list:' + message.id, message);
+}
+
+/*
+ * Obtient les informations d'un message à partir de son id
+ */
+Messages.prototype.get = function(id) {
+  return this.db.hgetallAsync('messages:list:' + id)
+  .then(function(message) {
+    return message ? message : Promise.reject('message not found');
+  })
 }
 
 /*

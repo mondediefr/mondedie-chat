@@ -12,12 +12,19 @@ messages.vm = (function() {
     vm.list = new messages.MessagesList();
     // Load initial messages list
     vm.loadmessages = function(res) {
-      res.messages.filter(function(m, i) {
-        if( ! m.user )
-          vm.list.push(new messages.Message({ type:'message-bot', time:m.time, mess:m.message }));
-        else
-          vm.list.push(new messages.Message({ time:m.time, user:m.user, mess:m.message  }));
+      res.messages.filter(function(message) {
+        return message.deleted == "false"
+      }).forEach(function(message) {
+        if(!message.user)
+          message.type = 'message-bot';
+        vm.list.push(new messages.Message(message));
       });
+    };
+    // Redraw all message list
+    vm.redrawAll = function() {
+      m.redraw.strategy('all');
+      m.redraw();
+      m.redraw.strategy('diff');
     };
     // Send a message
     vm.send = function() {
@@ -29,6 +36,14 @@ messages.vm = (function() {
       else
         socket.emit('message', message);
       editor.value('');
+    };
+    // Remove a message
+    vm.del = function(id) {
+      m.request({ method: 'DELETE', url: '/delete/message', data:{ id:id }})
+      .then(function(res) {
+        if(res.deleted)
+          socket.emit('remove_message', id);
+      })
     };
     // Parse a command
     vm.cmd = function(message) {
@@ -59,13 +74,13 @@ messages.vm = (function() {
       } else {
         vm.list.push(new messages.Message({
           type:'message-warning',
-          mess:'"' + message + '" -> commande inconnue...'
+          message:'"' + message + '" -> commande inconnue...'
         }));
         m.redraw();
       }
     };
     // Get and load messages list
-    m.request({ method: "GET", url: "/get/messages"})
+    m.request({ method: 'GET', url: '/get/messages'})
     .then(vm.loadmessages)
     .then(m.redraw)
     .then(deferred.resolve);
@@ -87,19 +102,18 @@ messages.vm = (function() {
       socket.on('ping', function(data) {
         socket.emit('pong', { beat: 1 });
       });
-      socket.on('message', function(time, user, mess) {
-        vm.list.push(new messages.Message({ time:time, user:user, mess:mess }));
+      socket.on('message', function(message) {
+        vm.list.push(new messages.Message(message));
         m.redraw();
       });
-      socket.on('botMessage', function(time, mess) {
-        vm.list.push(new messages.Message({ type:'message-bot', time:time, mess:mess }));
-        m.redraw();
+      socket.on('remove_message', function(id) {
+        vm.list.del(id).then(vm.redrawAll);
       });
       socket.on('user_new', function(time, username) {
         vm.list.push(new messages.Message({
           type:'message-bot',
           time:time,
-          mess:username + " s'est connecté"
+          message:username + " s'est connecté"
         }));
         m.redraw();
       });
@@ -107,7 +121,7 @@ messages.vm = (function() {
         vm.list.push(new messages.Message({
           type:'message-bot',
           time:time,
-          mess:user.name + " s'est déconnecté"
+          message:user.name + " s'est déconnecté"
         }));
         m.redraw();
       });
@@ -115,7 +129,7 @@ messages.vm = (function() {
         vm.list.push(new messages.Message({
           type:'message-bot',
           time:time,
-          mess:username + " est AFK"
+          message:username + " est AFK"
         }));
         m.redraw();
       });
@@ -123,7 +137,7 @@ messages.vm = (function() {
         vm.list.push(new messages.Message({
           type:'message-bot',
           time:time,
-          mess:username + " n'est plus AFK"
+          message:username + " n'est plus AFK"
         }));
         m.redraw();
       });
@@ -132,21 +146,21 @@ messages.vm = (function() {
         vm.list.push(new messages.Message({
           type:'message-bot',
           time:time,
-          mess:"Poke de @" + username
+          message:"Poke de @" + username
         }));
         m.redraw();
       });
       socket.on('already_connected', function() {
         vm.list.push(new messages.Message({
           type:'message-error',
-          mess:'Vous êtes déjà connecté, connexion au chat impossible !'
+          message:'Vous êtes déjà connecté, connexion au chat impossible !'
         }));
         m.redraw();
       });
       socket.on('user_banned', function() {
         vm.list.push(new messages.Message({
           type:'message-error',
-          mess:'Impossible de se connecter au chat, vous avez été banni.'
+          message:'Impossible de se connecter au chat, vous avez été banni.'
         }));
         m.redraw();
       });
@@ -161,7 +175,7 @@ messages.vm = (function() {
       socket.on('disconnect', function() {
         vm.list.push(new messages.Message({
           type:'message-warning',
-          mess:'Vous êtes déconnecté du chat !'
+          message:'Vous êtes déconnecté du chat !'
         }));
         m.redraw();
       });
@@ -169,13 +183,13 @@ messages.vm = (function() {
         if(attempt == 1) {
           vm.list.push(new messages.Message({
             type:'message-warning',
-            mess:'Tentative de connexion au serveur en cours...'
+            message:'Tentative de connexion au serveur en cours...'
           }));
         } else if(attempt == 10) {
           vm.notification('Impossible de rétablir la connexion avec le serveur.');
           vm.list.push(new messages.Message({
             type:'message-error',
-            mess:'Impossible de rétablir la connexion avec le serveur, recharger la page ou réessayer ultérieurement..'
+            message:'Impossible de rétablir la connexion avec le serveur, recharger la page ou réessayer ultérieurement..'
           }));
         }
         m.redraw();
@@ -183,14 +197,14 @@ messages.vm = (function() {
       socket.on('reconnect', function() {
         vm.list.push(new messages.Message({
           type:'message-success',
-          mess:'Connexion au chat réussie !'
+          message:'Connexion au chat réussie !'
         }));
         m.redraw();
       });
       socket.on('error', function() {
         vm.list.push(new messages.Message({
           type:'message-error',
-          mess:'Une erreur est survenue lors de la connexion au serveur, recharger la page ou réessayer ultérieurement.'
+          message:'Une erreur est survenue lors de la connexion au serveur, recharger la page ou réessayer ultérieurement.'
         }));
         m.redraw();
       });

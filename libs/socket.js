@@ -89,6 +89,10 @@ socket.init = function(io) {
         if(message && message.length <= 1000)
           addMessage(io, session.user, marked(message, { renderer:renderer }));
       });
+      // Suppression d'un message
+      socket.on('remove_message', function(id) {
+        io.emit('remove_message', id);
+      });
       // Déconnexion de l'utilisateur
       socket.on('disconnect', function() {
         users.remove(session.user.name);
@@ -236,22 +240,27 @@ socket.init = function(io) {
 
 var addMessage = function(io, user, message) {
   var time = moment().tz('Europe/Paris').format(dateFormat);
-  messages.add(time, user.name, message);
-  io.emit('message', time, user, message);
+  var data = { time:time, user:user, message:message };
+  messages.add(time, user.name, message)
+  .then(function(id) {
+    data.id = id;
+    io.emit('message', data);
+  });
 };
 
 var addBotMessage = function(io, message, options) {
   var time = moment().tz('Europe/Paris').format(dateFormat);
+  var data = { type:'message-bot', time:time, message:message };
   if(!options) {
-    io.emit('botMessage', time, message);
+    io.emit('message', data);
     return;
   }
   if(options.storage)
     messages.add(time, null, message);
   if(options.socket)
-    io.to(options.socket).emit('botMessage', time, message);
+    io.to(options.socket).emit('message', data);
   else
-    io.emit('botMessage', time, message);
+    io.emit('message', data);
 };
 
 var banUser = function(io, socketid, username) {

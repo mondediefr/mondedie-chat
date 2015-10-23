@@ -92,18 +92,31 @@ router.get('/get/messages', function(req, res, next) {
   });
 });
 
-router.get('/logout', function(req, res, next) {
+router.delete('/delete/message', function(req, res, next) {
   session.settings(req, res, { shouldBeLogged:true }, function(settings) {
-    req.session.destroy(function() {
-      return res.redirect('/');
+    messages.get(req.body.id).then(function(message) {
+      if(message.deleted === 'true')
+        return Promise.reject('Message not found');
+      if(!req.session.user.isAdmin && message.user !== req.session.user.name)
+        return Promise.reject('Not authorized');
+      return message;
+    })
+    .then(function(message) {
+      messages.del(message);
+    })
+    .then(function() {
+      return res.json({ deleted:true });
+    })
+    .catch(function(e) {
+      return res.json({ error:e, deleted:false });
     });
   });
 });
 
-router.get('/del/message/:id', function(req, res, next) {
-  session.settings(req, res, { shouldBeAdmin:true }, function(settings) {
-    messages.delete(req.param.id).then(function() {
-      res.json({ deleted:true });
+router.get('/logout', function(req, res, next) {
+  session.settings(req, res, { shouldBeLogged:true }, function(settings) {
+    req.session.destroy(function() {
+      return res.redirect('/');
     });
   });
 });

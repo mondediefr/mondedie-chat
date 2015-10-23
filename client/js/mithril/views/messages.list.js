@@ -7,13 +7,16 @@ var messages = messages || {};
  */
 messages.view = function() {
   return m("ul#messages", { config:autoScroll }, [
-    messages.vm.list.messages().map(function(message, i) {
+    messages.vm.list.messages().map(function(message, index) {
       var user = message.user();
-      return m("li", { class:message.type() }, [
+      return m("li", { key:index, class:message.type() }, [
         m("span", { class:'date' }, ( message.time() ? '[' + message.time() + '] ' : '' )),
         m("span", { class:'username', style:{ color:user.groupColor }}, user.name + ': '),
         m("span", { class:'text' }, m.trust(message.mess())),
-        m("a.option[href='#']", m("i", { class:message.type() == 'message' ? 'fa fa-times' : '' }))
+        m("a.option[href='#']", m("i", {
+          onclick:messages.vm.del.bind(this, message.id()),
+          class:message.type() == 'message' ? 'fa fa-times' : ''
+        }))
       ])
     })
   ])
