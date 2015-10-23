@@ -14,6 +14,7 @@ $heigh-editor: 60px;
     min-height: rem($heigh-editor);
     height: rem($heigh-editor);
     border-radius: 0;
+    padding: 0;
     &, .CodeMirror-scroll {
       min-height: rem($heigh-editor);
     }
@@ -28,8 +29,8 @@ $heigh-editor: 60px;
     cursor: pointer;
 
     img {
-      margin-right: 5px;
-      width: 18px;
+      margin-right: rem(5px);
+      width: rem(18px);
       height: auto;
     }
   }

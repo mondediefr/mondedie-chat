@@ -8,6 +8,7 @@ public/css/*.css
 client/bower
 typings
 .vscode/
+.DS_Store
 
 *~
 *.log
