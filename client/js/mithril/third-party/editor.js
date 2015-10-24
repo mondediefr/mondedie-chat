@@ -7,10 +7,12 @@ $(function(){
   * Markdown editor
   */
   $("#text-editor").markdown({
-    autofocus:true,
-    savable:false,
-    iconlibrary:'fa',
-    height:125
+    autofocus: true,
+    savable: false,
+    iconlibrary: 'fa',
+    height: 110,
+    language: 'fr',
+    hiddenButtons: ['cmdPreview']
   });
 
   textarea.onkeydown = function(e) {

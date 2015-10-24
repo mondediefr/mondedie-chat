@@ -27,6 +27,7 @@ var jsFiles = [
   bowerPath + '/visibilityjs/lib/visibility.core.js',
   bowerPath + '/HTML5-Desktop-Notifications/desktop-notify-min.js',
   bowerPath + '/bootstrap-markdown/js/bootstrap-markdown.js',
+  bowerPath + '/bootstrap-markdown/locale/bootstrap-markdown.fr.js',
   bowerPath + '/mithril/mithril.min.js',
   // appJsFiles
   jsPath + '/app.js',

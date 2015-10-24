@@ -4,6 +4,24 @@
 
 #editor {
 
+  .active {
+    border: rem(1px) solid #ddd;
+    box-shadow: none;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  textarea {
+    padding: rem(7px);
+    font-size: rem(13px);
+
+    &:focus {
+      border: none;
+    }
+  }
+
   .smileys-container {
     display: inline-block;
     margin-top: rem(10px);

@@ -61,7 +61,7 @@
       }
     }
 
-    pre {
+    pre, blockquote {
       padding: rem(10px);
       margin: rem(10px) 0;
       font-size: rem(13px);
@@ -76,5 +76,6 @@
       padding: 0;
       white-space: pre-wrap;
     }
+
   }
 }
