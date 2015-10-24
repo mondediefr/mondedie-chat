@@ -20,7 +20,7 @@ var jshintFiles = [
   'models/*.js', 'client/js/**/*.js'
 ];
 
-var JsFiles = [
+var jsFiles = [
   // dependJsFiles
   bowerPath + '/jquery/dist/jquery.min.js',
   bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
@@ -35,6 +35,12 @@ var JsFiles = [
   jsPath + '/mithril/views-models/*.js',
   jsPath + '/mithril/controllers/*.js',
   jsPath + '/mithril/views/*.js'
+];
+
+var cssFiles = [
+    bowerPath + '/bootstrap/dist/css/bootstrap.min.css',
+    bowerPath + '/simplemde/dist/simplemde.min.css',
+    'client/scss/app.scss'
 ];
 
 // ########################### ERROR ###########################
@@ -54,8 +60,14 @@ gulp.task('bower', function() {
 });
 
 gulp.task('js', ['bower'], function() {
-  return gulp.src(JsFiles)
+  var unminified = filter(
+    ['**', '!**.min.js'],
+    { restore: true }
+  );
+  return gulp.src(jsFiles)
+    .pipe(unminified)
     .pipe(uglify())
+    .pipe(unminified.restore)
     .pipe(concat('app.min.js'))
     .pipe(size({title: "fichier app.min.js"}))
     .pipe(gulp.dest('public/js'));
@@ -69,20 +81,19 @@ gulp.task('mithril-map', ['bower'], function() {
 });
 
 gulp.task('sass', ['bower'], function() {
-  var file = [
-    bowerPath + '/bootstrap/dist/css/bootstrap.min.css',
-    bowerPath + '/simplemde/dist/simplemde.min.css',
-    'client/scss/app.scss'
-  ];
-  var sassFile = filter('app.scss', {restore: true});
-  return gulp.src(file)
+  var sassFile = filter(
+    ['**', '!**.min.css'],
+    { restore: true }
+  );
+  return gulp.src(cssFiles)
     .pipe(sassFile)
     .pipe(sass({outputStyle: 'expanded'})).on('error', handleError)
-    .pipe(sassFile.restore)
+
     .pipe(autoprefixer({
       browsers: ['> 1%'],
       cascade: true
     }))
+    .pipe(sassFile.restore)
     .pipe(minify({keepSpecialComments: 0}))
     .pipe(concat('app.min.css'))
     .pipe(size({title: "fichier app.min.css"}))
