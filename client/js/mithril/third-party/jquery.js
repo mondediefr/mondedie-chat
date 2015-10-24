@@ -3,7 +3,10 @@
 
 $(function() {
 
-  notify.config({ pageVisibility:true });
+  notify.config({
+    pageVisibility:true,
+    autoClose:10000
+  });
 
   if(notify.permissionLevel() === notify.PERMISSION_DEFAULT)
     notify.requestPermission();
