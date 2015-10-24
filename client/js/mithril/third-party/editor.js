@@ -15,12 +15,14 @@ $(function(){
 
   textarea.onkeydown = function(e) {
     e = e || event;
-    if(e.keyCode === 13 && !document.getElementById('disable-enter-action').checked) {
-      e.preventDefault();
-      if(textarea.value.length > 0)
-        messages.vm.send();
-      else
-        textarea.value = null;
+    if(e.keyCode === 13 && !e.shiftKey) {
+      if(!document.getElementById('disable-enter-action').checked) {
+        e.preventDefault();
+        if(textarea.value.length > 0)
+          messages.vm.send();
+        else
+          textarea.value = null;
+      }
     }
     return true;
   }
