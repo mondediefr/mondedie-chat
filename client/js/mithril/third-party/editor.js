@@ -20,7 +20,7 @@ $(function(){
         toggle: true, // this param only take effect if you load bootstrap.js
         title: 'smiley',
         icon: 'fa fa-smile-o', callback: function(e) {
-          alert('Do something...');
+          console.log('Do something...');
         }
       }]
     }]

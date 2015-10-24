@@ -15,17 +15,16 @@
 
   .btn-default {
     outline: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
   }
 
   textarea {
     padding: rem(7px);
     font-size: rem(13px);
     background-color: #fff;
-    border: rem(1px) dashed #ddd;
-
-    &:focus {
-      border: none;
-    }
+    border-top: rem(1px) dashed #ddd;
+    border-bottom: none;
   }
 
   .smileys-container {
