@@ -13,9 +13,15 @@
     display: none !important;
   }
 
+  .btn-default {
+    outline: 0;
+  }
+
   textarea {
     padding: rem(7px);
     font-size: rem(13px);
+    background-color: #fff;
+    border: rem(1px) dashed #ddd;
 
     &:focus {
       border: none;

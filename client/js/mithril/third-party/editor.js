@@ -12,7 +12,19 @@ $(function(){
     iconlibrary: 'fa',
     height: 110,
     language: 'fr',
-    hiddenButtons: ['cmdPreview']
+    hiddenButtons: ['cmdPreview'],
+    additionalButtons: [
+    [{
+      name: 'groupCustom', data: [{
+        name: 'cmdSmiley',
+        toggle: true, // this param only take effect if you load bootstrap.js
+        title: 'smiley',
+        icon: 'fa fa-smile-o', callback: function(e) {
+          alert('Do something...');
+        }
+      }]
+    }]
+  ]
   });
 
   textarea.onkeydown = function(e) {
