@@ -2,23 +2,7 @@
 // _editor.scss
 //
 
-$heigh-editor: 60px;
-
 #editor {
-
-  .editor-toolbar {
-    border-radius: 0;
-  }
-
-  .CodeMirror {
-    min-height: rem($heigh-editor);
-    height: rem($heigh-editor);
-    border-radius: 0;
-    padding: 0;
-    &, .CodeMirror-scroll {
-      min-height: rem($heigh-editor);
-    }
-  }
 
   .smileys-container {
     display: inline-block;

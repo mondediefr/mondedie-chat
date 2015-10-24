@@ -3,6 +3,12 @@ node_modules
 Procfile_dev
 public/js/*.js
 public/js/*.map
+public/fonts/*.otf
+public/fonts/*.eot
+public/fonts/*.svg
+public/fonts/*.ttf
+public/fonts/*.woff
+public/fonts/*.woff2
 public/css/*.css
 .vagrant/
 client/bower

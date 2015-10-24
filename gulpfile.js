@@ -26,7 +26,7 @@ var jsFiles = [
   bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
   bowerPath + '/visibilityjs/lib/visibility.core.js',
   bowerPath + '/HTML5-Desktop-Notifications/desktop-notify-min.js',
-  bowerPath + '/simplemde/dist/simplemde.min.js',
+  bowerPath + '/bootstrap-markdown/js/bootstrap-markdown.js',
   bowerPath + '/mithril/mithril.min.js',
   // appJsFiles
   jsPath + '/app.js',
@@ -39,7 +39,8 @@ var jsFiles = [
 
 var cssFiles = [
     bowerPath + '/bootstrap/dist/css/bootstrap.min.css',
-    bowerPath + '/simplemde/dist/simplemde.min.css',
+    bowerPath + '/bootstrap-markdown/css/bootstrap-markdown.min.css',
+    bowerPath + '/font-awesome/css/font-awesome.min.css',
     'client/scss/app.scss'
 ];
 
@@ -52,7 +53,7 @@ function handleError(err) {
 
 // ########################### TASKS ###########################
 
-gulp.task('default', ['sass', 'js', 'lint']);
+gulp.task('default', ['sass', 'js', 'lint', 'fonts']);
 gulp.task('heroku:production', ['default']);
 
 gulp.task('bower', function() {
@@ -80,6 +81,12 @@ gulp.task('mithril-map', ['bower'], function() {
   ]).pipe(gulp.dest('public/js'));
 });
 
+gulp.task('fonts', ['bower'], function() {
+  return gulp.src([
+    bowerPath + '/font-awesome/fonts/*',
+  ]).pipe(gulp.dest('public/fonts'));
+});
+
 gulp.task('sass', ['bower'], function() {
   var sassFile = filter(
     ['**', '!**.min.css'],
@@ -88,7 +95,6 @@ gulp.task('sass', ['bower'], function() {
   return gulp.src(cssFiles)
     .pipe(sassFile)
     .pipe(sass({outputStyle: 'expanded'})).on('error', handleError)
-
     .pipe(autoprefixer({
       browsers: ['> 1%'],
       cascade: true

@@ -1,4 +1,4 @@
-/* global m, socket, editor, location, alert, notify */
+/* global m, socket, location, alert, notify, textarea */
 'use strict';
 var messages = messages || {};
 
@@ -28,14 +28,14 @@ messages.vm = (function() {
     };
     // Send a message
     vm.send = function() {
-      var message = editor.value();
+      var message = textarea.value;
       if(!message)
         return;
       if(message.indexOf('/') === 0)
         vm.cmd(message.trim());
       else
         socket.emit('message', message);
-      editor.value('');
+      textarea.value = null;
     };
     // Remove a message
     vm.del = function(id) {

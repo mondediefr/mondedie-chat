@@ -1,7 +1,6 @@
 /* global document, io */
 'use strict';
 var socket = io();
-var editor = null;
 
 /**
  * Mithril namespaces
@@ -16,3 +15,8 @@ var smileys  = smileys  || {};
 var messagesViewElement = document.getElementById("content-messages");
 var usersViewElement    = document.getElementById("content-users");
 var smileysViewElement  = document.getElementById("content-smileys");
+
+/**
+ * DOM elements
+ */
+var textarea = document.getElementById('text-editor');

@@ -1,4 +1,4 @@
-/* global $, document, editor, socket, notify */
+/* global $, document, editor, socket, notify, textarea */
 'use strict';
 
 $(function() {
@@ -15,22 +15,22 @@ $(function() {
     $('#notification').remove();
 
   $('#afk').click(function(e) {
-    editor.value('/afk on|off');
+    textarea.value = '/afk on|off';
     e.preventDefault();
   });
 
   $('#pm').click(function(e) {
-    editor.value('/msg user message');
+    textarea.value = '/msg user message';
     e.preventDefault();
   });
 
   $('#poke').click(function(e) {
-    editor.value('/poke user');
+    textarea.value = '/poke user';
     e.preventDefault();
   });
 
   $('#roll').click(function(e) {
-    editor.value('/roll 1d6');
+    textarea.value = '/roll 1d6';
     e.preventDefault();
   });
 
@@ -41,7 +41,7 @@ $(function() {
   });
 
   $('#unlock').click(function(e) {
-    editor.value('/unlock user');
+    textarea.value = '/unlock user';
     e.preventDefault();
   });
 
@@ -71,6 +71,7 @@ $(function() {
 
   $(document).on('click', '.username', function() {
     var username = $(this).text();
-    editor.value('**@' + username + '** ');
+    textarea.value = textarea.value + ' ' + '**@' + username + '** ';
+    textarea.focus();
   });
 });

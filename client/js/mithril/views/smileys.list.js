@@ -1,4 +1,4 @@
-/* global m, smileysViewElement, editor */
+/* global m, smileysViewElement, textarea */
 'use strict';
 var smileys = smileys || {};
 
@@ -22,7 +22,8 @@ smileys.view = function(controller) {
  * DOM methods
  */
 function insertEmoji(pattern) {
-  editor.value(editor.value() + ' ' + pattern);
+  textarea.value = textarea.value + ' ' + pattern;
+  textarea.focus();
 }
 
 /**

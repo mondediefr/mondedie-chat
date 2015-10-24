@@ -11,6 +11,10 @@
     "visibilityjs": "~1.2.1",
     "HTML5-Desktop-Notifications": "html5-desktop-notifications#*",
     "bootstrap": "v4.0.0-alpha",
-    "simplemde": "~1.8.0"
+    "bootstrap-markdown": "~2.9.0",
+    "font-awesome": "Font-Awesome#~4.4.0"
+  },
+  "resolutions": {
+    "bootstrap": "v4.0.0-alpha"
   }
 }
