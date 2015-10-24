@@ -113,6 +113,12 @@ router.delete('/delete/message', function(req, res, next) {
   });
 });
 
+router.get('/user/informations', function(req, res, next) {
+  session.settings(req, res, { shouldBeLogged:true }, function(settings) {
+    return res.json(req.session.user);
+  });
+});
+
 router.get('/logout', function(req, res, next) {
   session.settings(req, res, { shouldBeLogged:true }, function(settings) {
     req.session.destroy(function() {

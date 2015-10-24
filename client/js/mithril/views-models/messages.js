@@ -20,12 +20,6 @@ messages.vm = (function() {
         vm.list.push(new messages.Message(message));
       });
     };
-    // Redraw all message list
-    vm.redrawAll = function() {
-      m.redraw.strategy('all');
-      m.redraw();
-      m.redraw.strategy('diff');
-    };
     // Send a message
     vm.send = function() {
       var message = textarea.value;
@@ -107,7 +101,13 @@ messages.vm = (function() {
         m.redraw();
       });
       socket.on('remove_message', function(id) {
-        vm.list.del(id).then(vm.redrawAll);
+        vm.list.del(id)
+        .then(function() {
+          m.redraw.strategy('all');
+        }).then(m.redraw)
+        .then(function() {
+          m.redraw.strategy('diff');
+        });
       });
       socket.on('user_new', function(time, username) {
         vm.list.push(new messages.Message({
