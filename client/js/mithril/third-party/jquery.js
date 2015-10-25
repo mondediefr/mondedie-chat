@@ -16,21 +16,25 @@ $(function() {
 
   $('#afk').click(function(e) {
     textarea.value = '/afk on|off';
+    textarea.focus();
     e.preventDefault();
   });
 
   $('#pm').click(function(e) {
     textarea.value = '/msg user message';
+    textarea.focus();
     e.preventDefault();
   });
 
   $('#poke').click(function(e) {
     textarea.value = '/poke user';
+    textarea.focus();
     e.preventDefault();
   });
 
   $('#roll').click(function(e) {
     textarea.value = '/roll 1d6';
+    textarea.focus();
     e.preventDefault();
   });
 
@@ -42,6 +46,7 @@ $(function() {
 
   $('#unlock').click(function(e) {
     textarea.value = '/unlock user';
+    textarea.focus();
     e.preventDefault();
   });
 

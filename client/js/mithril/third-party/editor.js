@@ -43,12 +43,14 @@ $(function(){
           textarea.value = '';
       }
     }
-    if(e.keyCode !== 13) {
-      if(!isTyping) {
-        isTyping = true;
-        socket.emit('typing', isTyping);
-      } else clearTimeout(typingTimeout);
-      typingTimeout = setTimeout(timeoutHandler, 5000);
+    if(textarea.value.length > 1) {
+      if(e.keyCode !== 13 && textarea.value.charAt(0) !== '/') {
+        if(!isTyping) {
+          isTyping = true;
+          socket.emit('typing', isTyping);
+        } else clearTimeout(typingTimeout);
+        typingTimeout = setTimeout(timeoutHandler, 5000);
+      }
     }
     return true;
   }
