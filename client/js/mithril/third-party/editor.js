@@ -40,7 +40,7 @@ $(function(){
         if(textarea.value.length > 0)
           messages.vm.send();
         else
-          textarea.value = null;
+          textarea.value = '';
       }
     }
     if(e.keyCode !== 13) {

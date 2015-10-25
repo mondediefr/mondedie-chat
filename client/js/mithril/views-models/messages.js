@@ -29,7 +29,7 @@ messages.vm = (function() {
         vm.cmd(message.trim());
       else
         socket.emit('message', message);
-      textarea.value = null;
+      textarea.value = '';
     };
     // Remove a message
     vm.del = function(id) {
