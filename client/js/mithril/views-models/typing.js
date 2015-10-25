@@ -14,8 +14,11 @@ typing.vm = (function() {
         if(data.isTyping)
           vm.list.push(new typing.User({ name:data.user }));
         else
-          vm.list.del(data.user)
+          vm.list.del(data.user);
         m.redraw();
+      });
+      socket.on('user_disconnected', function(time, user) {
+        vm.list.del(user.name).then(m.redraw);
       });
     }());
   };
