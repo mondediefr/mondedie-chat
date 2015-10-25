@@ -4,9 +4,13 @@
 
 #editor {
 
-  .active {
-    border: rem(1px) solid #ddd;
+  .md-editor, .active {
     box-shadow: none;
+    border: {
+      style: dashed;
+      color: #ddd;
+      width: rem(1px) 0 rem(1px) 0;
+    }
   }
 
   .hidden {
@@ -23,16 +27,17 @@
     padding: rem(7px);
     font-size: rem(13px);
     background-color: #fff;
-    border-top: rem(1px) dashed #ddd;
-    border-bottom: none;
+
+    border: {
+      style: dashed;
+      width: rem(1px) 0 0 0;
+      color: #ddd;
+    }
   }
 
   .smileys-container {
     display: inline-block;
-    margin-top: rem(5px);
     padding: rem(5px);
-    border: rem(1px) solid #ccc;
-    border-radius: rem(4px);
     cursor: pointer;
 
     img {
@@ -43,6 +48,18 @@
   }
 
   #content-typing {
-    margin: rem(5px) 0 0 rem(5px);
+    height: rem(17px);
+    border: {
+      style: dashed;
+      color: #ddd;
+      width: 0 0 rem(1px) 0;
+    }
+
+    p {
+      padding: 0 rem(4px) 0 rem(4px);
+      margin: 0;
+      font-size: rem(11px);
+      color: #919191;
+    }
   }
 }
