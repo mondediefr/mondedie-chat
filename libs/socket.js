@@ -181,6 +181,7 @@ socket.init = function(io) {
         }
         users.getUserSocket(username)
         .then(function(userSocket) {
+          time = moment().tz('Europe/Paris').format(dateFormat);
           addBotMessage(io, 'Vous avez poke @' + username, { socket:socket.id });
           io.to(userSocket).emit('user_highlight', time, session.user.name);
         })
