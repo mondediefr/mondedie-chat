@@ -15,7 +15,8 @@ typing.User = function(data) {
 typing.UsersList = function() {
   this.list = [];
   this.push = function(user) {
-    this.list.push(user);
+    if(this.list.indexOf(user) == -1)
+      this.list.push(user);
   };
   this.del = function(username) {
     var deferred = m.deferred();
