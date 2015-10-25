@@ -20,7 +20,7 @@ messages.Message = function(data) {
 messages.MessagesList = function() {
   this.list = [];
   this.push = function(message) {
-    if(Visibility.state() === 'hidden' && message.type != 'message-bot')
+    if(Visibility.state() === 'hidden' && message.type() != 'message-bot')
       document.title = 'Nouveau(x) message(s) !';
     this.list.push(message);
   };
