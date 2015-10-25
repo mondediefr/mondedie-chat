@@ -47,10 +47,8 @@ $(function(){
       if(!isTyping) {
         isTyping = true;
         socket.emit('typing', isTyping);
-      } else {
-        clearTimeout(typingTimeout);
-        typingTimeout = setTimeout(timeoutHandler, 5000);
-      }
+      } else clearTimeout(typingTimeout);
+      typingTimeout = setTimeout(timeoutHandler, 5000);
     }
     return true;
   }
