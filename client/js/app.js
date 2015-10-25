@@ -15,6 +15,7 @@ var smileys  = smileys  || {};
 var messagesViewElement = document.getElementById("content-messages");
 var usersViewElement    = document.getElementById("content-users");
 var smileysViewElement  = document.getElementById("content-smileys");
+var typingViewElement   = document.getElementById("content-typing");
 
 /**
  * DOM elements

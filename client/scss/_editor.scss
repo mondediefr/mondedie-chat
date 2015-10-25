@@ -29,7 +29,7 @@
 
   .smileys-container {
     display: inline-block;
-    margin-top: rem(10px);
+    margin-top: rem(5px);
     padding: rem(5px);
     border: rem(1px) solid #ccc;
     border-radius: rem(4px);
@@ -40,5 +40,9 @@
       width: rem(18px);
       height: auto;
     }
+  }
+
+  #content-typing {
+    margin: rem(5px) 0 0 rem(5px);
   }
 }

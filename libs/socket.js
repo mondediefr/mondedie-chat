@@ -89,6 +89,13 @@ socket.init = function(io) {
         if(message && message.length <= 1000)
           addMessage(io, session.user, marked(message, { renderer:renderer }));
       });
+      // Frappe au clavier
+      socket.on('typing', function(isTyping) {
+        socket.broadcast.emit('isTyping', {
+          isTyping:isTyping,
+          user:session.user.name
+        });
+      });
       // Suppression d'un message
       socket.on('remove_message', function(id) {
         io.emit('remove_message', id);

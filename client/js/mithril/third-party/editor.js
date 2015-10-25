@@ -1,4 +1,4 @@
-/* global $, document, messages, event, textarea */
+/* global $, document, messages, event, textarea, socket */
 'use strict';
 
 $(function(){
@@ -27,18 +27,36 @@ $(function(){
   ]
   });
 
+  var typingTimeout;
+  var isTyping = false;
+
   textarea.onkeydown = function(e) {
     e = e || event;
     if(e.keyCode === 13 && !e.shiftKey) {
       if(!document.getElementById('disable-enter-action').checked) {
         e.preventDefault();
+        clearTimeout(typingTimeout);
+        typingTimeout = setTimeout(timeoutHandler, 0);
         if(textarea.value.length > 0)
           messages.vm.send();
         else
           textarea.value = null;
       }
     }
+    if(e.keyCode !== 13) {
+      if(!isTyping) {
+        isTyping = true;
+        socket.emit('typing', isTyping);
+      } else {
+        clearTimeout(typingTimeout);
+        typingTimeout = setTimeout(timeoutHandler, 5000);
+      }
+    }
     return true;
   }
 
+  function timeoutHandler() {
+    isTyping = false;
+    socket.emit('typing', isTyping);
+  }
 });
