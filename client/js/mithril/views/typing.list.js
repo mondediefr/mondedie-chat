@@ -9,8 +9,8 @@ typing.view = function() {
   var userList = typing.vm.list.users();
   var length = userList.length;
   return m("p", [
-    userList.map(function(user, index) {
-      return [ m("strong", user.name()), conjunction(index, length) ];
+    userList.map(function(username, index) {
+      return [ m("strong", username), conjunction(index, length) ];
     }),
     m("span", sentence(length))
   ])
