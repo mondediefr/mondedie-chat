@@ -50,9 +50,12 @@
 
 #content-smileys {
   display: none;
-  overflow: scroll;
-  background-color: #fff;
-  border: rem(1px) solid #000;
+  overflow: auto;
+  background-color: #f7f7f7;
+  box-shadow: 0 rem(5px) rem(10px) #1a1a1a;
+  border-radius: rem(6px);
+  border: rem(1px) solid #191919;
+  padding: rem(10px);
 
   .smileys-container img {
     cursor: pointer;

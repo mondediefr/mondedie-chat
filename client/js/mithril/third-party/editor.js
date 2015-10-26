@@ -23,7 +23,7 @@ $(function(){
           var smiley = $('#content-smileys');
           var button = $('span.fa.fa-smile-o').parent();
           var location = button.offset();
-          var heightSmiley = 200, widthSmiley = 180;
+          var heightSmiley = 135, widthSmiley = 310;
           smiley.css({
             'position': 'absolute',
             'top': location.top - heightSmiley,
