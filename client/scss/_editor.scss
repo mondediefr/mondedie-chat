@@ -52,9 +52,9 @@
   display: none;
   overflow: auto;
   background-color: #f7f7f7;
-  box-shadow: 0 rem(5px) rem(10px) #1a1a1a;
+  box-shadow: 0 rem(5px) rem(10px) rgba(0,0,0,.12);
   border-radius: rem(6px);
-  border: rem(1px) solid #191919;
+  border: rem(1px) solid rgba(0,0,0,.15);
   padding: rem(10px);
 
   .smileys-container img {
