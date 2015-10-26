@@ -6,7 +6,7 @@ $(function(){
   /**
   * Markdown editor
   */
-  $("#text-editor").markdown({
+  $('#text-editor').markdown({
     autofocus: true,
     savable: false,
     iconlibrary: 'fa',
@@ -17,17 +17,29 @@ $(function(){
     [{
       name: 'groupCustom', data: [{
         name: 'cmdSmiley',
-        toggle: true, // this param only take effect if you load bootstrap.js
+        toggle: true,
         title: 'smiley',
         icon: 'fa fa-smile-o', callback: function(e) {
           var smiley = $('#content-smileys');
-          var button = $('.fa-smile-o');
-          var location = button.offset()
-          smiley.toggle();
+          var button = $('span.fa.fa-smile-o').parent();
+          var location = button.offset();
+          var heightSmiley = 200, widthSmiley = 180;
           smiley.css({
-            'position' : 'absolute',
-            'top': location.top - 210,
-            'left': location.left + 14
+            'position': 'absolute',
+            'top': location.top - heightSmiley,
+            'left': location.left,
+            'width': widthSmiley,
+            'height': heightSmiley
+          });
+          // toggle popup + closing after click
+          smiley.toggleClass('opened');
+          $(document).click(function(e) {
+            if (!$(e.target).parents().andSelf().is(button)) {
+              smiley.removeClass('opened');
+            }
+          });
+          smiley.click(function(e) {
+            e.stopPropagation();
           });
         }
       }]

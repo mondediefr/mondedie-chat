@@ -51,8 +51,6 @@
 #content-smileys {
   display: none;
   overflow: scroll;
-  width: rem(150px);
-  height: rem(200px);
   background-color: #fff;
   border: rem(1px) solid #000;
 
@@ -60,5 +58,9 @@
     cursor: pointer;
     width: $size-smiley;
     margin: rem(4px);
+  }
+
+  &.opened {
+    display: block;
   }
 }
