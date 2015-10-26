@@ -20,7 +20,15 @@ $(function(){
         toggle: true, // this param only take effect if you load bootstrap.js
         title: 'smiley',
         icon: 'fa fa-smile-o', callback: function(e) {
-          console.log('Do something...');
+          var smiley = $('#content-smileys');
+          var button = $('.fa-smile-o');
+          var location = button.offset()
+          smiley.toggle();
+          smiley.css({
+            'position' : 'absolute',
+            'top': location.top - 210,
+            'left': location.left + 14
+          });
         }
       }]
     }]

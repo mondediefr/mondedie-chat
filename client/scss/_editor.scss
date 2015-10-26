@@ -13,10 +13,6 @@
     }
   }
 
-  .hidden {
-    display: none !important;
-  }
-
   .btn-default {
     outline: 0;
     background-color: #fff;
@@ -35,18 +31,6 @@
     }
   }
 
-  .smileys-container {
-    display: inline-block;
-    padding: rem(5px);
-    cursor: pointer;
-
-    img {
-      margin-right: rem(5px);
-      width: rem(18px);
-      height: auto;
-    }
-  }
-
   #content-typing {
     height: rem(17px);
     border: {
@@ -61,5 +45,20 @@
       font-size: rem(11px);
       color: #919191;
     }
+  }
+}
+
+#content-smileys {
+  display: none;
+  overflow: scroll;
+  width: rem(150px);
+  height: rem(200px);
+  background-color: #fff;
+  border: rem(1px) solid #000;
+
+  .smileys-container img {
+    cursor: pointer;
+    width: $size-smiley;
+    margin: rem(4px);
   }
 }

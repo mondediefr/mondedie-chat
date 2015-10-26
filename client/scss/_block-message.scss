@@ -56,7 +56,7 @@
       height: auto;
 
       &.emojione {
-        width: rem(18px);
+        width: $size-smiley;
         display: inline;
       }
     }

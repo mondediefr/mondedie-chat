@@ -8,10 +8,11 @@ $global-font-size: 16px; // note le pixel de base est de 16px avec bootstrap 4
 // ############# chatroom ##############
 // Remettre à 150px le height-footer après l'intégration
 // des smileys dans la barre d'outils
-$height-footer: rem(181px);
+$height-footer: rem(131px);
 $height-header: rem(50px);
 $border: rem(1px) solid #ddd;
 $padding-block: rem(10px);
+$size-smiley: rem(20px);
 
 // ## couleur block background ##
 $color1: #f5f5f5;

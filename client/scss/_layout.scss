@@ -11,6 +11,14 @@ body {
   padding: $padding-block;
 }
 
+.hidden {
+  display: none !important;
+}
+
+.none-padding {
+  padding: 0;
+}
+
 input[type="checkbox"] {
   margin-right: rem(5px);
 }
