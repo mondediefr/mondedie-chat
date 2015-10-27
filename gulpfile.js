@@ -39,10 +39,9 @@ var jsFiles = [
 ];
 
 var cssFiles = [
-    bowerPath + '/bootstrap/dist/css/bootstrap.min.css',
+    'client/scss/app.scss',
     bowerPath + '/bootstrap-markdown/css/bootstrap-markdown.min.css',
     bowerPath + '/font-awesome/css/font-awesome.min.css',
-    'client/scss/app.scss'
 ];
 
 // ########################### ERROR ###########################
@@ -95,9 +94,24 @@ gulp.task('sass', ['bower'], function() {
   );
   return gulp.src(cssFiles)
     .pipe(sassFile)
-    .pipe(sass({outputStyle: 'expanded'})).on('error', handleError)
+    .pipe(sass({
+      includePaths: [
+        'client/bower/bootstrap/scss',
+        'client/scss'
+      ],
+      outputStyle: 'expanded'
+    })).on('error', handleError)
     .pipe(autoprefixer({
-      browsers: ['> 1%'],
+      browsers: [
+        'Android 2.3',
+        'Android >= 4',
+        'Chrome >= 35',
+        'Firefox >= 31',
+        'Explorer >= 9',
+        'iOS >= 7',
+        'Opera >= 12',
+        'Safari >= 7.1'
+      ],
       cascade: true
     }))
     .pipe(sassFile.restore)

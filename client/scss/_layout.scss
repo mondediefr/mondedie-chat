@@ -22,3 +22,21 @@ body {
 input[type="checkbox"] {
   margin-right: rem(5px);
 }
+
+//
+// règles responsives
+//
+
+// breakpoint up
+@include media-breakpoint-up(xs) {/* ... */}
+@include media-breakpoint-up(sm) {/* ... */}
+@include media-breakpoint-up(md) {/* ... */}
+@include media-breakpoint-up(lg) {/* ... */}
+@include media-breakpoint-up(xl) {/* ... */}
+
+// breakpoint down
+@include media-breakpoint-down(xs) {/* ... */}
+@include media-breakpoint-down(sm) {/* ... */}
+@include media-breakpoint-down(md) {/* ... */}
+@include media-breakpoint-down(lg) {/* ... */}
+@include media-breakpoint-down(xl) {/* ... */}

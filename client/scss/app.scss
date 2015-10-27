@@ -1,18 +1,18 @@
-/*!
- * scss nodechat-flarum
- * author : hardware, magicalex, hydrog3n
- */
-
 // ############# import ##################
+
+// bootstrap
+@import "bootstrap";
+
 // core variables, functions and mixins
-@import "client/scss/functions";
-@import "client/scss/variables";
+@import "functions";
+@import "variables";
 
 // core css
-@import "client/scss/layout";
-@import "client/scss/chatroom";
-@import "client/scss/login";
-@import "client/scss/menu-right";
-@import "client/scss/menu-left";
-@import "client/scss/block-message";
-@import "client/scss/editor";
+@import "banner";
+@import "layout";
+@import "chatroom";
+@import "login";
+@import "menu-right";
+@import "menu-left";
+@import "block-message";
+@import "editor";
