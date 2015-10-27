@@ -13,7 +13,7 @@ flarum.login = function(data) {
   }).get(1).then(JSON.parse).then(function(authData) {
     return authData.token ? authData : Promise.reject();
   }).catch(function() {
-    return Promise.reject('Indentifiant ou mot de passe incorrect.');
+    return Promise.reject('Identifiant ou mot de passe incorrect.');
   });
 };
 

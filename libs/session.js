@@ -20,7 +20,11 @@ session.settings = function(req, res, options, callback) {
   };
 
   if(isLogged) {
-    var isAdmin = (req.session.user.groupName === 'Admins') ? true : false;
+    var isAdmin;
+    if(req.session.user.groupName === 'Administrateurs' || req.session.user.groupName === 'Modérateurs')
+      isAdmin = true;
+    else
+      isAdmin = false;
     req.session.user.isAdmin = isAdmin;
     settings.user = req.session.user;
     if(!! options.shouldBeAdmin && ! isAdmin)

@@ -3,7 +3,8 @@ var express  = require('express');
 var Promise  = require('bluebird');
 
 var session  = require('../libs/session');
-var flarum   = require('../libs/flarum');
+// var flarum   = require('../libs/flarum');
+var fluxbb   = require('../libs/fluxbb');
 var redis    = require('../libs/redis')();
 
 var Messages = require('../models/messages');
@@ -31,6 +32,20 @@ router.post('/login', function(req, res, next) {
       return res.render('login', settings);
     }
 
+    /* AUTH FLUXBB TEMPORAIRE */
+    return fluxbb.login(req.body)
+    .then(function(userInfos) {
+      req.session.user = {
+        id:userInfos.data.id,
+        name:userInfos.data.attributes.username,
+        groupName:(userInfos.included) ? userInfos.included.attributes.namePlural : null,
+        groupColor:(userInfos.included) ? userInfos.included.attributes.color : "#333",
+        avatar:(userInfos.data.attributes.avatarUrl) ? userInfos.data.attributes.avatarUrl : process.env.APP_URL + 'images/avatar.png',
+        status:'online'
+      }
+    })
+    /*
+    AUTH FLARUM
     return flarum.login(req.body)
     .then(function(user) {
       return flarum.user(user)
@@ -45,22 +60,17 @@ router.post('/login', function(req, res, next) {
         status:'online'
       }
     })
+    */
     .then(function() {
       return users.exist(req.session.user.name)
       .then(function(exist) {
-        if(exist)
-          return Promise.reject('Vous êtes déjà connecté au chat.');
-        else
-          return Promise.resolve();
+        return exist ? Promise.reject('Vous êtes déjà connecté au chat.') : Promise.resolve();
       });
     })
     .then(function() {
       return users.banned(req.session.user.name)
       .then(function(isBanned) {
-        if(isBanned)
-          return Promise.reject('Impossible de se connecter au chat, vous avez été banni.');
-        else
-          return Promise.resolve();
+        return isBanned ? Promise.reject('Impossible de se connecter au chat, vous avez été banni.') : Promise.resolve();
       });
     })
     .then(function() {
