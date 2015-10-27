@@ -86,7 +86,7 @@ socket.init = function(io) {
       });
       // Réception d'un message
       socket.on('message', function(message) {
-        if(message && message.length <= 1000)
+        if(message.trim() && message.length <= 1000)
           addMessage(io, session.user, marked(message, { renderer:renderer }));
       });
       // Frappe au clavier
@@ -161,7 +161,7 @@ socket.init = function(io) {
         users.getUserSocket(username)
         .then(function(userSocket) {
           time = moment().tz('Europe/Paris').format(dateFormat);
-          if(message && message.length <= 1000) {
+          if(message.trim() && message.length <= 1000) {
             var marksrc  = marked('*(chuchotte à **' + username + '**)* ' + message, { renderer:renderer });
             var markdest = marked('*(murmure)* ' + message, { renderer:renderer });
             io.to(socket.id).emit('message', { time:time, user:session.user, message:marksrc });
