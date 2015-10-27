@@ -114,7 +114,7 @@ gulp.task('sass', ['bower'], function() {
         'Safari >= 7.1'
       ]
     }))
-    .pipe(csscomb('client/bower/bootstrap/scss/.csscomb.json'))
+    .pipe(csscomb())
     .pipe(sassFile.restore)
     .pipe(minify({keepSpecialComments: 0}))
     .pipe(concat('app.min.css'))
