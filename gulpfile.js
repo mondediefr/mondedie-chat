@@ -1,13 +1,14 @@
-var gulp   = require('gulp');
+var gulp = require('gulp');
 var minify = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
-var size   = require('gulp-size');
+var size = require('gulp-size');
 var concat = require('gulp-concat');
-var bower  = require('gulp-bower');
+var bower = require('gulp-bower');
 var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 var filter = require('gulp-filter');
 var autoprefixer = require('gulp-autoprefixer');
+var csscomb = require('gulp-csscomb');
 var runSequence = require('run-sequence');
 
 // ########################### PATHS ###########################
@@ -41,7 +42,7 @@ var jsFiles = [
 var cssFiles = [
     'client/scss/app.scss',
     bowerPath + '/bootstrap-markdown/css/bootstrap-markdown.min.css',
-    bowerPath + '/font-awesome/css/font-awesome.min.css',
+    bowerPath + '/font-awesome/css/font-awesome.min.css'
 ];
 
 // ########################### ERROR ###########################
@@ -111,9 +112,9 @@ gulp.task('sass', ['bower'], function() {
         'iOS >= 7',
         'Opera >= 12',
         'Safari >= 7.1'
-      ],
-      cascade: true
+      ]
     }))
+    .pipe(csscomb('client/bower/bootstrap/scss/.csscomb.json'))
     .pipe(sassFile.restore)
     .pipe(minify({keepSpecialComments: 0}))
     .pipe(concat('app.min.css'))

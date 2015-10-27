@@ -21,3 +21,4 @@ typings
 *.env
 *.migrate
 Berksfile.lock
+.csscomb.json
