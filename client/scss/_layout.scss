@@ -1,6 +1,6 @@
-//
-// _layout.scss
-//
+// ################
+// # _layout.scss #
+// ################
 
 body {
   font-size: rem(13px);
@@ -23,20 +23,30 @@ input[type="checkbox"] {
   margin-right: rem(5px);
 }
 
-//
-// règles responsives
-//
+// ######################
+// # règles responsives #
+// ######################
+
+// il faut définir les breakpoints
+// voir la doc : http://v4-alpha.getbootstrap.com/layout/overview/
+// voir les variables de bootstrap : https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss#L89-L100
+// elles sont en px donc c'est très curieux
 
 // breakpoint up
-@include media-breakpoint-up(xs) {/* ... */}
-@include media-breakpoint-up(sm) {/* ... */}
-@include media-breakpoint-up(md) {/* ... */}
-@include media-breakpoint-up(lg) {/* ... */}
-@include media-breakpoint-up(xl) {/* ... */}
+
+//@include media-breakpoint-up(xs) {
+//  .class--bidon {
+//    font-size: 1rem;
+//  }
+//}
+//@include media-breakpoint-up(sm) {}
+//@include media-breakpoint-up(md) {}
+//@include media-breakpoint-up(lg) {}
+//@include media-breakpoint-up(xl) {}
 
 // breakpoint down
-@include media-breakpoint-down(xs) {/* ... */}
-@include media-breakpoint-down(sm) {/* ... */}
-@include media-breakpoint-down(md) {/* ... */}
-@include media-breakpoint-down(lg) {/* ... */}
-@include media-breakpoint-down(xl) {/* ... */}
+//@include media-breakpoint-down(xs) {}
+//@include media-breakpoint-down(sm) {}
+//@include media-breakpoint-down(md) {}
+//@include media-breakpoint-down(lg) {}
+//@include media-breakpoint-down(xl) {}
