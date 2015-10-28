@@ -29,6 +29,7 @@ var jsFiles = [
   bowerPath + '/HTML5-Desktop-Notifications/desktop-notify-min.js',
   bowerPath + '/bootstrap-markdown/js/bootstrap-markdown.js',
   bowerPath + '/bootstrap-markdown/locale/bootstrap-markdown.fr.js',
+  bowerPath + '/jquery-textcomplete/dist/jquery.textcomplete.min.js',
   bowerPath + '/mithril/mithril.min.js',
   // appJsFiles
   jsPath + '/app.js',
@@ -42,6 +43,7 @@ var jsFiles = [
 var cssFiles = [
     'client/scss/app.scss',
     bowerPath + '/bootstrap-markdown/css/bootstrap-markdown.min.css',
+    bowerPath + '/jquery-textcomplete/dist/jquery.textcomplete.css',
     bowerPath + '/font-awesome/css/font-awesome.min.css'
 ];
 
@@ -54,7 +56,7 @@ function handleError(err) {
 
 // ########################### TASKS ###########################
 
-gulp.task('default', ['sass', 'js', 'lint', 'fonts']);
+gulp.task('default', ['sass', 'js', 'lint', 'fonts', 'emojione-strategy']);
 gulp.task('heroku:production', ['default']);
 
 gulp.task('bower', function() {
@@ -86,6 +88,12 @@ gulp.task('fonts', ['bower'], function() {
   return gulp.src([
     bowerPath + '/font-awesome/fonts/*',
   ]).pipe(gulp.dest('public/fonts'));
+});
+
+gulp.task('emojione-strategy', ['bower'], function() {
+  return gulp.src([
+    'node_modules/emojione/emoji_strategy.json',
+  ]).pipe(gulp.dest('public/json'));
 });
 
 gulp.task('sass', ['bower'], function() {

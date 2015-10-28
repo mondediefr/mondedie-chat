@@ -12,7 +12,8 @@
     "HTML5-Desktop-Notifications": "html5-desktop-notifications#*",
     "bootstrap": "v4.0.0-alpha",
     "bootstrap-markdown": "~2.9.0",
-    "font-awesome": "Font-Awesome#~4.4.0"
+    "font-awesome": "Font-Awesome#~4.4.0",
+    "jquery-textcomplete": "~0.8.1"
   },
   "resolutions": {
     "bootstrap": "v4.0.0-alpha"

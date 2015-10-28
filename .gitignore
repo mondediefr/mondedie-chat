@@ -10,6 +10,7 @@ public/fonts/*.ttf
 public/fonts/*.woff
 public/fonts/*.woff2
 public/css/*.css
+public/json
 .vagrant/
 client/bower
 typings
