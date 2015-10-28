@@ -6,7 +6,7 @@ $(function() {
   $.get('../json/emoji_strategy.json', function(emojiStrategy) {
     $("#text-editor").textcomplete([{
       // Auto-complétion des smileys
-      match: /\B:([\-+\w]*)$/,
+      match: /\B:([\-+\w]{2,})$/,
       search: function(term, callback) {
         var x = []; var y = []; var z = [];
         $.each(emojiStrategy,function(shortname, data) {
@@ -42,15 +42,16 @@ $(function() {
       match: /\B@(\w*)$/,
       search: function(term, callback) {
         var mentions = $.map(this.users, function(user) {
-          return user.name().toLowerCase();
+          return user.name();
         });
         callback($.map(mentions, function(mention) {
-          return mention.indexOf(term) === 0 ? mention : null;
+          var temp = mention.toLowerCase();
+          return temp.indexOf(term.toLowerCase()) === 0 ? mention : null;
         }));
       },
       template: function(username) {
         var user = $.grep(this.users, function(user) {
-          return user.name().toLowerCase() === username;
+          return user.name() === username;
         });
         return '<img class="emojione" src="' + user[0].avatar() + '"></img>' + username;
       },
