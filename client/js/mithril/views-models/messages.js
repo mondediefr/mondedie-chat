@@ -151,17 +151,21 @@ messages.vm = (function() {
         m.redraw();
       });
       socket.on('already_connected', function() {
+        var message = 'Vous êtes déjà connecté, connexion au chat impossible !';
         vm.list.push(new messages.Message({
           type:'message-error',
-          message:'Vous êtes déjà connecté, connexion au chat impossible !'
+          message:message
         }));
+        alert(message);
         m.redraw();
       });
       socket.on('user_banned', function() {
+        var message = 'Impossible de se connecter au chat, vous avez été banni.'
         vm.list.push(new messages.Message({
           type:'message-error',
-          message:'Impossible de se connecter au chat, vous avez été banni.'
+          message:message
         }));
+        alert(message);
         m.redraw();
       });
       socket.on('ban', function() {
