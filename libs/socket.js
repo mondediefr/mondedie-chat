@@ -237,10 +237,14 @@ socket.init = function(io) {
       });
     })
     .catch(AlreadyConnectedError, function() {
-      io.to(socket.id).emit('already_connected');
+      Promise.delay(500).then(function() {
+        io.to(socket.id).emit('already_connected');
+      });
     })
     .catch(UserBannedError, function() {
-      io.to(socket.id).emit('user_banned');
+      Promise.delay(500).then(function() {
+        io.to(socket.id).emit('user_banned');
+      });
     });
   });
   // Envoi du premier Heartbeat

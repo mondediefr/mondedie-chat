@@ -151,7 +151,7 @@ messages.vm = (function() {
         m.redraw();
       });
       socket.on('already_connected', function() {
-        var message = 'Vous êtes déjà connecté, connexion au chat impossible !';
+        var message = "Vous êtes déjà connecté au chat. Si ce n'est pas le cas, veuillez patientez quelques instants.";
         vm.list.push(new messages.Message({
           type:'message-error',
           message:message
