@@ -212,7 +212,6 @@ socket.init = function(io) {
         addBotMessage(io, message, { storage:true });
       });
       socket.on('rolluser', function(username) {
-        console.log('->' + username + '<-');
         return Promise.try(function() {
           addBotMessage(io, "Quelqu'un a tenté un roll " + username + "...", { storage:true });
           var message;
