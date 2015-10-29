@@ -60,7 +60,7 @@ messages.vm = (function() {
           socket.emit('rolluser', message.substring(7));
         else
           socket.emit('roll', message.substring(6));
-      } else if(message.substring(0, 4) == '/msg') {
+      } else if(message.substring(0, 6) == '/msg @') {
         var arr = message.split(' ');
         var res = arr.splice(0, 2);
         res.push(arr.join(' '));
@@ -155,7 +155,7 @@ messages.vm = (function() {
         m.redraw();
       });
       socket.on('already_connected', function() {
-        var message = "Vous êtes déjà connecté au chat. Si ce n'est pas le cas, veuillez patientez quelques instants.";
+        var message = "Vous êtes déjà connecté au chat. Si ce n'est pas le cas, veuillez patienter quelques instants.";
         vm.list.push(new messages.Message({
           type:'message-error',
           message:message
