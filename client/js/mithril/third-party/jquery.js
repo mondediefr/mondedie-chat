@@ -38,6 +38,12 @@ $(function() {
     e.preventDefault();
   });
 
+  $('#rolluser').click(function(e) {
+    textarea.value = '/roll @';
+    textarea.focus();
+    e.preventDefault();
+  });
+
   $('#notification').click(function(e) {
     notify.requestPermission();
     $('#notification').remove();

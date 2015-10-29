@@ -211,15 +211,16 @@ socket.init = function(io) {
         var message = session.user.name + " lance " + number + "d" + sides + " et obtient " + result.toString();
         addBotMessage(io, message, { storage:true });
       });
-      socket.on('rollBXT', function() {
+      socket.on('rolluser', function(username) {
+        console.log('->' + username + '<-');
         return Promise.try(function() {
-          addBotMessage(io, "Quelqu'un a tenté un roll BXT...", { storage:true });
-          var message = null;
+          addBotMessage(io, "Quelqu'un a tenté un roll " + username + "...", { storage:true });
+          var message;
           var lucky = Math.floor(Math.random() * 200);
           switch(lucky) {
             case 0:
               message = 'Mouhahaha :evil:';
-              banUser(io, socket.id, "BXT");
+              banUser(io, socket.id, username);
               break;
             case 199:
               message = 'Dommage, le trolleur trollé :D';

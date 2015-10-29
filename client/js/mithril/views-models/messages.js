@@ -56,8 +56,8 @@ messages.vm = (function() {
       else if(message.substring(0, 5) == '/poke')
         socket.emit('highlight', message.substring(6));
       else if(message.substring(0, 5) == '/roll') {
-        if(message.substring(6) == 'BXT')
-          socket.emit('rollBXT');
+        if(message.substring(6, 7) == '@')
+          socket.emit('rolluser', message.substring(7));
         else
           socket.emit('roll', message.substring(6));
       } else if(message.substring(0, 4) == '/msg') {
