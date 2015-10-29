@@ -1,4 +1,4 @@
-/* global m, socket, location, alert, notify, textarea */
+/* global m, document, socket, location, alert, notify, textarea */
 'use strict';
 var messages = messages || {};
 
@@ -110,6 +110,8 @@ messages.vm = (function() {
         });
       });
       socket.on('user_new', function(time, username) {
+        if(document.getElementById('disable-login-events').checked)
+          return;
         vm.list.push(new messages.Message({
           type:'message-bot',
           time:time,
@@ -118,6 +120,8 @@ messages.vm = (function() {
         m.redraw();
       });
       socket.on('user_disconnected', function(time, user) {
+        if(document.getElementById('disable-login-events').checked)
+          return;
         vm.list.push(new messages.Message({
           type:'message-bot',
           time:time,
