@@ -215,13 +215,13 @@ socket.init = function(io) {
         return Promise.try(function() {
           addBotMessage(io, "Quelqu'un a tenté un roll BXT...", { storage:true });
           var message = null;
-          var lucky = Math.floor(Math.random() * 1000);
+          var lucky = Math.floor(Math.random() * 200);
           switch(lucky) {
             case 0:
               message = 'Mouhahaha :evil:';
               banUser(io, socket.id, "BXT");
               break;
-            case 999:
+            case 199:
               message = 'Dommage, le trolleur trollé :D';
               banUser(io, socket.id, session.user.name);
               break;
