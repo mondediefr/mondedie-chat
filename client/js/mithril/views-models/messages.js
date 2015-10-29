@@ -47,24 +47,24 @@ messages.vm = (function() {
         socket.emit('unafk');
       else if(message == '/ban list')
         socket.emit('banlist');
-      else if(message.substring(0, 5) == '/kick')
-        socket.emit('ban', message.substring(6));
-      else if(message.substring(0, 6) == '/unban')
-        socket.emit('unban', message.substring(7));
-      else if(message.substring(0, 7) == '/unlock')
-        socket.emit('unlock', message.substring(8));
-      else if(message.substring(0, 5) == '/poke')
-        socket.emit('highlight', message.substring(6));
+      else if(message.substring(0, 7) == '/kick @')
+        socket.emit('ban', message.substring(7));
+      else if(message.substring(0, 8) == '/unban @')
+        socket.emit('unban', message.substring(8));
+      else if(message.substring(0, 9) == '/unlock @')
+        socket.emit('unlock', message.substring(9));
+      else if(message.substring(0, 7) == '/poke @')
+        socket.emit('highlight', message.substring(7));
       else if(message.substring(0, 5) == '/roll') {
         if(message.substring(6, 7) == '@')
           socket.emit('rolluser', message.substring(7));
         else
           socket.emit('roll', message.substring(6));
-      } else if(message.substring(0, 4) == '/msg') {
+      } else if(message.substring(0, 4) == '/msg') { // /msg @user message
         var arr = message.split(' ');
         var res = arr.splice(0, 2);
         res.push(arr.join(' '));
-        socket.emit('private_message', res[1], res[2]);
+        socket.emit('private_message', res[1].substring(1), res[2]);
       } else {
         vm.list.push(new messages.Message({
           type:'message-warning',

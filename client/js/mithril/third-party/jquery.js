@@ -21,13 +21,13 @@ $(function() {
   });
 
   $('#pm').click(function(e) {
-    textarea.value = '/msg user message';
+    textarea.value = '/msg @';
     textarea.focus();
     e.preventDefault();
   });
 
   $('#poke').click(function(e) {
-    textarea.value = '/poke user';
+    textarea.value = '/poke @';
     textarea.focus();
     e.preventDefault();
   });
@@ -51,7 +51,7 @@ $(function() {
   });
 
   $('#unlock').click(function(e) {
-    textarea.value = '/unlock user';
+    textarea.value = '/unlock @';
     textarea.focus();
     e.preventDefault();
   });
