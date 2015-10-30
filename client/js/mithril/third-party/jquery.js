@@ -82,7 +82,7 @@ $(function() {
 
   $(document).on('click', '.username', function() {
     var username = $(this).text();
-    textarea.value = textarea.value + ' ' + '**@' + username + '** ';
+    textarea.value = textarea.value + '@' + username;
     textarea.focus();
   });
 });
