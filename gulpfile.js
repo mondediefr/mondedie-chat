@@ -9,7 +9,11 @@ var sass = require('gulp-sass');
 var filter = require('gulp-filter');
 var autoprefixer = require('gulp-autoprefixer');
 var csscomb = require('gulp-csscomb');
+var rev = require('gulp-rev');
+var sourcemaps = require('gulp-sourcemaps');
+var inject = require('gulp-inject');
 var runSequence = require('run-sequence');
+var del = require('del');
 
 // ########################### PATHS ###########################
 
@@ -56,14 +60,18 @@ function handleError(err) {
 
 // ########################### TASKS ###########################
 
-gulp.task('default', ['sass', 'js', 'lint', 'fonts', 'emojione-strategy']);
+gulp.task('default', ['sass', 'inject-js', 'lint', 'fonts', 'emojione-strategy']);
 gulp.task('heroku:production', ['default']);
 
 gulp.task('bower', function() {
   return bower();
 });
 
-gulp.task('js', ['bower'], function() {
+gulp.task('clean-js', ['bower'], function () {
+  return del(['public/js/*']);
+});
+
+gulp.task('js', ['clean-js'], function() {
   var unminified = filter(
     ['**', '!**.min.js'],
     { restore: true }
@@ -72,16 +80,18 @@ gulp.task('js', ['bower'], function() {
     .pipe(unminified)
     .pipe(uglify())
     .pipe(unminified.restore)
-    .pipe(concat('app.min.js'))
+    .pipe(sourcemaps.init())
+    .pipe(concat({path: 'app.min.js', cwd: ''}))
+    .pipe(rev())
+    .pipe(sourcemaps.write('.'))
     .pipe(size({title: "fichier app.min.js"}))
     .pipe(gulp.dest('public/js'));
 });
 
-gulp.task('mithril-map', ['bower'], function() {
-  return gulp.src([
-    bowerPath + 'mithril/mithril.js',
-    bowerPath + 'mithril/mithril.min.js.map'
-  ]).pipe(gulp.dest('public/js'));
+gulp.task('inject-js', ['js'], function() {
+  return gulp.src('views/includes/javascript.jade')
+    .pipe(inject(gulp.src('public/js/app-*.min.js', {read: false}), {ignorePath:'public'}))
+    .pipe(gulp.dest('views/includes/build'));
 });
 
 gulp.task('fonts', ['bower'], function() {
@@ -138,6 +148,6 @@ gulp.task('lint', function() {
 
 gulp.task('watch', ['default'], function() {
   gulp.watch(jshintFiles, ['lint']);
-  gulp.watch('client/js/**/*.js', function() { runSequence('js') });
+  gulp.watch('client/js/**/*.js', function() { runSequence('inject-js') });
   gulp.watch('client/scss/**/*.scss', function() { runSequence('sass') });
 });
