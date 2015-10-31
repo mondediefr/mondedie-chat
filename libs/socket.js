@@ -213,25 +213,27 @@ socket.init = function(io) {
       });
       socket.on('rolluser', function(username) {
         return Promise.try(function() {
-          addBotMessage(io, "Quelqu'un a tenté un roll " + username + "...", { storage:true });
-          var message;
+          var message, storage;
           var lucky = Math.floor(Math.random() * 200);
           switch(lucky) {
             case 0:
               message = 'Mouhahaha :evil:';
+              storage = { storage:true };
               banUser(io, socket.id, username);
               break;
             case 199:
               message = 'Dommage, le trolleur trollé :D';
+              storage = { storage:true };
               banUser(io, socket.id, session.user.name);
               break;
             default:
               message = '... la tentative a échoué, peut-être une autre fois :3';
               break;
           }
-          return Promise.delay(message, 50);
-        }).then(function(message) {
-          addBotMessage(io, message, { storage:true });
+          addBotMessage(io, "Quelqu'un a tenté un roll " + username + "...", storage);
+          return Promise.delay({ message:message, storage:storage }, 50);
+        }).then(function(result) {
+          addBotMessage(io, result.message, result.storage);
         });
       });
     })
