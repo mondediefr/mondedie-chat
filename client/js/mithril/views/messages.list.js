@@ -1,4 +1,4 @@
-/* global m, document, messagesViewElement */
+/* global m, document, messagesViewElement, mx */
 'use strict';
 var messages = messages || {};
 
@@ -35,12 +35,10 @@ function removeButton(instance, controller, message) {
     else if(controller.user().name === message.user().name)
       display = true
   }
-  if(!display)
-    return null;
-  return m("a.option[href='#']", m("i", {
-    onclick:messages.vm.del.bind(instance, message.id()),
-    class:'fa fa-times'
-  }));
+  if(!display) return null;
+  return mx("a.option[href='#']", {
+    cautions:messages.vm.del.bind(instance, message.id())
+  }, m("i", { class:'fa fa-times' }));
 }
 
 /**
