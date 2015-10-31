@@ -33,8 +33,7 @@ $(function() {
       replace: function(shortname) {
         return ':' + shortname + ': ';
       },
-      index: 1,
-      maxCount: 5
+      index: 1
     },
     // Auto-complétion des pseudos
     {
@@ -45,8 +44,7 @@ $(function() {
           return user.name();
         });
         callback($.map(mentions, function(mention) {
-          var temp = mention.toLowerCase();
-          return temp.indexOf(term.toLowerCase()) === 0 ? mention : null;
+          return mention.toLowerCase().indexOf(term.toLowerCase()) === 0 ? mention : null;
         }));
       },
       template: function(username) {
@@ -55,10 +53,27 @@ $(function() {
         });
         return '<img class="emojione" src="' + user[0].avatar() + '"></img>' + username;
       },
+      replace: function(username) {
+        return '@' + username + ' ';
+      },
       index: 1,
-      replace: function(user) {
-        return '@' + user + ' ';
-      }
+    },
+    // Auto-complétion des commandes
+    {
+      commands: ['poke @', 'msg @', 'roll', 'afk on|off'],
+      match: /\B\/(\w*)$/,
+      search: function(term, callback) {
+        callback($.map(this.commands, function(command) {
+          return command.indexOf(term) === 0 ? command : null;
+        }));
+      },
+      template: function(command) {
+        return '/' + command;
+      },
+      replace: function(command) {
+        return '/' + command;
+      },
+      index: 1,
     }
     ]);
   });

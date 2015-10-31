@@ -1,4 +1,4 @@
-/* global $, document, messages, event, textarea, socket */
+/* global $, document, window, messages, event, textarea, socket */
 'use strict';
 
 $(function(){
@@ -53,7 +53,10 @@ $(function(){
   textarea.onkeydown = function(e) {
     e = e || event;
     if(e.keyCode === 13 && !e.shiftKey) {
-      if(!document.getElementById('disable-enter-action').checked) {
+      var display = window.getComputedStyle(
+        document.getElementById('textcomplete-dropdown-1')
+      ).getPropertyValue('display');
+      if(!document.getElementById('disable-enter-action').checked && display != 'block') {
         e.preventDefault();
         clearTimeout(typingTimeout);
         typingTimeout = setTimeout(timeoutHandler, 0);
