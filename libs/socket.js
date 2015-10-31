@@ -89,7 +89,7 @@ socket.init = function(io) {
       socket.on('message', function(message) {
         if(message.trim() && message.length <= 1000) {
           addMessage(io, session.user, marked(message, { renderer:renderer }));
-          var prob  = message.search(/chatbot/gi) !== -1 ? 5 : 400;
+          var prob  = message.search(/chatbot/gi) !== -1 ? 10 : 400;
           if(getRandomInt({ emax:prob }) === 0) {
             var delay = getRandomInt({ min:5, max:15 }) * 1000;
             Promise.delay(delay).then(function() {

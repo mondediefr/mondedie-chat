@@ -29,7 +29,21 @@ module.exports = {
       "La prochaine fois que %user parle, c'est un ban définitif du chat",
       "%user a toujours raison. Et s'il a tort, c'est qu'il a raison d'avoir tort.",
       "Vous devriez vous méfier de %user, il fait des choses louches devant son écran",
-      "Une analyse de la NSA a été détectéé sur le chat, procédure de confinement en cours..."
+      "Une analyse de la NSA a été détectéé sur le chat, procédure de confinement en cours...",
+      "%user utilise ToutouLinux comme distribution principale",
+      "Un jour, %user a tenté d'installer Archlinux, on ne l'a jamais revu depuis...",
+      "%user parle trop, un mute ne va pas tarder...",
+      "Chatbot connais le secret de %user",
+      "Transfert des droits de modération à %user",
+      "Chatbot a le droit de vie ou de mort sur ce chat",
+      "%user lance un apt dist-upgrade en étant bourré",
+      "DDOS de BXT en cours sur le serveur de %user",
+      "%user joue à l'elastoball chez lui le soir",
+      "Les chinois du FBI réquisitionnent le serveur de %user",
+      "Chatbot s'approche de %user par derrière...",
+      "Le mot de passe SSH de %user est : HelloKitTy_%user2016",
+      "Qu'elle est la réponse à la question sur la vie, l'univers et le reste ?",
+      "%user se brosse les dents les jours de pleine lune uniquement"
     ]
   }
 };
