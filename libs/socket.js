@@ -212,7 +212,8 @@ socket.init = function(io) {
         addBotMessage(io, message, { storage:true });
       });
       socket.on('rolluser', function(username) {
-        return Promise.try(function() {
+        users.getUserSocket(username)
+        .then(function() {
           var message, storage;
           var lucky = Math.floor(Math.random() * 200);
           switch(lucky) {
@@ -232,8 +233,12 @@ socket.init = function(io) {
           }
           addBotMessage(io, "Quelqu'un a tenté un roll " + username + "...", storage);
           return Promise.delay({ message:message, storage:storage }, 50);
-        }).then(function(result) {
+        })
+        .then(function(result) {
           addBotMessage(io, result.message, result.storage);
+        })
+        .catch(function() {
+          addBotMessage(io, '(' + username + ') utilisateur introuvable...', { socket:socket.id });
         });
       });
     })
