@@ -60,7 +60,7 @@ function handleError(err) {
 
 // ########################### TASKS ###########################
 
-gulp.task('default', ['sass', 'inject-js', 'lint', 'fonts', 'emojione-strategy']);
+gulp.task('default', ['inject-css', 'inject-js', 'lint', 'fonts', 'emojione-strategy']);
 gulp.task('heroku:production', ['default']);
 
 gulp.task('bower', function() {
@@ -89,7 +89,7 @@ gulp.task('js', ['clean-js'], function() {
 });
 
 gulp.task('inject-js', ['js'], function() {
-  return gulp.src('views/includes/javascript.jade')
+  return gulp.src('views/includes/assets/javascript.jade')
     .pipe(inject(gulp.src('public/js/app-*.min.js', {read: false}), {ignorePath:'public'}))
     .pipe(gulp.dest('views/includes/build'));
 });
@@ -106,7 +106,11 @@ gulp.task('emojione-strategy', ['bower'], function() {
   ]).pipe(gulp.dest('public/json'));
 });
 
-gulp.task('sass', ['bower'], function() {
+gulp.task('clean-css', ['bower'], function () {
+  return del(['public/css/*']);
+});
+
+gulp.task('sass', ['clean-css'], function() {
   var sassFile = filter(
     ['**', '!**.min.css'],
     { restore: true }
@@ -135,9 +139,16 @@ gulp.task('sass', ['bower'], function() {
     .pipe(csscomb())
     .pipe(sassFile.restore)
     .pipe(minify({keepSpecialComments: 0}))
-    .pipe(concat('app.min.css'))
+    .pipe(concat({path: 'app.min.css', cwd: ''}))
+    .pipe(rev())
     .pipe(size({title: "fichier app.min.css"}))
     .pipe(gulp.dest('public/css'));
+});
+
+gulp.task('inject-css', ['sass'], function() {
+  return gulp.src('views/includes/assets/css.jade')
+    .pipe(inject(gulp.src('public/css/app-*.min.css', {read: false}), {ignorePath:'public'}))
+    .pipe(gulp.dest('views/includes/build'));
 });
 
 gulp.task('lint', function() {
@@ -149,5 +160,5 @@ gulp.task('lint', function() {
 gulp.task('watch', ['default'], function() {
   gulp.watch(jshintFiles, ['lint']);
   gulp.watch('client/js/**/*.js', function() { runSequence('inject-js') });
-  gulp.watch('client/scss/**/*.scss', function() { runSequence('sass') });
+  gulp.watch('client/scss/**/*.scss', function() { runSequence('inject-css') });
 });
