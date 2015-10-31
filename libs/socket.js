@@ -9,8 +9,9 @@ var emojione = require('emojione');
 
 var redis    = require('../libs/redis')();
 var Smileys  = require('../libs/smileys');
-var Users    = require('../models/users.js');
-var Messages = require('../models/messages.js');
+var sentence = require('./sentences');
+var Users    = require('../models/users');
+var Messages = require('../models/messages');
 
 var users    = new Users(redis.client);
 var messages = new Messages(redis.client);
@@ -86,8 +87,16 @@ socket.init = function(io) {
       });
       // Réception d'un message
       socket.on('message', function(message) {
-        if(message.trim() && message.length <= 1000)
+        if(message.trim() && message.length <= 1000) {
           addMessage(io, session.user, marked(message, { renderer:renderer }));
+          var prob  = message.search(/chatbot/i) !== -1 ? 5 : 500;
+          if(getRandomInt({ emax:prob }) === 0) {
+            var delay = getRandomInt({ min:5, max:15 }) * 1000;
+            Promise.delay(delay).then(function() {
+              chatbotSpeech(io, session.user.name);
+            });
+          }
+        }
       });
       // Frappe au clavier
       socket.on('typing', function(isTyping) {
@@ -192,7 +201,7 @@ socket.init = function(io) {
       // Lancer un dé
       socket.on('roll', function(pattern) {
         if(!pattern) {
-          addBotMessage(io, session.user.name + " lance 1d6 et obtient " + rollDice(6), { storage:true });
+          addBotMessage(io, session.user.name + " lance 1d6 et obtient " + getRandomInt({ min:1, max:6 }), { storage:true });
           return;
         }
 
@@ -205,7 +214,7 @@ socket.init = function(io) {
         sides  = (sides  > 0 && sides  <= 100) ? sides  : 6 ;
 
         for(var i = 0; i < number; i++) {
-          result.push(rollDice(sides));
+          result.push(getRandomInt({ min:1, max:sides }));
         }
 
         var message = session.user.name + " lance " + number + "d" + sides + " et obtient " + result.toString();
@@ -215,7 +224,7 @@ socket.init = function(io) {
         users.getUserSocket(username)
         .then(function() {
           var message, storage;
-          var lucky = Math.floor(Math.random() * 200);
+          var lucky = getRandomInt({ emax:200 });
           switch(lucky) {
             case 0:
               message = 'Mouhahaha :evil:';
@@ -294,12 +303,37 @@ var banUser = function(io, socketid, username) {
   });
 }
 
+function chatbotSpeech(io, username) {
+  var messages = sentence.get();
+  var index = getRandomInt({ emax:messages.length });
+  addBotMessage(io, messages[index].replace('%user', username), { storage:true });
+}
+
 /*
  * Génére un nombre aléatoire selon le nombre de faces
  * Les valeurs min et max sont incluses [1-sides]
  */
 function rollDice(sides) {
   return Math.floor(Math.random() * (sides - 1 + 1)) + 1;
+}
+
+/*
+ * Génère un entier aléatoire
+ *
+ * Ranges possibles :
+ * ----------------------------
+ * { max:x }         // [0-x]
+ * { min:x, max:y }  // [x-y]
+ * { min:x, emax:y } // [x-y[
+ * { emax:x }        // [0-x[
+ * ----------------------------
+ */
+function getRandomInt(range) {
+  if(!range.min) range.min = 0;
+  if(range.max) // Inclusive max
+    return Math.floor(Math.random() * (range.max - range.min + 1)) + range.min;
+  else if(range.emax) // Exclusive max
+    return Math.floor(Math.random() * (range.emax - range.min)) + range.min;
 }
 
 // Déclaration des erreurs
