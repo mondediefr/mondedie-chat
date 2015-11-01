@@ -228,23 +228,26 @@ socket.init = function(io) {
           switch(lucky) {
             case 0:
               message = 'Mouhahaha :evil:';
-              storage = { storage:true };
+              storage = true;
               banUser(io, socket.id, username);
               break;
             case 199:
               message = 'Dommage, le trolleur trollé :D';
-              storage = { storage:true };
+              storage = true;
               banUser(io, socket.id, session.user.name);
               break;
             default:
+              storage = false;
               message = '... la tentative a échoué, peut-être une autre fois :3';
               break;
           }
-          addBotMessage(io, "Quelqu'un a tenté un roll " + username + "...", storage);
-          return Promise.delay({ message:message, storage:storage }, 50);
+          addBotMessage(io, "Quelqu'un a tenté un roll " + username + "...", { storage:storage });
+          return Promise.delay(50).then(function() {
+            return Promise.resolve({ message:message, storage:storage });
+          })
         })
         .then(function(result) {
-          addBotMessage(io, result.message, result.storage);
+          addBotMessage(io, result.message, { storage:result.storage });
         })
         .catch(function() {
           addBotMessage(io, '(' + username + ') utilisateur introuvable...', { socket:socket.id });

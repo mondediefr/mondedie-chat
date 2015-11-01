@@ -14,7 +14,7 @@ block content
     #login
       form(action='/login' method='post' class='form-signin')
         if formMessage
-          .alert.alert-danger #{formMessage}
+          .alert.alert-danger.text-center #{formMessage}
         fieldset.form-group
           input(type='text' name='username' class='form-control' placeholder='Pseudo')
           input(type='password' name='password' class='form-control' placeholder='Mot de passe')

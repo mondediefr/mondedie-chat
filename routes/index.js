@@ -28,7 +28,7 @@ router.post('/login', function(req, res, next) {
     req.checkBody('password', "Valeur invalide").notEmpty();
 
     if(req.validationErrors(true)) {
-      settings.formMessage = 'Veuillez saisir vos identifiants mondedie.fr - flarum';
+      settings.formMessage = 'Veuillez saisir vos identifiants mondedie.fr';
       return res.render('login', settings);
     }
 

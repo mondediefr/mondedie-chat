@@ -10,8 +10,8 @@ fluxbb.login = function(data) {
   return request.postAsync({
     uri:process.env.FLUXBB_API_ENDPOINT + 'auth.php',
     form:{ login:data.username, password:data.password }
-  }).spread(function(response, body) {
-    return response.statusCode === 200 ? body : Promise.reject();
+  }).then(function(response) {
+    return response.statusCode === 200 ? response.body : Promise.reject();
   }).then(JSON.parse).then(function(userInfos) {
     return userInfos ? userInfos : Promise.reject();
   }).catch(function() {
