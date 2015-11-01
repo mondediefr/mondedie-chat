@@ -90,14 +90,14 @@ router.get('/chatroom', function(req, res, next) {
   session.settings(req, res, { shouldBeLogged:true }, function(settings) {
     settings.title += "Chatroom";
     settings.user = req.session.user;
-    res.render('chatroom', settings);
+    return res.render('chatroom', settings);
   });
 });
 
 router.get('/get/messages', function(req, res, next) {
   session.settings(req, res, { shouldBeLogged:true }, function(settings) {
     messages.list().then(function(list) {
-      res.json({ messages:list });
+      return res.json({ messages:list });
     });
   });
 });
