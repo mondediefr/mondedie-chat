@@ -1,15 +1,11 @@
 {
   "name": "Mondedie-chat",
-  "description": "Node.js chat application for mondedie.fr forum using Express, Socket.io, Redis and Mithril",
+  "description": "Node.js chat application using Express, Socket.io, Redis and Mithril",
   "repository": "https://github.com/mondediefr/mondedie-chat",
   "env": {
-    "FORUM_API_ENDPOINT": {
-      "description": "Flarum API endpoint",
-      "value": "http://mondedie.fr/api/"
-    },
-    "APP_URL": {
-      "description": "App URL",
-      "value": "http://my-chat-app.herokuapp.com"
+    "AUTH_API_ENDPOINT": {
+      "description": "AUTH API ENPOINT",
+      "value": "http://domain.tld/api/auth"
     },
     "COOKIES_SECRET": {
       "description": "Cookies secret key",

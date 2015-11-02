@@ -1,6 +1,6 @@
 # Mondedie-chat
 
-Node.js chat application for mondedie.fr forum using Express, Socket.io, Redis and Mithril.
+Node.js chat application using Express, Socket.io, Redis and Mithril.
 
 [![dependency](https://img.shields.io/david/mondediefr/mondedie-chat.svg?label=Dependencies)](https://github.com/mondediefr/mondedie-chat/blob/master/package.json#L8)
 [![release](https://img.shields.io/github/release/mondediefr/mondedie-chat.svg?label=Release)](https://github.com/mondediefr/mondedie-chat/releases)
@@ -42,6 +42,68 @@ This chat is hosted on Heroku using free dyno with following add-ons :
 Redis database is hosted on Amazon EC2.
 
 URL : http://chat.mondedie.fr/
+
+### Heroku deployment
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+---
+
+## Authentication method
+
+### Authentication request
+
+The application sends a HTTP POST request to the API endpoint specified in *AUTH_API_ENDPOINT* environment variable.
+
+#### Request body
+
+- **login** (*String*) : Account username
+- **password** (*String*) : Account password
+
+#### Request scheme example
+
+`AUTH_API_ENDPOINT=http://domain.tld/api/auth`
+
+```
+POST /api/auth HTTP/1.1
+Host: domain.tld
+Content-type: application/x-www-form-urlencoded
+
+login=username&password=password
+```
+
+### Authentication output structure example
+
+Your auth API endpoint **MUST** return this type of json structure :
+
+```json
+{
+  "data": {
+    "id": "4",
+    "attributes": {
+      "username": "Hardware",
+      "avatarUrl": "http://......."
+    }
+  },
+  "included": {
+    "attributes": {
+      "nameSingular": "Administrator",
+      "namePlural": "Administrators",
+      "color": "#7cc359"
+    }
+  }
+}
+```
+
+With HTTP status code of **200** when user is successfully authenticated or **403** otherwise.
+
+### Properties
+
+- `data.id` : User ID
+- `data.attributes.username` : User name
+- `data.attributes.avatarUrl` : User avatar URL
+- `data.included.attributes.namePlural` : Group name
+- `data.included.attributes.color` : Group color
 
 ---
 
@@ -96,10 +158,9 @@ Create .env file in project root with this content :
 
 ```
 ENV=development
-APP_URL=http://127.0.0.1:5000/
 COOKIES_SECRET=Xpg29n6s9hGuKqWA24U3w5gBAD46yw5X
 SESSION_SECRET=4fQ9FMEGqYSw3d289h72zx7S4hytb6BG
-FORUM_API_ENDPOINT=http://mondedie.fr/api/
+AUTH_API_ENDPOINT=http://domain.tld/api/auth
 ```
 
 Create Procfile_dev file in project root with this content :

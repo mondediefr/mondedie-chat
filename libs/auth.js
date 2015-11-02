@@ -1,12 +1,28 @@
 "use strict";
 var Promise = require('bluebird');
 var request = Promise.promisifyAll(require("request"));
-var flarum = {};
+var auth = {};
 
 /*
- *  Récupère les informations d'identification auprès de l'API
+ *  Récupère les informations de l'utilisateur auprès de l'API
  */
-flarum.login = function(data) {
+/* CUSTOM FLUXBB AUTH */
+auth.login = function(data) {
+  return request.postAsync({
+    uri:process.env.AUTH_API_ENDPOINT,
+    form:{ login:data.username, password:data.password }
+  }).then(function(response) {
+    return response.statusCode === 200 ? response.body : Promise.reject();
+  }).then(JSON.parse).then(function(userInfos) {
+    return userInfos ? userInfos : Promise.reject();
+  }).catch(function() {
+    return Promise.reject('Identifiant ou mot de passe incorrect.');
+  });
+};
+
+/*
+ * FLARUM AUTH
+auth.login = function(data) {
   return request.postAsync({
     uri:process.env.FLARUM_API_ENDPOINT + 'token',
     form:{ identification:data.username, password:data.password }
@@ -17,10 +33,7 @@ flarum.login = function(data) {
   });
 };
 
-/*
- *  Récupère les informations de l'utilisateur
- */
-flarum.user = function(user) {
+auth.user = function(user) {
   return request.getAsync({
     uri:process.env.FLARUM_API_ENDPOINT + 'users/' + user.userId,
     headers: { 'Authentication': 'Token ' + user.token }
@@ -30,5 +43,6 @@ flarum.user = function(user) {
     return Promise.reject('Impossible de récupérer les informations de l\'utilisateur.');
   });
 };
+*/
 
-module.exports = flarum;
+module.exports = auth;

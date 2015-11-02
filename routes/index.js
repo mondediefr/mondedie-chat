@@ -3,8 +3,7 @@ var express  = require('express');
 var Promise  = require('bluebird');
 
 var session  = require('../libs/session');
-// var flarum   = require('../libs/flarum');
-var fluxbb   = require('../libs/fluxbb');
+var auth     = require('../libs/auth');
 var redis    = require('../libs/redis')();
 
 var Messages = require('../models/messages');
@@ -32,15 +31,15 @@ router.post('/login', function(req, res, next) {
       return res.render('login', settings);
     }
 
-    /* AUTH FLUXBB TEMPORAIRE */
-    return fluxbb.login(req.body)
+    /* CUSTOM FLUXBB AUTH */
+    return auth.login(req.body)
     .then(function(userInfos) {
       req.session.user = {
         id:userInfos.data.id,
         name:userInfos.data.attributes.username,
         groupName:(userInfos.included) ? userInfos.included.attributes.namePlural : null,
         groupColor:(userInfos.included) ? userInfos.included.attributes.color : "#333",
-        avatar:(userInfos.data.attributes.avatarUrl) ? userInfos.data.attributes.avatarUrl : process.env.APP_URL + 'images/avatar.png',
+        avatar:(userInfos.data.attributes.avatarUrl) ? userInfos.data.attributes.avatarUrl : '/images/avatar.png',
         status:'online'
       }
     })
