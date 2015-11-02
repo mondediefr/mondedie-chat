@@ -8,7 +8,7 @@ var fluxbb = {};
  */
 fluxbb.login = function(data) {
   return request.postAsync({
-    uri:process.env.FLUXBB_API_ENDPOINT + 'auth.php',
+    uri:process.env.FORUM_API_ENDPOINT + 'auth.php',
     form:{ login:data.username, password:data.password }
   }).then(function(response) {
     return response.statusCode === 200 ? response.body : Promise.reject();

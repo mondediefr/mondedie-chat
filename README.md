@@ -99,8 +99,7 @@ ENV=development
 APP_URL=http://127.0.0.1:5000/
 COOKIES_SECRET=Xpg29n6s9hGuKqWA24U3w5gBAD46yw5X
 SESSION_SECRET=4fQ9FMEGqYSw3d289h72zx7S4hytb6BG
-FLARUM_API_ENDPOINT=http://flarum.mondedie.fr/api/
-FLUXBB_API_ENDPOINT=http://mondedie.fr/api/
+FORUM_API_ENDPOINT=http://mondedie.fr/api/
 ```
 
 Create Procfile_dev file in project root with this content :
