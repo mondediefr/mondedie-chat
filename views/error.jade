@@ -5,4 +5,5 @@ block content
     h1 Erreur #{status}
     h4 #{message}
     hr
-  pre #{stack}
+  if stack
+    pre #{stack}

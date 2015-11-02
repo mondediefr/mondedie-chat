@@ -93,7 +93,7 @@ app.use(function(err, req, res, next) {
   return res.render('error', {
     message: err.message,
     status: status,
-    stack: env === 'development' ? err.stack : {}
+    stack: env === 'development' ? err.stack : null
   });
 });
 
