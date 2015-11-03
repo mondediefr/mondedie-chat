@@ -20,3 +20,25 @@
     }
   }
 }
+
+.bottom-links {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-right: rem(10px);
+
+  span.label {
+    margin: 0 rem(3px);
+
+    a {
+      color: #FFF;
+    }
+  }
+
+  span.links {
+    a {
+      margin: 0 rem(3px);
+      color: #818a91;
+    }
+  }
+}
