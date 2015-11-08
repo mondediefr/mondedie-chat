@@ -136,6 +136,44 @@ Open app : `http://mondedie-chat.dev`
 
 ### Requirements:
 
+* Node.js
+* NPM
+* Redis
+
+Clone the project and install dependencies :
+```
+git clone https://github.com/mondediefr/mondedie-chat.git
+cd mondedie-chat
+
+npm install -g bower gulp pm2
+npm install
+
+gulp
+```
+
+Create .env file in project root with this content :
+
+```
+ENV=development
+COOKIES_SECRET=xxxxxxxxxxx
+SESSION_SECRET=yyyyyyyyyyy
+AUTH_API_ENDPOINT=http://domain.tld/api/auth
+```
+
+Start application :
+
+```
+pm2 start --node-args="--harmony" --name mondedie-chat app.js
+```
+
+Open app : http://127.0.0.1:5000/
+
+---
+
+## Developement installation
+
+### Requirements:
+
 * heroku toolbelt : https://toolbelt.heroku.com/
 * Node.js
 * NPM
@@ -146,9 +184,7 @@ Clone the project and install dependencies :
 git clone https://github.com/mondediefr/mondedie-chat.git
 cd mondedie-chat
 
-npm install -g bower
-npm install -g gulp
-npm install -g nodemon
+npm install -g bower gulp nodemon
 npm install
 
 gulp
@@ -158,8 +194,8 @@ Create .env file in project root with this content :
 
 ```
 ENV=development
-COOKIES_SECRET=Xpg29n6s9hGuKqWA24U3w5gBAD46yw5X
-SESSION_SECRET=4fQ9FMEGqYSw3d289h72zx7S4hytb6BG
+COOKIES_SECRET=xxxxxxxxxxx
+SESSION_SECRET=yyyyyyyyyyy
 AUTH_API_ENDPOINT=http://domain.tld/api/auth
 ```
 
@@ -175,6 +211,8 @@ Start application :
 ```
 foreman start -f Procfile_dev
 ```
+
+Open app : http://127.0.0.1:5000/
 
 ---
 
