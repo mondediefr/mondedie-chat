@@ -2,30 +2,9 @@
 // # _variables.scss #
 // ###################
 
-// ############# global ################
-$global-font-size: 16px; // note le pixel de base est de 16px avec bootstrap 4
-
-// ############# chatroom ##############
-// Remettre à 150px le height-footer après l'intégration
-// des smileys dans la barre d'outils
-$height-footer: rem(130px);
-$height-header: rem(50px);
-$border: rem(1px) solid #ddd;
-$padding-block: rem(10px);
+// #### global ####
+$global-font-size: 16px; // rem de référence
 $size-smiley: rem(20px);
 
-// ## couleur block background ##
-$color1: #f5f5f5;
-$color2: #fff;
-// left
-$color-block-1: $color1;
-$color-block-4: $color1;
-$color-block-7: $color1;
-//middle
-$color-block-2: $color2;
-$color-block-5: $color2;
-$color-block-8: $color2;
-//right
-$color-block-3: $color1;
-$color-block-6: $color1;
-$color-block-9: $color1;
+// #### color ####
+$color-menu: #f5f5f5;

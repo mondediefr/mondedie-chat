@@ -12,10 +12,11 @@
 // core css
 @import "banner";
 @import "layout";
-@import "chatroom";
 @import "login";
-@import "menu-right";
-@import "menu-left";
-@import "block-message";
+@import "section-left";
+@import "section-center";
+@import "section-right";
+
+// annexe
 @import "editor";
 @import "auto-complete";

@@ -1,0 +1,27 @@
+// ###################
+// # _menu-left.scss #
+// ###################
+
+.section--left {
+  background-color: $color-menu;
+
+  .section--left--header {
+    padding: rem(10px);
+
+    h5 {
+      margin: 0;
+
+      &.title-site {
+        text-align: center;
+
+        .site-name {
+          font-size: rem(28px);
+        }
+      }
+    }
+  }
+
+  .section--left--core {
+    padding: rem(10px);
+  }
+}

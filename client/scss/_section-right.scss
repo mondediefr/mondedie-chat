@@ -1,0 +1,48 @@
+// ####################
+// # _menu-right.scss #
+// ####################
+.section--right {
+  background-color: $color-menu;
+  padding: rem(10px);
+
+  .section--right--header {
+    #clients {
+      list-style-type: none;
+      margin: 0; padding: 0;
+
+      li {
+        margin-bottom: rem(5px);
+
+        & > img {
+          max-height: rem(30px);
+          max-width: rem(30px);
+          margin-right: rem(10px);
+        }
+
+        &.afk {
+          opacity: 0.3;
+        }
+      }
+    }
+  }
+
+  .section--right--footer {
+    text-align: center;
+    font-size: rem(12px);
+
+    span.label {
+      margin: 0 rem(3px);
+      a {
+        color: #fff;
+      }
+    }
+
+    span.links {
+      color: #818a91;
+      a {
+        color: #818a91;
+        margin: 0 rem(3px);
+      }
+    }
+  }
+}

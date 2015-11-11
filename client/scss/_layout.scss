@@ -2,29 +2,96 @@
 // # _layout.scss #
 // ################
 
+html, body {
+  height: 100%; //permet de fix les footer
+}
+
 body {
   font-size: rem(13px);
   overflow: hidden;
-}
-
-.block {
-  padding: $padding-block;
+  background-color: #fff;
 }
 
 .hidden {
   display: none !important;
 }
 
-.none-padding {
-  padding: 0;
-}
-
 input[type="checkbox"] {
   margin-right: rem(5px);
 }
 
+// ###########################
+// # layout pour la chatroom #
+// ###########################
+
+.conteneur-flex {
+  display: flex;
+  flex-direction: row; //bloque en ligne
+  height: 100%; //permet de fix les footer
+}
+
+.section--left {
+  flex: 1; // 1+4+1 soit 1/6 de l'interface
+  ///Nouvelle base
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .section--left--header {
+    // pas besoin de flex je fix moi même la taille
+    height: rem(50px);
+    min-height: rem(50px);
+  }
+
+  .section--left--core {
+    flex: 1 1 auto;
+  }
+  //.section--left-footer {}
+}
+
+.section--center {
+  flex: 4; // 1+4+1 soit 4/6 de l'interface
+  ///Nouvelle base
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .section--center--header {
+    // pas besoin de flex je fix moi même la taille */
+    height: rem(50px);
+    min-height: rem(50px);
+    max-height: rem(50px);
+  }
+
+  .section--center--core {
+    flex: 1 1 auto; //calcul par rapport au autre div, si trop grand scroll
+    overflow-y: auto;
+  }
+
+  .section--center--footer {
+    flex: 0 0 auto;
+  }
+}
+
+.section--right {
+  flex: 1; // 1/6 de l'interface
+  ///Nouvelle base
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .section--right--header {
+    flex: 1 1 auto;
+    overflow-y: auto;
+  }
+
+  .section--right--footer {
+    flex: 0 0 auto;
+  }
+}
+
 // ######################
-// # règles responsives #
+// # responsives        #
 // ######################
 
 // il faut définir les breakpoints
