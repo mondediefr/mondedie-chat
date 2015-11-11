@@ -118,6 +118,14 @@ input[type="checkbox"] {
 // note : la barre markdown est cache pour les tablettes. (à voir)
 
 @include media-breakpoint-down(lg) {
+  .section--left {
+    .section--left--header {
+      .site-name {
+        font-size: rem(22px) !important;
+      }
+    }
+  }
+
   .section--center--footer {
     .md-header {
       display: none;
@@ -152,19 +160,9 @@ input[type="checkbox"] {
   .section--left {
     display: none;
   }
+
+  //page login
+  .site-name {
+    font-size: rem(55px) !important;
+  }
 }
-
-
-/// Tools
-// breakpoint up
-//@include media-breakpoint-up(sm) {}
-//@include media-breakpoint-up(md) {}
-//@include media-breakpoint-up(lg) {}
-//@include media-breakpoint-up(xl) {}
-
-// breakpoint down
-//@include media-breakpoint-down(xs) {}
-//@include media-breakpoint-down(sm) {}
-//@include media-breakpoint-down(md) {}
-//@include media-breakpoint-down(lg) {}
-//@include media-breakpoint-down(xl) {}
