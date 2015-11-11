@@ -10,7 +10,7 @@ users.view = function() {
     users.vm.list.users().map(function(user, i) {
       return m("li", { key:user.id(), class:user.status(), style:{ color:user.color() }}, [
         m("img", { class:'img-rounded', src:user.avatar(), alt:user.name() }),
-        user.name()
+        m("span", user.name())
       ])
     })
   ])

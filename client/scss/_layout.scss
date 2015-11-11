@@ -94,18 +94,53 @@ input[type="checkbox"] {
 // # responsives        #
 // ######################
 
-// il faut définir les breakpoints
-// voir la doc : http://v4-alpha.getbootstrap.com/layout/overview/
-// voir les variables de bootstrap : https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss#L89-L100
-// elles sont en px donc c'est très curieux
+// note : ajouter un tooltip clickage pour les nom des users
+// note : la barre markdown est cache pour les tablettes. (à voir)
 
+@include media-breakpoint-down(lg) {
+  //html {
+  //  border: 4px solid red;
+  //}
+
+  .section--center--footer {
+    .md-header {
+      display: none;
+    }
+  }
+
+  .section--right {
+    flex: 0 0 rem(50px);
+
+    .section--right--header {
+      h6 {
+        display: none;
+      }
+      #clients > li {
+        span {
+          display: none;
+        }
+        img {
+          margin-right: 0 !important;
+        }
+      }
+    }
+
+    .section--right--footer {
+      display: none;
+    }
+  }
+}
+
+
+@include media-breakpoint-down(sm) {
+  .section--left {
+    display: none;
+  }
+}
+
+
+/// Tools
 // breakpoint up
-
-//@include media-breakpoint-up(xs) {
-//  .class--bidon {
-//    font-size: 1rem;
-//  }
-//}
 //@include media-breakpoint-up(sm) {}
 //@include media-breakpoint-up(md) {}
 //@include media-breakpoint-up(lg) {}
