@@ -122,10 +122,12 @@ vagrant plugin install vagrant-berkshelf
 vagrant plugin install vagrant-hostmanager
 ```
 
-### Up !
+### installation
 
-```
-vagrant up
+```bash
+vagrant up # for installation
+vagrant halt # stop vagrant
+vagrant up --provision # restart vagrant
 ```
 
 Open app : `http://mondedie-chat.dev`

@@ -1,7 +1,8 @@
 include_recipe "nginx"
 
-template '/etc/nginx/sites-available/mondedie-chat' do
-  source 'nginx/mondedie-chat'
+cookbook_file '/etc/nginx/sites-available/mondedie-chat' do
+  source 'mondedie-chat'
+  action :create
 end
 
 nginx_site 'mondedie-chat' do

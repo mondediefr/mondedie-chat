@@ -6,8 +6,8 @@ project_name = 'mondedie-chat'
 
 Vagrant.configure(2) do |config|
 
-  config.vm.box = 'ubuntu/trusty64'
-  config.vm.box_url = 'ubuntu/trusty64'
+  config.vm.box = 'debian/jessie64'
+  config.vm.box_url = 'debian/jessie64'
   config.vm.hostname = project_name + '.dev'
   config.vm.network :private_network, ip: ip_address
   config.vm.synced_folder '.', '/home/vagrant/mondedie-chat', :mount_options => ['dmode=777', 'fmode=666']
