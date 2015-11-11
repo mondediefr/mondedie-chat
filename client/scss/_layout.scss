@@ -24,6 +24,10 @@ input[type="checkbox"] {
 // # layout pour la chatroom #
 // ###########################
 
+//flex-grow définit le facteur de grossissement d'un objet flex.
+//flex-shrink spécifie le facteur de réduction d'un élément flex
+//taille initiale de l'élément en px ou auto
+
 .conteneur-flex {
   display: flex;
   flex-direction: row; //bloque en ligne
@@ -38,13 +42,17 @@ input[type="checkbox"] {
   height: 100%;
 
   .section--left--header {
-    // pas besoin de flex je fix moi même la taille
-    height: rem(50px);
-    min-height: rem(50px);
+    // flex: 0 0 rem(50px);
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: rem(50px);
   }
 
   .section--left--core {
-    flex: 1 1 auto;
+    //flex: 1 1 auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
   }
   //.section--left-footer {}
 }
@@ -57,19 +65,25 @@ input[type="checkbox"] {
   height: 100%;
 
   .section--center--header {
-    // pas besoin de flex je fix moi même la taille */
-    height: rem(50px);
-    min-height: rem(50px);
-    max-height: rem(50px);
+    // flex: 0 0 rem(50px);
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: rem(50px);
   }
 
   .section--center--core {
-    flex: 1 1 auto; //calcul par rapport au autre div, si trop grand scroll
+    // flex: 1 1 auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
     overflow-y: auto;
   }
 
   .section--center--footer {
-    flex: 0 0 auto;
+    // flex: 0 0 auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
   }
 }
 
@@ -81,12 +95,18 @@ input[type="checkbox"] {
   height: 100%;
 
   .section--right--header {
-    flex: 1 1 auto;
+    // flex: 1 1 auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
     overflow-y: auto;
   }
 
   .section--right--footer {
-    flex: 0 0 auto;
+    //flex: 0 0 auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
   }
 }
 
@@ -98,10 +118,6 @@ input[type="checkbox"] {
 // note : la barre markdown est cache pour les tablettes. (à voir)
 
 @include media-breakpoint-down(lg) {
-  //html {
-  //  border: 4px solid red;
-  //}
-
   .section--center--footer {
     .md-header {
       display: none;

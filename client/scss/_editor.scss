@@ -20,10 +20,10 @@
   }
 
   textarea {
+    min-height: rem(70px);
     padding: rem(7px);
     font-size: rem(13px);
     background-color: #fff;
-
     border: {
       style: dashed;
       width: rem(1px) 0 0 0;
@@ -31,20 +31,22 @@
     }
   }
 
-  #content-typing {
-    height: rem(17px);
-    border: {
-      style: dashed;
-      color: #ddd;
-      width: 0 0 rem(1px) 0;
-    }
 
-    p {
-      padding: 0 rem(4px) 0 rem(4px);
-      margin: 0;
-      font-size: rem(11px);
-      color: #919191;
-    }
+}
+
+#content-typing {
+  height: rem(17px);
+  border: {
+    style: dashed;
+    color: #ddd;
+    width: 0 0 rem(1px) 0;
+  }
+
+  p {
+    padding: 0 rem(4px) 0 rem(4px);
+    margin: 0;
+    font-size: rem(11px);
+    color: #919191;
   }
 }
 
