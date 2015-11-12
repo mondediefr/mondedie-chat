@@ -3,40 +3,41 @@
 // ####################
 .section--right {
   background-color: $color-menu;
-  padding: rem(10px);
-
   .section--right--header {
+    padding: rem(10px);
+    .fa-sign-out, a {
+      color: #B94A48;
+      text-decoration: none;
+    }
+    .fa-sign-out{
+      margin-right: rem(7px);
+    }
     #clients {
       list-style-type: none;
       margin: 0; padding: 0;
-
       li {
         margin-bottom: rem(5px);
-
         & > img {
           max-height: rem(30px);
           max-width: rem(30px);
-          margin-right: rem(10px);
+          margin-right: rem(7px);
         }
-
         &.afk {
           opacity: 0.3;
         }
       }
     }
   }
-
   .section--right--footer {
     text-align: center;
+    padding: rem(7px);
     font-size: rem(12px);
-
     span.label {
       margin: 0 rem(3px);
       a {
         color: #fff;
       }
     }
-
     span.links {
       color: #818a91;
       a {

@@ -51,6 +51,7 @@ input[type="checkbox"] {
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: auto;
+    overflow-y: auto;
   }
   //.section--left-footer {}
 }
@@ -83,7 +84,7 @@ input[type="checkbox"] {
 }
 
 .section--right {
-  flex: .9; // 1/6 de l'interface
+  flex: 0.9; // 1/6 de l'interface
   ///Nouvelle base
   display: flex;
   flex-direction: column;
