@@ -3,7 +3,6 @@
 // ################
 
 #editor {
-
   .md-editor, .active {
     box-shadow: none;
     border: {
@@ -12,13 +11,11 @@
       width: 0 0 rem(1px) 0;
     }
   }
-
   .btn-default {
     outline: 0;
     background-color: #fff;
     border: 1px solid #ddd;
   }
-
   textarea {
     min-height: rem(70px);
     padding: rem(7px);
@@ -30,8 +27,6 @@
       color: #ddd;
     }
   }
-
-
 }
 
 #content-typing {
@@ -41,7 +36,6 @@
     color: #ddd;
     width: 0 0 rem(1px) 0;
   }
-
   p {
     padding: 0 rem(4px) 0 rem(4px);
     margin: 0;
@@ -58,13 +52,11 @@
   border-radius: rem(6px);
   border: rem(1px) solid rgba(0,0,0,.15);
   padding: rem(10px);
-
   .smileys-container img {
     cursor: pointer;
     width: $size-smiley;
     margin: rem(4px);
   }
-
   &.opened {
     display: block;
   }

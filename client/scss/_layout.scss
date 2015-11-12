@@ -40,14 +40,12 @@ input[type="checkbox"] {
   display: flex;
   flex-direction: column;
   height: 100%;
-
   .section--left--header {
     // flex: 0 0 rem(50px);
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: rem(50px);
   }
-
   .section--left--core {
     //flex: 1 1 auto;
     flex-grow: 1;
@@ -63,14 +61,12 @@ input[type="checkbox"] {
   display: flex;
   flex-direction: column;
   height: 100%;
-
   .section--center--header {
     // flex: 0 0 rem(50px);
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: rem(50px);
   }
-
   .section--center--core {
     // flex: 1 1 auto;
     flex-grow: 1;
@@ -78,7 +74,6 @@ input[type="checkbox"] {
     flex-basis: auto;
     overflow-y: auto;
   }
-
   .section--center--footer {
     // flex: 0 0 auto;
     flex-grow: 0;
@@ -88,12 +83,11 @@ input[type="checkbox"] {
 }
 
 .section--right {
-  flex: 1; // 1/6 de l'interface
+  flex: .9; // 1/6 de l'interface
   ///Nouvelle base
   display: flex;
   flex-direction: column;
   height: 100%;
-
   .section--right--header {
     // flex: 1 1 auto;
     flex-grow: 1;
@@ -101,7 +95,6 @@ input[type="checkbox"] {
     flex-basis: auto;
     overflow-y: auto;
   }
-
   .section--right--footer {
     //flex: 0 0 auto;
     flex-grow: 0;
@@ -125,16 +118,18 @@ input[type="checkbox"] {
       }
     }
   }
-
   .section--center--footer {
-    .md-header {
-      display: none;
+    #editor {
+      .md-header {
+        display: none;
+      }
+      textarea {
+        border-top: none;
+      }
     }
   }
-
   .section--right {
     flex: 0 0 rem(50px);
-
     .section--right--header {
       h6 {
         display: none;
@@ -148,19 +143,16 @@ input[type="checkbox"] {
         }
       }
     }
-
     .section--right--footer {
       display: none;
     }
   }
 }
 
-
 @include media-breakpoint-down(sm) {
   .section--left {
     display: none;
   }
-
   //page login
   .site-name {
     font-size: rem(55px) !important;
