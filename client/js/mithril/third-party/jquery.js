@@ -1,4 +1,4 @@
-/* global $, document, editor, socket, notify, textarea, slideout */
+/* global $, document, editor, socket, notify, textarea, slideout, localStorage */
 'use strict';
 
 $(function() {
@@ -89,4 +89,19 @@ $(function() {
   $('#toggle-button').click(function(e) {
     slideout.toggle();
   });
+
+  $('input[type="checkbox"]').each(function() {
+    if(localStorage.getItem($(this).attr('id')) !== null) {
+      $(this).attr("checked", "checked");
+    }
+  });
+
+  $('input[type="checkbox"]').click(function () {
+    if($(this).is(':checked')) {
+      localStorage.setItem($(this).attr('id'), $(this).val());
+    } else {
+      localStorage.removeItem($(this).attr('id'));
+    }
+  });
+
 });
