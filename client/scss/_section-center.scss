@@ -14,6 +14,12 @@
     border-bottom: 1px solid #ddd;
     h5 {
       color: #777;
+      display: inline-block;
+    }
+    span {
+      border: 1px solid green;
+      margin-right: 4px;
+      margin-left: 4px;
     }
   }
   .section--center--core {
@@ -28,19 +34,22 @@
           cursor: pointer;
         }
         .date {
-          font-style: italic;
+          //...
         }
         .text {
           word-wrap: break-word;
         }
         .option {
-          position: absolute;
-          right: rem(10px); top: rem(4px);
-          color: #90a4ae;
+          float: right;
           font-size: rem(14px);
+          color: #aaa;
+          cursor: pointer;
+          &:hover {
+            color: #3498db;
+          }
         }
         &:nth-child(odd) {
-          background-color: #eee;
+          background-color: #f2f2f2;
         }
         &.message-bot {
           background-color: rgba(0, 153, 153, 0.2);

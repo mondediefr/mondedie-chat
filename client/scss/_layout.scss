@@ -111,46 +111,7 @@ input[type="checkbox"] {
 // note : ajouter un tooltip clickage pour les nom des users
 // note : la barre markdown est cache pour les tablettes. (à voir)
 
-@include media-breakpoint-down(lg) {
-  .menu {
-    .nav--header {
-      .site-name {
-        font-size: rem(22px) !important;
-      }
-    }
-  }
-  .section--center--footer {
-    #editor {
-      .md-header {
-        display: none;
-      }
-      textarea {
-        border-top: none;
-      }
-    }
-  }
-  .section--right {
-    flex: 0 0 rem(50px) !important;
-    .section--right--header {
-      h6 {
-        display: none;
-      }
-      #clients > li {
-        span {
-          display: none;
-        }
-        img {
-          margin-right: 0 !important;
-        }
-      }
-    }
-    .section--right--footer {
-      display: none;
-    }
-  }
-}
-
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down(md) {
   //page login
   .site-name {
     font-size: rem(55px) !important;
@@ -192,6 +153,42 @@ input[type="checkbox"] {
     }
     #toggle-button, h5 {
       display: inline-block;
+    }
+  }
+  .menu {
+    .nav--header {
+      .site-name {
+        font-size: rem(20px) !important;
+      }
+    }
+  }
+  .section--center--footer {
+    #editor {
+      .md-header {
+        display: none;
+      }
+      textarea {
+        border-top: none;
+      }
+    }
+  }
+  .section--right {
+    flex: 0 0 rem(50px) !important;
+    .section--right--header {
+      h6 {
+        display: none;
+      }
+      #clients > li {
+        span {
+          display: none;
+        }
+        img {
+          margin-right: 0 !important;
+        }
+      }
+    }
+    .section--right--footer {
+      display: none;
     }
   }
 }
