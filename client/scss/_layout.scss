@@ -152,10 +152,8 @@ input[type="checkbox"] {
 
 @include media-breakpoint-down(sm) {
   //page login
-  .nav--core {
-    .site-name {
-      font-size: rem(55px) !important;
-    }
+  .site-name {
+    font-size: rem(55px) !important;
   }
   //slideout
   .slideout-menu {
