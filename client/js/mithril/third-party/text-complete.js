@@ -61,7 +61,7 @@ $(function() {
     // Auto-complétion des commandes
     {
       commands: ['poke @', 'msg @', 'roll', 'afk on|off'],
-      match: /\B\/(\w*)$/,
+      match: /^\/(\w*)$/,
       search: function(term, callback) {
         callback($.map(this.commands, function(command) {
           return command.indexOf(term) === 0 ? command : null;
