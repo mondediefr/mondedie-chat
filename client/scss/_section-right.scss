@@ -5,13 +5,6 @@
   background-color: $color-menu;
   .section--right--header {
     padding: rem(10px);
-    .fa-sign-out, a {
-      color: #B94A48;
-      text-decoration: none;
-    }
-    .fa-sign-out{
-      margin-right: rem(7px);
-    }
     #clients {
       list-style-type: none;
       margin: 0; padding: 0;

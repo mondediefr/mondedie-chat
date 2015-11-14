@@ -1,4 +1,4 @@
-/* global $, document, editor, socket, notify, textarea */
+/* global $, document, editor, socket, notify, textarea, slideout */
 'use strict';
 
 $(function() {
@@ -84,5 +84,9 @@ $(function() {
     var username = $(this).text();
     textarea.value = textarea.value + '@' + username;
     textarea.focus();
+  });
+
+  $('#toggle-button').click(function(e) {
+    slideout.toggle();
   });
 });

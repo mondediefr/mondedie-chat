@@ -35,6 +35,7 @@ var jsFiles = [
   bowerPath + '/bootstrap-markdown/locale/bootstrap-markdown.fr.js',
   bowerPath + '/jquery-textcomplete/dist/jquery.textcomplete.min.js',
   bowerPath + '/mithril/mithril.min.js',
+  bowerPath + '/slideout.js/dist/slideout.min.js',
   // appJsFiles
   jsPath + '/app.js',
   jsPath + '/mithril/third-party/*.js',

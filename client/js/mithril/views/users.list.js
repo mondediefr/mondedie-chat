@@ -9,14 +9,12 @@ users.view = function() {
   return m("ul#clients", [
     users.vm.list.users().map(function(user, i) {
       return m("li", {key:user.id(), class:user.status()}, [
-        m("img", {class:'img-rounded', src:user.avatar(), alt:user.name()}),
+        m("img", {class:'img-rounded', src:user.avatar(), alt:user.name(), title:user.name()}),
         m("span", {style:{color:user.color()}}, user.name())
       ])
     })
   ])
 };
-
-
 
 /**
  * Component mounting

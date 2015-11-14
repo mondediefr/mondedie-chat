@@ -2,18 +2,22 @@ extends layout
 
 block content
 
-  section.conteneur-flex
+  .conteneur-flex
 
     //- menu gauche
-    .section--left
-      .section--left--header
+    nav.menu#menu
+      .nav--header
         h5.title-site
           a(href="/" title="Mondedie.fr" class="site-name")
             | {
             span  M
             | ONDEDIE
             span  }
-      .section--left--core
+      .nav--core
+        p.sign-out
+          a(href='/logout' class='link-sign-out' title='Déconnexion')
+            i.fa.fa-sign-out
+            span Se déconnecter
         h6 Commandes
         p: a(href='#' id='afk') /afk on | off
         p: a(href='#' id='pm') /msg @user message
@@ -38,34 +42,32 @@ block content
           p: a(href='#' id='unlock') Débloquer un utilisateur
 
     //- message
-    .section--center
-      .section--center--header
-        h5 #General
-      .section--center--core#content-messages
-      .section--center--footer
-        form#editor
-          textarea(id='text-editor' placeholder='Cliquez ici pour écrire un message.')
-        #content-typing
+    section.panel#panel
+      .section--center
+        .section--center--header
+          a#toggle-button.hidden-sm-up ☰
+          h5 #General
+        .section--center--core#content-messages
+        .section--center--footer
+          form#editor
+            textarea(id='text-editor' placeholder='Cliquez ici pour écrire un message.')
+          #content-typing
 
-    //- colonne de droite
-    .section--right
-      .section--right--header
-        p.sign-out
-          i(class='fa fa-sign-out' title='Déconnexion')
-          a(href='/logout' title='Déconnexion') Se déconnecter
-        h6 Utilisateurs en ligne
-        #content-users
-      .section--right--footer
-        span.links
-          a(href='http://mondedie.fr' target='_blank') Forum
-          | -
-          a(href='https://twitter.com/mondediefr' target='_blank') Twitter
-          | -
-          a(href='https://github.com/mondediefr/mondedie-chat' target='_blank') Github
-          | -
-        span.label.label-default
-          a(href='https://github.com/mondediefr/mondedie-chat/releases/tag/v1.0.0' target='_blank') v1.0.0
-
+      //- colonne de droite
+      .section--right
+        .section--right--header
+          h6 Utilisateurs en ligne
+          #content-users
+        .section--right--footer
+          span.links
+            a(href='http://mondedie.fr' target='_blank') Forum
+            | -
+            a(href='https://twitter.com/mondediefr' target='_blank') Twitter
+            | -
+            a(href='https://github.com/mondediefr/mondedie-chat' target='_blank') Github
+            | -
+          span.label.label-default
+            a(href='https://github.com/mondediefr/mondedie-chat/releases/tag/v1.0.0' target='_blank') v1.0.0
 
   //- popup
   #content-smileys

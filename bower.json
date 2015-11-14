@@ -13,7 +13,8 @@
     "bootstrap": "v4.0.0-alpha",
     "bootstrap-markdown": "master",
     "font-awesome": "Font-Awesome#~4.4.0",
-    "jquery-textcomplete": "~0.8.1"
+    "jquery-textcomplete": "~0.8.1",
+    "slideout.js": "~0.1.11"
   },
   "resolutions": {
     "bootstrap": "v4.0.0-alpha"

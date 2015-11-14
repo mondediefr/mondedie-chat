@@ -2,26 +2,31 @@
 // # _menu-left.scss #
 // ###################
 
-.section--left {
+.menu {
   background-color: $color-menu;
-
-  .section--left--header {
+  .nav--header {
     padding: rem(10px);
-
     h5 {
       margin: 0;
-
       &.title-site {
         text-align: center;
-
         .site-name {
           font-size: rem(28px);
         }
       }
     }
   }
-
-  .section--left--core {
+  .nav--core {
     padding: rem(10px);
+    .sign-out {
+      margin-bottom: rem(10px);
+    }
+    .link-sign-out {
+      color: #b94a48;
+      text-decoration: none;
+    }
+    .fa-sign-out {
+      margin-right: rem(7px);
+    }
   }
 }
