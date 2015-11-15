@@ -17,7 +17,32 @@
     }
   }
   .nav--core {
-    padding: rem(10px);
+    padding: 0 rem(10px) rem(10px) rem(10px);
+    .nav--core--block {
+      h6 {
+        color: #595959;
+        i {
+          margin-right: rem(5px);
+        }
+      }
+      a {
+        display: block;
+        margin: rem(4px) 0 0 rem(10px);
+      }
+      label {
+        display: block;
+        color: #595959;
+        cursor: pointer;
+        margin: rem(4px) 0 0 rem(10px);
+      }
+    }
+    hr {
+      margin: rem(12px) 0 rem(12px) 0;
+      border-top: rem(1px) dashed #7089a9;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
     .sign-out {
       margin-bottom: rem(10px);
     }

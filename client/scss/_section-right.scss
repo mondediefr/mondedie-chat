@@ -5,6 +5,12 @@
   background-color: $color-menu;
   .section--right--header {
     padding: rem(10px);
+    h6 {
+      color: #595959;
+      i {
+        margin-right: rem(5px);
+      }
+    }
     #clients {
       list-style-type: none;
       margin: 0; padding: 0;
