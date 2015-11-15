@@ -115,7 +115,7 @@ messages.vm = (function() {
         vm.list.push(new messages.Message({
           type:'message-bot',
           time:time,
-          message:username + " s'est connecté"
+          message:username + " vient de se connecter"
         }));
         m.redraw();
       });
@@ -125,7 +125,7 @@ messages.vm = (function() {
         vm.list.push(new messages.Message({
           type:'message-bot',
           time:time,
-          message:user.name + " s'est déconnecté"
+          message:user.name + " vient de se déconnecter"
         }));
         m.redraw();
       });
@@ -197,7 +197,7 @@ messages.vm = (function() {
           vm.notification('Impossible de rétablir la connexion avec le serveur.');
           vm.list.push(new messages.Message({
             type:'message-error',
-            message:'Impossible de rétablir la connexion avec le serveur, recharger la page ou réessayer ultérieurement..'
+            message:'Impossible de rétablir la connexion avec le serveur, recharger la page ou réessayer ultérieurement.'
           }));
         }
         m.redraw();

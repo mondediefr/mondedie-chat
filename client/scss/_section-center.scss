@@ -11,15 +11,20 @@
   }
   .section--center--header {
     padding: rem(10px);
-    border-bottom: 1px solid #ddd;
-    h5 {
-      color: #777;
-      display: inline-block;
+    border-bottom: rem(1px) solid #ddd;
+    #toggle-button {
+      color: #595959;
+      font-size: rem(20px);
+      margin-right: rem(7px);
+      padding: 0;
+      border: none;
+      outline: none;
+      background-color: #fff;
     }
-    span {
-      border: 1px solid green;
-      margin-right: 4px;
-      margin-left: 4px;
+    h5 {
+      color: #595959;
+      margin: 0;
+      display: inline-block;
     }
   }
   .section--center--core {
@@ -34,7 +39,7 @@
           cursor: pointer;
         }
         .date {
-          //...
+          // todo
         }
         .text {
           word-wrap: break-word;

@@ -5,18 +5,15 @@
 .title-site {
   margin: rem(15px) 0;
   text-align: center;
-
   .site-name {
     color: #a4b3ba;
     font-family: 'Oswald', sans-serif;
     font-size: rem(70px);
     text-decoration: none;
-
     span {
       color: #66afe9;
     }
   }
-
   .site-motto {
     color: #999;
     font-size: rem(10px);
@@ -27,41 +24,33 @@
 }
 
 #login {
-
   .form-signin {
     margin: 0 auto;
     max-width: rem(330px);
     padding: 0;
-
     .form-control {
       // permet le focus sur 1 ligne, un peu wtf la solution
       position: relative;
       padding: rem(10px);
-
       &:focus {
         z-index: 1;
       }
     }
-
     .form-group, .checkbox {
       margin-bottom: rem(10px);
     }
-
     .checkbox {
       text-align: center;
     }
-
     .btn {
       border-width: rem(2px);
     }
-
     input[type="text"] {
       margin-bottom: rem(-2px);
       border-width: rem(2px);
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
     }
-
     input[type="password"] {
       border-width: rem(2px);
       border-top-left-radius: 0;

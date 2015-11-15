@@ -142,24 +142,9 @@ input[type="checkbox"] {
       overflow: hidden;
     }
   }
-  //button slide
-  .section--center--header {
-    #toggle-button {
-      font-size: rem(20px);
-      margin-right: rem(7px);
-      text-decoration: none;
-      color: #777;
-      cursor: pointer;
-    }
-    #toggle-button, h5 {
-      display: inline-block;
-    }
-  }
   .menu {
-    .nav--header {
-      .site-name {
-        font-size: rem(20px) !important;
-      }
+    .site-name {
+      font-size: rem(20px) !important;
     }
   }
   .section--center--footer {

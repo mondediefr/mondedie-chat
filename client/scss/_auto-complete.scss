@@ -12,7 +12,6 @@
   overflow: hidden;
   letter-spacing: .025em;
   box-shadow: rem(3px) rem(3px) rem(3px) rgba(0,0,0,.2);
-
   li {
     letter-spacing: 0;
     display: block;
@@ -20,11 +19,9 @@
     margin: 0;
     padding: 0;
     border: none;
-
     &:before {
       display: none;
     }
-
     .emojione {
       vertical-align: middle;
       font-size: 1.23em;
@@ -33,7 +30,6 @@
       top: -1px;
       margin: 0 4px 0 0;
     }
-
     a {
       display: block;
       height: 100%;
@@ -42,17 +38,14 @@
       color: #4f4f4f;
       text-decoration: none;
     }
-
     &:hover {
       background: #6e6e6e;
       color: white;
     }
   }
-
   .textcomplete-footer {
     margin-top: .3em;
     background: #e6e6e6;
-
     a {
       color: #999999;
       text-decoration: none;
@@ -62,22 +55,18 @@
       padding-left: 1.8181em;
       font-size: .84em;
     }
-
     .arrow {
       margin-left: .8em;
       font-size: 1.3em;
     }
   }
-
   .active {
     background: #6e6e6e;
     color: white;
-
     a {
       color: inherit;
     }
   }
-
   a:hover {
     cursor: pointer;
   }
