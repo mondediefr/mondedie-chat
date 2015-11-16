@@ -26,8 +26,30 @@
           max-width: rem(30px);
           margin-right: rem(7px);
         }
+        .status {
+          position: absolute;
+          width: rem(7px);
+          height: rem(7px);
+          margin-top: rem(-4px);
+          margin-left: rem(-4px);
+          border-radius: 5em;
+          &.online {
+            border: rem(4px) solid limegreen;
+          }
+          &.afk {
+            border: rem(4px) solid orange;
+          }
+          &:after {
+            content: " ";
+            position: absolute;
+            left: 0;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            border-bottom: rem(1px) solid white;
+          }
+        }
         &.afk {
-          opacity: 0.3;
+          //opacity: 0.3;
         }
       }
     }
