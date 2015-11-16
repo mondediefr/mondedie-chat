@@ -160,7 +160,7 @@ input[type="checkbox"] {
   .section--right {
     flex: 0 0 rem(50px) !important;
     .section--right--header {
-      h6 {
+      h6, hr {
         display: none;
       }
       #clients > li {
