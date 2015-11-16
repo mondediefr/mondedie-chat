@@ -12,6 +12,10 @@
         margin-right: rem(5px);
       }
     }
+    hr {
+      margin: rem(12px) 0 rem(12px) 0;
+      border-top: rem(1px) dashed #7089a9;
+    }
     #clients {
       list-style-type: none;
       margin: 0; padding: 0;

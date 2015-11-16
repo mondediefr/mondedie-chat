@@ -11,6 +11,7 @@ Node.js chat application using Express, Socket.io, Redis and Mithril.
 
 - Real-time communication via socket or long-polling
 - Using flarum API
+- Responsive design
 - Private messages
 - List of connected users
 - Auto-complete usernames, commands and smileys
@@ -29,7 +30,8 @@ Node.js chat application using Express, Socket.io, Redis and Mithril.
 
 ## Screenshot
 
-![screenshot](https://i.imgur.com/2oeAaIO.png "screenshot")
+![screenshot](https://i.imgur.com/5DD0KqC.png "screenshot")
+![screenshot responsive](https://i.imgur.com/TuSo0Ha.png "screenshot responsive")
 
 ## Hosting
 
