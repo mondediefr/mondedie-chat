@@ -108,9 +108,6 @@ input[type="checkbox"] {
 // # responsives        #
 // ######################
 
-// note : ajouter un tooltip clickage pour les nom des users
-// note : la barre markdown est cache pour les tablettes. (à voir)
-
 @include media-breakpoint-down(md) {
   //page login
   .site-name {
@@ -122,15 +119,19 @@ input[type="checkbox"] {
     left: 0;
     top: 0;
     bottom: 0;
-    right: 0;
-    z-index: 0;
     width: rem(225px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     display: none;
+    .nav--header {
+      height: rem(50px);
+      .site-name {
+        font-size: rem(28px) !important;
+      }
+    }
   }
   .slideout-panel {
-    position:relative;
+    position: relative;
     z-index: 1;
   }
   .slideout-open {
@@ -140,11 +141,6 @@ input[type="checkbox"] {
     }
     & body, & .slideout-panel {
       overflow: hidden;
-    }
-  }
-  .menu {
-    .site-name {
-      font-size: rem(20px) !important;
     }
   }
   .section--center--footer {
