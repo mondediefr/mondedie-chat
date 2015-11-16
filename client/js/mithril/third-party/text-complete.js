@@ -3,6 +3,10 @@
 
 $(function() {
 
+  var option = {
+    placement: 'top'
+  };
+
   $.get('../json/emoji_strategy.json', function(emojiStrategy) {
     $("#text-editor").textcomplete([{
       // Auto-complétion des smileys
@@ -56,7 +60,7 @@ $(function() {
       replace: function(username) {
         return '@' + username + ' ';
       },
-      index: 1,
+      index: 1
     },
     // Auto-complétion des commandes
     {
@@ -73,8 +77,8 @@ $(function() {
       replace: function(command) {
         return '/' + command;
       },
-      index: 1,
+      index: 1
     }
-    ]);
+    ], option);
   });
 });

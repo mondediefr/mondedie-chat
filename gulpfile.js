@@ -46,10 +46,9 @@ var jsFiles = [
 ];
 
 var cssFiles = [
-    'client/scss/app.scss',
-    bowerPath + '/bootstrap-markdown/css/bootstrap-markdown.min.css',
-    bowerPath + '/jquery-textcomplete/dist/jquery.textcomplete.css',
-    bowerPath + '/font-awesome/css/font-awesome.min.css'
+  'client/scss/app.scss',
+  bowerPath + '/bootstrap-markdown/css/bootstrap-markdown.min.css',
+  bowerPath + '/font-awesome/css/font-awesome.min.css'
 ];
 
 // ########################### ERROR ###########################
