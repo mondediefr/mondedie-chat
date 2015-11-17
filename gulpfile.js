@@ -95,9 +95,8 @@ gulp.task('inject-js', ['js'], function() {
 });
 
 gulp.task('fonts', ['bower'], function() {
-  return gulp.src([
-    bowerPath + '/font-awesome/fonts/*',
-  ]).pipe(gulp.dest('public/fonts'));
+  return gulp.src(bowerPath + '/font-awesome/fonts/*')
+    .pipe(gulp.dest('public/fonts'));
 });
 
 gulp.task('emojione-strategy', ['bower'], function() {

@@ -16,7 +16,7 @@ users.view = function() {
           alt:user.name(),
           title:user.name() + ' - ' + user.status()
         }),
-        m("span", {style:{color:user.color()}}, user.name())
+        m("span", {class:'pseudo', style:{color:user.color()}}, user.name())
       ])
     })
   ])
