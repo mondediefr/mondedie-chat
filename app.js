@@ -1,5 +1,6 @@
 "use strict";
-require('dotenv').load();
+if(process.env.ENV === 'development')
+  require('dotenv').load();
 
 var express      = require('express');
 var path         = require('path');
