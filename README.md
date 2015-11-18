@@ -220,12 +220,51 @@ Open app : http://127.0.0.1:5000/
 
 ---
 
+## Docker installation
+
+### Requirements:
+* Redis
+* http instance for api server
+
+
+### Build image
+```
+docker build -t mondedie/chat github.com/mondediefr/mondedie-chat.git
+```
+
+### Image usage
+
+#### Ports
+* 5000
+
+#### Environment
+* ENV=production
+* COOKIES_SECRET=xxxxxxxxxxx
+* SESSION_SECRET=yyyyyyyyyyy
+* AUTH_API_ENDPOINT=http://domain.tld/api/auth
+* REDIS_URL=http://domain.tld:6379
+
+### Run container
+```
+docker run -d -p 5000:5000 -e COOKIES_SECRET=xxxxxxxxxxx -e SESSION_SECRET=yyyyyyyyyyyy -e AUTH_API_ENDPOINT=http://domain.tld/api/auth.php -e ENV=development -e REDIS_URL=http://domain.tld:6379 mondedie/chat
+```
+
+### Run full stack
+We have created a docker-compose.yml for example with 3 containers :
+* chat
+* nginx : host your API
+* redis
+
+```
+docker-compose up -d
+```
+
+
 ## Roadmap
 
 - Ignore a user
 - Private rooms
 - Unit tests + coverage
-- Docker container
 - Build an API
 - Increase chatbot IQ
 
