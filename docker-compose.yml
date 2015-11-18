@@ -1,5 +1,6 @@
 chat:
-  build: .
+  image: mondedie/chat
+  # build: .
   environment:
     - AUTH_API_ENDPOINT=http://web/api/auth.php
     - ENV=production
