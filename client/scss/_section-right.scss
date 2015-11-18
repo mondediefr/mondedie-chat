@@ -2,6 +2,8 @@
 // # _menu-right.scss #
 // ####################
 
+$size-circle-status: 8px; //chiffre pair obligatoire
+
 .section--right {
   background-color: $color-menu;
   .section--right--header {
@@ -20,6 +22,7 @@
       list-style-type: none;
       margin: 0; padding: 0;
       li {
+        position: relative;
         margin-bottom: rem(5px);
         & > img {
           max-height: rem(30px);
@@ -28,28 +31,19 @@
         }
         .status {
           position: absolute;
-          width: rem(7px);
-          height: rem(7px);
-          margin-top: rem(-4px);
-          margin-left: rem(-4px);
-          border-radius: 5em;
+          top: 0;
+          left: 0;
+          width: rem($size-circle-status);
+          height: rem($size-circle-status);
+          margin-left: rem(-1 * ($size-circle-status / 2));
+          margin-top: rem(-1 * ($size-circle-status / 2));
+          border-radius: 50%;
           &.online {
-            border: rem(4px) solid limegreen;
+            background-color: limegreen;
           }
           &.afk {
-            border: rem(4px) solid orange;
+            background-color: orange;
           }
-          &:after {
-            content: " ";
-            position: absolute;
-            left: 0;
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-            border-bottom: rem(1px) solid white;
-          }
-        }
-        &.afk {
-          //opacity: 0.3;
         }
       }
     }
