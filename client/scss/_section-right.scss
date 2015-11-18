@@ -23,11 +23,12 @@ $size-circle-status: 8px; //chiffre pair obligatoire
       margin: 0; padding: 0;
       li {
         position: relative;
-        margin-bottom: rem(5px);
-        & > img {
-          max-height: rem(30px);
-          max-width: rem(30px);
+        margin-bottom: rem(8px);
+        img {
+          height: rem(30px);
+          width: rem(30px);
           margin-right: rem(7px);
+          border: rem(1px) solid #777;
         }
         .status {
           position: absolute;
