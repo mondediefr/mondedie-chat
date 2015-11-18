@@ -1,7 +1,7 @@
 chat:
   build: .
   environment:
-    - AUTH_API_ENDPOINT=http://mondedie.fr/api/auth.php
+    - AUTH_API_ENDPOINT=http://web/api/auth.php
     - ENV=production
     - COOKIES_SECRET=cbdjgjfozjshgklh679
     - SESSION_SECRET=hfdksoehngkfdlshj2
@@ -10,6 +10,10 @@ chat:
     - "5000:5000"
   links:
     - redis:redis
+    - web:web
 
 redis:
   image: redis:3.0.5 
+
+web:
+  image: nginx:1.9.6
