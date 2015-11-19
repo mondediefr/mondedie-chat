@@ -54,7 +54,8 @@
   padding: rem(10px);
   .smileys-container img {
     cursor: pointer;
-    width: $size-smiley;
+    width: rem($size-smiley);
+    height: rem($size-smiley);
     margin: rem(4px);
   }
   &.opened {

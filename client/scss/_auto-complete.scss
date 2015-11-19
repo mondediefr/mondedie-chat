@@ -2,15 +2,15 @@
 // # _auto-complete.scss #
 // #######################
 
-$radius: rem(4px);
+$radius: 4px;
 
 .dropdown-menu {
   list-style: none;
   padding: 0;
   margin: 0;
-  border-radius: $radius;
+  border-radius: rem($radius);
   border-color: #ddd;
-  box-shadow: 0 0 rem(5px) rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 rem(3px) #ddd;
   li {
     cursor: pointer;
     border-top: rem(1px) solid #ddd;
@@ -21,19 +21,19 @@ $radius: rem(4px);
       color: #000;
       text-decoration: none;
       .emojione {
-        width: $size-smiley;
-        height: $size-smiley;
+        width: rem($size-smiley);
+        height: rem($size-smiley);
         margin-right: rem(7px);
       }
     }
     &:first-child {
       border-top: none;
-      border-top-left-radius: $radius;
-      border-top-right-radius: $radius;
+      border-top-left-radius: rem($radius);
+      border-top-right-radius: rem($radius);
     }
     &:last-child {
-      border-bottom-left-radius: $radius;
-      border-bottom-right-radius: $radius;
+      border-bottom-left-radius: rem($radius);
+      border-bottom-right-radius: rem($radius);
     }
   }
   li:hover, .active {

@@ -47,17 +47,15 @@ input[type="checkbox"] {
     flex-basis: rem(50px);
   }
   .nav--core {
-    //flex: 1 1 auto;
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: auto;
     overflow-y: auto;
   }
-  //.section--left-footer {}
 }
 
 .panel {
-  flex: 5; // 1+4+1 soit 4/6 de l'interface
+  flex: 5;
   display: flex;
   flex-direction: row; //bloque en ligne
   height: 100%; //permet de fix les footer
