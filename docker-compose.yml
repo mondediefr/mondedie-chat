@@ -1,5 +1,5 @@
 chat:
-  image: mondedie/chat
+  image: mondediefr/chat
   # build: .
   environment:
     - AUTH_API_ENDPOINT=http://web/api/auth.php
@@ -14,7 +14,7 @@ chat:
     - web:web
 
 redis:
-  image: redis:3.0.5 
+  image: xataz/redis:3.0.5 
 
 web:
   image: nginx:1.9.6
