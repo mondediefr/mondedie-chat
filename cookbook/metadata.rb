@@ -2,7 +2,7 @@ name 'chat'
 maintainer 'hardware, magicalex'
 maintainer_email 'contact@meshup.net'
 description 'Mondedie-chat vagrant box'
-version '1.1.0'
+version '1.2.0'
 
 recipe 'chat', 'Mondedie-chat installation recipies'
 
