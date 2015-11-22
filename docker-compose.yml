@@ -1,5 +1,5 @@
 chat:
-  image: mondediefr/chat
+  image: mondedie/chat
   # build: .
   environment:
     - AUTH_API_ENDPOINT=http://web/api/auth.php
