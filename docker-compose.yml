@@ -14,7 +14,7 @@ chat:
     - web:web
 
 redis:
-  image: redis:3.0.5
+  image: xataz/redis:3.0.5 
 
 web:
   image: nginx:1.9.6
