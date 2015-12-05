@@ -100,9 +100,8 @@ gulp.task('fonts', ['bower'], function() {
 });
 
 gulp.task('emojione-strategy', ['bower'], function() {
-  return gulp.src([
-    'node_modules/emojione/emoji_strategy.json',
-  ]).pipe(gulp.dest('public/json'));
+  return gulp.src('node_modules/emojione/emoji_strategy.json')
+    .pipe(gulp.dest('public/json'));
 });
 
 gulp.task('clean-css', ['bower'], function () {

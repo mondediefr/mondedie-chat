@@ -32,7 +32,6 @@
       padding: 0; margin: 0;
       list-style-type: none;
       li {
-        position: relative;
         padding: rem(4px);
         .username {
           font-weight: bold;
@@ -40,6 +39,19 @@
         }
         .text {
           word-wrap: break-word;
+          img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            @-moz-document url-prefix() {
+              //bug fix, see : https://bugzilla.mozilla.org/show_bug.cgi?id=975632
+              width: 100%;
+            }
+            &.emojione {
+              width: rem($size-smiley);
+              display: inline;
+            }
+          }
         }
         .option {
           float: right;
@@ -64,15 +76,6 @@
         }
         &.message-success {
           background-color: rgba(0, 255, 0, 0.3);
-        }
-        .text img {
-          display: block;
-          max-width: 100%;
-          height: auto;
-          &.emojione {
-            width: rem($size-smiley);
-            display: inline;
-          }
         }
         pre, blockquote {
           padding: rem(10px);
