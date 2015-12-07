@@ -25,7 +25,7 @@
     },
     "ANALYTIC_KEY": {
       "description": "Analytics key for google analytics",
-      "value": "production"
+      "required":false
     }
   },
   "addons": [
