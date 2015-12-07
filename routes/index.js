@@ -89,6 +89,8 @@ router.get('/chatroom', function(req, res, next) {
   session.settings(req, res, { shouldBeLogged:true }, function(settings) {
     settings.title += "Chatroom";
     settings.user = req.session.user;
+    if(process.env.ANALYTIC_KEY)
+      settings.analytics = process.env.ANALYTIC_KEY;
     return res.render('chatroom', settings);
   });
 });

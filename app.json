@@ -22,6 +22,10 @@
     "ENV": {
       "description": "Online environment",
       "value": "production"
+    },
+    "ANALYTIC_KEY": {
+      "description": "Analytics key for google analytics",
+      "value": "production"
     }
   },
   "addons": [
