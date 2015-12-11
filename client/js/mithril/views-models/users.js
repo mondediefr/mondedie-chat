@@ -28,6 +28,10 @@ users.vm = (function() {
         socket.on('user_unafk', function(time, username) {
           vm.list.status('online', username).then(m.redraw);
         });
+        socket.on('disconnect', function() {
+          vm.list.reinit();
+          m.redraw();
+        });
       }
     }());
   };
