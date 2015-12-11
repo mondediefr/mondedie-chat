@@ -17,6 +17,6 @@
     "slideout.js": "~0.1.11"
   },
   "resolutions": {
-    "bootstrap": "v4.0.0-alpha"
+    "bootstrap": "v4.0.0-alpha.2"
   }
 }

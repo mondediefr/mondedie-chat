@@ -129,9 +129,10 @@ gulp.task('sass', ['clean-css'], function() {
         'Chrome >= 35',
         'Firefox >= 31',
         'Explorer >= 9',
-        'iOS >= 7',
+        'Edge >= 12',
+        'iOS >= 8',
         'Opera >= 12',
-        'Safari >= 7.1'
+        'Safari >= 8'
       ]
     }))
     .pipe(csscomb())
