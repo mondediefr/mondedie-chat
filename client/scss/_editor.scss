@@ -29,14 +29,32 @@
   }
 }
 
-#content-typing {
+#footer-editor {
+  display: flex;
+  flex-direction: row;
   height: rem(17px);
   border: {
     style: dashed;
     color: #ddd;
     width: 0 0 rem(1px) 0;
   }
-  p {
+  #content-typing {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    p {
+      padding: 0 rem(4px) 0 rem(4px);
+      margin: 0;
+      font-size: rem(11px);
+      color: #919191;
+    }
+  }
+  #count-textarea {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    width: rem(70px);
+    text-align: right;
     padding: 0 rem(4px) 0 rem(4px);
     margin: 0;
     font-size: rem(11px);
