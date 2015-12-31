@@ -9,7 +9,6 @@ $(function(){
 
   area.keyup(function(event) {
     currentString = area.val().length;
-    console.log(currentString);
     if (currentString > 1000) {
       countTextarea.addClass('full');
     } else {
