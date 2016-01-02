@@ -53,6 +53,6 @@
     "run-sequence": "^1.1.5"
   },
   "engines": {
-    "node": "0.12.x"
+    "node": "5.3.x"
   }
 }
