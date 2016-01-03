@@ -222,11 +222,6 @@ Open app : http://127.0.0.1:5000/
 
 ## Docker installation
 
-### Requirements:
-
-* Redis
-* http instance for api server
-
 ### Build image
 ```
 docker build -t mondedie/chat github.com/mondediefr/mondedie-chat.git
@@ -250,10 +245,35 @@ docker run -d -p 5000:5000 -e COOKIES_SECRET=xxxxxxxxxxx -e SESSION_SECRET=yyyyy
 ```
 
 ### Run full stack
+
 We have created a docker-compose.yml for example with 3 containers :
+
 * chat
-* nginx : host your API
+* nginx : reverse-proxy mode
 * redis
+
+Create a new vhost with this content :
+
+```nginx
+# /docker/nginx/sites-enabled/chat.conf
+
+server {
+
+  listen 80;
+  server_name chat.domain.tld;
+
+  location / {
+    proxy_pass http://chat:5000;
+    # For websockets handshake to establish the upgraded connection
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+  }
+
+}
+```
+
+Run !
 
 ```
 docker-compose up -d

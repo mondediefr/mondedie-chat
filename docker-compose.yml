@@ -1,20 +1,22 @@
+nginx:
+  image: xataz/nginx:1.9.9
+  links:
+    - chat:chat
+  ports:
+    - "80:80"
+  volumes:
+    - /docker/nginx/sites-enabled:/sites-enabled
+
 chat:
-  image: mondedie/chat
-  # build: .
+  image: mondedie/mondedie-chat
+  links:
+    - redis:redis
   environment:
     - AUTH_API_ENDPOINT=http://domain.tld/api/auth.php
     - ENV=production
     - COOKIES_SECRET=xxxxxxxxxxx
     - SESSION_SECRET=yyyyyyyyyyy
-    - REDIS_URL=redis://localhost:6379
-  ports:
-    - "5000:5000"
-  links:
-    - redis:redis
-    - web:web
+    - REDIS_URL=redis://redis:6379
 
 redis:
-  image: xataz/redis:3.0.5 
-
-web:
-  image: nginx:1.9.6
+  image: xataz/redis:3.0.5
