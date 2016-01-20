@@ -19,8 +19,8 @@ Smileys.prototype.replace = function(message) {
 }
 
 var jedeConversion = function(message) {
-  message = message.replace(':)', '<img src="/images/smileys/smile.png" class="emojione" alt="smile" title="smile"></img>');
-  message = message.replace('^^', '<img src="/images/smileys/slight_smile.png" class="emojione" alt="smile" title="smile"></img>')
+  message = message.replace(/(\:\))+/g, '<img src="/images/smileys/smile.png" class="emojione" alt="smile" title="smile"></img>');
+  message = message.replace(/(\^\^)+/g, '<img src="/images/smileys/slight_smile.png" class="emojione" alt="smile" title="smile"></img>')
   return emojione.shortnameToImage(message);
 }
 
