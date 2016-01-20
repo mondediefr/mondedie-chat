@@ -5,7 +5,6 @@ var Promise  = require('bluebird');
 var debug    = require('debug')('socket')
 var moment   = require('moment-timezone');
 var marked   = require('marked');
-var emojione = require('emojione');
 
 var redis    = require('../libs/redis')();
 var Smileys  = require('../libs/smileys');
@@ -18,8 +17,6 @@ var messages = new Messages(redis.client);
 var smileys  = new Smileys();
 
 var dateFormat = 'DD/MM à HH:mm:ss'
-
-emojione.ascii = true;
 
 marked.setOptions({
   breaks: true,
@@ -37,7 +34,7 @@ renderer.link = function(href, title, text) {
 }
 
 renderer.paragraph = function(text) {
-  return smileys.replace(emojione.shortnameToImage(text));
+  return smileys.replace(text);
 }
 
 // Ping du client toutes les 50 secondes pour éviter
