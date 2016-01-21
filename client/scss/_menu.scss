@@ -5,13 +5,13 @@
 .menu {
   background-color: $color-menu;
   .nav--header {
-    padding: rem(10px);
+    flex: 1;
     h5 {
       margin: 0;
       &.title-site {
         text-align: center;
         .site-name {
-          font-size: rem(28px);
+          font-size: rem(37px);
         }
       }
     }

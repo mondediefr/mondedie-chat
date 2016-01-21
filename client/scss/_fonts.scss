@@ -1,0 +1,11 @@
+// ###################
+// # _fonts.scss     #
+// ###################
+
+@font-face {
+  font-family: "BebasNeue";
+  src: url('/fonts/BebasNeue-webfont.eot'), /* IE9 Compat Modes */
+  url('/fonts/BebasNeue-webfont.woff') format('woff'), /* Modern Browsers */
+  url('/fonts/BebasNeue-webfont.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('/fonts/BebasNeue-webfont.svg') format('svg'); /* Legacy iOS */
+}
