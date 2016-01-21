@@ -126,7 +126,7 @@ input[type="checkbox"] {
 @include media-breakpoint-down(md) {
   //page login
   .site-name {
-    font-size: rem(55px) !important;
+    font-size: rem(70px) !important;
   }
   //slideout
   .slideout-menu {
@@ -139,8 +139,9 @@ input[type="checkbox"] {
     -webkit-overflow-scrolling: touch;
     display: none;
     .nav--header {
+      padding: rem(1px);
       .site-name {
-        font-size: rem(28px) !important;
+        font-size: rem(42px) !important;
       }
     }
   }
