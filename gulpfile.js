@@ -19,6 +19,7 @@ var del = require('del');
 
 var bowerPath = 'client/bower';
 var jsPath = 'client/js';
+var fontsPath = 'client/fonts';
 
 var jshintFiles = [
   'app.js', 'gulpfile.js', 'routes/*.js', 'libs/*.js',
@@ -95,7 +96,7 @@ gulp.task('inject-js', ['js'], function() {
 });
 
 gulp.task('fonts', ['bower'], function() {
-  return gulp.src(bowerPath + '/font-awesome/fonts/*')
+  return gulp.src([bowerPath + '/font-awesome/fonts/*', fontsPath + '/*'])
     .pipe(gulp.dest('public/fonts'));
 });
 
