@@ -45,7 +45,9 @@ var smileys = smileys || {};
         { url:'/images/smileys/monkey-smile.png', pattern:':monkeysmile:' },
         { url:'/images/smileys/noel.gif', pattern:':noel:' },
         { url:'/images/smileys/kappa.png', pattern:':kappa:' },
-        { url:'/images/smileys/hap.gif', pattern:':hap:' }
+        { url:'/images/smileys/bb8.png', pattern:':bb8:' },
+        { url:'/images/smileys/saber.png', pattern:':saber:' },
+        { url:'/images/smileys/kyloren.png', pattern:':kyloren:' }
       ]
     }
   };
