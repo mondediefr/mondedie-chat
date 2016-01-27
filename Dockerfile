@@ -1,4 +1,4 @@
-FROM xataz/node:5.3.0-onbuild
+FROM xataz/node:5.5.0-onbuild
 MAINTAINER "xataz <xataz@mondedie.fr>"
 ENV REDIS_URL=redis://localhost:6379
 ENV AUTH_API_ENDPOINT=http://domain.tld/api/auth.php
