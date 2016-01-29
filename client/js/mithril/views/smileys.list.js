@@ -22,7 +22,7 @@ smileys.view = function(controller) {
  * DOM methods
  */
 function insertEmoji(pattern) {
-  textarea.value = textarea.value + ' ' + pattern;
+  textarea.value = textarea.value + pattern;
   textarea.focus();
 }
 

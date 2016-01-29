@@ -3,10 +3,12 @@
   ":monkeysmile:":"monkey-smile.png",
   ":noel:":"noel.gif",
   ":kappa:":"kappa.png",
-  ":hap:":"hap.gif",
   "Kappa":"kappa.png",
   "kappa":"kappa.png",
   ":bb8:":"bb8.png",
+  ":hap:":"hap.gif",
   ":saber:":"saber.png",
-  ":kyloren:":"kyloren.png"
+  ":kyloren:":"kyloren.png",
+  ":troll:":"troll.png",
+  ":trollface:":"troll.png"
 }

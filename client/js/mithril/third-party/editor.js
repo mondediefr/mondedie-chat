@@ -1,8 +1,7 @@
 /* global $, document, window, messages, event, textarea, socket */
 'use strict';
 
-$(function(){
-
+$(function() {
   /**
   * Markdown editor
   */
@@ -21,13 +20,13 @@ $(function(){
         title: 'smiley',
         icon: 'fa fa-smile-o', callback: function(e) {
           var smiley = $('#content-smileys');
-          var button = $('span.fa.fa-smile-o').parent();
+          var button = $('.fa.fa-smile-o').parent();
           var location = button.offset();
-          var heightSmiley = 135, widthSmiley = 310;
+          var heightSmiley = 220, widthSmiley = 275;
           smiley.css({
             'position': 'absolute',
-            'top': location.top - heightSmiley,
-            'left': location.left,
+            'top': location.top - heightSmiley - 6,
+            'left': location.left - (widthSmiley / 2) + 20,
             'width': widthSmiley,
             'height': heightSmiley
           });

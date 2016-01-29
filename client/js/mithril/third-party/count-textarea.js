@@ -1,12 +1,11 @@
 /* global $, document, event */
 'use strict';
 
-$(function(){
+$(function() {
   var area = $('#text-editor');
   var currentString = area.val().length;
   var countTextarea = $('#count-textarea');
   countTextarea.text(1000 - currentString);
-
   area.keyup(function(event) {
     currentString = area.val().length;
     if (currentString > 1000) {
@@ -16,5 +15,4 @@ $(function(){
     }
     countTextarea.text(1000 - currentString);
   });
-
 });
