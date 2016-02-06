@@ -1,6 +1,6 @@
 /* global document, io, m, window */
 'use strict';
-var socket = io({ forceNew: true });
+var socket = io.connect('/', {'forceNew': true});
 
 /**
  * Mithril namespaces

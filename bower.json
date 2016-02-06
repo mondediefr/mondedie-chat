@@ -11,10 +11,10 @@
     "visibilityjs": "~1.2.1",
     "HTML5-Desktop-Notifications": "html5-desktop-notifications#*",
     "bootstrap": "v4.0.0-alpha",
-    "bootstrap-markdown": "master",
-    "font-awesome": "Font-Awesome#~4.4.0",
+    "bootstrap-markdown": "~2.10.0",
+    "font-awesome": "Font-Awesome#~4.5.0",
     "jquery-textcomplete": "~0.8.1",
-    "slideout.js": "~0.1.11"
+    "slideout.js": "~0.1.12"
   },
   "resolutions": {
     "bootstrap": "v4.0.0-alpha"

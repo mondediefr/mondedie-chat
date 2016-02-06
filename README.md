@@ -3,9 +3,6 @@
 Node.js chat application using Express, Socket.io, Redis and Mithril.
 
 [![dependency](https://img.shields.io/david/mondediefr/mondedie-chat.svg?label=Dependencies)](https://github.com/mondediefr/mondedie-chat/blob/master/package.json#L8)
-[![release](https://img.shields.io/github/release/mondediefr/mondedie-chat.svg?label=Release)](https://github.com/mondediefr/mondedie-chat/releases)
-[![stars](https://img.shields.io/github/stars/mondediefr/mondedie-chat.svg?label=Likes)](https://github.com/mondediefr/mondedie-chat/stargazers)
-[![license](https://img.shields.io/github/license/mondediefr/mondedie-chat.svg?label=License)](https://raw.githubusercontent.com/mondediefr/mondedie-chat/master/LICENSE)
 
 ## Features
 
@@ -30,22 +27,10 @@ Node.js chat application using Express, Socket.io, Redis and Mithril.
 
 ## Screenshot
 
-![screenshot](https://i.imgur.com/5DD0KqC.png "screenshot")
-![screenshot responsive](https://i.imgur.com/TuSo0Ha.png "screenshot responsive")
+![screenshot](http://i.imgur.com/SvOP3ix.png "screenshot")
+![screenshot responsive](http://i.imgur.com/yjd28Ud.png "screenshot responsive")
 
-## Hosting
-
-This chat is hosted on Heroku using free dyno with following add-ons :
-
-- Heroku Redis - Free plan
-- Logentries - Free plan
-- Deploy Hooks
-
-Redis database is hosted on Amazon EC2.
-
-URL : http://chat.mondedie.fr/
-
-### Heroku deployment
+## Heroku deployment
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
@@ -241,7 +226,15 @@ docker build -t mondedie/chat github.com/mondediefr/mondedie-chat.git
 
 ### Run container
 ```
-docker run -d -p 5000:5000 -e COOKIES_SECRET=xxxxxxxxxxx -e SESSION_SECRET=yyyyyyyyyyyy -e AUTH_API_ENDPOINT=http://domain.tld/api/auth.php -e ENV=production -e REDIS_URL=redis://localhost:6379 mondedie/chat
+docker run -d \
+  -p 5000:5000 \
+  -e COOKIES_SECRET=xxxxxxxxxxx \
+  -e SESSION_SECRET=yyyyyyyyyyyy \
+  -e AUTH_API_ENDPOINT=http://domain.tld/api/auth.php \
+  -e ENV=production \
+  -e REDIS_URL=redis://redis:6379 \
+  --link redis:redis \
+  mondedie/chat
 ```
 
 ### Run full stack
@@ -289,7 +282,6 @@ docker-compose up -d
 
 ## Contribute
 
-- First read [CONTRIBUTION.md](https://github.com/mondediefr/mondedie-chat/tree/master/docs/CONTRIBUTION.md)
 - Fork this repository
 - Create a new feature branch for a new functionality or bugfix
 - Commit your changes
