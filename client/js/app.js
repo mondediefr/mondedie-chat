@@ -1,6 +1,6 @@
 /* global document, io, m, window */
 'use strict';
-var socket = io();
+var socket = io({ forceNew: true });
 
 /**
  * Mithril namespaces
