@@ -12,6 +12,7 @@ messages.Message = function(data) {
   this.user = m.prop(data.user || { name:'CHATBOT' });
   this.mess = m.prop(data.message);
   this.del  = m.prop(data.deleted || false);
+  this.priv = m.prop(data.private || false);
 };
 
 /**

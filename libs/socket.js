@@ -170,8 +170,8 @@ socket.init = function(io) {
           if(message.trim() && message.length <= 1000) {
             var marksrc  = marked('*(chuchotte à **' + username + '**)* ' + message, { renderer:renderer });
             var markdest = marked('*(murmure)* ' + message, { renderer:renderer });
-            io.to(socket.id).emit('message', { time:time, user:session.user, message:marksrc });
-            io.to(userSocket).emit('message', { time:time, user:session.user, message:markdest });
+            io.to(socket.id).emit('message', { time:time, user:session.user, message:marksrc, private:true });
+            io.to(userSocket).emit('message', { time:time, user:session.user, message:markdest, private:true });
             io.to(userSocket).emit('private_notification', session.user.name);
           }
         })

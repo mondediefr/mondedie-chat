@@ -10,10 +10,11 @@ messages.view = function(controller) {
     messages.vm.list.messages().map(function(message, index) {
       var user = message.user();
       return m("li", { key:index, class:message.type() }, [
-        removeButton(this, controller, message),
         m("span", { class:'date' }, ( message.time() ? '[' + message.time() + '] ' : '' )),
         m("span", { class:'username', style:{ color:user.groupColor || '#373a3c' }}, user.name + ': '),
-        m("span", { class:'text' }, m.trust(message.mess()))
+        m("span", { class:'text' }, m.trust(message.mess())),
+        removeButton(this, controller, message),
+        privateMark(message.priv()),
       ])
     })
   ])
@@ -27,6 +28,13 @@ function autoScroll(element) {
     messagesViewElement.scrollTop = element.scrollHeight;
 }
 
+function privateMark(isPriv) {
+  if(!isPriv) return null;
+  return m("span", { class:'private' },
+    m("i", { title:'Message privé', class:'fa fa-lock' })
+  );
+}
+
 function removeButton(instance, controller, message) {
   var display = false;
   if(message.type() === 'message') {
@@ -35,7 +43,7 @@ function removeButton(instance, controller, message) {
     else if(controller.user().name === message.user().name)
       display = true
   }
-  if(!display) return null;
+  if(!display || message.priv()) return null;
   return mx("a.option[href='#']", {
     cautions:messages.vm.del.bind(instance, message.id())
   }, m("i", { class:'fa fa-times' }));
