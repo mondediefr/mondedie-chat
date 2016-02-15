@@ -39,6 +39,9 @@
         }
         .text {
           word-wrap: break-word;
+          overflow-wrap: break-word;
+          word-break: break-word;
+          word-break: break-all; // need to find other solution
           img {
             display: block;
             max-width: 100%;
@@ -56,8 +59,8 @@
         .private {
           float: right;
           font-size: rem(14px);
-          color: indianred;
-          margin-right:1px;
+          color: #cd5c5c;
+          margin-right: rem(1px);
         }
         .option {
           float: right;
