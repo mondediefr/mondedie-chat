@@ -31,7 +31,7 @@ var jsFiles = [
   bowerPath + '/jquery/dist/jquery.min.js',
   bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
   bowerPath + '/visibilityjs/lib/visibility.core.js',
-  bowerPath + '/HTML5-Desktop-Notifications/desktop-notify-min.js',
+  bowerPath + '/notify.js/notify.js',
   bowerPath + '/bootstrap-markdown/js/bootstrap-markdown.js',
   bowerPath + '/bootstrap-markdown/locale/bootstrap-markdown.fr.js',
   bowerPath + '/jquery-textcomplete/dist/jquery.textcomplete.min.js',

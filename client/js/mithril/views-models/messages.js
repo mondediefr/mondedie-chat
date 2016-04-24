@@ -1,4 +1,4 @@
-/* global m, document, socket, location, alert, notify, textarea */
+/* global m, document, socket, location, alert, Notify, textarea */
 'use strict';
 var messages = messages || {};
 
@@ -83,11 +83,13 @@ messages.vm = (function() {
   };
   // Envoyer une notification
   vm.notification = function(message) {
-    if(notify.permissionLevel() === notify.PERMISSION_GRANTED) {
-      notify.createNotification('Mondedie::chat', {
+    if(!Notify.needsPermission) {
+      var notification = new Notify('Mondedie::chat', {
         body:message,
-        icon:'http://mondedie.fr/img/favicon.png'
+        icon:'https://mondedie.fr/img/favicon.png',
+        timeout:10
       });
+      notification.show();
     }
   };
   vm.initsockets = function() {

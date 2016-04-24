@@ -1,18 +1,26 @@
-/* global $, document, editor, socket, notify, textarea, slideout, localStorage */
+/* global $, document, editor, socket, Notify, textarea, slideout, localStorage */
 'use strict';
 
 $(function() {
 
-  notify.config({
-    pageVisibility:true,
-    autoClose:10000
-  });
-
-  if(notify.permissionLevel() === notify.PERMISSION_DEFAULT)
-    notify.requestPermission();
-
-  if(notify.permissionLevel() === notify.PERMISSION_GRANTED)
+  function removeNotificationItem() {
     $('#notification').remove();
+  }
+
+  function onPermissionGranted() {
+    removeNotificationItem();
+  }
+
+  function onPermissionDenied() {
+    removeNotificationItem();
+    console.warn('[Web Notifications] Permission has been denied by the user');
+  }
+
+  if(!Notify.needsPermission) {
+    removeNotificationItem();
+  } else if(Notify.isSupported()) {
+    Notify.requestPermission(onPermissionGranted, onPermissionDenied);
+  }
 
   $('#afk').click(function(e) {
     textarea.value = '/afk on|off';
@@ -45,8 +53,8 @@ $(function() {
   });
 
   $('#notification').click(function(e) {
-    notify.requestPermission();
-    $('#notification').remove();
+    if(Notify.isSupported())
+      Notify.requestPermission(onPermissionGranted, onPermissionDenied);
     e.preventDefault();
   });
 
