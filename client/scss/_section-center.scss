@@ -3,6 +3,8 @@
 // ######################
 
 .section--center {
+  // bug fix : https://github.com/mondediefr/mondedie-chat/issues/21
+  max-width: rem(900px);
   background-color: #fff;
   border: {
     style: solid;
@@ -39,17 +41,10 @@
         }
         .text {
           word-wrap: break-word;
-          overflow-wrap: break-word;
-          word-break: break-word;
-          word-break: break-all; // need to find other solution
           img {
             display: block;
             max-width: 100%;
             height: auto;
-            @-moz-document url-prefix() {
-              //bug fix, see : https://bugzilla.mozilla.org/show_bug.cgi?id=975632
-              width: 100%;
-            }
             &.emojione {
               width: rem($size-smiley);
               display: inline;
