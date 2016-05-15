@@ -1,4 +1,4 @@
-/* global $, document, editor, socket, Notify, textarea, slideout, localStorage */
+/* global $, window, document, editor, socket, Notify, textarea, slideout, localStorage */
 'use strict';
 
 $(function() {
@@ -110,6 +110,12 @@ $(function() {
     } else {
       localStorage.removeItem($(this).attr('id'));
     }
+  });
+
+  // fix width de .section--center
+  var size = $(window).width() * 0.64;
+  $('.section--center').css({
+      'width': size
   });
 
 });
