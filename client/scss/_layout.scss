@@ -190,15 +190,3 @@ input[type="checkbox"] {
     }
   }
 }
-
-@include media-breakpoint-up(xs) {
-  .message > .date {
-    display: none;
-  }
-}
-
-@include media-breakpoint-up(sm) {
-  .message > .date {
-    display: none;
-  }
-}
