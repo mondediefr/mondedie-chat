@@ -112,10 +112,19 @@ $(function() {
     }
   });
 
-  // fix width de .section--center
-  var size = $(window).width() * 0.64;
-  $('.section--center').css({
-      'width': size
-  });
+  // Adapt width of .section--center with screen resolution
+  function setSectionCenterWidth() {
+    var size = $(window).width() * 0.64;
+    $('.section--center').css({
+        'width': size,
+        'max-width': size
+    });
+  }
+
+  setSectionCenterWidth();
+
+  window.onresize = function() {
+    setSectionCenterWidth();
+  }
 
 });
