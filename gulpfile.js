@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var minify = require('gulp-minify-css');
+var minify = require('gulp-clean-css');
 var uglify = require('gulp-uglify');
 var size = require('gulp-size');
 var concat = require('gulp-concat');
@@ -29,6 +29,7 @@ var jshintFiles = [
 var jsFiles = [
   // dependJsFiles
   bowerPath + '/jquery/dist/jquery.min.js',
+  bowerPath + '/tether/dist/js/tether.min.js',
   bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
   bowerPath + '/visibilityjs/lib/visibility.core.js',
   bowerPath + '/notify.js/notify.js',

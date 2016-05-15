@@ -1,22 +1,27 @@
-nginx:
-  image: xataz/nginx:1.9.9
-  links:
-    - chat:chat
-  ports:
-    - "80:80"
-  volumes:
-    - /docker/nginx/sites-enabled:/sites-enabled
-
 chat:
   image: mondedie/mondedie-chat
+  container_name: chat
   links:
     - redis:redis
   environment:
-    - AUTH_API_ENDPOINT=http://domain.tld/api/auth.php
-    - ENV=production
-    - COOKIES_SECRET=xxxxxxxxxxx
-    - SESSION_SECRET=yyyyyyyyyyy
+    - AUTH_API_ENDPOINT=http://your-domain.tld/api/auth.php
+    - COOKIES_SECRET=PLEASE_REPLACE_BY_RANDOM_VALUE
+    - SESSION_SECRET=PLEASE_REPLACE_BY_RANDOM_VALUE
     - REDIS_URL=redis://redis:6379
 
 redis:
-  image: xataz/redis:3.0.5
+  image: redis:3.0.7-alpine
+  container_name: redis
+  volumes:
+    - /mnt/docker/redis/db/:/data
+
+nginx:
+  image: wonderfall/reverse
+  container_name: nginx
+  links:
+    - chat:chat
+  ports:
+    - "80:8000"
+  volumes:
+    - /mnt/docker/nginx/sites-enabled:/sites-enabled
+    - /mnt/docker/nginx/log:/var/log/nginx

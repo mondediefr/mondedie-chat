@@ -209,46 +209,31 @@ Open app : http://127.0.0.1:5000/
 
 ### Build image
 ```
-docker build -t mondedie/chat github.com/mondediefr/mondedie-chat.git
+docker pull mondedie/mondedie-chat
 ```
 
 ### Image usage
 
-#### Ports
-* 5000
+#### Environment variables
 
-#### Environment
 * ENV=production
-* COOKIES_SECRET=xxxxxxxxxxx
-* SESSION_SECRET=yyyyyyyyyyy
-* AUTH_API_ENDPOINT=http://domain.tld/api/auth
-* REDIS_URL=redis://localhost:6379
+* AUTH_API_ENDPOINT=http://your-domain.tld/api/auth.php
+* COOKIES_SECRET=PLEASE_REPLACE_BY_RANDOM_VALUE
+* SESSION_SECRET=PLEASE_REPLACE_BY_RANDOM_VALUE
+* REDIS_URL=redis://redis:6379
 
-### Run container
-```
-docker run -d \
-  -p 5000:5000 \
-  -e COOKIES_SECRET=xxxxxxxxxxx \
-  -e SESSION_SECRET=yyyyyyyyyyyy \
-  -e AUTH_API_ENDPOINT=http://domain.tld/api/auth.php \
-  -e ENV=production \
-  -e REDIS_URL=redis://redis:6379 \
-  --link redis:redis \
-  mondedie/chat
-```
+#### Setup
 
-### Run full stack
-
-We have created a docker-compose.yml for example with 3 containers :
+We have created a [docker-compose.yml](https://github.com/mondediefr/mondedie-chat/blob/master/docker-compose.yml) including 3 containers :
 
 * chat
-* nginx : reverse-proxy mode
 * redis
+* nginx : reverse-proxy mode
 
-Create a new vhost with this content :
+Create a new Nginx vhost with this content :
 
 ```nginx
-# /docker/nginx/sites-enabled/chat.conf
+# /mnt/docker/nginx/sites-enabled/chat.conf
 
 server {
 

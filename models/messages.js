@@ -8,7 +8,7 @@ var Messages = function(redis) {
 }
 
 /*
- * Ajoute un message dans le base de données
+ * Ajoute un message dans la base de données
  */
 Messages.prototype.add = function(time, username, message) {
   var self = this;
@@ -19,7 +19,7 @@ Messages.prototype.add = function(time, username, message) {
     self.db.hmset(messagekey, {
       id:id,
       time:time,
-      user:(username) ? username : null,
+      user:(username) ? username : 'null',
       message:message,
       deleted:false
     });
@@ -61,7 +61,10 @@ Messages.prototype.list = function() {
     return self.db.hgetallAsync(item);
   })
   .map(function(message) {
-    if(!message.user) return message;
+    if(message.user === 'null') {
+      message.user = null;
+      return message;
+    }
     return self.db.hgetallAsync('users:profiles:' + message.user.toLowerCase())
     .then(function(user) {
       message.user = user;

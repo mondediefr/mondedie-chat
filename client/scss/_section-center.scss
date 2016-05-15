@@ -3,8 +3,6 @@
 // ######################
 
 .section--center {
-  // bug fix : https://github.com/mondediefr/mondedie-chat/issues/21
-  max-width: rem(900px);
   background-color: #fff;
   border: {
     style: solid;
@@ -31,6 +29,7 @@
   }
   .section--center--core {
     #messages {
+      overflow-x: hidden;
       padding: 0; margin: 0;
       list-style-type: none;
       li {
@@ -40,7 +39,11 @@
           cursor: pointer;
         }
         .text {
-          word-wrap: break-word;
+          // Firefox
+          display: inline-block;
+          word-break: break-all;
+          // Chrome/Opera/Safari
+          word-break: break-word;
           img {
             display: block;
             max-width: 100%;
