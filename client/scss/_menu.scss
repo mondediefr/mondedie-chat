@@ -25,15 +25,18 @@
           margin-right: rem(5px);
         }
       }
-      a {
-        display: block;
-        margin: rem(4px) 0 0 rem(10px);
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+      }
+      li {
+        margin: rem(4px) 0 0 rem(7px);
       }
       label {
-        display: block;
+        display: inline;
         color: #595959;
         cursor: pointer;
-        margin: rem(4px) 0 0 rem(10px);
       }
     }
     hr {

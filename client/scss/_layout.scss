@@ -29,10 +29,10 @@ input[type="checkbox"] {
 //flex-shrink: spécifie le facteur de réduction d'un élément flex
 //flex-basis: taille initiale de l'élément en px ou auto
 
-// .menu = 1/5 soit 20% de l'écran
-// .panel = 4/5 soit 80% de l'écran
-// .section--center = (4/5)*(4/5) = 16/25 soit 64% de l'écran
-// .section--right = (4/5)*(1/5) = 4/25 soit 16% de l'écran
+// .menu = 1/6 soit 16,66% de l'écran
+// .panel = 5/6 soit 83,33% de l'écran
+// .section--center = (5/6)*(4/5) = 4/6 soit 66,67% de l'écran
+// .section--right = (5/6)*(1/5) = 1/6 soit 16,67% de l'écran
 
 .conteneur-flex {
   display: flex;
@@ -66,7 +66,7 @@ input[type="checkbox"] {
 }
 
 .panel {
-  flex-grow: 4;
+  flex-grow: 5;
   flex-shrink: 0;
   flex-basis: 0;
   // ----

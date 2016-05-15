@@ -120,7 +120,7 @@ $(function() {
       size = $(window).width() - 50;
     } else {
       // 0.64 = section center width coef
-      size = $(window).width() * 0.64;
+      size = $(window).width() * (4/6);
     }
 
     $('.section--center').css({

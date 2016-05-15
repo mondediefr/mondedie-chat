@@ -39,11 +39,7 @@
           cursor: pointer;
         }
         .text {
-          // Firefox
-          display: inline-block;
-          word-break: break-all;
-          // Chrome/Opera/Safari
-          word-break: break-word;
+          word-wrap: break-word;
           img {
             display: block;
             max-width: 100%;

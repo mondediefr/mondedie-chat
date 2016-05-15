@@ -3,7 +3,6 @@ extends layout
 block content
 
   .conteneur-flex
-
     //- menu gauche
     nav.menu#menu
       .nav--header
@@ -19,44 +18,58 @@ block content
           h6
             i.fa.fa-terminal
             span Commandes
-          a(href='#' id='afk') /afk on | off
-          a(href='#' id='pm') /msg @user message
-          a(href='#' id='poke') /poke @user
-          a(href='#' id='roll') /roll [nombre]d[faces]
-          a(href='#' id='rolluser') /roll @user
+          ul
+            li
+              a(href='#' id='afk') /afk on | off
+            li
+              a(href='#' id='pm') /msg @user message
+            li
+              a(href='#' id='poke') /poke @user
+            li
+              a(href='#' id='roll') /roll [nombre]d[faces]
+            li
+              a(href='#' id='rolluser') /roll @user
         hr
         .nav--core--block
           h6
             i.fa.fa-cog
             span Options
-          a(href='#' id="notification")
-            i.fa.fa-volume-up
-            | &nbsp;&nbsp;
-            span Activer les notifications
-          label
-            input(type='checkbox' id='disable-enter-action')
-            | Désactiver la touche entrée
-          label
-            input(type='checkbox' id='disable-auto-scroll')
-            | Désactiver l'auto-scroll
-          label
-            input(type='checkbox' id='disable-login-events')
-            | Désactiver les évènements de connexion
+          ul
+            li
+              a(href='#' id="notification")
+                i.fa.fa-volume-up
+                | &nbsp;&nbsp;
+                span Activer les notifications
+            li
+              label
+                input(type='checkbox' id='disable-enter-action')
+                | Désactiver la touche entrée
+            li
+              label
+                input(type='checkbox' id='disable-auto-scroll')
+                | Désactiver l'auto-scroll
+            li
+              label
+                input(type='checkbox' id='disable-login-events')
+                | Désactiver les évènements de connexion
         if user.isAdmin
           hr
           .nav--core--block
             h6
               i.fa.fa-university
               span Modération
-            a(href='#' id='banLink') Kick/Ban
-            a(href='#' id='banList') Lister les membres exclus
-            a(href='#' id='unlock') Débloquer un utilisateur
+            ul
+              li
+                a(href='#' id='banLink') Kick/Ban
+              li
+                a(href='#' id='banList') Lister les membres exclus
+              li
+                a(href='#' id='unlock') Débloquer un utilisateur
         hr
         h6.sign-out
           a(href='/logout' class='link-sign-out' title='Déconnexion')
             i.fa.fa-sign-out
             span Se déconnecter
-
     //- message
     section.panel#panel
       .section--center
@@ -71,7 +84,6 @@ block content
           #footer-editor
             #content-typing
             #count-textarea
-
       //- colonne de droite
       .section--right
         .section--right--header
@@ -90,7 +102,6 @@ block content
             | -
           span.label.label-default
             a(href='https://github.com/mondediefr/mondedie-chat/releases/tag/v1.3.0' target='_blank') v1.3.0
-
   //- popup
   #content-smileys
   if user.isAdmin
