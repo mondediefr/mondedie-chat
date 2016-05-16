@@ -12,8 +12,13 @@ messages.view = function(controller) {
       return m("li", { key:index, class:message.type() }, [
         removeButton(this, controller, message),
         privateMark(message.priv()),
-        m("span", { class:'date' }, ( message.time() ? '[' + message.time() + '] ' : '' )),
-        m("span", { class:'username', style:{ color:user.groupColor || '#373a3c' }}, user.name + ': '),
+        m("img", {
+          class: 'img-rounded avatar-message',
+          src: user.avatar || '/images/bender.gif',
+          alt: user.name
+        }),
+        m("span", { class:'username', style:{ color:user.groupColor || '#373a3c' }}, user.name),
+        m("span", { class:'date' }, (message.time() ? message.time() : '')),
         m("span", { class:'text' }, m.trust(message.mess()))
       ])
     })

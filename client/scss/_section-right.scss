@@ -38,7 +38,7 @@ $size-circle-status: 10px; //chiffre pair obligatoire
           height: rem($size-circle-status);
           border-radius: 50%;
           &.online {
-            background-color: limegreen;
+            background-color: #32cd32;
           }
           &.afk {
             background-color: orange;

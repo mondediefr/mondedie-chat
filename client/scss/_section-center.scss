@@ -34,11 +34,28 @@
       list-style-type: none;
       li {
         padding: rem(4px);
+        .avatar-message {
+          height: rem(36px);
+          width: rem(36px);
+          float: left;
+          margin-left: rem(4px);
+        }
         .username {
           font-weight: bold;
           cursor: pointer;
+          margin-left: rem(7px);
+        }
+        .date {
+          margin-left: rem(7px);
+          color: #818a91;
+          &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+          }
         }
         .text {
+          margin-left: rem(47px);
+          display: block;
           word-wrap: break-word;
           img {
             display: block;
@@ -87,7 +104,6 @@
           padding: rem(10px);
           margin: rem(10px) 0;
           font-size: rem(13px);
-          word-break: break-all;
           word-wrap: break-word;
           background-color: #f5f5f5;
           border: rem(1px) solid #ccc;
@@ -95,7 +111,6 @@
         }
         pre code {
           padding: 0;
-          white-space: pre-wrap;
         }
       }
     }
