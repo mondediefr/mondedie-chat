@@ -134,4 +134,16 @@ $(function() {
     setSectionCenterWidth();
   }
 
+  $(document).on('click', '.disclose', function() {
+    $(this).prev().show(200);
+    $(this).text("Cacher l'image");
+    $(this).addClass('hide').removeClass('disclose');
+  });
+
+  $(document).on('click', '.hide', function() {
+    $(this).prev().hide(200);
+    $(this).text("Afficher l'image");
+    $(this).addClass('disclose').removeClass('hide');
+  });
+
 });

@@ -65,6 +65,9 @@
             color: #3498db;
           }
         }
+        .btn-sm {
+          line-height: 0.9;
+        }
         &:nth-child(odd) {
           background-color: #f2f2f2;
         }

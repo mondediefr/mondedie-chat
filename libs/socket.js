@@ -33,6 +33,11 @@ renderer.link = function(href, title, text) {
   return '<a target="_blank" href="'+ href +'">' + text + '</a>'
 }
 
+renderer.image = function(src) {
+  return '<img style="margin-bottom: 5px;display:none;" src="' + src + '" > \
+          <button type="button" class="btn btn-secondary btn-sm disclose">Afficher l\'image</button>'
+}
+
 renderer.paragraph = function(text) {
   return smileys.replace(text);
 }
