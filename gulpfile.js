@@ -33,6 +33,7 @@ var jsFiles = [
   bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
   bowerPath + '/visibilityjs/lib/visibility.core.js',
   bowerPath + '/notify.js/notify.js',
+  bowerPath + '/moment/min/moment-with-locales.min.js',
   bowerPath + '/bootstrap-markdown/js/bootstrap-markdown.js',
   bowerPath + '/bootstrap-markdown/locale/bootstrap-markdown.fr.js',
   bowerPath + '/jquery-textcomplete/dist/jquery.textcomplete.min.js',

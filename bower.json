@@ -15,7 +15,8 @@
     "jquery-textcomplete": "1.2.1",
     "slideout.js": "~0.1.12",
     "notify.js": "~1.3.0",
-    "tether": "^1.3.2"
+    "tether": "^1.3.2",
+    "moment": "^2.13.0"
   },
   "resolutions": {
     "bootstrap": "v4.0.0-alpha.2"

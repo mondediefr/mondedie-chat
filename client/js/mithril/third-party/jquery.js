@@ -16,6 +16,13 @@ $(function() {
     console.warn('[Web Notifications] Permission has been denied by the user');
   }
 
+  function checkDOMChange() {
+    $('[data-toggle="tooltip"]').tooltip({'html': true});
+    setTimeout( checkDOMChange, 100 );
+  }
+
+  checkDOMChange();
+
   if(!Notify.needsPermission) {
     removeNotificationItem();
   } else if(Notify.isSupported()) {

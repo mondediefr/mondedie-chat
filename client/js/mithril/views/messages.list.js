@@ -1,4 +1,4 @@
-/* global m, document, messagesViewElement, mx */
+/* global m, document, messagesViewElement, mx, moment */
 'use strict';
 var messages = messages || {};
 
@@ -9,6 +9,8 @@ messages.view = function(controller) {
   return m("ul#messages", { config:autoScroll }, [
     messages.vm.list.messages().map(function(message, index) {
       var user = message.user();
+      var messageTooltipTime = moment(message.time(), 'DD/MM [à] HH:mm:ss').format('[Le] DD MMM [à] HH[h]mm');
+      var messageTime = moment(message.time(), 'DD/MM [à] HH:mm:ss').format('HH:mm');
       return m("li", { key:index, class:message.type() }, [
         removeButton(this, controller, message),
         privateMark(message.priv()),
@@ -18,7 +20,13 @@ messages.view = function(controller) {
           alt: user.name
         }),
         m("span", { class:'username', style:{ color:user.groupColor || '#373a3c' }}, user.name),
-        m("span", { class:'date' }, (message.time() ? message.time() : '')),
+        m("span", {
+          class:'date',
+          'data-toggle': 'tooltip',
+          'data-placement':'top',
+          'data-original-title': messageTooltipTime,
+          title: messageTooltipTime
+        }, (message.time() ? messageTime : '')),
         m("span", { class:'text' }, m.trust(message.mess()))
       ])
     })
