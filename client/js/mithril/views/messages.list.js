@@ -9,8 +9,9 @@ messages.view = function(controller) {
   return m("ul#messages", { config:autoScroll }, [
     messages.vm.list.messages().map(function(message, index) {
       var user = message.user();
-      var messageTooltipTime = moment(message.time()).format('[Le] DD MMM [à] HH[h]mm');
-      var messageTime = moment(message.time()).format('HH:mm');
+      var time = parseInt(message.time());
+      var messageTooltipTime = moment(time).format('[Le] DD MMM [à] HH[h]mm');
+      var messageTime = moment(time).format('HH:mm');
       return m("li", { key:index, class:message.type() }, [
         removeButton(this, controller, message),
         privateMark(message.priv()),
@@ -26,7 +27,7 @@ messages.view = function(controller) {
           'data-placement':'top',
           'data-original-title': messageTooltipTime,
           title: messageTooltipTime
-        }, (message.time() ? messageTime : '')),
+        }, (time ? messageTime : '')),
         m("span", { class:'text' }, m.trust(message.mess()))
       ])
     })
