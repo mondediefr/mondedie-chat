@@ -16,13 +16,6 @@ $(function() {
     console.warn('[Web Notifications] Permission has been denied by the user');
   }
 
-  function checkDOMChange() {
-    $('[data-toggle="tooltip"]').tooltip({'html': true});
-    setTimeout( checkDOMChange, 100 );
-  }
-
-  checkDOMChange();
-
   if(!Notify.needsPermission) {
     removeNotificationItem();
   } else if(Notify.isSupported()) {
@@ -151,6 +144,11 @@ $(function() {
     $(this).prev().hide(200);
     $(this).text("Afficher l'image");
     $(this).addClass('disclose').removeClass('hide');
+  });
+
+  $('body').tooltip({
+    html: true,
+    selector: '[data-toggle="tooltip"]'
   });
 
 });
