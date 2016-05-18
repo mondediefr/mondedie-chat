@@ -3,7 +3,6 @@ var socket = {};
 
 var Promise  = require('bluebird');
 var debug    = require('debug')('socket')
-var moment   = require('moment-timezone');
 var marked   = require('marked');
 
 var redis    = require('../libs/redis')();
@@ -15,8 +14,6 @@ var Messages = require('../models/messages');
 var users    = new Users(redis.client);
 var messages = new Messages(redis.client);
 var smileys  = new Smileys();
-
-var dateFormat = 'DD/MM à HH:mm:ss'
 
 marked.setOptions({
   breaks: true,
@@ -57,7 +54,7 @@ socket.init = function(io) {
   io.on('connection', function(socket) {
 
     var session = socket.handshake.session;
-    var time = moment().tz('Europe/Paris').format(dateFormat);
+    var time = Date.now();
 
     if( ! session.user )
       return;
@@ -114,7 +111,7 @@ socket.init = function(io) {
       // Déconnexion de l'utilisateur
       socket.on('disconnect', function() {
         users.remove(session.user.name);
-        time = moment().tz('Europe/Paris').format(dateFormat);
+        time = Date.now();
         io.emit('user_disconnected', time, session.user);
       });
       // Ban d'un utilisateur par un admin
@@ -153,14 +150,14 @@ socket.init = function(io) {
       socket.on('afk', function() {
         session.user.status = 'afk';
         users.add(session.user);
-        time = moment().tz('Europe/Paris').format(dateFormat);
+        time = Date.now();
         io.emit('user_afk', time, session.user.name);
       });
       // Utilisateur n'est plus AFK
       socket.on('unafk', function() {
         session.user.status = 'online';
         users.add(session.user);
-        time = moment().tz('Europe/Paris').format(dateFormat);
+        time = Date.now();
         io.emit('user_unafk', time, session.user.name);
       });
       // Messages privés
@@ -171,7 +168,7 @@ socket.init = function(io) {
         }
         users.getUserSocket(username)
         .then(function(userSocket) {
-          time = moment().tz('Europe/Paris').format(dateFormat);
+          time = Date.now();
           if(message.trim() && message.length <= 1000) {
             var marksrc  = marked('*(chuchotte à **' + username + '**)* ' + message, { renderer:renderer });
             var markdest = marked('*(murmure)* ' + message, { renderer:renderer });
@@ -192,7 +189,7 @@ socket.init = function(io) {
         }
         users.getUserSocket(username)
         .then(function(userSocket) {
-          time = moment().tz('Europe/Paris').format(dateFormat);
+          time = Date.now();
           addBotMessage(io, 'Vous avez poke @' + username, { socket:socket.id });
           io.to(userSocket).emit('user_highlight', time, session.user.name);
         })
@@ -272,7 +269,7 @@ socket.init = function(io) {
 };
 
 var addMessage = function(io, user, message) {
-  var time = moment().tz('Europe/Paris').format(dateFormat);
+  var time = Date.now();
   var data = { time:time, user:user, message:message };
   messages.add(time, user.name, message)
   .then(function(id) {
@@ -282,7 +279,7 @@ var addMessage = function(io, user, message) {
 };
 
 var addBotMessage = function(io, message, options) {
-  var time = moment().tz('Europe/Paris').format(dateFormat);
+  var time = Date.now();
   var data = { type:'message-bot', time:time, message:message };
   if(!options) {
     io.emit('message', data);

@@ -20,8 +20,6 @@
     "highlight.js": "~9.3.0",
     "jade": "~1.11.0",
     "marked": "~0.3.5",
-    "moment": "~2.13.0",
-    "moment-timezone": "~0.5.4",
     "morgan": "~1.7.0",
     "ms": "~0.7.1",
     "redis": "~2.6.0-2",
