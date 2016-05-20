@@ -87,8 +87,22 @@ socket.init = function(io) {
       // Réception d'un message
       socket.on('message', function(message) {
         if(message.trim() && message.length <= 1000) {
-          addMessage(io, session.user, marked(message, { renderer:renderer }));
+          var messageId = addMessage(io, session.user, marked(message, { renderer:renderer }));
           var prob  = message.search(/chatbot/gi) !== -1 ? 10 : 400;
+          /**
+           * @type {!Array<!String>}
+           */
+          var usernameTweet = message.match(/^@([a-zA-Z0-9]*)/);
+          if (usernameTweet !== null && session.user.name != usernameTweet[1]) {
+            users.exist(usernameTweet[1])
+              .then(function(exist) {
+                if (exist) {
+                  users.getUserSocket(usernameTweet[1]).then(function(userSocket) {
+                    io.to(userSocket).emit('user_tweet', session.user.name, messageId);
+                  });
+                }
+              });
+          }
           if(getRandomInt({ emax:prob }) === 0) {
             var delay = getRandomInt({ min:5, max:15 }) * 1000;
             Promise.delay(delay).then(function() {
@@ -275,6 +289,7 @@ var addMessage = function(io, user, message) {
   .then(function(id) {
     data.id = id;
     io.emit('message', data);
+    return id;
   });
 };
 

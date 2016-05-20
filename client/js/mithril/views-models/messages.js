@@ -147,6 +147,10 @@ messages.vm = (function() {
         }));
         m.redraw();
       });
+      socket.on('user_tweet', function(username, messageId) {
+        vm.notification('Il y a ' + username + ' qui vous parle');
+        //vm.highlight(messageId);
+      });
       socket.on('user_highlight', function(time, username) {
         vm.notification('Vous avez reçu un poke de @' + username);
         vm.list.push(new messages.Message({
