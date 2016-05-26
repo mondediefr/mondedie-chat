@@ -21,6 +21,7 @@
     "marked": "~0.3.5",
     "morgan": "~1.7.0",
     "ms": "~0.7.1",
+    "pug": "^2.0.0-alpha8",
     "redis": "~2.6.0-2",
     "request": "~2.72.0",
     "serve-favicon": "~2.3.0",
