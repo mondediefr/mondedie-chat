@@ -39,7 +39,6 @@ var jsFiles = [
   bowerPath + '/jquery-textcomplete/dist/jquery.textcomplete.min.js',
   bowerPath + '/mithril/mithril.min.js',
   bowerPath + '/slideout.js/dist/slideout.min.js',
-  bowerPath + '/highlightjs/highlight.pack.min.js',
   // appJsFiles
   jsPath + '/app.js',
   jsPath + '/mithril/third-party/*.js',
@@ -53,7 +52,7 @@ var cssFiles = [
   'client/scss/app.scss',
   bowerPath + '/bootstrap-markdown/css/bootstrap-markdown.min.css',
   bowerPath + '/font-awesome/css/font-awesome.min.css',
-  bowerPath + '/highlightjs/styles/monokai-sublime.css'
+  'node_modules/highlight.js/styles/github.css'
 ];
 
 // ########################### ERROR ###########################

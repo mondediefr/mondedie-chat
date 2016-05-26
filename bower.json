@@ -16,8 +16,7 @@
     "slideout.js": "0.1.x",
     "notify.js": "1.3.x",
     "tether": "1.3.x",
-    "moment": "2.13.x",
-    "highlightjs": "9.4.x"
+    "moment": "2.13.x"
   },
   "resolutions": {
     "bootstrap": "v4.0.0-alpha.2"
