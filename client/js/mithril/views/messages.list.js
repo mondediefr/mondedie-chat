@@ -10,8 +10,8 @@ messages.view = function(controller) {
     messages.vm.list.messages().map(function(message, index) {
       var user = message.user();
       var time = parseInt(message.time());
-      var messageTooltipTime = moment(time).format('[Le] DD MMM [à] HH[h]mm');
-      var messageTime = moment(time).format('HH:mm');
+      var messageTooltipTime = moment(time).format('DD MMMM YYYY [à] HH[h]mm');
+      var messageTime = moment(time).format('HH[h]mm');
       return m("li", { key:index, class:message.type() }, [
         removeButton(this, controller, message),
         privateMark(message.priv()),

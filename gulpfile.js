@@ -12,7 +12,6 @@ var csscomb = require('gulp-csscomb');
 var rev = require('gulp-rev');
 var sourcemaps = require('gulp-sourcemaps');
 var inject = require('gulp-inject');
-var runSequence = require('run-sequence');
 var del = require('del');
 
 // ########################### PATHS ###########################
@@ -33,12 +32,14 @@ var jsFiles = [
   bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
   bowerPath + '/visibilityjs/lib/visibility.core.js',
   bowerPath + '/notify.js/notify.js',
-  bowerPath + '/moment/min/moment-with-locales.min.js',
+  bowerPath + '/moment/min/moment.min.js',
+  bowerPath + '/moment/locale/fr.js',
   bowerPath + '/bootstrap-markdown/js/bootstrap-markdown.js',
   bowerPath + '/bootstrap-markdown/locale/bootstrap-markdown.fr.js',
   bowerPath + '/jquery-textcomplete/dist/jquery.textcomplete.min.js',
   bowerPath + '/mithril/mithril.min.js',
   bowerPath + '/slideout.js/dist/slideout.min.js',
+  bowerPath + '/highlightjs/highlight.pack.min.js',
   // appJsFiles
   jsPath + '/app.js',
   jsPath + '/mithril/third-party/*.js',
@@ -51,7 +52,8 @@ var jsFiles = [
 var cssFiles = [
   'client/scss/app.scss',
   bowerPath + '/bootstrap-markdown/css/bootstrap-markdown.min.css',
-  bowerPath + '/font-awesome/css/font-awesome.min.css'
+  bowerPath + '/font-awesome/css/font-awesome.min.css',
+  bowerPath + '/highlightjs/styles/monokai-sublime.css'
 ];
 
 // ########################### ERROR ###########################
@@ -75,10 +77,8 @@ gulp.task('clean-js', ['bower'], function () {
 });
 
 gulp.task('js', ['clean-js'], function() {
-  var unminified = filter(
-    ['**', '!**.min.js'],
-    { restore: true }
-  );
+  var unminified = filter(['**', '!**.min.js'], {restore: true});
+
   return gulp.src(jsFiles)
     .pipe(unminified)
     .pipe(uglify())
@@ -87,7 +87,10 @@ gulp.task('js', ['clean-js'], function() {
     .pipe(concat({path: 'app.min.js', cwd: ''}))
     .pipe(rev())
     .pipe(sourcemaps.write('.'))
-    .pipe(size({title: "fichier app.min.js"}))
+    .pipe(size({
+      showFiles: true,
+      showTotal: false
+    }))
     .pipe(gulp.dest('public/js'));
 });
 
@@ -112,10 +115,8 @@ gulp.task('clean-css', ['bower'], function () {
 });
 
 gulp.task('sass', ['clean-css'], function() {
-  var sassFile = filter(
-    ['**', '!**.min.css'],
-    { restore: true }
-  );
+  var sassFile = filter(['**', '!**.min.css'], {restore: true});
+
   return gulp.src(cssFiles)
     .pipe(sassFile)
     .pipe(sass({
@@ -143,7 +144,10 @@ gulp.task('sass', ['clean-css'], function() {
     .pipe(minify({keepSpecialComments: 0}))
     .pipe(concat({path: 'app.min.css', cwd: ''}))
     .pipe(rev())
-    .pipe(size({title: "fichier app.min.css"}))
+    .pipe(size({
+      showFiles: true,
+      showTotal: false
+    }))
     .pipe(gulp.dest('public/css'));
 });
 
@@ -161,6 +165,6 @@ gulp.task('lint', function() {
 
 gulp.task('watch', ['default'], function() {
   gulp.watch(jshintFiles, ['lint']);
-  gulp.watch('client/js/**/*.js', function() { runSequence('inject-js') });
-  gulp.watch('client/scss/**/*.scss', function() { runSequence('inject-css') });
+  gulp.watch('client/js/**/*.js', ['inject-js']);
+  gulp.watch('client/scss/**/*.scss', ['inject-css']);
 });

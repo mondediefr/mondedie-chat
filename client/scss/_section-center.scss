@@ -109,8 +109,9 @@
           border: rem(1px) solid #ccc;
           border-radius: rem(4px);
         }
-        pre code {
-          padding: 0;
+        pre, code {
+          background-color: #23241f;
+          color: white;
         }
       }
     }
