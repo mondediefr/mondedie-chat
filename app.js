@@ -26,7 +26,7 @@ var ios    = require('socket.io-express-session');
 app.set('env', process.env.ENV || 'development');
 app.set('port', process.env.PORT || 5000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 // Initialisation de Redis
 redis.init(redis.client);

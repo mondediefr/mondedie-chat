@@ -94,7 +94,7 @@ gulp.task('js', ['clean-js'], function() {
 });
 
 gulp.task('inject-js', ['js'], function() {
-  return gulp.src('views/includes/assets/javascript.jade')
+  return gulp.src('views/includes/assets/javascript.pug')
     .pipe(inject(gulp.src('public/js/app-*.min.js', {read: false}), {ignorePath:'public'}))
     .pipe(gulp.dest('views/includes/build'));
 });
@@ -151,7 +151,7 @@ gulp.task('sass', ['clean-css'], function() {
 });
 
 gulp.task('inject-css', ['sass'], function() {
-  return gulp.src('views/includes/assets/css.jade')
+  return gulp.src('views/includes/assets/css.pug')
     .pipe(inject(gulp.src('public/css/app-*.min.css', {read: false}), {ignorePath:'public'}))
     .pipe(gulp.dest('views/includes/build'));
 });

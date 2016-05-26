@@ -11,7 +11,7 @@ public/fonts/*.woff
 public/fonts/*.woff2
 public/css/*.css
 public/json
-views/includes/build/*.jade
+views/includes/build/*.pug
 .vagrant/
 client/bower
 typings
