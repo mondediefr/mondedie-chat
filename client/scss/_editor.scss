@@ -66,18 +66,46 @@
 }
 
 #content-smileys {
+  position: relative;
   display: none;
-  overflow: auto;
-  background-color: #f2f4f7;
-  box-shadow: 0 rem(5px) rem(10px) rgba(0, 0, 0, 0.12);
-  border-radius: rem(6px);
-  border: rem(1px) solid rgba(0, 0, 0, 0.15);
+  z-index: 2;
+  background-color: #fff;
+  box-shadow: 0 rem(5px) rem(10px) rgba(0, 0, 0, 0.3);
+  border-radius: rem(4px);
+  border: rem(1px) solid #ccc;
   padding: rem(10px);
-  .smileys-container img {
-    cursor: pointer;
-    width: rem($size-smiley);
-    height: rem($size-smiley);
-    margin: rem(4px);
+  .smileys-arrow {
+    position: absolute;
+    bottom: rem(-20px);
+    right: 50%;
+    margin-right: rem(-9px);
+    border: rem(10px) solid transparent;
+    border-top: rem(10px) solid #fff;
+    width: 0;
+  }
+  .smileys-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f7f7f7;
+    border-bottom: rem(1px) solid #ebebeb;
+    border-radius: rem(4px) rem(4px) 0 0;
+    color: #373a3c;
+    padding: rem(7px);
+    font: {
+      size: rem(16px);
+      weight: normal;
+    }
+  }
+  .smileys-container {
+    margin-top: rem(34px);
+    img {
+      cursor: pointer;
+      width: rem($size-smiley);
+      height: rem($size-smiley);
+      margin: rem(4px);
+    }
   }
   &.opened {
     display: block;

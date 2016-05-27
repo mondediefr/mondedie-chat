@@ -6,16 +6,20 @@ var smileys = smileys || {};
  * Smileys component - view
  */
 smileys.view = function(controller) {
-  return m(".smileys-container", [
-    controller.smileys.map(function(smiley) {
-      return m("img", {
-        src:smiley.url,
-        class:'emojione',
-        title:smiley.pattern,
-        onclick:m.withAttr("title", insertEmoji)
-      });
-    })
-  ])
+  return [
+    m(".smileys-arrow"),
+    m("h3.smileys-title", "Smiley"),
+    m(".smileys-container", [
+      controller.smileys.map(function(smiley) {
+        return m("img", {
+          src:smiley.url,
+          class:'emojione',
+          title:smiley.pattern,
+          onclick:m.withAttr("title", insertEmoji)
+        });
+      })
+    ])
+  ];
 };
 
 /**
