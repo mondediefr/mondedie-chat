@@ -1,6 +1,7 @@
 /* global m, document, messagesViewElement, mx, moment */
 'use strict';
 var messages = messages || {};
+moment.locale('fr');
 
 /**
  * Messages component - view
@@ -10,7 +11,6 @@ messages.view = function(controller) {
     messages.vm.list.messages().map(function(message, index) {
       var user = message.user();
       var time = parseInt(message.time());
-      moment.locale('fr');
       var messageTooltipTime = moment(time).format('DD MMMM YYYY [à] HH[h]mm');
       var messageTime = moment(time).format('HH[h]mm');
       return m("li", { key:index, class:message.type() }, [

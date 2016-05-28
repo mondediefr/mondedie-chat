@@ -40,6 +40,7 @@
     "gulp-filter": "~4.0.0",
     "gulp-inject": "~4.1.0",
     "gulp-jshint": "~2.0.1",
+    "gulp-plumber": "^1.1.0",
     "gulp-rev": "~7.0.0",
     "gulp-sass": "~2.3.1",
     "gulp-size": "~2.1.0",

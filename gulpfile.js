@@ -13,6 +13,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var inject = require('gulp-inject');
 var del = require('del');
 var runSequence = require('run-sequence');
+var plumber = require('gulp-plumber');
 
 // ########################### PATHS ###########################
 var bowerPath = 'client/bower';
@@ -80,12 +81,6 @@ var optionSize = {
   showTotal: false
 };
 
-// ########################### ERROR ###########################
-function handleError(err) {
-  console.log(err.toString());
-  this.emit('end');
-}
-
 // ########################### TASKS ###########################
 gulp.task('default', function() {
   runSequence('bower', ['inject-css', 'inject-js', 'lint', 'fonts', 'emojione-strategy']);
@@ -124,7 +119,9 @@ gulp.task('sass', ['clean-css'], function() {
   var sassFile = filter(['**', '!**/*.min.css'], {restore: true});
   return gulp.src(cssFiles)
     .pipe(sassFile)
-    .pipe(sass(optionSass)).on('error', handleError)
+    .pipe(plumber())
+    .pipe(sass(optionSass))
+    .pipe(plumber.stop())
     .pipe(autoprefixer(optionAutoprefixer))
     .pipe(sassFile.restore)
     .pipe(minify({keepSpecialComments: 0}))
@@ -138,7 +135,9 @@ gulp.task('js', ['clean-js'], function() {
   var unminified = filter(['**', '!**/*.min.js'], {restore: true});
   return gulp.src(jsFiles)
     .pipe(unminified)
+    .pipe(plumber())
     .pipe(uglify())
+    .pipe(plumber.stop())
     .pipe(unminified.restore)
     .pipe(sourcemaps.init())
     .pipe(concat('app.min.js'))
