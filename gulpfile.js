@@ -1,3 +1,4 @@
+'use strict';
 var gulp = require('gulp');
 var minify = require('gulp-clean-css');
 var uglify = require('gulp-uglify');
@@ -85,6 +86,7 @@ var optionSize = {
 gulp.task('default', function() {
   runSequence('bower', ['inject-css', 'inject-js', 'lint', 'fonts', 'emojione-strategy']);
 });
+
 gulp.task('heroku:production', ['default']);
 
 gulp.task('bower', function() {
