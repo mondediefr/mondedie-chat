@@ -190,7 +190,8 @@ hr {
     flex-grow: 0 !important;
     flex-shrink: 0 !important;
     flex-basis: rem(50px) !important;
-    .section--right--header {
+    .section--right--core {
+      padding: rem(10px) !important;
       h6, hr {
         display: none;
       }
