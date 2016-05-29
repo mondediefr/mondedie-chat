@@ -4,8 +4,8 @@
 $(function() {
 
   /**
-  * Markdown editor
-  */
+   * Markdown editor
+   */
   $('#text-editor').markdown({
     autofocus: true,
     savable: false,

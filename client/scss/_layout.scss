@@ -21,6 +21,14 @@ input[type="checkbox"] {
   margin-right: rem(5px);
 }
 
+hr {
+  margin: rem(12px) 0 rem(12px) 0;
+  border-top: rem(1px) dashed #7089a9;
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
 // ###########################
 // # layout pour la chatroom #
 // ###########################
@@ -54,7 +62,6 @@ input[type="checkbox"] {
     //bug fix ie10-11 -> flex-basis: rem(50px);
     flex-basis: auto;
     height: rem(50px);
-    box-sizing: border-box;
     // end
   }
   .nav--core {
@@ -87,7 +94,6 @@ input[type="checkbox"] {
       //bug fix ie10-11 -> flex-basis: rem(50px);
       flex-basis: auto;
       height: rem(50px);
-      box-sizing: border-box;
       // end
     }
     .section--center--core {
@@ -111,6 +117,13 @@ input[type="checkbox"] {
     flex-direction: column;
     height: 100%;
     .section--right--header {
+      flex-grow: 0;
+      flex-shrink: 0;
+      //bug fix ie10-11 -> flex-basis: rem(50px);
+      flex-basis: auto;
+      height: rem(50px);
+    }
+    .section--right--core {
       flex-grow: 1;
       flex-shrink: 1;
       flex-basis: auto;

@@ -7,16 +7,16 @@ $size-circle-status: 10px; //chiffre pair obligatoire
 .section--right {
   background-color: $color-menu;
   .section--right--header {
-    padding: rem(10px);
+    // -
+  }
+  .section--right--core {
+    padding: 0 rem(10px) rem(10px) rem(10px);
     h6 {
       color: #595959;
+      margin-bottom: rem(15px);
       i {
         margin-right: rem(5px);
       }
-    }
-    hr {
-      margin: rem(12px) 0 rem(12px) 0;
-      border-top: rem(1px) dashed #7089a9;
     }
     #clients {
       list-style-type: none;

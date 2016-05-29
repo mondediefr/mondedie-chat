@@ -1,9 +1,16 @@
 /* global $, document, Slideout */
 'use strict';
 
-var slideout = new Slideout({
-  'panel': document.getElementById('panel'),
-  'menu': document.getElementById('menu'),
-  'padding': 225,
-  'tolerance': 70
+$(function(){
+
+  /**
+   * Slideout plugin
+   */
+  var slideout = new Slideout({
+    'panel': document.getElementById('panel'),
+    'menu': document.getElementById('menu'),
+    'padding': 225,
+    'tolerance': 90
+  });
+
 });

@@ -39,13 +39,6 @@
         cursor: pointer;
       }
     }
-    hr {
-      margin: rem(12px) 0 rem(12px) 0;
-      border-top: rem(1px) dashed #7089a9;
-      &:first-child {
-        margin-top: 0;
-      }
-    }
     .sign-out {
       margin-bottom: rem(10px);
     }
