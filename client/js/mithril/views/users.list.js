@@ -6,13 +6,14 @@ var users = users || {};
  * Users component - view
  */
 users.view = function() {
+  var usersList = users.vm.list.users();
   return [
     m("h6", [
       m("i", {class:'fa fa-users'}),
-      m("span", users.vm.list.users().length + " Utilisateurs en ligne")
+      m("span", usersList.length + " utilisateur" + (usersList.length > 1 ? 's':'') + " en ligne")
     ]),
     m("ul#clients", [
-      users.vm.list.users().map(function(user) {
+      usersList.users().map(function(user) {
         return m("li", {key:user.id(), class:user.status()}, [
           m("span", {class:'status ' + user.status()}),
           m("img", {
