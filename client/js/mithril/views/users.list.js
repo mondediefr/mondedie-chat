@@ -13,7 +13,7 @@ users.view = function() {
       m("span", usersList.length + " utilisateur" + (usersList.length > 1 ? 's':'') + " en ligne")
     ]),
     m("ul#clients", [
-      usersList.users().map(function(user) {
+      usersList.map(function(user) {
         return m("li", {key:user.id(), class:user.status()}, [
           m("span", {class:'status ' + user.status()}),
           m("img", {
