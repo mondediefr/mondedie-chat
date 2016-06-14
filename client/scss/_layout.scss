@@ -170,6 +170,10 @@ hr {
     position: fixed;
     right: 0;
     left: 0;
+    .panel--header h5 {
+      display: block !important;
+      text-align: center;
+    }
     .panel--footer {
       #editor {
         .md-header {

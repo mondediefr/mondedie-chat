@@ -6,6 +6,7 @@
   background-color: $color-menu;
   .nav--header {
     padding: rem(1px);
+    border-bottom: rem(1px) solid #ddd;
     h5 {
       margin: 0;
       &.title-site {
@@ -17,7 +18,7 @@
     }
   }
   .nav--core {
-    padding: 0 rem(10px) rem(10px) rem(10px);
+    padding: rem(10px);
     .nav--core--block {
       h6 {
         color: #595959;

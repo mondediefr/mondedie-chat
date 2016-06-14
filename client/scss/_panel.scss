@@ -12,7 +12,7 @@
   .panel--header {
     padding: rem(10px);
     border-bottom: rem(1px) solid #ddd;
-    #left-nav {
+    .button-nav {
       color: #595959;
       font-size: rem(20px);
       margin-right: rem(7px);
@@ -21,21 +21,16 @@
       outline: none;
       background-color: #fff;
     }
-
+    #left-nav {
+      float: left;
+    }
     #right-nav {
-      color: #595959;
-      font-size: rem(20px);
-      margin-right: rem(7px);
-      padding: 0;
-      border: none;
-      outline: none;
-      background-color: #fff;
       float: right;
     }
     h5 {
+      display: inline-block;
       color: #595959;
       margin: 0;
-      display: inline-block;
     }
   }
   .panel--core {
