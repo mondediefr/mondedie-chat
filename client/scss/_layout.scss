@@ -78,7 +78,7 @@ hr {
   display: flex;
   flex-direction: column;
   height: 100%;
-  .section--header {
+  .panel--header {
     flex-grow: 0;
     flex-shrink: 0;
     //bug fix ie10-11 -> flex-basis: rem(50px);
@@ -86,13 +86,13 @@ hr {
     height: rem(50px);
     // end
   }
-  .section--core {
+  .panel--core {
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: auto;
     overflow-y: auto;
   }
-  .section--footer {
+  .panel--footer {
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: auto;
@@ -148,6 +148,7 @@ hr {
     left: 0;
     top: 0;
     bottom: 0;
+    z-index: 0;
     width: rem(225px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -157,26 +158,31 @@ hr {
     position: relative;
     z-index: 1;
   }
-  .slideout-open {
+  .slideout-open .slideout-menu {
+    display: flex;
+  }
+  .slideout-open,
+  .slideout-open body,
+  .slideout-open .slideout-panel {
     overflow: hidden;
-    .slideout-menu {
-      display: block;
-    }
-    & body, & .slideout-panel {
-      overflow: hidden;
+  }
+  .panel {
+    // test fix scroll
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    .panel--footer {
+      #editor {
+        .md-header {
+          display: none;
+        }
+        textarea {
+          border-top: none;
+        }
+      }
     }
   }
-  .section--footer {
-    #editor {
-      .md-header {
-        display: none;
-      }
-      textarea {
-        border-top: none;
-      }
-    }
-  }
-  #right-menu.slideout-menu {
+  .menu--right.slideout-menu {
     right: 0;
     left: auto;
   }
