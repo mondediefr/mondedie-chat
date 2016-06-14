@@ -14,9 +14,12 @@ var slideoutLeft = new Slideout({
 });
 
 $('#left-nav').click(function() {
-  slideoutLeft.toggle();
-  $('#right-menu').hide();
-  $('#left-menu').show();
+  var status = slideoutLeft.toggle();
+  var oppositeMenu = $('#right-menu');
+  if (status._opened === true)
+    oppositeMenu.hide();
+  else
+    oppositeMenu.delay(200).show(0);
 });
 
 /**
@@ -32,7 +35,10 @@ var slideoutRight = new Slideout({
 });
 
 $('#right-nav').click(function() {
-  slideoutRight.toggle();
-  $('#left-menu').hide();
-  $('#right-menu').show();
+  var status = slideoutRight.toggle();
+  var oppositeMenu = $('#left-menu');
+  if (status._opened === true)
+    oppositeMenu.hide();
+  else
+    oppositeMenu.show(0);
 });
