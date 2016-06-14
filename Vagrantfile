@@ -20,8 +20,6 @@ Vagrant.configure(2) do |config|
   config.berkshelf.enabled = true
 
   config.vm.provision :chef_solo do |chef|
-
-    chef.add_recipe 'apt'
     chef.add_recipe 'build-essential'
     chef.add_recipe 'redisio'
     chef.add_recipe 'nginx'
@@ -30,11 +28,9 @@ Vagrant.configure(2) do |config|
     chef.add_recipe 'chat::nodejs'
     chef.add_recipe 'chat::nginx'
     chef.add_recipe 'chat::setup'
-
     chef.json = {
       :chat => {
-        :packages => %W{ vim git curl },
-        :npm_packages => %W{ pm2 bower gulp }
+        :npm_packages => %W{ pm2 gulp }
       },
       :nginx => {
         :user => 'vagrant',

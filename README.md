@@ -100,16 +100,22 @@ With HTTP status code of **200** when user is successfully authenticated or **40
 
 - [chef-dk](https://downloads.chef.io/chef-dk/)
 - [virtualbox](https://www.virtualbox.org/wiki/Downloads)
-- [vagrant](https://www.vagrantup.com/downloads.html)
+- [vagrant (>=v1.8.3)](https://www.vagrantup.com/downloads.html)
 
 ### Vagrant plugins :
 
 ```
+vagrant plugin install vagrant-vbguest
 vagrant plugin install vagrant-berkshelf
 vagrant plugin install vagrant-hostmanager
 ```
 
 ### installation
+
+Only for the first time
+```bash
+vagrant box update # Make sure you're running the latest box version.
+```
 
 ```bash
 vagrant up # for installation

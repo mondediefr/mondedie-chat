@@ -6,10 +6,9 @@ version '1.3.0'
 
 recipe 'chat', 'Mondedie-chat installation recipies'
 
-depends 'apt'
 depends 'nvm'
 depends 'nginx'
 
-%W{ debian ubuntu }.each do |os|
+%W{ debian }.each do |os|
   supports os
 end

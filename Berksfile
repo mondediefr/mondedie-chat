@@ -1,8 +1,7 @@
 source 'https://supermarket.chef.io'
 
-cookbook 'apt'
 cookbook 'build-essential'
 cookbook 'redisio'
 cookbook 'nvm'
-cookbook 'nginx'
+cookbook 'nginx', '~> 2.0'
 cookbook 'chat', path: './cookbook'

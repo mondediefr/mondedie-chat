@@ -1,6 +1,6 @@
 include_recipe 'nvm'
 
-nvm_install 'v0.12.7' do
+nvm_install 'v6.2.1' do
   user 'vagrant'
   group 'vagrant'
   from_source false
@@ -8,7 +8,7 @@ nvm_install 'v0.12.7' do
   action :create
 end
 
-# global packages
+# packages npm
 node['chat']['npm_packages'].each do |n_package|
   script n_package do
     interpreter 'bash'

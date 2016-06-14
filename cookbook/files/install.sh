@@ -6,12 +6,9 @@ if [ ! -d ~/mondedie-chat ]; then
   exit 1
 fi
 
+# Installation des dépendances et compilation des assets
 cd ~/mondedie-chat
-
-# Installation des dépendances
-npm --no-bin-links install
-
-# Compilation des assets
+npm install
 gulp
 
 # Exécution de l'app
