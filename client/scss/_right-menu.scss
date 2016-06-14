@@ -1,15 +1,15 @@
-// ####################
-// # _menu-right.scss #
-// ####################
+// ----------------------------
+// _right-menu.scss
+// ----------------------------
 
 $size-circle-status: 10px; //chiffre pair obligatoire
 
-.section--right {
+.menu--right {
   background-color: $color-menu;
-  .section--right--header {
+  .menu--right--header {
     // -
   }
-  .section--right--core {
+  .menu--right--core {
     padding: 0 rem(10px) rem(10px) rem(10px);
     h6 {
       color: #595959;
@@ -47,7 +47,7 @@ $size-circle-status: 10px; //chiffre pair obligatoire
       }
     }
   }
-  .section--right--footer {
+  .menu--right--footer {
     text-align: center;
     padding: rem(7px);
     font-size: rem(12px);

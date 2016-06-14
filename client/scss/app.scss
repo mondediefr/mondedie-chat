@@ -1,24 +1,21 @@
-// ##########
-// # import #
-// ##########
+// ----------------------------
+// apps.scss
+// ----------------------------
 
 // bootstrap
 @import "bootstrap";
 
-// core variables, functions and mixins
+// core variables, functions, minins and fonts
 @import "functions";
 @import "variables";
-
-// fonts
 @import "fonts";
 
 // core css
-@import "banner";
 @import "layout";
 @import "login";
-@import "menu";
-@import "section-center";
-@import "section-right";
+@import "left-menu";
+@import "right-menu";
+@import "panel";
 
 // annexe
 @import "editor";

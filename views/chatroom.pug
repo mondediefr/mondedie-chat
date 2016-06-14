@@ -1,10 +1,8 @@
 extends layout
-
 block content
-
   .conteneur-flex
     //- menu gauche
-    nav.menu#menu
+    nav.menu#left-menu
       .nav--header
         h5.title-site
           a(href="/" title="Mondedie.fr" class="site-name")
@@ -72,34 +70,35 @@ block content
             span Se déconnecter
     //- message
     section.panel#panel
-      .section--center
-        .section--center--header
-          button#toggle-button.hidden-lg-up
-            i.fa.fa-bars
-          h5 #General
-        .section--center--core#content-messages
-        .section--center--footer
-          form#editor
-            textarea(id='text-editor' placeholder='Cliquez ici pour écrire un message.')
-          #footer-editor
-            #content-typing
-            #count-textarea
-      //- colonne de droite
-      .section--right
-        .section--right--header
-        .section--right--core
-          hr
-          #content-users
-        .section--right--footer
-          span.links
-            a(href='https://mondedie.fr' target='_blank') Forum
-            | -
-            a(href='https://twitter.com/mondediefr' target='_blank') Twitter
-            | -
-            a(href='https://github.com/mondediefr/mondedie-chat' target='_blank') Github
-            | -
-          span.label.label-default
-            a(href='https://github.com/mondediefr/mondedie-chat/releases/tag/v1.3.0' target='_blank') v1.3.0
+      .section--header
+        button#left-nav.hidden-lg-up
+          i.fa.fa-bars
+        button#right-nav.hidden-lg-up
+          i.fa.fa-bars
+        h5 #General
+      .section--core#content-messages
+      .section--footer
+        form#editor
+          textarea(id='text-editor' placeholder='Cliquez ici pour écrire un message.')
+        #footer-editor
+          #content-typing
+          #count-textarea
+    //- menu droit
+    #right-menu.menu--right
+      .menu--right--header
+      .menu--right--core
+        hr
+        #content-users
+      .menu--right--footer
+        span.links
+          a(href='https://mondedie.fr' target='_blank') Forum
+          | -
+          a(href='https://twitter.com/mondediefr' target='_blank') Twitter
+          | -
+          a(href='https://github.com/mondediefr/mondedie-chat' target='_blank') Github
+          | -
+        span.label.label-default
+          a(href='https://github.com/mondediefr/mondedie-chat/releases/tag/v1.3.0' target='_blank') v1.3.0
   //- popup
   #content-smileys
   if user.isAdmin

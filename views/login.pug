@@ -1,7 +1,5 @@
 extends layout
-
 block content
-
   .container
     h1.title-site
       a(href="/" title="Mondedie.fr" class="site-name")
@@ -10,7 +8,6 @@ block content
         | ONDEDIE
         span  }
       p.site-motto Forum pour débutant en administration système.
-
     #login
       form(action='/login' method='post' class='form-signin')
         if formMessage

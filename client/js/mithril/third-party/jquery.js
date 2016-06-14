@@ -1,4 +1,4 @@
-/* global $, window, document, editor, socket, Notify, textarea, slideout, localStorage */
+/* global $, window, document, editor, socket, Notify, textarea, localStorage */
 'use strict';
 
 $(function() {
@@ -94,10 +94,6 @@ $(function() {
     textarea.focus();
   });
 
-  $('#toggle-button').click(function(e) {
-    slideout.toggle();
-  });
-
   $('input[type="checkbox"]').each(function() {
     if(localStorage.getItem($(this).attr('id')) !== null) {
       $(this).attr("checked", "checked");
@@ -117,13 +113,13 @@ $(function() {
     var size = 0;
     if($(window).width() < 992) {
       // 50px = section right width
-      size = $(window).width() - 50;
+      size = $(window).width();
     } else {
       // 0.64 = section center width coef
       size = $(window).width() * (4/6);
     }
 
-    $('.section--center').css({
+    $('.panel').css({
       'max-width': size
     });
   }

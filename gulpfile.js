@@ -1,4 +1,5 @@
 'use strict';
+
 var gulp = require('gulp');
 var minify = require('gulp-clean-css');
 var uglify = require('gulp-uglify');
@@ -16,7 +17,9 @@ var del = require('del');
 var runSequence = require('run-sequence');
 var plumber = require('gulp-plumber');
 
-// ########################### PATHS ###########################
+// ----------------------------
+// Paths
+// ----------------------------
 var bowerPath = 'client/bower';
 var jsPath = 'client/js';
 var fontsPath = 'client/fonts';
@@ -53,7 +56,9 @@ var cssFiles = [
   'node_modules/highlight.js/styles/github.css'
 ];
 
-// ########################### CONFIG ##########################
+// ----------------------------
+// Configuration
+// ----------------------------
 var optionAutoprefixer = {
   browsers: [
     'Chrome >= 35',
@@ -82,7 +87,9 @@ var optionSize = {
   showTotal: false
 };
 
-// ########################### TASKS ###########################
+// ----------------------------
+// Gulp task definitions
+// ----------------------------
 gulp.task('default', function() {
   runSequence('bower', ['inject-css', 'inject-js', 'lint', 'fonts', 'emojione-strategy']);
 });

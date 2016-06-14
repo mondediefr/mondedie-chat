@@ -1,18 +1,18 @@
-// ######################
-// # _bloc-message.scss #
-// ######################
+// ----------------------------
+// _panel.scss
+// ----------------------------
 
-.section--center {
+#panel {
   background-color: #fff;
   border: {
     style: solid;
     width: 0 rem(1px) 0 rem(1px);
     color: #ddd;
   }
-  .section--center--header {
+  .section--header {
     padding: rem(10px);
     border-bottom: rem(1px) solid #ddd;
-    #toggle-button {
+    #left-nav {
       color: #595959;
       font-size: rem(20px);
       margin-right: rem(7px);
@@ -21,13 +21,24 @@
       outline: none;
       background-color: #fff;
     }
+
+    #right-nav {
+      color: #595959;
+      font-size: rem(20px);
+      margin-right: rem(7px);
+      padding: 0;
+      border: none;
+      outline: none;
+      background-color: #fff;
+      float: right;
+    }
     h5 {
       color: #595959;
       margin: 0;
       display: inline-block;
     }
   }
-  .section--center--core {
+  .section--core {
     #messages {
       overflow-x: hidden;
       padding: 0; margin: 0;
@@ -112,7 +123,7 @@
       }
     }
   }
-  .section--center--footer {
+  .section--footer {
     border: {
       style: solid;
       width: rem(1px) 0 0 0;
