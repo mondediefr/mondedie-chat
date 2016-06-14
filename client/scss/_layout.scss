@@ -167,10 +167,9 @@ hr {
     overflow: hidden;
   }
   .panel {
-    // test fix scroll
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
+    position: fixed;
+    right: 0;
+    left: 0;
     .panel--footer {
       #editor {
         .md-header {
