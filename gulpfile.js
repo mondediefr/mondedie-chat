@@ -16,6 +16,7 @@ var inject = require('gulp-inject');
 var del = require('del');
 var runSequence = require('run-sequence');
 var plumber = require('gulp-plumber');
+var imagemin = require('gulp-imagemin');
 
 // ----------------------------
 // Paths
@@ -23,69 +24,85 @@ var plumber = require('gulp-plumber');
 var bowerPath = 'client/bower';
 var jsPath = 'client/js';
 var fontsPath = 'client/fonts';
-var jshintFiles = [
-  'app.js', 'gulpfile.js', 'routes/*.js', 'libs/*.js',
-  'models/*.js', 'client/js/**/*.js'
-];
-var jsFiles = [
-  // dependJsFiles
-  bowerPath + '/jquery/dist/jquery.min.js',
-  bowerPath + '/tether/dist/js/tether.min.js',
-  bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
-  bowerPath + '/visibilityjs/lib/visibility.core.js',
-  bowerPath + '/notify.js/notify.js',
-  bowerPath + '/moment/min/moment.min.js',
-  bowerPath + '/moment/locale/fr.js',
-  bowerPath + '/bootstrap-markdown/js/bootstrap-markdown.js',
-  bowerPath + '/bootstrap-markdown/locale/bootstrap-markdown.fr.js',
-  bowerPath + '/jquery-textcomplete/dist/jquery.textcomplete.min.js',
-  bowerPath + '/mithril/mithril.min.js',
-  bowerPath + '/slideout.js/dist/slideout.min.js',
-  // appJsFiles
-  jsPath + '/app.js',
-  jsPath + '/mithril/third-party/*.js',
-  jsPath + '/mithril/models/*.js',
-  jsPath + '/mithril/views-models/*.js',
-  jsPath + '/mithril/controllers/*.js',
-  jsPath + '/mithril/views/*.js'
-];
-var cssFiles = [
-  'client/scss/app.scss',
-  bowerPath + '/bootstrap-markdown/css/bootstrap-markdown.min.css',
-  bowerPath + '/font-awesome/css/font-awesome.min.css',
-  'node_modules/highlight.js/styles/github.css'
-];
+
+var files = {
+
+  jshint: [
+    'app.js', 'gulpfile.js', 'routes/*.js', 'libs/*.js',
+    'models/*.js', 'client/js/**/*.js'
+  ],
+
+  js: [
+    // dependJsFiles
+    bowerPath + '/jquery/dist/jquery.min.js',
+    bowerPath + '/tether/dist/js/tether.min.js',
+    bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
+    bowerPath + '/visibilityjs/lib/visibility.core.js',
+    bowerPath + '/notify.js/notify.js',
+    bowerPath + '/moment/min/moment.min.js',
+    bowerPath + '/moment/locale/fr.js',
+    bowerPath + '/bootstrap-markdown/js/bootstrap-markdown.js',
+    bowerPath + '/bootstrap-markdown/locale/bootstrap-markdown.fr.js',
+    bowerPath + '/jquery-textcomplete/dist/jquery.textcomplete.min.js',
+    bowerPath + '/mithril/mithril.min.js',
+    bowerPath + '/slideout.js/dist/slideout.min.js',
+    // appJsFiles
+    jsPath + '/app.js',
+    jsPath + '/mithril/third-party/*.js',
+    jsPath + '/mithril/models/*.js',
+    jsPath + '/mithril/views-models/*.js',
+    jsPath + '/mithril/controllers/*.js',
+    jsPath + '/mithril/views/*.js'
+  ],
+
+  css: [
+    'client/scss/app.scss',
+    bowerPath + '/bootstrap-markdown/css/bootstrap-markdown.min.css',
+    bowerPath + '/font-awesome/css/font-awesome.min.css',
+    'node_modules/highlight.js/styles/github.css'
+  ]
+}
 
 // ----------------------------
 // Configuration
 // ----------------------------
-var optionAutoprefixer = {
-  browsers: [
-    'Chrome >= 35',
-    'Firefox >= 38',
-    'Edge >= 12',
-    'Explorer >= 9',
-    'iOS >= 8',
-    'Safari >= 8',
-    'Android 2.3',
-    'Android >= 4',
-    'Opera >= 12'
-  ]
-};
-var optionSass = {
-  includePaths: [
-    'client/bower/bootstrap/scss',
-    'client/scss'
-  ],
-  outputStyle: 'expanded',
-  precision: 6,
-  sourceComments: false,
-  sourceMap: false
-};
-var optionSize = {
-  showFiles: true,
-  showTotal: false
-};
+var option = {
+
+  imagemin: {
+    progressive: true,
+    optimizationLevel: 7
+  },
+
+  size: {
+    showFiles: true,
+    showTotal: false
+  },
+
+  sass: {
+    includePaths: [
+      'client/bower/bootstrap/scss',
+      'client/scss'
+    ],
+    outputStyle: 'expanded',
+    precision: 6,
+    sourceComments: false,
+    sourceMap: false
+  },
+
+  autoprefixeur: {
+    browsers: [
+      'Chrome >= 35',
+      'Firefox >= 38',
+      'Edge >= 12',
+      'Explorer >= 9',
+      'iOS >= 8',
+      'Safari >= 8',
+      'Android 2.3',
+      'Android >= 4',
+      'Opera >= 12'
+    ]
+  }
+}
 
 // ----------------------------
 // Gulp task definitions
@@ -94,14 +111,12 @@ gulp.task('default', function() {
   runSequence('bower', ['inject-css', 'inject-js', 'lint', 'fonts', 'emojione-strategy']);
 });
 
-gulp.task('heroku:production', ['default']);
-
 gulp.task('bower', function() {
   return bower();
 });
 
 gulp.task('lint', function() {
-  return gulp.src(jshintFiles)
+  return gulp.src(files.jshint)
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
 });
@@ -126,23 +141,23 @@ gulp.task('clean-css', function() {
 
 gulp.task('sass', ['clean-css'], function() {
   var sassFile = filter(['**', '!**/*.min.css'], {restore: true});
-  return gulp.src(cssFiles)
+  return gulp.src(files.css)
     .pipe(sassFile)
     .pipe(plumber())
-    .pipe(sass(optionSass))
+    .pipe(sass(option.sass))
     .pipe(plumber.stop())
-    .pipe(autoprefixer(optionAutoprefixer))
+    .pipe(autoprefixer(option.autoprefixer))
     .pipe(sassFile.restore)
     .pipe(minify({keepSpecialComments: 0}))
     .pipe(concat('app.min.css'))
     .pipe(rev())
-    .pipe(size(optionSize))
+    .pipe(size(option.size))
     .pipe(gulp.dest('public/css'));
 });
 
 gulp.task('js', ['clean-js'], function() {
   var unminified = filter(['**', '!**/*.min.js'], {restore: true});
-  return gulp.src(jsFiles)
+  return gulp.src(files.js)
     .pipe(unminified)
     .pipe(plumber())
     .pipe(uglify())
@@ -152,7 +167,7 @@ gulp.task('js', ['clean-js'], function() {
     .pipe(concat('app.min.js'))
     .pipe(rev())
     .pipe(sourcemaps.write('.'))
-    .pipe(size(optionSize))
+    .pipe(size(option.size))
     .pipe(gulp.dest('public/js'));
 });
 
@@ -168,8 +183,14 @@ gulp.task('inject-js', ['js'], function() {
     .pipe(gulp.dest('views/includes/build'));
 });
 
+gulp.task('img', function() {
+  return gulp.src('public/images/**/*')
+    .pipe(imagemin(option.imagemin))
+    .pipe(gulp.dest('public/images'));
+});
+
 gulp.task('watch', ['default'], function() {
-  gulp.watch(jshintFiles, ['lint']);
+  gulp.watch(files.jshint, ['lint']);
   gulp.watch('client/js/**/*.js', ['inject-js']);
   gulp.watch('client/scss/**/*.scss', ['inject-css']);
 });

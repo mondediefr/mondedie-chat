@@ -18,7 +18,7 @@ messages.view = function(controller) {
         privateMark(message.priv()),
         m("img", {
           class: 'img-rounded avatar-message',
-          src: user.avatar || '/images/bender.gif',
+          src: user.avatar || '/images/bender.jpeg',
           alt: user.name
         }),
         m("span", { class:'username', style:{ color:user.groupColor || '#373a3c' }}, user.name),

@@ -38,17 +38,17 @@ $(function() {
         to: 'window',
         attachment: 'together'
       }]
-    })
-    button.click(function(event) {
+    });
+    button.on('click touch', function(event) {
       popup.position();
       divSmileys.show();
     });
-    $(document).click(function(event) {
+    $(document).on('click touch', function(event) {
       if (!$(event.target).parents().andSelf().is(button)) {
         divSmileys.hide();
       }
     });
-    divSmileys.click(function(event) {
+    divSmileys.on('click touch', function(event) {
       event.stopPropagation();
     });
   }
