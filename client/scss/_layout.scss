@@ -17,18 +17,6 @@ body {
   display: none !important;
 }
 
-input[type="checkbox"] {
-  margin-right: rem(5px);
-}
-
-hr {
-  margin: rem(12px) 0 rem(12px) 0;
-  border-top: rem(1px) solid #dce1e6;
-  &:first-child {
-    margin-top: 0;
-  }
-}
-
 // --------------------------
 // Layout pour la chatroom
 // --------------------------

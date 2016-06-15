@@ -66,28 +66,23 @@
 }
 
 #content-smileys {
-  position: relative;
-  display: none;
-  z-index: 2;
+  z-index: 100000;
+  width: rem(275px);
+  height: auto;
   background-color: #fff;
   box-shadow: 0 rem(5px) rem(10px) rgba(0, 0, 0, 0.3);
   border-radius: rem(4px);
   border: rem(1px) solid #ccc;
-  padding: rem(10px);
-  .smileys-arrow {
-    position: absolute;
-    bottom: rem(-20px);
-    right: 50%;
-    margin-right: rem(-9px);
-    border: rem(10px) solid transparent;
-    border-top: rem(10px) solid #fff;
-    width: 0;
-  }
+  padding: rem(7px);
+
+  position: relative;
+  $height-title: rem(30px);
   .smileys-title {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
+    height: $height-title;
     background-color: #f7f7f7;
     border-bottom: rem(1px) solid #ebebeb;
     border-radius: rem(4px) rem(4px) 0 0;
@@ -99,7 +94,7 @@
     }
   }
   .smileys-container {
-    margin-top: rem(34px);
+    margin-top: $height-title;
     img {
       cursor: pointer;
       width: rem($size-smiley);
@@ -107,7 +102,13 @@
       margin: rem(4px);
     }
   }
-  &.opened {
-    display: block;
-  }
+  /*.smileys-arrow {
+    position: absolute;
+    bottom: rem(-20px);
+    right: 50%;
+    margin-right: rem(-9px);
+    border: rem(10px) solid transparent;
+    border-top: rem(10px) solid #fff;
+    width: 0;
+  }*/
 }

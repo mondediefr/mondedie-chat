@@ -29,7 +29,7 @@ var slideoutRight = new Slideout({
   'panel': document.getElementById('panel'),
   'menu': document.getElementById('right-menu'),
   'padding': 225,
-  'tolerance': 70, //only when touch is available
+  'tolerance': 70,
   'touch': false,
   'side': 'right'
 });
@@ -40,5 +40,5 @@ $('#right-nav').click(function() {
   if (status._opened === true)
     oppositeMenu.hide();
   else
-    oppositeMenu.show(0);
+    oppositeMenu.show();
 });

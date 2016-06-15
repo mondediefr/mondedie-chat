@@ -1,8 +1,7 @@
-/* global $, document, window, messages, event, textarea, socket */
+/* global $, document, window, messages, event, textarea, socket, Tether */
 'use strict';
 
 $(function() {
-
   /**
    * Markdown editor
    */
@@ -26,27 +25,30 @@ $(function() {
     ]
   });
 
-  function popupSmiley(event) {
-    var smiley = $('#content-smileys');
+  function popupSmiley() {
+    var divSmileys = $('#content-smileys');
     var button = $('.fa.fa-smile-o').parent();
-    var location = button.offset();
-    var heightSmiley = 220 + 34;
-    var widthSmiley = 275;
-    smiley.css({
-      'position': 'absolute',
-      'top': location.top - heightSmiley - 9,
-      'left': location.left - (widthSmiley / 2) + 20,
-      'width': widthSmiley,
-      'height': heightSmiley
+    var popup = new Tether({
+      element: divSmileys,
+      target: button,
+      attachment: 'bottom center',
+      targetAttachment: 'top center',
+      //offset: '10px 0',
+      constraints: [{
+        to: 'window',
+        attachment: 'together'
+      }]
+    })
+    button.click(function(event) {
+      popup.position();
+      divSmileys.show();
     });
-    // toggle popup + closing after click
-    smiley.toggleClass('opened');
     $(document).click(function(event) {
       if (!$(event.target).parents().andSelf().is(button)) {
-        smiley.removeClass('opened');
+        divSmileys.hide();
       }
     });
-    smiley.click(function(event) {
+    divSmileys.click(function(event) {
       event.stopPropagation();
     });
   }
@@ -106,5 +108,4 @@ $(function() {
     }
     countTextarea.text(1000 - currentString);
   });
-
 });

@@ -38,6 +38,16 @@
         display: inline;
         color: #595959;
         cursor: pointer;
+        input[type="checkbox"] {
+          margin-right: rem(5px);
+        }
+      }
+    }
+    hr {
+      margin: rem(10px) 0 rem(10px) 0;
+      border-top: rem(1px) solid #dce1e6;
+      &:first-child {
+        margin-top: 0;
       }
     }
     .sign-out {
