@@ -1,0 +1,34 @@
+chat:
+  image: xataz/node:6
+  container_name: chat
+  links:
+    - redis:redis
+  environment:
+    - AUTH_API_ENDPOINT=https://mondedie.fr/api/auth.php
+    - COOKIES_SECRET=PLEASE_REPLACE_BY_RANDOM_VALUE
+    - SESSION_SECRET=PLEASE_REPLACE_BY_RANDOM_VALUE
+    - REDIS_URL=redis://redis:6379
+  volumes:
+    - /PATH/TO/mondedie-chat:/usr/src/app
+  ports:
+    - "5000:5000"
+  working_dir: /usr/src/app
+  command: npm start
+
+redis:
+  image: redis:3.0.7-alpine
+  container_name: redis
+  command: redis-server --appendonly yes
+  volumes:
+    - /mnt/docker/redis/db/:/data
+
+nginx:
+  image: xataz/nginx:mainline
+  container_name: nginx
+  links:
+    - chat:chat
+  ports:
+    - "80:8000"
+  volumes:
+    - /PATH/TO/mondedie-chat/nginx/sites-enabled:/sites-enabled
+    - /PATH/TO/mondedie-chat/nginx/log:/var/log/nginx
