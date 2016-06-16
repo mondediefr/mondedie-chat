@@ -4,12 +4,12 @@ chat:
   links:
     - redis:redis
   environment:
-    - AUTH_API_ENDPOINT=https://mondedie.fr/api/auth.php
-    - COOKIES_SECRET=PLEASE_REPLACE_BY_RANDOM_VALUE
-    - SESSION_SECRET=PLEASE_REPLACE_BY_RANDOM_VALUE
+    - "AUTH_API_ENDPOINT=${AUTH_API_ENDPOINT}"
+    - COOKIES_SECRET=Xpg29n6s9hGuKqWA24U3w5gBAD46yw5X
+    - SESSION_SECRET=4fQ9FMEGqYSw3d289h72zx7S4hytb6BG
     - REDIS_URL=redis://redis:6379
   volumes:
-    - /PATH/TO/mondedie-chat:/usr/src/app
+    - "${PATH_MONDEDIE_CHAT}/mondedie-chat:/usr/src/app"
   ports:
     - "5000:5000"
   working_dir: /usr/src/app
@@ -30,5 +30,5 @@ nginx:
   ports:
     - "80:8000"
   volumes:
-    - /PATH/TO/mondedie-chat/nginx/sites-enabled:/sites-enabled
-    - /PATH/TO/mondedie-chat/nginx/log:/var/log/nginx
+    - "${PATH_MONDEDIE_CHAT}/mondedie-chat/nginx/sites-enabled:/sites-enabled"
+    - "${PATH_MONDEDIE_CHAT}/mondedie-chat/nginx/log:/var/log/nginx"

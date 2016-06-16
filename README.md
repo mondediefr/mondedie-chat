@@ -27,8 +27,9 @@ Node.js chat application using Express, Socket.io, Redis and Mithril.
 
 ## Screenshot
 
-![screenshot](http://i.imgur.com/SvOP3ix.png "screenshot")
-![screenshot responsive](http://i.imgur.com/yjd28Ud.png "screenshot responsive")
+![screenshot](https://images.mondedie.fr/p1fy7flP/KlbD6rL5.png "screenshot")
+
+![screenshot responsive](https://images.mondedie.fr/SMdzJAdJ/cJ3wt7lL.png "screenshot responsive")
 
 ## Heroku deployment
 
@@ -91,39 +92,6 @@ With HTTP status code of **200** when user is successfully authenticated or **40
 - `data.attributes.avatarUrl` : User avatar URL
 - `data.included.attributes.namePlural` : Group name
 - `data.included.attributes.color` : Group color
-
----
-
-## Vagrant installation
-
-### Requirements:
-
-- [chef-dk](https://downloads.chef.io/chef-dk/)
-- [virtualbox](https://www.virtualbox.org/wiki/Downloads)
-- [vagrant (>=v1.8.3)](https://www.vagrantup.com/downloads.html)
-
-### Vagrant plugins :
-
-```
-vagrant plugin install vagrant-vbguest
-vagrant plugin install vagrant-berkshelf
-vagrant plugin install vagrant-hostmanager
-```
-
-### installation
-
-Only for the first time
-```bash
-vagrant box update # Make sure you're running the latest box version.
-```
-
-```bash
-vagrant up # for installation
-vagrant halt # stop vagrant
-vagrant up --provision # restart vagrant
-```
-
-Open app : `http://mondedie-chat.dev`
 
 ---
 
@@ -263,9 +231,37 @@ Run !
 docker-compose up -d
 ```
 
+---
+
+## Development Docker installation
+
+#### Requirements:
+
+* docker
+* nodejs
+* npm
+* gulp
+
+#### Set environment variables
+```bash
+echo 'export PATH_MONDEDIE_CHAT="/path/to/chat"' >> ~/.bash_profile
+echo 'export AUTH_API_ENDPOINT="http://your-domain.tld/api/auth.php"' >> ~/.bash_profile
+```
+
+#### Setup
+
+```bash
+cd /path/to/chat/mondedie-chat
+npm install
+docker-compose --file docker-compose_dev.yml up -d
+gulp watch
+```
+Now, you can dev :)
+
+---
+
 ## Roadmap
 
-- Ignore a user
 - Private rooms
 - Unit tests + coverage
 - Build an API
