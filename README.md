@@ -245,6 +245,7 @@ docker-compose up -d
 #### Set environment variables
 ```bash
 echo 'export PATH_MONDEDIE_CHAT="/path/to/chat"' >> ~/.bash_profile
+echo 'export AUTH_API_TOKEN="token"' >> ~/.bash_profile
 echo 'export AUTH_API_ENDPOINT="http://your-domain.tld/api/auth.php"' >> ~/.bash_profile
 ```
 

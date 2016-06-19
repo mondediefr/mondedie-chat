@@ -21,45 +21,52 @@ var imagemin = require('gulp-imagemin');
 // ----------------------------
 // Paths
 // ----------------------------
-var bowerPath = 'client/bower';
-var jsPath = 'client/js';
-var fontsPath = 'client/fonts';
+var path = {
+  bower: 'client/bower',
+  js: 'client/js',
+  fonts: 'client/fonts',
+  npm: 'node_modules'
+}
 
+// ----------------------------
+// Files
+// ----------------------------
 var files = {
 
   jshint: [
-    'app.js', 'gulpfile.js', 'routes/*.js', 'libs/*.js',
-    'models/*.js', 'client/js/**/*.js'
+    'app.js', 'gulpfile.js', 'routes/*.js',
+    'libs/*.js','models/*.js', 'client/js/**/*.js'
   ],
 
   js: [
     // dependJsFiles
-    bowerPath + '/jquery/dist/jquery.min.js',
-    bowerPath + '/tether/dist/js/tether.min.js',
-    bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
-    bowerPath + '/visibilityjs/lib/visibility.core.js',
-    bowerPath + '/notify.js/notify.js',
-    bowerPath + '/moment/min/moment.min.js',
-    bowerPath + '/moment/locale/fr.js',
-    bowerPath + '/bootstrap-markdown/js/bootstrap-markdown.js',
-    bowerPath + '/bootstrap-markdown/locale/bootstrap-markdown.fr.js',
-    bowerPath + '/jquery-textcomplete/dist/jquery.textcomplete.min.js',
-    bowerPath + '/mithril/mithril.min.js',
-    bowerPath + '/slideout.js/dist/slideout.min.js',
+    path.bower + '/jquery/dist/jquery.min.js',
+    path.bower + '/tether/dist/js/tether.min.js',
+    path.bower + '/bootstrap/dist/js/bootstrap.min.js',
+    path.bower + '/mithril/mithril.min.js',
+    path.bower + '/moment/min/moment.min.js',
+    path.bower + '/jquery-textcomplete/dist/jquery.textcomplete.min.js',
+    path.bower + '/slideout.js/dist/slideout.min.js',
+    path.bower + '/visibilityjs/lib/visibility.core.js',
+    path.bower + '/notify.js/notify.js',
+    path.bower + '/moment/locale/fr.js',
+    path.bower + '/bootstrap-markdown/js/bootstrap-markdown.js',
+    path.bower + '/bootstrap-markdown/locale/bootstrap-markdown.fr.js',
+
     // appJsFiles
-    jsPath + '/app.js',
-    jsPath + '/mithril/third-party/*.js',
-    jsPath + '/mithril/models/*.js',
-    jsPath + '/mithril/views-models/*.js',
-    jsPath + '/mithril/controllers/*.js',
-    jsPath + '/mithril/views/*.js'
+    path.js + '/app.js',
+    path.js + '/mithril/third-party/*.js',
+    path.js + '/mithril/models/*.js',
+    path.js + '/mithril/views-models/*.js',
+    path.js + '/mithril/controllers/*.js',
+    path.js + '/mithril/views/*.js'
   ],
 
   css: [
     'client/scss/app.scss',
-    bowerPath + '/bootstrap-markdown/css/bootstrap-markdown.min.css',
-    bowerPath + '/font-awesome/css/font-awesome.min.css',
-    'node_modules/highlight.js/styles/github.css'
+    path.bower + '/bootstrap-markdown/css/bootstrap-markdown.min.css',
+    path.bower + '/font-awesome/css/font-awesome.min.css',
+    path.npm + '/highlight.js/styles/github.css'
   ]
 }
 
@@ -122,7 +129,7 @@ gulp.task('lint', function() {
 });
 
 gulp.task('fonts', function() {
-  return gulp.src([bowerPath + '/font-awesome/fonts/*', fontsPath + '/*'])
+  return gulp.src([path.bower + '/font-awesome/fonts/*', path.fonts + '/*'])
     .pipe(gulp.dest('public/fonts'));
 });
 

@@ -66,6 +66,9 @@
 }
 
 #content-smileys {
+  //temporaire provoque un autre bug au click
+  display: none;
+
   z-index: 100000;
   width: rem(275px);
   height: auto;

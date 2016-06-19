@@ -11,15 +11,18 @@ body {
   font-size: rem(13px);
   overflow: hidden;
   background-color: #fff;
+
+  border: 4px solid red;
+  //margin: 10px;
+}
+
+input[type="checkbox"] {
+  margin-right: rem(5px);
 }
 
 .hidden {
   display: none !important;
 }
-
-// --------------------------
-// Layout pour la chatroom
-// --------------------------
 
 // flex-grow: définit le facteur de grossissement d'un objet flex.
 // flex-shrink: spécifie le facteur de réduction d'un élément flex
