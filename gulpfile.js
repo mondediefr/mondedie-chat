@@ -17,6 +17,7 @@ var del = require('del');
 var runSequence = require('run-sequence');
 var plumber = require('gulp-plumber');
 var imagemin = require('gulp-imagemin');
+var livereload = require('gulp-livereload');
 
 // ----------------------------
 // Paths
@@ -52,7 +53,6 @@ var files = {
     path.bower + '/moment/locale/fr.js',
     path.bower + '/bootstrap-markdown/js/bootstrap-markdown.js',
     path.bower + '/bootstrap-markdown/locale/bootstrap-markdown.fr.js',
-
     // appJsFiles
     path.js + '/app.js',
     path.js + '/mithril/third-party/*.js',
@@ -181,13 +181,15 @@ gulp.task('js', ['clean-js'], function() {
 gulp.task('inject-css', ['sass'], function() {
   return gulp.src('views/includes/assets/css.pug')
     .pipe(inject(gulp.src('public/css/app-*.min.css', {read: false}), {ignorePath:'public'}))
-    .pipe(gulp.dest('views/includes/build'));
+    .pipe(gulp.dest('views/includes/build'))
+    .pipe(livereload());
 });
 
 gulp.task('inject-js', ['js'], function() {
   return gulp.src('views/includes/assets/javascript.pug')
     .pipe(inject(gulp.src('public/js/app-*.min.js', {read: false}), {ignorePath:'public'}))
-    .pipe(gulp.dest('views/includes/build'));
+    .pipe(gulp.dest('views/includes/build'))
+    .pipe(livereload());
 });
 
 gulp.task('img', function() {
@@ -197,6 +199,7 @@ gulp.task('img', function() {
 });
 
 gulp.task('watch', ['default'], function() {
+  livereload.listen();
   gulp.watch(files.jshint, ['lint']);
   gulp.watch('client/js/**/*.js', ['inject-js']);
   gulp.watch('client/scss/**/*.scss', ['inject-css']);

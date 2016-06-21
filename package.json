@@ -41,6 +41,7 @@
     "gulp-imagemin": "^3.0.1",
     "gulp-inject": "~4.1.0",
     "gulp-jshint": "~2.0.1",
+    "gulp-livereload": "^3.8.1",
     "gulp-plumber": "^1.1.0",
     "gulp-rev": "~7.0.0",
     "gulp-sass": "~2.3.1",
