@@ -20,16 +20,3 @@ redis:
   image: redis:3.0.7-alpine
   container_name: redis
   command: redis-server --appendonly yes
-  volumes:
-    - /mnt/docker/redis/db/:/data
-
-nginx:
-  image: xataz/nginx:mainline
-  container_name: nginx
-  links:
-    - chat:chat
-  ports:
-    - "80:8000"
-  volumes:
-    - "${PATH_MONDEDIE_CHAT}/mondedie-chat/nginx/sites-enabled:/sites-enabled"
-    - "${PATH_MONDEDIE_CHAT}/mondedie-chat/nginx/log:/var/log/nginx"

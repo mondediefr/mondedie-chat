@@ -244,6 +244,7 @@ docker-compose up -d
 
 #### Set environment variables
 ```bash
+sudo echo '127.0.0.1 mondedie-chat.dev' >> /etc/hosts
 echo 'export PATH_MONDEDIE_CHAT="/path/to/chat"' >> ~/.bash_profile
 echo 'export AUTH_API_TOKEN="token"' >> ~/.bash_profile
 echo 'export AUTH_API_ENDPOINT="http://your-domain.tld/api/auth.php"' >> ~/.bash_profile
@@ -257,7 +258,7 @@ npm install
 docker-compose --file docker-compose_dev.yml up -d
 gulp watch
 ```
-Now, you can dev :)
+Open app : http://mondedie-chat.dev:5000/
 
 ---
 
