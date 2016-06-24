@@ -11,11 +11,13 @@
       width: 0 0 rem(1px) 0;
     }
   }
+
   .btn-default {
     outline: 0;
     background-color: #fff;
     border: 1px solid #ddd;
   }
+  
   textarea {
     min-height: rem(70px);
     padding: rem(7px);
@@ -38,6 +40,7 @@
     color: #ddd;
     width: 0 0 rem(1px) 0;
   }
+
   #content-typing {
     flex-grow: 1;
     flex-shrink: 1;
@@ -49,6 +52,7 @@
       color: #919191;
     }
   }
+
   #count-textarea {
     flex-grow: 0;
     flex-shrink: 0;
@@ -66,20 +70,19 @@
 }
 
 #content-smileys {
-  //temporaire provoque un autre bug au click
   display: none;
-
   z-index: 100000;
   width: rem(275px);
   height: auto;
   background-color: #fff;
-  box-shadow: 0 rem(5px) rem(10px) rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 rem(10px) 0 rgba(0, 0, 0, 0.4);
   border-radius: rem(4px);
   border: rem(1px) solid #ccc;
   padding: rem(7px);
 
   position: relative;
   $height-title: rem(30px);
+
   .smileys-title {
     position: absolute;
     top: 0;
@@ -96,6 +99,7 @@
       weight: normal;
     }
   }
+
   .smileys-container {
     margin-top: $height-title;
     img {
@@ -105,7 +109,12 @@
       margin: rem(4px);
     }
   }
-  /*.smileys-arrow {
+
+  &.open {
+    display: block !important;
+  }
+
+  .smileys-arrow {
     position: absolute;
     bottom: rem(-20px);
     right: 50%;
@@ -113,5 +122,5 @@
     border: rem(10px) solid transparent;
     border-top: rem(10px) solid #fff;
     width: 0;
-  }*/
+  }
 }

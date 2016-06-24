@@ -33,22 +33,23 @@ $(function() {
       target: button,
       attachment: 'bottom center',
       targetAttachment: 'top center',
-      //offset: '10px 0',
+      offset: '10px 0',
       constraints: [{
         to: 'window',
         attachment: 'together'
       }]
     });
-    button.on('click touch', function(event) {
+
+    divSmileys.toggleClass('open');
+
+    $(document).click(function(event) {
       popup.position();
-      divSmileys.show();
-    });
-    $(document).on('click touch', function(event) {
-      if (!$(event.target).parents().andSelf().is(button)) {
-        divSmileys.hide();
+      if (! $(event.target).parent().andSelf().is(button)) {
+        divSmileys.removeClass('open');
       }
     });
-    divSmileys.on('click touch', function(event) {
+
+    divSmileys.click(function(event) {
       event.stopPropagation();
     });
   }
