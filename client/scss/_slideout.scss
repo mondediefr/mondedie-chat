@@ -1,0 +1,37 @@
+// ----------------------------
+// _slideout.scss
+// ----------------------------
+
+@include media-breakpoint-down(md) {
+  .slideout-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+    width: rem(225px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: none;
+  }
+
+  .slideout-panel {
+    position: relative;
+    z-index: 1;
+  }
+
+  .slideout-open .slideout-menu {
+    display: flex;
+  }
+
+  .slideout-open,
+  .slideout-open body,
+  .slideout-open .slideout-panel {
+    overflow: hidden;
+  }
+
+  .menu--right.slideout-menu {
+    right: 0;
+    left: auto;
+  }
+}

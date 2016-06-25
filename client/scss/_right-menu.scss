@@ -6,30 +6,39 @@ $size-circle-status: 10px; //chiffre pair obligatoire
 
 .menu--right {
   background-color: $color-menu;
+
   .menu--right--header {
     border-bottom: rem(1px) solid #ddd;
   }
+
   .menu--right--core {
     padding: rem(10px);
+
     h6 {
       color: #595959;
       margin-bottom: rem(15px);
+
       i {
         margin-right: rem(5px);
       }
     }
+
     #clients {
       list-style-type: none;
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
+
       li {
         position: relative;
         margin-bottom: rem(8px);
+
         img {
           height: rem(30px);
           width: rem(30px);
           margin-right: rem(7px);
           border: rem(1px) solid #ddd;
         }
+
         .status {
           position: absolute;
           top: rem(($size-circle-status / 3) * -1);
@@ -37,9 +46,11 @@ $size-circle-status: 10px; //chiffre pair obligatoire
           width: rem($size-circle-status);
           height: rem($size-circle-status);
           border-radius: 50%;
+
           &.online {
             background-color: #32cd32;
           }
+
           &.afk {
             background-color: orange;
           }
@@ -47,18 +58,23 @@ $size-circle-status: 10px; //chiffre pair obligatoire
       }
     }
   }
+
   .menu--right--footer {
     text-align: center;
     padding: rem(7px);
     font-size: rem(12px);
+
     span.label {
       margin: 0 rem(3px);
+
       a {
         color: #fff;
       }
     }
+
     span.links {
       color: #818a91;
+      
       a {
         color: #818a91;
         margin: 0 rem(3px);

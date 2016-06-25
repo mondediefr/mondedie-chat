@@ -4,56 +4,71 @@
 
 .menu {
   background-color: $color-menu;
+
   .nav--header {
     padding: rem(1px);
     border-bottom: rem(1px) solid #ddd;
+
     h5 {
       margin: 0;
+
       &.title-site {
         text-align: center;
+
         .site-name {
           font-size: rem(42px);
         }
       }
     }
   }
+
   .nav--core {
     padding: rem(10px);
+
     .nav--core--block {
       h6 {
         color: #595959;
-        i {
-          margin-right: rem(5px);
-        }
       }
+
+      h6 i {
+        margin-right: rem(5px);
+      }
+
       ul {
         margin: 0;
         padding: 0;
         list-style-type: none;
       }
+
       li {
         margin: rem(4px) 0 0 rem(7px);
       }
+
       label {
         display: inline;
         color: #595959;
         cursor: pointer;
       }
     }
+
     hr {
       margin: rem(10px) 0 rem(10px) 0;
       border-top: rem(1px) solid #dce1e6;
+
       &:first-child {
         margin-top: 0;
       }
     }
+
     .sign-out {
       margin-bottom: rem(10px);
     }
+
     .link-sign-out {
       color: #b94a48;
       text-decoration: none;
     }
+
     .fa-sign-out {
       margin-right: rem(7px);
     }

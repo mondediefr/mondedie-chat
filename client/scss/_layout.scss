@@ -38,18 +38,18 @@ input[type="checkbox"] {
   flex-grow: 1;
   flex-shrink: 0;
   flex-basis: 0;
-  // ----
   display: flex;
   flex-direction: column;
   height: 100%;
+
   .nav--header {
     flex-grow: 0;
     flex-shrink: 0;
     //bug fix ie10-11 -> flex-basis: rem(50px);
     flex-basis: auto;
     height: rem(50px);
-    // end
   }
+
   .nav--core {
     flex-grow: 1;
     flex-shrink: 1;
@@ -62,24 +62,25 @@ input[type="checkbox"] {
   flex-grow: 4;
   flex-shrink: 0;
   flex-basis: 0;
-  // ----
   display: flex;
   flex-direction: column;
   height: 100%;
+
   .panel--header {
     flex-grow: 0;
     flex-shrink: 0;
     //bug fix ie10-11 -> flex-basis: rem(50px);
     flex-basis: auto;
     height: rem(50px);
-    // end
   }
+
   .panel--core {
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: auto;
     overflow-y: auto;
   }
+
   .panel--footer {
     flex-grow: 0;
     flex-shrink: 0;
@@ -91,10 +92,10 @@ input[type="checkbox"] {
   flex-grow: 1;
   flex-shrink: 0;
   flex-basis: 0;
-  // ----
   display: flex;
   flex-direction: column;
   height: 100%;
+
   .menu--right--header {
     flex-grow: 0;
     flex-shrink: 0;
@@ -102,79 +103,17 @@ input[type="checkbox"] {
     flex-basis: auto;
     height: rem(50px);
   }
+
   .menu--right--core {
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: auto;
     overflow-y: auto;
   }
+
   .menu--right--footer {
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: auto;
-  }
-}
-
-// ----------------------------
-// Responsives rules
-// ----------------------------
-
-@include media-breakpoint-down(md) {
-  //page login
-  .site-name {
-    font-size: rem(70px) !important;
-  }
-  .nav--header {
-    padding: rem(1px);
-    .site-name {
-      font-size: rem(42px) !important;
-    }
-  }
-  //slideout
-  .slideout-menu {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 0;
-    width: rem(225px);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    display: none;
-  }
-  .slideout-panel {
-    position: relative;
-    z-index: 1;
-  }
-  .slideout-open .slideout-menu {
-    display: flex;
-  }
-  .slideout-open,
-  .slideout-open body,
-  .slideout-open .slideout-panel {
-    overflow: hidden;
-  }
-  .panel {
-    position: fixed;
-    right: 0;
-    left: 0;
-    .panel--header h5 {
-      display: block !important;
-      text-align: center;
-    }
-    .panel--footer {
-      #editor {
-        .md-header {
-          display: none;
-        }
-        textarea {
-          border-top: none;
-        }
-      }
-    }
-  }
-  .menu--right.slideout-menu {
-    right: 0;
-    left: auto;
   }
 }

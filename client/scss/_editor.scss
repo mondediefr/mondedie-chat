@@ -3,7 +3,9 @@
 // ----------------------------
 
 #editor {
-  .md-editor, .active {
+
+  .md-editor,
+  .active {
     box-shadow: none;
     border: {
       style: dashed;
@@ -17,7 +19,7 @@
     background-color: #fff;
     border: 1px solid #ddd;
   }
-  
+
   textarea {
     min-height: rem(70px);
     padding: rem(7px);
@@ -45,6 +47,7 @@
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: auto;
+
     p {
       padding: 0 rem(4px) 0 rem(4px);
       margin: 0;
@@ -64,6 +67,7 @@
     font-size: rem(11px);
     color: #919191;
   }
+
   .full {
     color: #a94442 !important;
   }
@@ -79,7 +83,6 @@
   border-radius: rem(4px);
   border: rem(1px) solid #ccc;
   padding: rem(7px);
-
   position: relative;
   $height-title: rem(30px);
 
@@ -102,6 +105,7 @@
 
   .smileys-container {
     margin-top: $height-title;
+
     img {
       cursor: pointer;
       width: rem($size-smiley);
@@ -122,5 +126,12 @@
     border: rem(10px) solid transparent;
     border-top: rem(10px) solid #fff;
     width: 0;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  #editor textarea {
+    min-height: rem(50px);
+    border-top: none;
   }
 }

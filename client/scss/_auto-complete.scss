@@ -11,33 +11,41 @@ $radius: 4px;
   border-radius: rem($radius);
   border-color: #ddd;
   box-shadow: 0 0 rem(3px) #ddd;
+
   li {
     cursor: pointer;
     border-top: rem(1px) solid #ddd;
     padding: rem(5px) rem(10px);
+
     a {
       font-size: rem(13px);
       font-weight: bold;
       color: #000;
       text-decoration: none;
+
       .emojione {
         width: rem($size-smiley);
         height: rem($size-smiley);
         margin-right: rem(7px);
       }
     }
+
     &:first-child {
       border-top: none;
       border-top-left-radius: rem($radius);
       border-top-right-radius: rem($radius);
     }
+
     &:last-child {
       border-bottom-left-radius: rem($radius);
       border-bottom-right-radius: rem($radius);
     }
   }
-  li:hover, .active {
+
+  li:hover,
+  .active {
     background-color: #4078c0;
+
     a {
       color: #fff;
     }

@@ -9,9 +9,11 @@
     width: 0 rem(1px) 0 rem(1px);
     color: #ddd;
   }
+
   .panel--header {
     padding: rem(10px);
     border-bottom: rem(1px) solid #ddd;
+
     .button-nav {
       color: #595959;
       font-size: rem(20px);
@@ -21,92 +23,115 @@
       outline: none;
       background-color: #fff;
     }
+
     #left-nav {
       float: left;
     }
+
     #right-nav {
       float: right;
     }
+
     h5 {
       display: inline-block;
       color: #595959;
       margin: 0;
     }
   }
+
   .panel--core {
     #messages {
       overflow-x: hidden;
       padding: 0; margin: 0;
       list-style-type: none;
+
       li {
         padding: rem(4px);
+
         .avatar-message {
           height: rem(36px);
           width: rem(36px);
           float: left;
           margin-left: rem(4px);
         }
+
         .username {
           font-weight: bold;
           cursor: pointer;
           margin-left: rem(7px);
         }
+
         .date {
           margin-left: rem(7px);
           color: #818a91;
+
           &:hover {
             text-decoration: underline;
             cursor: pointer;
           }
         }
+
         .text {
           margin-left: rem(47px);
           display: block;
           word-wrap: break-word;
+
           img {
             display: block;
             max-width: 100%;
             height: auto;
+
             &.emojione {
               width: rem($size-smiley);
               display: inline;
             }
           }
         }
+
         .private {
           float: right;
           font-size: rem(14px);
           color: #cd5c5c;
           margin-right: rem(1px);
         }
+
         .option {
           float: right;
           font-size: rem(14px);
           color: #aaa;
           cursor: pointer;
+
           &:hover {
             color: #3498db;
           }
         }
+
         .btn-sm {
           line-height: 0.9;
         }
+
         &:nth-child(odd) {
           background-color: #f2f2f2;
         }
+
         &.message-bot {
           background-color: rgba(0, 153, 153, 0.2);
         }
+
         &.message-error {
           background-color: rgba(255, 0, 0, 0.3);
         }
+
         &.message-warning {
           background-color: rgba(255, 165, 0, 0.5);
         }
+
         &.message-success {
           background-color: rgba(0, 255, 0, 0.3);
         }
-        pre, blockquote {
+
+        pre,
+        blockquote {
           padding: rem(10px);
           margin: rem(10px) 0;
           font-size: rem(13px);
@@ -116,17 +141,40 @@
           border-radius: rem(4px);
         }
       }
+
       hr {
         border-color: black;
         margin: rem(10px) 0 rem(10px) 0;
       }
     }
   }
+
   .panel--footer {
     border: {
       style: solid;
       width: rem(1px) 0 0 0;
       color: #ddd;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .panel {
+    position: fixed;
+    right: 0;
+    left: 0;
+
+    .panel--header h5 {
+      display: block !important;
+      text-align: center ;
+    }
+
+    .panel--footer .md-header {
+      display: none;
+    }
+
+    .panel--footer textarea {
+      border-top: none;
     }
   }
 }
