@@ -4,6 +4,7 @@ chat:
   links:
     - redis:redis
   environment:
+    - ENV=development
     - "AUTH_API_TOKEN=${AUTH_API_TOKEN}"
     - "AUTH_API_ENDPOINT=${AUTH_API_ENDPOINT}"
     - COOKIES_SECRET=Xpg29n6s9hGuKqWA24U3w5gBAD46yw5X

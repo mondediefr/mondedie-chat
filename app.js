@@ -1,6 +1,4 @@
 "use strict";
-if(process.env.ENV !== 'production')
-  require('dotenv').load();
 
 var express      = require('express');
 var path         = require('path');

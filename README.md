@@ -31,10 +31,6 @@ Node.js chat application using Express, Socket.io, Redis and Mithril.
 
 ![screenshot responsive](https://images.mondedie.fr/SMdzJAdJ/cJ3wt7lL.png "screenshot responsive")
 
-## Heroku deployment
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
 ---
 
 ## Authentication method

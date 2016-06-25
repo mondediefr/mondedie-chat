@@ -21,5 +21,4 @@ typings
 .vscode/
 *~
 *.log
-*.env
 *.migrate

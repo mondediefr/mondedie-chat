@@ -46,11 +46,11 @@ var files = {
     path.bower + '/bootstrap/dist/js/bootstrap.min.js',
     path.bower + '/mithril/mithril.min.js',
     path.bower + '/moment/min/moment.min.js',
+    path.bower + '/moment/locale/fr.js',
     path.bower + '/jquery-textcomplete/dist/jquery.textcomplete.min.js',
     path.bower + '/slideout.js/dist/slideout.min.js',
     path.bower + '/visibilityjs/lib/visibility.core.js',
     path.bower + '/notify.js/notify.js',
-    path.bower + '/moment/locale/fr.js',
     path.bower + '/bootstrap-markdown/js/bootstrap-markdown.js',
     path.bower + '/bootstrap-markdown/locale/bootstrap-markdown.fr.js',
     // appJsFiles
