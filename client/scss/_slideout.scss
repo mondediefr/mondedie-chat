@@ -16,8 +16,8 @@
   }
 
   .slideout-panel {
-    position: relative;
-    z-index: 1;
+    position: fixed;
+    z-index: 1000;
   }
 
   .slideout-open .slideout-menu {

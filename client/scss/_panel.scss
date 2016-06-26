@@ -33,7 +33,6 @@
     }
 
     h5 {
-      display: inline-block;
       color: #595959;
       margin: 0;
     }
@@ -159,22 +158,15 @@
 }
 
 @include media-breakpoint-down(md) {
-  .panel {
-    position: fixed;
-    right: 0;
-    left: 0;
+  .panel--header h5 {
+    text-align: center;
+  }
 
-    .panel--header h5 {
-      display: block !important;
-      text-align: center ;
-    }
+  .panel--footer .md-header {
+    display: none;
+  }
 
-    .panel--footer .md-header {
-      display: none;
-    }
-
-    .panel--footer textarea {
-      border-top: none;
-    }
+  .panel--footer textarea {
+    border-top: none;
   }
 }
