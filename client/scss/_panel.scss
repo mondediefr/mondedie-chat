@@ -41,7 +41,8 @@
   .panel--core {
     #messages {
       overflow-x: hidden;
-      padding: 0; margin: 0;
+      padding: 0;
+      margin: 0;
       list-style-type: none;
 
       li {
@@ -103,10 +104,6 @@
           &:hover {
             color: #3498db;
           }
-        }
-
-        .btn-sm {
-          line-height: 0.9;
         }
 
         &:nth-child(odd) {

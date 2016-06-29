@@ -11,13 +11,12 @@
     z-index: 0;
     width: rem(225px);
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
     display: none;
   }
 
   .slideout-panel {
-    position: fixed;
-    z-index: 1000;
+    position: relative;
+    z-index: 1;
   }
 
   .slideout-open .slideout-menu {
