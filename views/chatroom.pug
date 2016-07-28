@@ -95,8 +95,9 @@ block content
           | -
           a(href='https://github.com/mondediefr/mondedie-chat' target='_blank') Github
           | -
-        span.label.label-default
-          a(href='https://github.com/mondediefr/mondedie-chat/releases/tag/v1.4.0' target='_blank') v1.4.0
+          a(href='https://github.com/mondediefr/mondedie-chat/releases/tag/v1.4.0' target='_blank')
+            span.tag.tag-default v1.4.0
+
   //- popup
   #content-smileys
   if user.isAdmin
@@ -117,6 +118,6 @@ block content
                 label.control-label Pseudo :
                 input(type='text' name='userBanned' class='form-control' autofocus)
           .modal-footer
-            button(type='button' class='btn btn-secondary' data-dismiss='modal') Annuler
-            button(type='button' role='unban' class='btn btn-warning-outline') Débannir
-            button(type='button' role='ban' class='btn btn-danger-outline') Bannir
+            button(type="button" class="btn btn-secondary" data-dismiss="modal") Annuler
+            button(type='button' role='unban' class='btn btn-outline-warning') Débannir
+            button(type='button' role='ban' class='btn btn-outline-danger') Bannir

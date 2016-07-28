@@ -44,7 +44,7 @@ $(function() {
 
     $(document).click(function(event) {
       popup.position();
-      if (! $(event.target).parent().andSelf().is(button)) {
+      if (! $(event.target).parent().addBack().is(button)) {
         divSmileys.removeClass('open');
       }
     });
