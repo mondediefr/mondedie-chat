@@ -50,7 +50,7 @@ var files = {
     path.bower + '/jquery-textcomplete/dist/jquery.textcomplete.min.js',
     path.bower + '/slideout.js/dist/slideout.min.js',
     path.bower + '/visibilityjs/lib/visibility.core.js',
-    path.bower + '/notify.js/notify.js',
+    path.bower + '/notify.js/dist/notify.js',
     path.bower + '/bootstrap-markdown/js/bootstrap-markdown.js',
     path.bower + '/bootstrap-markdown/locale/bootstrap-markdown.fr.js',
     // appJsFiles

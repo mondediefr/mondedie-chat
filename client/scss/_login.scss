@@ -36,7 +36,6 @@
       // permet le focus sur 1 ligne, un peu wtf la solution
       position: relative;
       padding: rem(10px);
-
       &:focus {
         z-index: 1;
       }
@@ -55,15 +54,21 @@
       border-width: rem(2px);
     }
 
+    input {
+      border-color: #d9d9d9;
+      border-width: rem(2px);
+      &:focus {
+        border-color: #66afe9;
+      }
+    }
+
     input[type="text"] {
       margin-bottom: rem(-2px);
-      border-width: rem(2px);
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
     }
 
     input[type="password"] {
-      border-width: rem(2px);
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }

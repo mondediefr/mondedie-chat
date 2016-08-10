@@ -14,7 +14,7 @@
     "font-awesome": "4.6.x",
     "jquery-textcomplete": "1.2.1",
     "slideout.js": "0.1.x",
-    "notify.js": "1.3.x",
+    "notify.js": "2.0.x",
     "tether": "1.3.x",
     "moment": "2.14.x"
   },

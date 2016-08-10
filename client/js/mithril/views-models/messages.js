@@ -1,4 +1,4 @@
-/* global m, document, socket, location, alert, Notify, textarea */
+/* global m, document, window, socket, location, alert, Notify, textarea */
 'use strict';
 var messages = messages || {};
 
@@ -83,17 +83,18 @@ messages.vm = (function() {
   };
   // Envoyer une notification
   vm.notification = function(message) {
+    var Notify = window.Notify.default;
     if(!Notify.needsPermission) {
       var notification = new Notify('Mondedie::chat', {
         body:message,
-        icon:'https://mondedie.fr/img/favicon.png',
+        icon:'/images/favicon.png',
         timeout:10
       });
       notification.show();
     }
   };
   vm.initsockets = function() {
-    vm.listen = (function () {
+    vm.listen = (function() {
       // ==================== CHAT EVENTS ===================
       socket.on('ping', function(data) {
         socket.emit('pong', { beat: 1 });
