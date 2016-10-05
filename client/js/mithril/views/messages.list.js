@@ -11,8 +11,8 @@ messages.view = function(controller) {
     messages.vm.list.messages().map(function(message, index) {
       var user = message.user();
       var time = parseInt(message.time());
-      var messageTooltipTime = moment(time).format('ddd DD MMM YYYY [à] HH[h]mm');
-      var messageTime = moment(time).format('HH[h]mm');
+      var messageTooltipTime = moment(time).format('ddd DD MMM YYYY [à] HH[h]m[m]ss[s]');
+      var messageTimeAgo = moment(time).fromNow();
       return m("li", { key:index, class:message.type() }, [
         removeButton(this, controller, message),
         privateMark(message.priv()),
@@ -24,11 +24,12 @@ messages.view = function(controller) {
         m("span", { class:'username', style:{ color:user.groupColor || '#373a3c' }}, user.name),
         m("span", {
           class:'date',
+          'data-time': time,
           'data-toggle': 'tooltip',
           'data-placement':'top',
           'data-original-title': messageTooltipTime,
           title: messageTooltipTime
-        }, (time ? messageTime : '')),
+        }, (time ? messageTimeAgo : '')),
         m("span", { class:'text' }, m.trust(message.mess()))
       ])
     })

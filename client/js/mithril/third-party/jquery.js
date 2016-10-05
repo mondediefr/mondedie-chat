@@ -1,4 +1,4 @@
-/* global $, window, document, editor, socket, Notify, textarea, localStorage */
+/* global $, window, document, editor, socket, Notify, textarea, localStorage, moment */
 'use strict';
 
 $(function() {
@@ -146,5 +146,16 @@ $(function() {
     html: true,
     selector: '[data-toggle="tooltip"]'
   });
+
+  function updateTime() {
+    $('[data-time]').each(function() {
+      var time = $(this).data('time');
+      time = moment(time).fromNow();
+
+      $(this).text(time);
+    });
+  }
+
+   setInterval(updateTime, 10000); // every 1Osec
 
 });
