@@ -156,6 +156,6 @@ $(function() {
     });
   }
 
-   setInterval(updateTime, 10000); // every 1Osec
+   setInterval(updateTime, 20000); // every 2Osec
 
 });
