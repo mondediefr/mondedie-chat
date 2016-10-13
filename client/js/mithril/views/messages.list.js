@@ -28,7 +28,7 @@ messages.view = function(controller) {
         }, user.name),
         m("span", {
           class:'date',
-          'data-time': time,
+          'data-time': time ? time : null,
           'data-toggle': 'tooltip',
           'data-placement':'top',
           'data-original-title': messageTooltipTime,
