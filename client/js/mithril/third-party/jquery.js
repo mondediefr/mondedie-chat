@@ -150,9 +150,10 @@ $(function() {
   function updateTime() {
     $('[data-time]').each(function() {
       var time = $(this).data('time');
-      time = moment(time).fromNow();
-
-      $(this).text(time);
+      if (time !== null) {
+        time = moment(time).fromNow();
+        $(this).text(time);
+      }
     });
   }
 

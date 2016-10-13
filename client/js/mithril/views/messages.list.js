@@ -27,10 +27,10 @@ messages.view = function(controller) {
           style: {color: user.groupColor || '#373a3c'}
         }, user.name),
         m("span", {
-          class:'date',
+          class: 'date',
           'data-time': time ? time : null,
           'data-toggle': 'tooltip',
-          'data-placement':'top',
+          'data-placement': 'top',
           'data-original-title': messageTooltipTime,
           title: messageTooltipTime,
           innerText: time ? messageTimeAgo : ''
