@@ -12,7 +12,7 @@ messages.view = function(controller) {
       var user = message.user();
       var time = parseInt(message.time());
       var momentTime = moment(time);
-      var messageTooltipTime = momentTime.format('ddd DD MMM YYYY');
+      var messageTooltipTime = momentTime.format('ddd DD MMM YYYY à HH[h]mm');
       var messageTimeAgo = momentTime.fromNow();
       return m("li", { key:index, class:message.type() }, [
         removeButton(this, controller, message),
