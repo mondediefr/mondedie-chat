@@ -3,4 +3,4 @@ MAINTAINER "xataz <xataz@mondedie.fr>"
 ENV ENV=production
 
 RUN chown -R 1000:1000 /usr/src/app
-CMD ["gosu", "1000:1000", "npm", "start"]
+CMD ["su-exec", "1000:1000", "npm", "start"]
