@@ -1,25 +1,27 @@
-/* global $, window, document, editor, socket, Notify, textarea, localStorage, moment */
+/* global $, window, document, editor, socket, textarea, localStorage, moment, Notification */
 'use strict';
+
 
 $(function() {
 
-  function removeNotificationItem() {
-    $('#notification').remove();
+  var Notify = window.Notify.default;
+
+  if(Notification.permission == 'granted') {
+    onPermissionGranted();
+  } else if(Notification.permission == 'denied') {
+    onPermissionDenied();
   }
 
   function onPermissionGranted() {
-    removeNotificationItem();
+    $('#notification').html(
+      '<span class="text-success"><i class="fa fa-bell-o"></i>Notifications activées</span>'
+    );
   }
 
   function onPermissionDenied() {
-    removeNotificationItem();
-    console.warn('[Web Notifications] Permission has been denied by the user');
-  }
-
-  if(!Notify.needsPermission) {
-    removeNotificationItem();
-  } else if(Notify.isSupported()) {
-    Notify.requestPermission(onPermissionGranted, onPermissionDenied);
+    $('#notification').html(
+      '<span class="text-danger"><i class="fa fa-bell-o"></i>Notifications bloquées</span>'
+    );
   }
 
   $('#afk').click(function(e) {
@@ -52,9 +54,10 @@ $(function() {
     e.preventDefault();
   });
 
-  $('#notification').click(function(e) {
-    if(Notify.isSupported())
+  $('#requestpermission').click(function(e) {
+    if(Notify.isSupported()) {
       Notify.requestPermission(onPermissionGranted, onPermissionDenied);
+    }
     e.preventDefault();
   });
 
@@ -158,5 +161,4 @@ $(function() {
   }
 
    setInterval(updateTime, 20000); // every 2Osec
-
 });

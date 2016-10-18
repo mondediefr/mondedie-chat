@@ -1,4 +1,4 @@
-/* global m, document, window, socket, location, alert, Notify, textarea */
+/* global m, document, window, socket, location, alert, textarea */
 'use strict';
 var messages = messages || {};
 

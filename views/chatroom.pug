@@ -5,7 +5,7 @@ block content
     nav.menu#left-menu
       .nav--header
         h5.title-site
-          a(href="/" title="Mondedie.fr" class="site-name")
+          a(href='/' title='Mondedie.fr' class='site-name')
             | {
             span  M
             | ONDEDIE
@@ -31,24 +31,22 @@ block content
           h6
             i.fa.fa-cog
             span Options
-          ul
-            li
-              a(href='#' id="notification")
-                i.fa.fa-volume-up
-                | &nbsp;&nbsp;
-                span Activer les notifications
-            li
-              label
-                input(type='checkbox' id='disable-enter-action')
-                | Désactiver la touche entrée
-            li
-              label
-                input(type='checkbox' id='disable-auto-scroll')
-                | Désactiver l'auto-scroll
-            li
-              label
-                input(type='checkbox' id='disable-login-events')
-                | Désactiver les évènements de connexion
+          #notification
+            a(href='#' id='requestpermission')
+              i.fa.fa-bell-o
+              | Activer les notifications
+          .form-check
+            label.form-check-label
+              input(type='checkbox' class='form-check-input' id='disable-enter-action')
+              | Désactiver la touche entrée
+          .form-check
+            label.form-check-label
+              input(type='checkbox' class='form-check-input' id='disable-auto-scroll')
+              | Désactiver l'auto-scroll
+          .form-check
+            label.form-check-label
+              input(type='checkbox' class='form-check-input' id='disable-login-events')
+              | Désactiver les évènements de connexion
         if user.isAdmin
           hr
           .nav--core--block

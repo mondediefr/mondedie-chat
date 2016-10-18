@@ -28,33 +28,31 @@
     .nav--core--block {
       h6 {
         color: #595959;
+        i {
+          margin-right: rem(5px);
+        }
       }
 
-      h6 i {
-        margin-right: rem(5px);
+      #notification {
+        margin-bottom: rem(7px);
+        i {
+          margin-right: rem(5px);
+        }
       }
 
       ul {
         margin: 0;
         padding: 0;
         list-style-type: none;
-      }
-
-      li {
-        margin: rem(4px) 0 0 rem(7px);
-      }
-
-      label {
-        display: inline;
-        color: #595959;
-        cursor: pointer;
+        li {
+          margin-bottom: rem(7px);
+        }
       }
     }
 
     hr {
       margin: rem(10px) 0 rem(10px) 0;
       border-top: rem(1px) solid #dce1e6;
-
       &:first-child {
         margin-top: 0;
       }
@@ -77,7 +75,6 @@
 
 .modal-footer button {
   margin-right: 4px;
-
   &:last-child {
     margin-right: 0;
   }
