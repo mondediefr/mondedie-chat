@@ -15,8 +15,8 @@ block content
         fieldset.form-group
           input(type='text' name='username' class='form-control' placeholder='Pseudo')
           input(type='password' name='password' class='form-control' placeholder='Mot de passe')
-        .checkbox
-          label
-            input(type='checkbox' value='remember-me')
+        .form-check
+          label.form-check-label
+            input(type='checkbox' value='remember-me' class='form-check-input')
             | Se souvenir de moi
         button(type='submit' class='btn btn-outline-info btn-lg btn-block') Connexion

@@ -26,52 +26,49 @@
   }
 }
 
-#login {
-  .form-signin {
-    margin: 0 auto;
-    max-width: rem(330px);
-    padding: 0;
+#login .form-signin {
+  margin: 0 auto;
+  max-width: rem(330px);
+  padding: 0;
 
-    .form-control {
-      // permet le focus sur 1 ligne, un peu wtf la solution
-      position: relative;
-      padding: rem(10px);
-      &:focus {
-        z-index: 1;
-      }
+  .form-control {
+    position: relative; // permet le focus sur l'input username
+    padding: rem(10px);
+    &:focus {
+      z-index: 1;
     }
+  }
 
-    .form-group,
-    .checkbox {
-      margin-bottom: rem(10px);
-    }
+  .form-group,
+  .form-check {
+    margin-bottom: rem(10px);
+  }
 
-    .checkbox {
-      text-align: center;
-    }
+  .form-check {
+    text-align: center;
+  }
 
-    .btn {
-      border-width: rem(2px);
-    }
+  .btn {
+    border-width: rem(2px);
+  }
 
-    input {
-      border-color: #d9d9d9;
-      border-width: rem(2px);
-      &:focus {
-        border-color: #66afe9;
-      }
+  input {
+    border-color: #d9d9d9;
+    border-width: rem(2px);
+    &:focus {
+      border-color: #66afe9;
     }
+  }
 
-    input[type="text"] {
-      margin-bottom: rem(-2px);
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
-    }
+  input[type="text"] {
+    margin-bottom: rem(-2px);
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
 
-    input[type="password"] {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
+  input[type="password"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 }
 
