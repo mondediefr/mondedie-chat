@@ -2,8 +2,6 @@
 
 Node.js chat application using Express, Socket.io, Redis and Mithril.
 
-[![dependency](https://img.shields.io/david/mondediefr/mondedie-chat.svg?label=Dependencies)](https://github.com/mondediefr/mondedie-chat/blob/master/package.json#L8)
-
 ## Features
 
 - Real-time communication via socket or long-polling
