@@ -15,9 +15,9 @@ users.view = function() {
     m("ul#clients", [
       usersList.map(function(user) {
         return m("li", {key:user.id(), class:user.status()}, [
-          m("span", {class:'status ' + user.status()}),
+          m("span", {class:'status rounded-circle ' + user.status()}),
           m("img", {
-            class:'img-rounded',
+            class:'rounded',
             src:user.avatar(),
             alt:user.name(),
             title:user.name() + ' - ' + user.status()

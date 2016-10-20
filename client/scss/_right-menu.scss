@@ -45,7 +45,6 @@ $size-circle-status: 10px; //chiffre pair obligatoire
           left: rem(($size-circle-status / 3) * -1);
           width: rem($size-circle-status);
           height: rem($size-circle-status);
-          border-radius: 50%;
 
           &.online {
             background-color: #32cd32;
@@ -74,7 +73,7 @@ $size-circle-status: 10px; //chiffre pair obligatoire
 
     span.links {
       color: #818a91;
-      
+
       a {
         color: #818a91;
         margin: 0 rem(3px);

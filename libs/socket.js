@@ -31,7 +31,7 @@ renderer.link = function(href, title, text) {
 }
 
 renderer.image = function(src) {
-  return '<img style="margin-bottom: 5px;display:none;" src="' + src + '" > \
+  return '<img class="img-fluid" src="' + src + '" > \
           <button type="button" class="btn btn-secondary btn-sm disclose">Afficher l\'image</button>'
 }
 

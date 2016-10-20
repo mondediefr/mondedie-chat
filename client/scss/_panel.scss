@@ -51,7 +51,6 @@
         .avatar-message {
           height: rem(36px);
           width: rem(36px);
-          float: left;
           margin-left: rem(4px);
         }
 
@@ -73,37 +72,23 @@
 
         .text {
           margin-left: rem(47px);
-          display: block;
           word-wrap: break-word;
 
-          img {
-            display: block;
-            max-width: 100%;
-            height: auto;
-
-            &.emojione {
-              width: rem($size-smiley);
-              display: inline;
-            }
+          .img-fluid {
+            display: none;
+            margin-bottom: rem(5px);
           }
         }
 
         .private {
-          float: right;
           font-size: rem(14px);
           color: #cd5c5c;
           margin-right: rem(1px);
         }
 
-        .option {
-          float: right;
-          font-size: rem(14px);
-          color: #aaa;
-          cursor: pointer;
-
-          &:hover {
-            color: #3498db;
-          }
+        .close {
+          font-size: 1.3rem;
+          outline: 0;
         }
 
         &:nth-child(odd) {
@@ -152,6 +137,18 @@
       color: #ddd;
     }
   }
+}
+
+#deleteMessage .disclose {
+  display: none;
+}
+
+.emojione {
+  width: rem($size-smiley);
+}
+
+.modal-title i {
+  margin-right: rem(5px);
 }
 
 @include media-breakpoint-down(md) {

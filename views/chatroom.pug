@@ -98,6 +98,22 @@ block content
 
   //- popup
   #content-smileys
+  div(class='modal fade' id='deleteMessage')
+    div(class='modal-dialog' role='document')
+      .modal-content
+        .modal-header
+          button(type='button' class='close' data-dismiss='modal' aria-label='Close')
+            span(aria-hidden='true') &times;
+            span(class='sr-only') Close
+          h4.modal-title
+            i.fa.fa-trash
+            | Supprimer un message
+        .modal-body
+          p.text-danger Êtes vous sûr de vouloir supprimer ce message?
+          blockquote.blockquote#messageSelected
+        .modal-footer
+          button(type='button' class='btn btn-secondary' data-dismiss='modal') Annuler
+          button(type='button' role='delete' class='btn btn-outline-danger') Oui, supprimer ce message
   if user.isAdmin
     div(class='modal fade' id='banPopup')
       div(class='modal-dialog' role='document')
@@ -106,7 +122,9 @@ block content
             button(type='button' class='close' data-dismiss='modal' aria-label='Close')
               span(aria-hidden='true') &times;
               span(class='sr-only') Close
-            h4.modal-title Kick/Ban
+            h4.modal-title
+              i.fa.fa-ban
+              | Kick/Ban
           .modal-body
             .alert.alert-info
               | Commandes équivalentes : <code>/kick @user</code> et <code>/unban @user</code>

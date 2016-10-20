@@ -14,11 +14,11 @@ messages.view = function(controller) {
       var momentTime = moment(time);
       var messageTooltipTime = momentTime.format('ddd DD MMM YYYY à HH[h]mm');
       var messageTimeAgo = momentTime.fromNow();
-      return m("li", { key:index, class:message.type() }, [
+      return m("li", { key:index, class: message.type() + ' clearfix' }, [
         removeButton(this, controller, message),
         privateMark(message.priv()),
         m("img", {
-          class: 'img-rounded avatar-message',
+          class: 'rounded avatar-message float-xs-left',
           src: user.avatar || '/images/bender.jpeg',
           alt: user.name
         }),
@@ -35,7 +35,7 @@ messages.view = function(controller) {
           title: messageTooltipTime,
           innerText: time ? messageTimeAgo : ''
         }),
-        m("span", { class:'text' }, m.trust(message.mess()))
+        m("span", { class:'d-block text' }, m.trust(message.mess()))
       ])
     })
   ])
@@ -51,7 +51,7 @@ function autoScroll(element) {
 
 function privateMark(isPriv) {
   if(!isPriv) return null;
-  return m("span", { class:'private' },
+  return m("span", { class: 'float-xs-right private' },
     m("i", { title:'Message privé', class:'fa fa-lock' })
   );
 }
@@ -65,9 +65,12 @@ function removeButton(instance, controller, message) {
       display = true
   }
   if(!display || message.priv()) return null;
-  return mx("a.option[href='#']", {
-    cautions:messages.vm.del.bind(instance, message.id())
-  }, m("i", { class:'fa fa-times' }));
+  return mx('button', {
+    class: 'float-xs-right close',
+    'aria-label': 'Close',
+    cautions: messages.vm.del.bind(instance, message.id()),
+    'data-message': message.mess()
+  }, m('span', { 'aria-hidden': 'true' }, m.trust('&times;')));
 }
 
 /**

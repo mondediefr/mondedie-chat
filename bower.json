@@ -9,7 +9,7 @@
   "dependencies": {
     "mithril": "0.2.x",
     "visibilityjs": "1.2.x",
-    "bootstrap": "v4.0.0-alpha.4",
+    "bootstrap": "v4.0.0-alpha.5",
     "bootstrap-markdown": "2.10.x",
     "font-awesome": "4.6.x",
     "jquery-textcomplete": "1.7.x",
@@ -18,6 +18,6 @@
     "moment": "2.15.x"
   },
   "resolutions": {
-    "bootstrap": "v4.0.0-alpha.4"
+    "bootstrap": "v4.0.0-alpha.5"
   }
 }
