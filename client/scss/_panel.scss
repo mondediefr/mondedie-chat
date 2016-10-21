@@ -74,6 +74,17 @@
           margin-left: rem(47px);
           word-wrap: break-word;
 
+          ol, ul {
+            padding-left: rem(15px);
+            li {
+              background-color: transparent;
+            }
+          }
+
+          ul {
+            list-style-type: disc;
+          }
+
           .img-fluid {
             display: none;
             margin-bottom: rem(5px);
@@ -139,8 +150,23 @@
   }
 }
 
-#deleteMessage .disclose {
-  display: none;
+#messageSelected {
+  word-wrap: break-word;
+  font-size: rem(16px);
+  .disclose {
+    display: none;
+  }
+  pre,
+  blockquote {
+    padding: rem(10px);
+    margin: rem(10px) 0;
+    background-color: #f5f5f5;
+    border: rem(1px) solid #ccc;
+    border-radius: rem(4px);
+  }
+  ul, ol {
+    padding-left: rem(20px);
+  }
 }
 
 .emojione {
