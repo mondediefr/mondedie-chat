@@ -94,7 +94,7 @@ With HTTP status code of **200** when user is successfully authenticated or **40
 ### Requirements:
 
 * Node.js
-* NPM
+* Yarn
 * Redis
 
 Clone the project and install dependencies :
@@ -102,8 +102,8 @@ Clone the project and install dependencies :
 git clone https://github.com/mondediefr/mondedie-chat.git
 cd mondedie-chat
 
-npm install -g bower gulp pm2
-npm install
+yarn global add bower gulp pm2
+yarn install
 
 gulp
 ```
@@ -133,7 +133,7 @@ Open app : http://127.0.0.1:5000/
 
 * heroku toolbelt : https://toolbelt.heroku.com/
 * Node.js
-* NPM
+* Yarn
 * Redis
 
 Clone the project and install dependencies :
@@ -141,8 +141,8 @@ Clone the project and install dependencies :
 git clone https://github.com/mondediefr/mondedie-chat.git
 cd mondedie-chat
 
-npm install -g bower gulp nodemon
-npm install
+yarn global add -g bower gulp nodemon
+yarn install
 
 gulp
 ```
@@ -233,7 +233,7 @@ docker-compose up -d
 
 * docker
 * nodejs
-* npm
+* yarn
 * gulp
 
 #### Set environment variables
@@ -247,7 +247,7 @@ echo 'export AUTH_API_ENDPOINT="http://your-domain.tld/api/auth.php"' >> ~/.bash
 
 ```bash
 cd /path/to/chat/mondedie-chat
-npm install
+yarn install
 docker-compose --file dev.yml up -d
 gulp watch
 ```

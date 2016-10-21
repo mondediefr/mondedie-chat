@@ -44,8 +44,6 @@ socket.init(io);
 
 if(app.get('env') == 'development') {
   app.use(logger('dev'));
-  var edt = require('express-debug');
-  edt(app);
 }
 
 app.use(favicon(path.join(__dirname, 'public/images/favicon.png')));
