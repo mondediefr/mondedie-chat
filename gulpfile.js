@@ -1,23 +1,28 @@
 'use strict';
 
 var gulp = require('gulp');
-var minify = require('gulp-clean-css');
-var uglify = require('gulp-uglify');
+var bower = require('gulp-bower');
 var size = require('gulp-size');
 var concat = require('gulp-concat');
-var bower = require('gulp-bower');
-var jshint = require('gulp-jshint');
-var sass = require('gulp-sass');
 var filter = require('gulp-filter');
-var autoprefixer = require('gulp-autoprefixer');
 var rev = require('gulp-rev');
-var sourcemaps = require('gulp-sourcemaps');
 var inject = require('gulp-inject');
 var del = require('del');
 var runSequence = require('run-sequence');
 var plumber = require('gulp-plumber');
-var imagemin = require('gulp-imagemin');
 var livereload = require('gulp-livereload');
+// lib for css
+var cssmin = require('gulp-clean-css');
+var postcss = require('gulp-postcss');
+var sass = require('gulp-sass');
+var autoprefixer = require('autoprefixer');
+var postcssFlexbugsFixes = require('postcss-flexbugs-fixes');
+// lib for js
+var uglify = require('gulp-uglify');
+var jshint = require('gulp-jshint');
+var sourcemaps = require('gulp-sourcemaps');
+//lib for image
+var imagemin = require('gulp-imagemin');
 
 // ----------------------------
 // Paths
@@ -85,6 +90,13 @@ var option = {
     showTotal: false
   },
 
+  // see config : https://github.com/twbs/bootstrap/blob/v4-dev/Gruntfile.js#L165
+  cssmin: {
+    keepSpecialComments: 0,
+    compatibility: 'ie9,-properties.zeroUnits',
+    advanced: false
+  },
+
   sass: {
     includePaths: [
       'client/bower/bootstrap/scss',
@@ -96,6 +108,7 @@ var option = {
     sourceMap: false
   },
 
+  // see config : https://github.com/twbs/bootstrap/blob/v4-dev/grunt/postcss.js#L11
   autoprefixeur: {
     browsers: [
       'Chrome >= 35',
@@ -153,9 +166,12 @@ gulp.task('sass', ['clean-css'], function() {
     .pipe(plumber())
     .pipe(sass(option.sass))
     .pipe(plumber.stop())
-    .pipe(autoprefixer(option.autoprefixer))
+    .pipe(postcss([
+      postcssFlexbugsFixes,
+      autoprefixer(option.autoprefixer)
+    ]))
     .pipe(sassFile.restore)
-    .pipe(minify({keepSpecialComments: 0}))
+    .pipe(cssmin(option.cssmin))
     .pipe(concat('app.min.css'))
     .pipe(rev())
     .pipe(size(option.size))
