@@ -110,7 +110,9 @@ block content
             | Supprimer un message
         .modal-body
           p.text-danger Êtes vous sûr de vouloir supprimer ce message?
-          blockquote.blockquote#messageSelected
+          blockquote.blockquote
+            #messageInfo
+            #messageSelected
         .modal-footer
           button(type='button' class='btn btn-secondary' data-dismiss='modal') Annuler
           button(type='button' role='delete' class='btn btn-outline-danger') Oui, supprimer ce message

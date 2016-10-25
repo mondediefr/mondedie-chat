@@ -110,7 +110,7 @@
           background-color: rgba(0, 153, 153, 0.2);
         }
 
-        &.message-error {
+        &.message-error, &.remove {
           background-color: rgba(255, 0, 0, 0.3);
         }
 
@@ -147,6 +147,20 @@
       width: rem(1px) 0 0 0;
       color: #ddd;
     }
+  }
+}
+
+#messageInfo {
+  font-size: 1rem;
+  .date {
+    margin-left: rem(7px);
+    color: #818a91;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .modal-username {
+    font-weight: bold;
   }
 }
 

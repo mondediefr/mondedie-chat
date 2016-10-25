@@ -27,7 +27,8 @@ var textarea = document.getElementById('text-editor');
  */
 var mx = function(selector, attrs, children) {
   for(var attrName in attrs) {
-    if(customAttrs[attrName]) customAttrs[attrName].call(attrs, attrs[attrName]);
+    if(customAttrs[attrName])
+      customAttrs[attrName].call(attrs, attrs[attrName]);
   }
   return m(selector, attrs, children);
 }
@@ -35,12 +36,30 @@ var mx = function(selector, attrs, children) {
 var customAttrs = {
   cautions: function(callback) {
     this.onclick = function(e) {
-      var messageSelected = $(this).data('message');
-      var deleteMessage = $('#deleteMessage');
-      $('#messageSelected').html(messageSelected);
-      deleteMessage.modal();
-      deleteMessage.find('button[role="delete"]').click(function(e) {
-        deleteMessage.modal('hide');
+      m.redraw.strategy('none');
+      var dataMessage = $(this);
+      var modaldeleteMessage = $('#deleteMessage');
+      var messageSelected = dataMessage.parent('.message');
+
+      messageSelected.addClass('remove');
+      $('#deleteMessage').on('hidden.bs.modal', function(e) {
+        messageSelected.removeClass('remove');
+      })
+
+      var content = dataMessage.data('content');
+      var groupColor = dataMessage.data('groupcolor');
+      var date = dataMessage.data('date');
+      var username = dataMessage.data('username');
+      var html = '<span class="modal-username" style="color:'+ groupColor +'">' + username + '</span>'+
+      '<span class="date">'+ date +'</span>';
+
+      $('#messageInfo').html(html);
+      $('#messageSelected').html(content);
+
+      modaldeleteMessage.modal();
+
+      $('button[role="delete"]').click(function(e) {
+        modaldeleteMessage.modal('hide');
         callback(e);
       });
     }
