@@ -111,28 +111,6 @@ $(function() {
     }
   });
 
-  // Adapt width of .section--center with screen resolution
-  function setSectionCenterWidth() {
-    var size = 0;
-    if($(window).width() < 992) {
-      // 50px = section right width
-      size = $(window).width();
-    } else {
-      // 0.64 = section center width coef
-      size = $(window).width() * (4/6);
-    }
-
-    $('.panel').css({
-      'max-width': size
-    });
-  }
-
-  setSectionCenterWidth();
-
-  window.onresize = function() {
-    setSectionCenterWidth();
-  }
-
   $(document).on('click', '.disclose', function() {
     $(this).prev().show(200);
     $(this).text("Cacher l'image");

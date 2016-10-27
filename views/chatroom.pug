@@ -1,100 +1,104 @@
 extends layout
 block content
-  .conteneur-flex
-    //- menu gauche
-    nav.menu#left-menu
-      .nav--header
-        h5.title-site
-          a(href='/' title='Mondedie.fr' class='site-name')
-            | {
-            span  M
-            | ONDEDIE
-            span  }
-      .nav--core
-        .nav--core--block
-          h6
-            i.fa.fa-terminal
-            span Commandes
-          ul
-            li
-              a(href='#' id='afk') /afk on | off
-            li
-              a(href='#' id='pm') /msg @user message
-            li
-              a(href='#' id='poke') /poke @user
-            li
-              a(href='#' id='roll') /roll [nombre]d[faces]
-            li
-              a(href='#' id='rolluser') /roll @user
-        hr
-        .nav--core--block
-          h6
-            i.fa.fa-cog
-            span Options
-          #notification
-            a(href='#' id='requestpermission')
-              i.fa.fa-bell-o
-              | Activer les notifications
-          .form-check
-            label.form-check-label
-              input(type='checkbox' class='form-check-input' id='disable-enter-action')
-              | Désactiver la touche entrée
-          .form-check
-            label.form-check-label
-              input(type='checkbox' class='form-check-input' id='disable-auto-scroll')
-              | Désactiver l'auto-scroll
-          .form-check
-            label.form-check-label
-              input(type='checkbox' class='form-check-input' id='disable-login-events')
-              | Désactiver les évènements de connexion
-        if user.isAdmin
-          hr
-          .nav--core--block
-            h6
-              i.fa.fa-university
-              span Modération
-            ul
-              li
-                a(href='#' id='banLink') Kick/Ban
-              li
-                a(href='#' id='banList') Lister les membres exclus
-              li
-                a(href='#' id='unlock') Débloquer un utilisateur
-        hr
-        h6.sign-out
-          a(href='/logout' class='link-sign-out' title='Déconnexion')
-            i.fa.fa-sign-out
-            span Déconnexion
-    //- message
-    section.panel#panel
-      .panel--header
-        button.button-nav.hidden-lg-up#left-nav
-          i.fa.fa-bars
-        button.button-nav.hidden-lg-up#right-nav
-          i.fa.fa-ellipsis-h
-        h5 #Générale
-      .panel--core#content-messages
-      .panel--footer
-        form#editor
-          textarea(id='text-editor' placeholder='Cliquez ici pour écrire un message.')
-        #footer-editor
-          #content-typing
-          #count-textarea
-    //- menu droit
-    #right-menu.menu--right
-      .menu--right--header
-      .menu--right--core
-        #content-users
-      .menu--right--footer
-        span.links
-          a(href='https://mondedie.fr' target='_blank') Forum
-          | -
-          a(href='https://twitter.com/mondediefr' target='_blank') Twitter
-          | -
-          a(href='https://github.com/mondediefr/mondedie-chat' target='_blank') Github
-          | -
-          a(href='https://github.com/mondediefr/mondedie-chat/releases/tag/v1.4.0' target='_blank')
-            span.tag.tag-default v1.4.0
+  .container-fluid.extend
+    .row.extend
+      //- menu gauche
+      nav.col-lg-2.menu#left-menu
+        .row.extend.fix-bootstrap-flex-column
+          .col-xs.fix-bootstrap-flex-fixed.nav--header
+            h5.title-site
+              a(href='/' title='Mondedie.fr' class='site-name')
+                | {
+                span  M
+                | ONDEDIE
+                span  }
+          .col-xs.nav--core.fix-bootstrap-flex-fluid.overflow
+            .nav--core--block
+              h6
+                i.fa.fa-terminal
+                span Commandes
+              ul
+                li
+                  a(href='#' id='afk') /afk on | off
+                li
+                  a(href='#' id='pm') /msg @user message
+                li
+                  a(href='#' id='poke') /poke @user
+                li
+                  a(href='#' id='roll') /roll [nombre]d[faces]
+                li
+                  a(href='#' id='rolluser') /roll @user
+            hr
+            .nav--core--block
+              h6
+                i.fa.fa-cog
+                span Options
+              #notification
+                a(href='#' id='requestpermission')
+                  i.fa.fa-bell-o
+                  | Activer les notifications
+              .form-check
+                label.form-check-label
+                  input(type='checkbox' class='form-check-input' id='disable-enter-action')
+                  | Désactiver la touche entrée
+              .form-check
+                label.form-check-label
+                  input(type='checkbox' class='form-check-input' id='disable-auto-scroll')
+                  | Désactiver l'auto-scroll
+              .form-check
+                label.form-check-label
+                  input(type='checkbox' class='form-check-input' id='disable-login-events')
+                  | Désactiver les évènements de connexion
+            if user.isAdmin
+              hr
+              .nav--core--block
+                h6
+                  i.fa.fa-university
+                  span Modération
+                ul
+                  li
+                    a(href='#' id='banLink') Kick/Ban
+                  li
+                    a(href='#' id='banList') Lister les membres exclus
+                  li
+                    a(href='#' id='unlock') Débloquer un utilisateur
+            hr
+            h6.sign-out
+              a(href='/logout' class='link-sign-out' title='Déconnexion')
+                i.fa.fa-sign-out
+                span Déconnexion
+      //- message
+      section.col-lg-8.col-xs-12#panel
+        .row.extend.fix-bootstrap-flex-column
+          .col-xs.panel--header.fix-bootstrap-flex-fixed
+            button.button-nav.hidden-lg-up#left-nav
+              i.fa.fa-bars
+            button.button-nav.hidden-lg-up#right-nav
+              i.fa.fa-ellipsis-h
+            h5 #Générale
+          .col-xs.panel--core.fix-bootstrap-flex-fluid.overflow#content-messages
+          .col-xs.panel--footer.fix-bootstrap-flex-fixed
+            form#editor
+              textarea(id='text-editor' placeholder='Cliquez ici pour écrire un message.')
+            #footer-editor
+              #content-typing
+              #count-textarea
+      //- menu droit
+      .col-lg-2.menu--right#right-menu
+        .row.extend.fix-bootstrap-flex-column
+          .col-xs.menu--right--header.fix-bootstrap-flex-fixed
+          .col-xs.menu--right--core.fix-bootstrap-flex-fluid.overflow
+            #content-users
+          .col-xs.menu--right--footer.fix-bootstrap-flex-fixed
+            span.links
+              a(href='https://mondedie.fr' target='_blank') Forum
+              | -
+              a(href='https://twitter.com/mondediefr' target='_blank') Twitter
+              | -
+              a(href='https://github.com/mondediefr/mondedie-chat' target='_blank') Github
+              | -
+              a(href='https://github.com/mondediefr/mondedie-chat/releases/tag/v1.4.0' target='_blank')
+                span.tag.tag-default v1.4.0
 
   //- popup
   #content-smileys

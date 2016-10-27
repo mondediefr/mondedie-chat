@@ -13,7 +13,7 @@
   .panel--header {
     padding: rem(10px);
     border-bottom: rem(1px) solid #ddd;
-
+    height: rem(50px);
     .button-nav {
       color: #595959;
       font-size: rem(20px);
@@ -39,6 +39,7 @@
   }
 
   .panel--core {
+    padding: 0;
     #messages {
       overflow-x: hidden;
       padding: 0;
@@ -142,6 +143,7 @@
   }
 
   .panel--footer {
+    padding: 0;
     border: {
       style: solid;
       width: rem(1px) 0 0 0;
@@ -151,7 +153,7 @@
 }
 
 #messageInfo {
-  font-size: 1rem;
+  font-size: rem(13px);
   .date {
     margin-left: rem(7px);
     color: #818a91;
@@ -166,7 +168,7 @@
 
 #messageSelected {
   word-wrap: break-word;
-  font-size: rem(16px);
+  font-size: rem(13px);
   .disclose {
     display: none;
   }

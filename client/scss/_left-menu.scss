@@ -4,17 +4,14 @@
 
 .menu {
   background-color: $color-menu;
-
   .nav--header {
     padding: rem(1px);
     border-bottom: rem(1px) solid #ddd;
-
+    height: rem(50px);
     h5 {
       margin: 0;
-
       &.title-site {
         text-align: center;
-
         .site-name {
           font-size: rem(42px);
         }
@@ -24,7 +21,6 @@
 
   .nav--core {
     padding: rem(10px);
-
     .nav--core--block {
       h6 {
         color: #595959;
@@ -70,12 +66,5 @@
     .fa-sign-out {
       margin-right: rem(7px);
     }
-  }
-}
-
-.modal-footer button {
-  margin-right: 4px;
-  &:last-child {
-    margin-right: 0;
   }
 }

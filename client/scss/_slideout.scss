@@ -19,16 +19,17 @@
     z-index: 1;
   }
 
-  .slideout-open .slideout-menu {
-    display: flex;
-  }
-
   .slideout-open,
   .slideout-open body,
   .slideout-open .slideout-panel {
     overflow: hidden;
   }
 
+  .slideout-open .slideout-menu {
+    display: flex;
+  }
+
+  // fix
   .menu--right.slideout-menu {
     right: 0;
     left: auto;
