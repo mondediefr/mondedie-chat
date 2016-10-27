@@ -14,10 +14,12 @@
     }
   }
 
-  .btn-default {
+  .btn {
     outline: 0;
-    background-color: #fff;
+    padding: rem(5px) rem(10px);
     border: 1px solid #ddd;
+    background-color: #fff;
+    font-size: rem(14px);
   }
 
   textarea {
