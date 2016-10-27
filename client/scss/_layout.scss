@@ -11,11 +11,6 @@ html {
   height: 100vh; // window.innerHeight * (100vh/100)
 }
 
-//fix pour ie 10 et plus
-_:-ms-lang(x), .extend {
-  height: 100%;
-}
-
 .overflow {
   overflow-y: auto;
 }
@@ -44,6 +39,7 @@ _:-ms-lang(x), .extend {
 }
 
 input[type="checkbox"] {
+  // reason: html compressed
   margin-right: rem(5px);
 }
 
