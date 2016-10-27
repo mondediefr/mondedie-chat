@@ -3,6 +3,7 @@
 // ----------------------------
 
 #panel {
+  background-color: #fff;
   border: {
     style: solid;
     width: 0 rem(1px) 0 rem(1px);
@@ -196,7 +197,7 @@
 }
 
 @include media-breakpoint-down(md) {
-  .panel--header h5 {
+  .panel--header h4 {
     text-align: center;
   }
 
