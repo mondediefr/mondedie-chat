@@ -14,7 +14,7 @@ block content
                 span  }
           .col-xs.nav--core.fix-bootstrap-flex-fluid.overflow
             .nav--core--block
-              h6
+              h5
                 i.fa.fa-terminal
                 span Commandes
               ul
@@ -30,7 +30,7 @@ block content
                   a(href='#' id='rolluser') /roll @user
             hr
             .nav--core--block
-              h6
+              h5
                 i.fa.fa-cog
                 span Options
               #notification
@@ -52,7 +52,7 @@ block content
             if user.isAdmin
               hr
               .nav--core--block
-                h6
+                h5
                   i.fa.fa-university
                   span Modération
                 ul
@@ -63,7 +63,7 @@ block content
                   li
                     a(href='#' id='unlock') Débloquer un utilisateur
             hr
-            h6.sign-out
+            h5.sign-out
               a(href='/logout' class='link-sign-out' title='Déconnexion')
                 i.fa.fa-sign-out
                 span Déconnexion
@@ -75,7 +75,7 @@ block content
               i.fa.fa-bars
             button.button-nav.hidden-lg-up#right-nav
               i.fa.fa-ellipsis-h
-            h5 #Générale
+            h4 #Générale
           .col-xs.panel--core.fix-bootstrap-flex-fluid.overflow#content-messages
           .col-xs.panel--footer.fix-bootstrap-flex-fixed
             form#editor

@@ -3,17 +3,12 @@
 // ----------------------------
 
 html {
-  height: 100%;
-  background-color: #fff;
-}
-
-body {
+  font-size: $global-font-size;
   overflow: hidden;
-  font-size: rem(13px); // note: 1rem = 16px
 }
 
 .extend {
-  height: 100vh;
+  height: 100vh; // window.innerHeight * (100vh/100)
 }
 
 //fix pour ie 10 et plus
