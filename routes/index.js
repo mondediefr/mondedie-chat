@@ -32,7 +32,7 @@ router.post('/login', function(req, res, next) {
     }
 
     /* CUSTOM FLUXBB AUTH */
-    return auth.login(req.body)
+    /*return auth.login(req.body)
     .then(function(userInfos) {
       req.session.user = {
         id:userInfos.data.id,
@@ -42,12 +42,12 @@ router.post('/login', function(req, res, next) {
         avatar:(userInfos.data.attributes.avatarUrl) ? userInfos.data.attributes.avatarUrl : '/images/avatar.jpeg',
         status:'online'
       }
-    })
-    /*
-    AUTH FLARUM
-    return flarum.login(req.body)
+    })*/
+
+    /* FLARUM AUTH */
+    return auth.login(req.body)
     .then(function(user) {
-      return flarum.user(user)
+      return auth.user(user)
     })
     .then(function(userInfos) {
       req.session.user = {
@@ -59,7 +59,7 @@ router.post('/login', function(req, res, next) {
         status:'online'
       }
     })
-    */
+
     .then(function() {
       return users.exist(req.session.user.name)
       .then(function(exist) {

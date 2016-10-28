@@ -5,7 +5,7 @@ chat:
     - redis:redis
   environment:
     - ENV=production
-    - AUTH_API_ENDPOINT=http://your-domain.tld/api/auth.php
+    - AUTH_API_ENDPOINT=http://your-domain.tld/api/
     - COOKIES_SECRET=PLEASE_REPLACE_BY_RANDOM_VALUE
     - SESSION_SECRET=PLEASE_REPLACE_BY_RANDOM_VALUE
     - REDIS_URL=redis://redis:6379

@@ -239,8 +239,7 @@ docker-compose up -d
 #### Set environment variables
 ```bash
 sudo echo '127.0.0.1 mondedie-chat.dev' >> /etc/hosts
-echo 'export AUTH_API_TOKEN="token"' >> ~/.bash_profile
-echo 'export AUTH_API_ENDPOINT="http://your-domain.tld/api/auth.php"' >> ~/.bash_profile
+echo 'export AUTH_API_ENDPOINT="http://your-domain.tld/api/"' >> ~/.bash_profile
 ```
 
 #### Setup

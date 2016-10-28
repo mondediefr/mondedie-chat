@@ -9,8 +9,7 @@ services:
       - database:database
     environment:
       - ENV=development
-      - "AUTH_API_TOKEN=${AUTH_API_TOKEN}"
-      - "AUTH_API_ENDPOINT=${AUTH_API_ENDPOINT}"
+      - "FLARUM_API_ENDPOINT=${AUTH_API_ENDPOINT}"
       - COOKIES_SECRET=Xpg29n6s9hGuKqWA24U3w5gBAD46yw5X
       - SESSION_SECRET=4fQ9FMEGqYSw3d289h72zx7S4hytb6BG
       - REDIS_URL=redis://database:6379
