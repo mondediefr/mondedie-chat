@@ -51,12 +51,12 @@ router.post('/login', function(req, res, next) {
     })
     .then(function(userInfos) {
       req.session.user = {
-        id:userInfos.data.id,
-        name:userInfos.data.attributes.username,
-        groupName:(userInfos.included) ? userInfos.included[0].attributes.namePlural : null,
-        groupColor:(userInfos.included) ? userInfos.included[0].attributes.color : "#333",
-        avatar:(userInfos.data.attributes.avatarUrl) ? userInfos.data.attributes.avatarUrl : process.env.APP_URL + 'images/avatar.jpeg',
-        status:'online'
+        id: userInfos.data.id,
+        name: userInfos.data.attributes.username,
+        groupName: (userInfos.included) ? userInfos.included[0].attributes.namePlural : null,
+        groupColor: (userInfos.included) ? userInfos.included[0].attributes.color : '#01A9DB',
+        avatar: (userInfos.data.attributes.avatarUrl) ? userInfos.data.attributes.avatarUrl : '/images/avatar.jpeg',
+        status: 'online'
       }
     })
 
