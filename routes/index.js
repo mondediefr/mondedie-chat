@@ -31,19 +31,6 @@ router.post('/login', function(req, res, next) {
       return res.render('login', settings);
     }
 
-    /* CUSTOM FLUXBB AUTH */
-    /*return auth.login(req.body)
-    .then(function(userInfos) {
-      req.session.user = {
-        id:userInfos.data.id,
-        name:userInfos.data.attributes.username,
-        groupName:(userInfos.included) ? userInfos.included.attributes.namePlural : null,
-        groupColor:(userInfos.included) ? userInfos.included.attributes.color : "#333",
-        avatar:(userInfos.data.attributes.avatarUrl) ? userInfos.data.attributes.avatarUrl : '/images/avatar.jpeg',
-        status:'online'
-      }
-    })*/
-
     /* FLARUM AUTH */
     return auth.login(req.body)
     .then(function(user) {
@@ -89,8 +76,10 @@ router.get('/chatroom', function(req, res, next) {
   session.settings(req, res, { shouldBeLogged:true }, function(settings) {
     settings.title += "Chatroom";
     settings.user = req.session.user;
-    if(process.env.ANALYTIC_KEY)
-      settings.analytics = process.env.ANALYTIC_KEY;
+    if(process.env.PIWIK_ID)
+      settings.piwik_id = process.env.PIWIK_ID;
+    if(process.env.PIWIK_URL)
+      settings.piwik_url = process.env.PIWIK_URL;
     return res.render('chatroom', settings);
   });
 });

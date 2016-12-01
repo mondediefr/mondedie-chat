@@ -12,10 +12,10 @@
     "bootstrap": "v4.0.0-alpha.5",
     "bootstrap-markdown": "2.10.x",
     "font-awesome": "4.7.x",
-    "jquery-textcomplete": "1.7.x",
-    "slideout.js": "0.1.x",
+    "jquery-textcomplete": "1.8.x",
+    "slideout.js": "1.0.x",
     "notify.js": "2.0.x",
-    "moment": "2.15.x"
+    "moment": "2.17.x"
   },
   "resolutions": {
     "bootstrap": "v4.0.0-alpha.5"

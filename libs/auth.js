@@ -3,27 +3,7 @@ var Promise = require('bluebird');
 var request = Promise.promisifyAll(require('request'));
 var auth = {};
 
-/*
- *  Récupère les informations de l'utilisateur auprès de l'API
- */
-
-/* CUSTOM FLUXBB AUTH */
-/*auth.login = function(data) {
-  return request.postAsync({
-    uri:process.env.AUTH_API_ENDPOINT,
-    form:{
-      login:data.username,
-      password:data.password,
-      token:process.env.AUTH_API_TOKEN
-    }
-  }).then(function(response) {
-    return response.statusCode === 200 ? response.body : Promise.reject();
-  }).then(JSON.parse).then(function(userInfos) {
-    return userInfos ? userInfos : Promise.reject();
-  }).catch(function() {
-    return Promise.reject('Identifiant ou mot de passe incorrect.');
-  });
-};*/
+/* Récupère les informations de l'utilisateur auprès de l'API */
 
 /* FLARUM AUTH */
 auth.login = function(data) {
