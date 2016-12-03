@@ -5,20 +5,22 @@ chat:
     - redis:redis
   environment:
     - ENV=production
-    - AUTH_API_ENDPOINT=http://your-domain.tld/api/
+    - FLARUM_API_ENDPOINT=http://your-domain.tld/api/
     - COOKIES_SECRET=PLEASE_REPLACE_BY_RANDOM_VALUE
     - SESSION_SECRET=PLEASE_REPLACE_BY_RANDOM_VALUE
     - REDIS_URL=redis://redis:6379
+    - PIWIK_ID=1
+    - PIWIK_URL=https://piwik.domain.tld
 
 redis:
-  image: redis:3.0.7-alpine
+  image: redis:3.2-alpine
   container_name: redis
   command: redis-server --appendonly yes
   volumes:
     - /mnt/docker/redis/db/:/data
 
 nginx:
-  image: wonderfall/reverse
+  image: boring-nginx
   container_name: nginx
   links:
     - chat:chat

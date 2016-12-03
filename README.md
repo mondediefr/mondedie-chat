@@ -33,59 +33,22 @@ Node.js chat application using Express, Socket.io, Redis and Mithril.
 
 ## Authentication method
 
-### Authentication request
+See Flarum documentation : http://flarum.org/docs/api/
 
-The application sends a HTTP POST request to the API endpoint specified in *AUTH_API_ENDPOINT* environment variable.
+---
 
-#### Request body
+## Environment variables
 
-- **login** (*String*) : Account username
-- **password** (*String*) : Account password
-
-#### Request scheme example
-
-`AUTH_API_ENDPOINT=http://domain.tld/api/auth`
-
-```
-POST /api/auth HTTP/1.1
-Host: domain.tld
-Content-type: application/x-www-form-urlencoded
-
-login=username&password=password
-```
-
-### Authentication output structure example
-
-Your auth API endpoint **MUST** return this type of json structure :
-
-```json
-{
-  "data": {
-    "id": "4",
-    "attributes": {
-      "username": "Hardware",
-      "avatarUrl": "http://......."
-    }
-  },
-  "included": {
-    "attributes": {
-      "nameSingular": "Administrator",
-      "namePlural": "Administrators",
-      "color": "#7cc359"
-    }
-  }
-}
-```
-
-With HTTP status code of **200** when user is successfully authenticated or **403** otherwise.
-
-### Properties
-
-- `data.id` : User ID
-- `data.attributes.username` : User name
-- `data.attributes.avatarUrl` : User avatar URL
-- `data.included.attributes.namePlural` : Group name
-- `data.included.attributes.color` : Group color
+| Variable | Description | Type | Default value |
+| -------- | ----------- | ---- | ------------- |
+| **ENV** | Environnement | **required** | development
+| **PORT** | port app | *optional* | 5000
+| **FLARUM_API_ENDPOINT** | Url api flarum | **required** | none
+| **COOKIES_SECRET** | set random cookies secret | **required** | none
+| **SESSION_SECRET** | set random session secret | **required** | none
+| **REDIS_URL** | Redis instance ip/hostname | **required**  | none
+| **PIWIK_ID** | Piwik id | *optional* | none
+| **PIWIK_URL** | Piwik url | *optional* | none
 
 ---
 
@@ -111,10 +74,10 @@ gulp
 Create .env file in project root with this content :
 
 ```
-ENV=development
+ENV=production
 COOKIES_SECRET=xxxxxxxxxxx
 SESSION_SECRET=yyyyyyyyyyy
-AUTH_API_ENDPOINT=http://domain.tld/api/auth
+FLARUM_API_ENDPOINT=http://domain.tld/api/auth
 ```
 
 Start application :
@@ -153,7 +116,7 @@ Create .env file in project root with this content :
 ENV=development
 COOKIES_SECRET=xxxxxxxxxxx
 SESSION_SECRET=yyyyyyyyyyy
-AUTH_API_ENDPOINT=http://domain.tld/api/auth
+FLARUM_API_ENDPOINT=http://domain.tld/api/auth
 ```
 
 Create Procfile_dev file in project root with this content :
@@ -185,7 +148,7 @@ docker pull mondedie/mondedie-chat
 #### Environment variables
 
 * ENV=production
-* AUTH_API_ENDPOINT=http://your-domain.tld/api/auth.php
+* FLARUM_API_ENDPOINT=http://your-domain.tld/api/auth.php
 * COOKIES_SECRET=PLEASE_REPLACE_BY_RANDOM_VALUE
 * SESSION_SECRET=PLEASE_REPLACE_BY_RANDOM_VALUE
 * REDIS_URL=redis://redis:6379
@@ -205,7 +168,7 @@ Create a new Nginx vhost with this content :
 
 server {
 
-  listen 80;
+  listen 8000;
   server_name chat.domain.tld;
 
   location / {
@@ -239,7 +202,7 @@ docker-compose up -d
 #### Set environment variables
 ```bash
 sudo echo '127.0.0.1 mondedie-chat.dev' >> /etc/hosts
-echo 'export AUTH_API_ENDPOINT="http://your-domain.tld/api/"' >> ~/.bash_profile
+echo 'export FLARUM_API_ENDPOINT="http://your-domain.tld/api/"' >> ~/.bash_profile
 ```
 
 #### Setup
