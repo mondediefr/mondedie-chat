@@ -52,7 +52,7 @@ See Flarum documentation : http://flarum.org/docs/api/
 
 ---
 
-## Manual installation
+## Manual installation (Production)
 
 ### Requirements:
 
@@ -77,7 +77,7 @@ Create .env file in project root with this content :
 ENV=production
 COOKIES_SECRET=xxxxxxxxxxx
 SESSION_SECRET=yyyyyyyyyyy
-FLARUM_API_ENDPOINT=http://domain.tld/api/auth
+FLARUM_API_ENDPOINT=http://domain.tld/api/
 ```
 
 Start application :
@@ -90,11 +90,10 @@ Open app : http://127.0.0.1:5000/
 
 ---
 
-## Developement installation
+## Manual installation (Developement)
 
 ### Requirements:
 
-* heroku toolbelt : https://toolbelt.heroku.com/
 * Node.js
 * Yarn
 * Redis
@@ -116,7 +115,7 @@ Create .env file in project root with this content :
 ENV=development
 COOKIES_SECRET=xxxxxxxxxxx
 SESSION_SECRET=yyyyyyyyyyy
-FLARUM_API_ENDPOINT=http://domain.tld/api/auth
+FLARUM_API_ENDPOINT=http://domain.tld/api/
 ```
 
 Create Procfile_dev file in project root with this content :
@@ -138,7 +137,7 @@ Open app : http://127.0.0.1:5000/
 
 ## Docker installation
 
-### Build image
+### Pull image
 ```bash
 docker pull mondedie/mondedie-chat
 ```
@@ -147,11 +146,17 @@ docker pull mondedie/mondedie-chat
 
 #### Environment variables
 
+Set environment variables in [docker-compose.yml](https://github.com/mondediefr/mondedie-chat/blob/master/docker-compose.yml)
+
 * ENV=production
-* FLARUM_API_ENDPOINT=http://your-domain.tld/api/auth.php
+* FLARUM_API_ENDPOINT=http://your-domain.tld/api/
 * COOKIES_SECRET=PLEASE_REPLACE_BY_RANDOM_VALUE
 * SESSION_SECRET=PLEASE_REPLACE_BY_RANDOM_VALUE
 * REDIS_URL=redis://redis:6379
+
+#### Requirements:
+
+* Docker
 
 #### Setup
 
@@ -161,7 +166,7 @@ We have created a [docker-compose.yml](https://github.com/mondediefr/mondedie-ch
 * redis
 * nginx : reverse-proxy mode
 
-Create a new Nginx vhost with this content :
+Create a new nginx vhost with this content :
 
 ```nginx
 # /mnt/docker/nginx/sites-enabled/chat.conf
@@ -194,10 +199,10 @@ docker-compose up -d
 
 #### Requirements:
 
-* docker
-* nodejs
-* yarn
-* gulp
+* Docker
+* Node.js
+* Gulp
+* npm
 
 #### Set environment variables
 ```bash
@@ -209,7 +214,7 @@ echo 'export FLARUM_API_ENDPOINT="http://your-domain.tld/api/"' >> ~/.bash_profi
 
 ```bash
 cd /path/to/chat/mondedie-chat
-yarn install
+npm install
 docker-compose --file dev.yml up -d
 gulp watch
 ```
