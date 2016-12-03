@@ -1,6 +1,6 @@
 'use strict';
 var smileys = smileys || {};
-var emojiVersion = '?v=2.2.6';
+var emojiVersion = '?v=2.2.7';
 
 /**
  * Smileys component - model

@@ -12,7 +12,7 @@
     "connect-redis": "3.1.*",
     "cookie-parser": "1.4.*",
     "debug": "2.3.*",
-    "emojione": "2.2.6",
+    "emojione": "2.2.7",
     "express": "4.14.*",
     "express-session": "1.14.*",
     "express-validator": "3.0.*",

@@ -9,13 +9,13 @@
   "dependencies": {
     "mithril": "0.2.x",
     "visibilityjs": "1.2.x",
-    "bootstrap": "v4.0.0-alpha.5",
     "bootstrap-markdown": "2.10.x",
     "font-awesome": "4.7.x",
     "jquery-textcomplete": "1.8.x",
     "slideout.js": "1.0.x",
     "notify.js": "2.0.x",
-    "moment": "2.17.x"
+    "moment": "2.17.x",
+    "bootstrap": "v4.0.0-alpha.5"
   },
   "resolutions": {
     "bootstrap": "v4.0.0-alpha.5"

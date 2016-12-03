@@ -141,7 +141,7 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('fonts', function() {
+gulp.task('fonts', ['clean-fonts'], function() {
   return gulp.src([path.bower + '/font-awesome/fonts/*', path.fonts + '/*'])
     .pipe(gulp.dest('public/fonts'));
 });
@@ -149,6 +149,10 @@ gulp.task('fonts', function() {
 gulp.task('emojione-strategy', function() {
   return gulp.src('node_modules/emojione/emoji_strategy.json')
     .pipe(gulp.dest('public/json'));
+});
+
+gulp.task('clean-fonts', function() {
+  return del(['public/fonts/*']);
 });
 
 gulp.task('clean-js', function() {
