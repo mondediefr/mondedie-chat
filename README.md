@@ -41,11 +41,11 @@ See Flarum documentation : http://flarum.org/docs/api/
 
 | Variable | Description | Type | Default value |
 | -------- | ----------- | ---- | ------------- |
-| **ENV** | Environnement | **required** | development
-| **PORT** | port app | *optional* | 5000
-| **FLARUM_API_ENDPOINT** | Url api flarum | **required** | none
-| **COOKIES_SECRET** | set random cookies secret | **required** | none
-| **SESSION_SECRET** | set random session secret | **required** | none
+| **ENV** | Environment | **required** | development
+| **PORT** | Port app | *optional* | 5000
+| **FLARUM_API_ENDPOINT** | API URL | **required** | none
+| **COOKIES_SECRET** | Set random cookies secret | **required** | none
+| **SESSION_SECRET** | Set random session secret | **required** | none
 | **REDIS_URL** | Redis instance ip/hostname | **required**  | none
 | **PIWIK_ID** | Piwik id | *optional* | none
 | **PIWIK_URL** | Piwik url | *optional* | none
