@@ -41,7 +41,7 @@ See Flarum documentation : http://flarum.org/docs/api/
 
 | Variable | Description | Type | Default value |
 | -------- | ----------- | ---- | ------------- |
-| **ENV** | Environment | **required** | development
+| **ENV** | Environment | *optional* | development
 | **PORT** | Port app | *optional* | 5000
 | **FLARUM_API_ENDPOINT** | API URL | **required** | none
 | **COOKIES_SECRET** | Set random cookies secret | **required** | none
