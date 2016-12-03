@@ -61,7 +61,7 @@ See Flarum documentation : http://flarum.org/docs/api/
 * Redis
 
 Clone the project and install dependencies :
-```
+```bash
 git clone https://github.com/mondediefr/mondedie-chat.git
 cd mondedie-chat
 
@@ -82,7 +82,7 @@ FLARUM_API_ENDPOINT=http://domain.tld/api/auth
 
 Start application :
 
-```
+```bash
 pm2 start --node-args="--harmony" --name mondedie-chat app.js
 ```
 
@@ -100,7 +100,7 @@ Open app : http://127.0.0.1:5000/
 * Redis
 
 Clone the project and install dependencies :
-```
+```bash
 git clone https://github.com/mondediefr/mondedie-chat.git
 cd mondedie-chat
 
@@ -128,7 +128,7 @@ worker: gulp watch
 
 Start application :
 
-```
+```bash
 foreman start -f Procfile_dev
 ```
 
@@ -139,7 +139,7 @@ Open app : http://127.0.0.1:5000/
 ## Docker installation
 
 ### Build image
-```
+```bash
 docker pull mondedie/mondedie-chat
 ```
 
@@ -184,7 +184,7 @@ server {
 
 Run !
 
-```
+```bash
 docker-compose up -d
 ```
 
