@@ -21,6 +21,27 @@ $(function() {
           icon: 'fa fa-smile-o',
           callback: popupSmiley
         }]
+      },
+      {
+        name: 'grouplink', data: [{
+          name: 'linkImage',
+          btnText: 'image',
+          toggle: false,
+          title: 'lien image-lutim',
+          //icon: 'fa fa-external-link',
+          callback: function() {
+            window.open('https://images.mondedie.fr', '_blank');
+          }
+        },{
+          name: 'linkPaste',
+          btnText: 'paste',
+          toggle: false,
+          title: 'lien privatebin',
+          //icon: 'fa fa-external-link',
+          callback: function() {
+            window.open('https://paste.mondedie.fr', '_blank');
+          }
+        }]
       }]
     ]
   });

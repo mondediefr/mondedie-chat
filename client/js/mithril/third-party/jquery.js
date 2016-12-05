@@ -20,7 +20,7 @@ $(function() {
 
   function onPermissionDenied() {
     $('#notification').html(
-      '<span class="text-danger"><i class="fa fa-bell-o"></i>Notifications bloquées</span>'
+      '<span class="text-danger"><i class="fa fa-bell-slash-o"></i>Notifications bloquées</span>'
     );
   }
 

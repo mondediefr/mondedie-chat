@@ -22,7 +22,12 @@ users.view = function() {
             alt: user.name(),
             title: user.name() + ' - ' + user.status()
           }),
-          m('span', {class: 'pseudo', style: {color: user.color()}}, user.name())
+          m('a', {
+            class: 'pseudo',
+            style: {color: user.color()},
+            target: '_blank',
+            href: 'https://mondedie.fr/u/' + user.name()
+          }, user.name())
         ])
       })
     ])

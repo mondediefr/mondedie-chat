@@ -15,22 +15,6 @@ block content
           .col-xs.nav--core.fix-bootstrap-flex-fluid.overflow
             .nav--core--block
               h5
-                i.fa.fa-terminal
-                span Commandes
-              ul
-                li
-                  a(href='#' id='afk') /afk on | off
-                li
-                  a(href='#' id='pm') /msg @user message
-                li
-                  a(href='#' id='poke') /poke @user
-                li
-                  a(href='#' id='roll') /roll [nombre]d[faces]
-                li
-                  a(href='#' id='rolluser') /roll @user
-            hr
-            .nav--core--block
-              h5
                 i.fa.fa-cog
                 span Options
               #notification
@@ -49,6 +33,22 @@ block content
                 label.form-check-label
                   input(type='checkbox' class='form-check-input' id='disable-login-events')
                   | Désactiver les évènements de connexion
+            hr
+            .nav--core--block
+              h5
+                i.fa.fa-terminal
+                span Commandes
+              ul
+                li
+                  a(href='#' id='afk') /afk on | off
+                li
+                  a(href='#' id='pm') /msg @user message
+                li
+                  a(href='#' id='poke') /poke @user
+                li
+                  a(href='#' id='roll') /roll [nombre]d[faces]
+                li
+                  a(href='#' id='rolluser') /roll @user
             if user.isAdmin
               hr
               .nav--core--block
@@ -63,10 +63,11 @@ block content
                   li
                     a(href='#' id='unlock') Débloquer un utilisateur
             hr
-            h5.sign-out
-              a(href='/logout' class='link-sign-out' title='Déconnexion')
-                i.fa.fa-sign-out
-                span Déconnexion
+            .nav--core--block
+              h5
+                a(href='/logout' class='link-sign-out' title='Déconnexion')
+                  i.fa.fa-sign-out
+                  span Déconnexion
       //- message
       section.col-lg-8.col-xs-12#panel
         .row.extend.fix-bootstrap-flex-column
