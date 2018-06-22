@@ -7,7 +7,6 @@
   ],
   "private": true,
   "dependencies": {
-    "mithril": "0.2.x",
     "visibilityjs": "1.2.x",
     "bootstrap-markdown": "2.10.x",
     "font-awesome": "4.7.x",

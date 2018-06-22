@@ -49,7 +49,7 @@ var files = {
     path.bower + '/jquery/dist/jquery.min.js',
     path.bower + '/tether/dist/js/tether.min.js',
     path.bower + '/bootstrap/dist/js/bootstrap.min.js',
-    path.bower + '/mithril/mithril.min.js',
+    path.npm + '/mithril/mithril.min.js',
     path.bower + '/moment/min/moment.min.js',
     path.bower + '/moment/locale/fr.js',
     path.bower + '/jquery-textcomplete/dist/jquery.textcomplete.min.js',
